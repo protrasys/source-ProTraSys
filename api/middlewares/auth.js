@@ -10,7 +10,7 @@ module.exports = (req, res, next) => {
   // Check if token is not valid or not available
   if (!token) {
     return res.status(401).json({
-      msg: 'Authoriazion Failed'
+      msg: 'Authorization Failed'
     });
   }
 

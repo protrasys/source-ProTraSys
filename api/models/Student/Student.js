@@ -31,7 +31,8 @@ const StudentSchema = new mongoose.Schema(
       j: true,
       wtimeout: 1000
     },
-    versionKey: false
+    versionKey: false,
+    timestamps: true
   }
 );
 

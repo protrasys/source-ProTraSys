@@ -1,6 +1,5 @@
 // Importing Dependencies
 const mongoose = require('mongoose');
-const SchemaOptions = require('../SchemaOptions');
 
 // Student Model
 const StudentSchema = new mongoose.Schema(
@@ -25,19 +24,18 @@ const StudentSchema = new mongoose.Schema(
     },
     password: { type: mongoose.Schema.Types.String, required: true }
   },
-  SchemaOptions
+  {
+    minimize: false,
+    writeConcern: {
+      w: 'majority',
+      j: true,
+      wtimeout: 1000
+    },
+    versionKey: false
+  }
 );
 
+StudentSchema.index({ name: 1, type: -1 }); // Schema Level
+
 // Exporting Student Schema to a database
-const temp = mongoose.model('Student', StudentSchema);
-
-new temp({
-  name: 'Manav',
-  sem: 6,
-  enrollmentId: '1720BCA04150',
-  email: 'manavoza7@gmail.com',
-  phone: 9662260013,
-  password: 'admin@123'
-});
-
-temp.save();
+module.exports = mongoose.model('Student', StudentSchema);

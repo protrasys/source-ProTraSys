@@ -21,7 +21,7 @@ app.use(
   })
 );
 
-app.use('/', StudentRoutes);
+app.use('/students', StudentRoutes);
 
 // Temporary Handling Home Page
 app.use('/', (req, res) => {

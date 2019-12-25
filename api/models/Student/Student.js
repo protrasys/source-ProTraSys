@@ -8,8 +8,8 @@ const StudentSchema = new mongoose.Schema(
     sem: { type: mongoose.Schema.Types.Number, required: true, maxlength: 1 },
     enrollmentId: {
       type: mongoose.Schema.Types.String,
-      required: true,
-      match: /([0-9]{4})+([A-Z]{3})+([0-9]{5})/g
+      required: true
+      // match: /([0-9]{4})+([A-Z]{3})+([0-9]{5})/g    // Put this at frontend
     },
     email: {
       type: mongoose.Schema.Types.String,

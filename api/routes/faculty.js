@@ -4,7 +4,7 @@ const Faculty = require('../models/Faculty');
 const bcrypt = require('bcryptjs');
 const config = require('config');
 const jwt = require('jsonwebtoken');
-const authMiddleware = require('../middlewares/auth');
+const authMiddleware = require('../middlewares/facAuth');
 
 // @route     GET   /faculty/
 // @desc      Get All Faculty
@@ -84,6 +84,21 @@ router.post('/', async (req, res) => {
   }
 });
 
+// @route     GET   /faculty/me
+// @desc      Get Individual Faculty
+// @access    Private
+router.get('/me', authMiddleware, async (req, res) => {
+  try {
+    const faculty = await Faculty.findById(req.faculty.id).select('-password');
+    res.status(200).json(faculty);
+  } catch (err) {
+    console.log(err);
+    res.status(500).json({
+      error: err.message
+    });
+  }
+});
+
 // @route     Post   /faculty/addNewFaculty
 // @desc      Add New Faculty
 // @access    Public
@@ -127,6 +142,7 @@ router.post('/addNewFaculty', async (req, res) => {
       skills: skills.split(',').map((skill) => skill.trim()),
       password: encryptedPassword
     });
+    await faculty.save();
 
     const payload = {
       faculty: {
@@ -146,8 +162,6 @@ router.post('/addNewFaculty', async (req, res) => {
         });
       }
     );
-
-    await faculty.save();
   } catch (err) {
     console.log(err);
     return res.status(500).json({

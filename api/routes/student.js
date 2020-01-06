@@ -55,11 +55,7 @@ router.post('/addNewStudent', async (req, res) => {
 
     if (student) {
       return res.status(400).json({
-        errors: [
-          {
-            msg: 'Student Already Exists with this Enrollment ID'
-          }
-        ]
+        msg: 'Student Already exists with same enrollment ID'
       });
     }
 

@@ -43,7 +43,7 @@ router.get('/me', authMiddleware, async (req, res) => {
 // @route     POST  /students/
 // @desc      Add New Student
 // @access    Public
-router.post('/', async (req, res) => {
+router.post('/addNewStudent', async (req, res) => {
   const { name, sem, enrollmentId, email, phone, password } = req.body;
 
   // Encrypting Password using Bcrypt
@@ -97,6 +97,64 @@ router.post('/', async (req, res) => {
     console.log(err);
     return res.status(500).json({
       Error: err.errmsg || err.message
+    });
+  }
+});
+
+// @route     POST  /students/
+// @desc      Student Login
+// @access    Public
+router.post('/', async (req, res) => {
+  const { enrollmentId, password } = req.body;
+
+  try {
+    // See if student exists or not
+    const student = await Student.findOne({ enrollmentId: enrollmentId });
+
+    // Check if student not found
+    if (!student) {
+      return res.status(400).json({
+        msg: 'Invalid Credentials'
+      });
+    }
+
+    // Lets match given password with students password (from database)
+    const isCorrect = await bcrypt.compare(password, student.password);
+
+    // Check is password is not valid
+    if (!isCorrect) {
+      return res.status(400).json({
+        msg: 'Invalid Credentials'
+      });
+    }
+
+    // Sending Student id in Payload
+    const payload = {
+      student: {
+        id: student.id
+      }
+    };
+
+    // return json web token to frontend
+    jwt.sign(
+      payload,
+      config.get('jwtSecret'),
+      { expiresIn: '24h' },
+      (err, token) => {
+        if (!err) {
+          return res.json({
+            msg: `${student.name}, Welcome Back 😉`,
+            token
+          });
+        }
+        throw err;
+      }
+    );
+  } catch (err) {
+    console.log(err);
+    res.status(500).json({
+      msg: 'Internal Server Error',
+      description: err
     });
   }
 });

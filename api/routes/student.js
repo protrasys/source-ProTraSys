@@ -1,6 +1,6 @@
 // Importing Dependencies
 const router = require('express').Router();
-const Student = require('../models/Student/Student');
+const Student = require('../models/Student');
 const bcrypt = require('bcryptjs');
 const config = require('config');
 const jwt = require('jsonwebtoken');

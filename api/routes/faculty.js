@@ -26,6 +26,64 @@ router.get('/', async (req, res) => {
   }
 });
 
+// @route     POST  /faculty/
+// @desc      Faculty Login
+// @access    Public
+router.post('/', async (req, res) => {
+  const { enrollmentId, password } = req.body;
+
+  try {
+    // See if faculty exists or not
+    const faculty = await Faculty.findOne({ enrollmentId: enrollmentId });
+
+    // Check if faculty not found
+    if (!faculty) {
+      return res.status(400).json({
+        msg: 'Invalid Credentials'
+      });
+    }
+
+    // Lets match given password with faculty password (from database)
+    const isCorrect = await bcrypt.compare(password, faculty.password);
+
+    // Check is password is not valid
+    if (!isCorrect) {
+      return res.status(400).json({
+        msg: 'Invalid Credentials'
+      });
+    }
+
+    // Sending faculty id in Payload
+    const payload = {
+      faculty: {
+        id: faculty.id
+      }
+    };
+
+    // return json web token to frontend
+    jwt.sign(
+      payload,
+      config.get('jwtSecret'),
+      { expiresIn: '24h' },
+      (err, token) => {
+        if (!err) {
+          return res.json({
+            msg: `${faculty.name}, Welcome Back 😉`,
+            token
+          });
+        }
+        throw err;
+      }
+    );
+  } catch (err) {
+    console.log(err);
+    res.status(500).json({
+      msg: 'Internal Server Error',
+      description: err
+    });
+  }
+});
+
 // @route     Post   /faculty/addNewFaculty
 // @desc      Add New Faculty
 // @access    Public

@@ -4,7 +4,7 @@ const Student = require('../models/Student');
 const bcrypt = require('bcryptjs');
 const config = require('config');
 const jwt = require('jsonwebtoken');
-const authMiddleware = require('../middlewares/auth');
+const { studentAuth } = require('../middlewares/auth');
 
 // @route     GET   /students/
 // @desc      Get All Students
@@ -29,7 +29,7 @@ router.get('/', async (req, res) => {
 // @route     GET   /students/me
 // @desc      Get Individual Student
 // @access    Private
-router.get('/me', authMiddleware, async (req, res) => {
+router.get('/me', studentAuth, async (req, res) => {
   try {
     const student = await Student.findById(req.student.id).select('-password');
     res.status(200).json(student);

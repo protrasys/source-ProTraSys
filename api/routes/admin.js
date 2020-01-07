@@ -4,7 +4,7 @@ const Admin = require('../models/Admin');
 const bcrypt = require('bcryptjs');
 const config = require('config');
 const jwt = require('jsonwebtoken');
-const authMiddleware = require('../middlewares/facAuth');
+const { adminAuth } = require('../middlewares/auth');
 
 // @route     Post   /admin/addNewAdmin
 // @desc      Add New Admin

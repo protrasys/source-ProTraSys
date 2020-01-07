@@ -8,6 +8,7 @@ const databaseConnectionHandler = require('./config/database');
 // Importing Routes
 const StudentRoutes = require('./api/routes/student');
 const FacultyRoutes = require('./api/routes/faculty');
+const AdminRoutes = require('./api/routes/admin');
 
 // Database Connection
 databaseConnectionHandler();
@@ -24,6 +25,7 @@ app.use(
 
 app.use('/students', StudentRoutes);
 app.use('/faculty', FacultyRoutes);
+app.use('/admin', AdminRoutes);
 
 // Temporary Handling Home Page
 app.use('/', (req, res) => {

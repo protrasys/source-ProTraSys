@@ -17,7 +17,7 @@ router.post('/addNewAdmin', async (req, res) => {
 
     if (admin) {
       return res.status(400).json({
-        msg: 'Admin already exists with same AID'
+        msg: `Admin already exists with same ${AID}`
       });
     }
 
@@ -64,6 +64,60 @@ router.post('/addNewAdmin', async (req, res) => {
           err: mongoErr.message
         });
       });
+  } catch (err) {
+    console.log(err);
+    return res.status(500).json({
+      Error: err.errmsg || err.message
+    });
+  }
+});
+
+// @route     Post   /admin/
+// @desc      Admin Login
+// @access    Public
+router.post('/', async (req, res) => {
+  const { AID, password } = req.body;
+  try {
+    // Lets FInd the Admin first
+    const admin = await Admin.findOne({ _id: AID });
+
+    // If Admin does not found
+    if (!admin) {
+      return res.status(400).json({
+        msg: 'Invalid Credentials'
+      });
+    }
+
+    // Now match the password
+    const isCorrect = await bcrypt.compare(password, admin.password);
+
+    if (!isCorrect) {
+      return res.status(400).json({
+        msg: 'Invalid Credentials'
+      });
+    }
+
+    // Sending Admin id in Payload
+    const payload = {
+      admin: {
+        id: admin.id
+      }
+    };
+    // return json web token to frontend
+    jwt.sign(
+      payload,
+      config.get('jwtSecret'),
+      { expiresIn: '24h' },
+      (err, token) => {
+        if (!err) {
+          return res.json({
+            msg: `${admin.name}, Welcome Back 😉`,
+            token
+          });
+        }
+        throw err;
+      }
+    );
   } catch (err) {
     console.log(err);
     return res.status(500).json({

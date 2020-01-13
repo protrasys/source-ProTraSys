@@ -1,7 +1,7 @@
 // Importing Dependencies
 const mongoose = require('mongoose');
 
-// Student Model
+// Admin Model
 const AdminSchema = new mongoose.Schema(
   {
     _id: {
@@ -27,5 +27,5 @@ const AdminSchema = new mongoose.Schema(
 
 AdminSchema.index({ name: 1, type: -1 }); // Schema Level
 
-// Exporting Student Schema to a database
+// Exporting Admin Schema to a database
 module.exports = mongoose.model('Admin', AdminSchema);

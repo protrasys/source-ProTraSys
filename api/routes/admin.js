@@ -1,6 +1,9 @@
 // Importing Dependencies
 const router = require('express').Router();
 const Admin = require('../models/Admin');
+const Faculty = require('../models/Faculty');
+const Student = require('../models/Student');
+const ProjectGroup = require('../models/ProjectGroup');
 const bcrypt = require('bcryptjs');
 const config = require('config');
 const jwt = require('jsonwebtoken');
@@ -122,6 +125,95 @@ router.post('/', async (req, res) => {
     console.log(err);
     return res.status(500).json({
       Error: err.errmsg || err.message
+    });
+  }
+});
+
+// @route     Get   /admin/me
+// @desc      Get Individual Admin
+// @access    Private
+router.get('/me', adminAuth, async (req, res) => {
+  try {
+    const admin = await Admin.findById(req.admin.id).select('-password');
+    res.status(200).json(admin);
+  } catch (err) {
+    console.log(err);
+    res.status(500).json({
+      error: err.message
+    });
+  }
+});
+
+// @route     Get   /admin/
+// @desc      Get All Admins
+// @access    Public
+router.get('/', async (req, res) => {
+  try {
+    const admins = await Admin.find().select('-password');
+
+    // Check is no admin found
+    if (admins.length === 0) {
+      return res.status(400).json({
+        msg: 'No More Admins Found'
+      });
+    }
+
+    res.status(200).json(admins);
+  } catch (err) {
+    res.status(500).json({
+      error: err
+    });
+  }
+});
+
+// @route     Delete   /admin/deleteFaculty/:id
+// @desc      Delete Faculty
+// @access    Private
+router.delete('/deleteFaculty/:id', adminAuth, async (req, res) => {
+  const id = req.params.id;
+  try {
+    // Check if Faculty exists with same id
+    let faculty = await Faculty.findById(id);
+
+    if (!faculty) {
+      return res.status(400).json({
+        msg: 'No Faculty Found'
+      });
+    }
+
+    await Faculty.deleteOne({ _id: id });
+    res.status(200).json({
+      msg: 'Faculty Removed'
+    });
+  } catch (err) {
+    res.status(500).json({
+      err: err
+    });
+  }
+});
+
+// @route     Delete   /admin/deleteStudent/:id
+// @desc      Delete Student
+// @access    Private
+router.delete('/deleteStudent/:id', adminAuth, async (req, res) => {
+  const id = req.params.id;
+  try {
+    // Check if Student exists with same id
+    let student = await Student.findById(id);
+
+    if (!student) {
+      return res.status(400).json({
+        msg: 'No Student Found'
+      });
+    }
+
+    await Student.deleteOne({ _id: id });
+    res.status(200).json({
+      msg: 'Student Removed'
+    });
+  } catch (err) {
+    res.status(500).json({
+      err: err
     });
   }
 });

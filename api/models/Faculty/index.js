@@ -1,7 +1,7 @@
 // Importing Dependencies
 const mongoose = require('mongoose');
 
-// Student Model
+// Faculty Model
 const FacultySchema = new mongoose.Schema(
   {
     name: { type: mongoose.Schema.Types.String, required: true },
@@ -53,5 +53,5 @@ const FacultySchema = new mongoose.Schema(
 
 FacultySchema.index({ name: 1, type: -1 }); // Schema Level
 
-// Exporting Student Schema to a database
+// Exporting Faculty Schema to a database
 module.exports = mongoose.model('Faculty', FacultySchema);

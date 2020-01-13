@@ -1,7 +1,7 @@
 // Importing Dependencies
 const mongoose = require('mongoose');
 
-// Student Model
+// ProjectGroup Model
 const ProjectSchema = new mongoose.Schema(
   {
     projectName: { type: mongoose.Schema.Types.String, required: true },
@@ -27,5 +27,5 @@ const ProjectSchema = new mongoose.Schema(
 
 ProjectSchema.index({ name: 1, type: -1 }); // Schema Level
 
-// Exporting Student Schema to a database
+// Exporting Project Group Schema to a database
 module.exports = mongoose.model('ProjectGroup', ProjectSchema);

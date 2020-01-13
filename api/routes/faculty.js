@@ -1,6 +1,7 @@
 // Importing Dependencies
 const router = require('express').Router();
 const Faculty = require('../models/Faculty');
+const ProjectGroup = require('../models/ProjectGroup');
 const bcrypt = require('bcryptjs');
 const config = require('config');
 const jwt = require('jsonwebtoken');
@@ -166,6 +167,44 @@ router.post('/addNewFaculty', async (req, res) => {
     console.log(err);
     return res.status(500).json({
       Error: err.errmsg || err.message
+    });
+  }
+});
+
+// @route     Post   /faculty/addNewProjectGroup
+// @desc      Add New Project Group
+// @access    Private
+router.post('/addNewProjectGroup', facultyAuth, async (req, res) => {
+  const {
+    projectName,
+    definition,
+    stu01,
+    stu02,
+    stu03,
+    stu04,
+    technology
+  } = req.body;
+  try {
+    let faculty = await Faculty.findById(req.faculty.id).select('-password');
+    let projectGroup = new ProjectGroup({
+      projectName,
+      definition,
+      stu01,
+      stu02,
+      stu03,
+      stu04,
+      technology: technology.split(',').map((tech) => tech.trim()),
+      faculty: faculty.id
+    });
+
+    await projectGroup.save();
+    res.status(200).json({
+      msg: `Hey ${faculty.name}, Your Group : ${projectName} is now added Successfully`
+    });
+  } catch (err) {
+    console.log(err);
+    res.status(500).json({
+      err: err
     });
   }
 });

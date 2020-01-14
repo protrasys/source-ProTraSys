@@ -359,7 +359,14 @@ router.delete(
 
       await projectGroup.save();
 
-      res.json(projectGroup.files);
+      if (projectGroup.files.length === 0) {
+        return res.status(200).json({
+          msg: 'File Successfully Deleted'
+        });
+      }
+      res.status(400).json({
+        msg: 'Something Went Wrong, Kindly Contact to DB Admin'
+      });
     } catch (err) {
       console.log(err);
       res.status(500).json(err);

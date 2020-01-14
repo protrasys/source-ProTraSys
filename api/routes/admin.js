@@ -218,4 +218,37 @@ router.delete('/deleteStudent/:id', adminAuth, async (req, res) => {
   }
 });
 
+// @route     Delete   /admin/deleteProjectGroup/:id
+// @desc      Delete Project Group
+// @access    private
+router.delete('/deleteProjectGroup/:id', adminAuth, async (req, res) => {
+  const id = req.params.id;
+  try {
+    await ProjectGroup.deleteOne({ _id: id })
+      .exec()
+      .then((result) => {
+        if (result.deletedCount > 0) {
+          return res.status(200).json({
+            msg: 'Deleted Successfully'
+          });
+        } else {
+          return res.status(400).json({
+            msg: 'No Project Group Found to Delete'
+          });
+        }
+      })
+      .catch((err) => {
+        console.log(err);
+        return res.status(400).json({
+          err: err
+        });
+      });
+  } catch (err) {
+    console.log(err);
+    res.status(500).json({
+      err: err
+    });
+  }
+});
+
 module.exports = router;

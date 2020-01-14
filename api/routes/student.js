@@ -156,8 +156,39 @@ router.post('/', async (req, res) => {
   }
 });
 
-// @route     POST   /students/uploadProjectFiles
+// @route     POST   /students/uploadProjectFiles/:projectId
 // @desc      save Uploaded file String to the Database
 // @access    Private
+router.post('/uploadProjectFiles/:projectId', studentAuth, async (req, res) => {
+  const projectId = req.params.projectId;
+  const { UploadedFile, Description } = req.body;
+  try {
+    const student = await Student.findOne({ _id: req.student.id });
+    const projectGroup = await ProjectGroup.findOne({ _id: projectId });
+
+    if (!projectGroup) {
+      return res.status(400).json({
+        msg: 'No Project Group Found'
+      });
+    }
+
+    const newFile = {
+      StudentID: student.id,
+      StudentName: student.name,
+      UploadedFile,
+      Description
+    };
+
+    projectGroup.files.unshift(newFile);
+    await projectGroup.save();
+
+    res.status(200).json(projectGroup);
+  } catch (err) {
+    console.log(err);
+    res.status(500).json({
+      err: err
+    });
+  }
+});
 
 module.exports = router;

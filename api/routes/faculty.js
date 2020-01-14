@@ -212,7 +212,7 @@ router.post('/addNewProjectGroup', facultyAuth, async (req, res) => {
 // @route     GET   /faculty/getAllProjectGroups
 // @desc      Get All Project Groups
 // @access    public
-router.get('/getAllProjectGroups', facultyAuth, async (req, res) => {
+router.get('/getAllProjectGroups', async (req, res) => {
   try {
     const projectGroups = await ProjectGroup.find();
 
@@ -229,6 +229,58 @@ router.get('/getAllProjectGroups', facultyAuth, async (req, res) => {
   } catch (err) {
     console.log(err);
     res.status(500).json({
+      err: err
+    });
+  }
+});
+
+// @route     GET   /faculty/mineProjectGroups
+// @desc      Get Individual Faculties Project Groups
+// @access    private
+router.get('/mineProjectGroups', facultyAuth, async (req, res) => {
+  try {
+    const faculty = await Faculty.findOne({ _id: req.faculty.id });
+    const myProjectGroups = await ProjectGroup.find({
+      faculty: req.faculty.id
+    });
+
+    if (!myProjectGroups) {
+      return res.status(400).json({
+        msg: `Sorry, ${faculty.name} you have no project groups`
+      });
+    }
+
+    res.status(200).json(myProjectGroups);
+  } catch (err) {
+    console.log(err);
+    res.status(500).json({
+      err: err
+    });
+  }
+});
+
+// @route     GET   /faculty/projects/:id
+// @desc      Get Individual Project Group
+// @access    private
+router.get('/projects/:id', facultyAuth, async (req, res) => {
+  const id = req.params.id;
+  try {
+    const faculty = await Faculty.findOne({ _id: req.faculty.id });
+    const projectGroup = await ProjectGroup.findOne({ _id: id }).populate(
+      'faculty stu01 stu02 stu03 stu04',
+      'name profile sem enrollmentId email phone'
+    );
+
+    if (!projectGroup) {
+      return res.status(400).json({
+        msg: `Hey ${faculty.name}, You have no Project Group found with this ID`
+      });
+    }
+
+    res.status(200).json(projectGroup);
+  } catch (err) {
+    console.log(err);
+    res.status(200).json({
       err: err
     });
   }

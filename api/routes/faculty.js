@@ -319,7 +319,7 @@ router.delete('/projects/:id', facultyAuth, async (req, res) => {
   }
 });
 
-// @route     Delete   /faculty/projects/:projectID/:fileID
+// @route     Delete   /faculty/projects/files/:projectID/:fileID
 // @desc      Delete Project Files
 // @access    private
 router.delete(
@@ -367,6 +367,33 @@ router.delete(
       res.status(400).json({
         msg: 'Something Went Wrong, Kindly Contact to DB Admin'
       });
+    } catch (err) {
+      console.log(err);
+      res.status(500).json(err);
+    }
+  }
+);
+
+// @route     GET   /faculty/projects/files/:projectID/:fileID
+// @desc      View Students Uploaded Files
+// @access    Private
+router.get(
+  '/projects/files/:projectID/:fileID',
+  facultyAuth,
+  async (req, res) => {
+    const projectID = req.params.projectID;
+    const fileID = req.params.fileID;
+    try {
+      const projectGroup = await ProjectGroup.findById(projectID).select(
+        'files'
+      );
+
+      // Finding Index fo File
+      const uploadFileIndex = projectGroup.files
+        .map((file) => file.id.toString())
+        .indexOf(fileID);
+
+      res.json(projectGroup.files[uploadFileIndex]);
     } catch (err) {
       console.log(err);
       res.status(500).json(err);

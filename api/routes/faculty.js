@@ -319,4 +319,52 @@ router.delete('/projects/:id', facultyAuth, async (req, res) => {
   }
 });
 
+// @route     Delete   /faculty/projects/:projectID/:fileID
+// @desc      Delete Project Files
+// @access    private
+router.delete(
+  '/projects/files/:projectID/:fileID',
+  facultyAuth,
+  async (req, res) => {
+    const fileID = req.params.fileID;
+    const projectID = req.params.projectID;
+    try {
+      const projectGroup = await ProjectGroup.findById(projectID);
+
+      // find Uploaded Files
+      const uploadedFile = projectGroup.files.find(
+        (file) => file.id === fileID
+      );
+
+      // If no such file found to delete
+      if (!uploadedFile) {
+        return res.status(400).json({
+          msg: 'No Such File found to delete'
+        });
+      }
+
+      // Check if Faculty is Authorized or not
+      if (projectGroup.faculty.toString() !== req.faculty.id) {
+        return res.status(401).json({
+          msg: 'Faculty Unauthorized'
+        });
+      }
+
+      // Finding Index of File to Delete
+      const removeIndex = projectGroup.files
+        .map((file) => file.id.toString())
+        .indexOf(fileID);
+
+      projectGroup.files.splice(removeIndex, 1);
+
+      await projectGroup.save();
+
+      res.json(projectGroup.files);
+    } catch (err) {
+      console.log(err);
+      res.status(500).json(err);
+    }
+  }
+);
+
 module.exports = router;

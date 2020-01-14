@@ -209,4 +209,29 @@ router.post('/addNewProjectGroup', facultyAuth, async (req, res) => {
   }
 });
 
+// @route     GET   /faculty/getAllProjectGroups
+// @desc      Get All Project Groups
+// @access    public
+router.get('/getAllProjectGroups', facultyAuth, async (req, res) => {
+  try {
+    const projectGroups = await ProjectGroup.find();
+
+    // check if projectGroup available or not
+    if (projectGroups.length === 0) {
+      return res.status(400).json({
+        msg: 'No ProjectGroups Records Found!'
+      });
+    }
+
+    res.status(200).json({
+      projectGroups
+    });
+  } catch (err) {
+    console.log(err);
+    res.status(500).json({
+      err: err
+    });
+  }
+});
+
 module.exports = router;

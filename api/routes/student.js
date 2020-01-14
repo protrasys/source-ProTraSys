@@ -1,6 +1,7 @@
 // Importing Dependencies
 const router = require('express').Router();
 const Student = require('../models/Student');
+const ProjectGroup = require('../models/ProjectGroup');
 const bcrypt = require('bcryptjs');
 const config = require('config');
 const jwt = require('jsonwebtoken');
@@ -154,5 +155,9 @@ router.post('/', async (req, res) => {
     });
   }
 });
+
+// @route     POST   /students/uploadProjectFiles
+// @desc      save Uploaded file String to the Database
+// @access    Private
 
 module.exports = router;

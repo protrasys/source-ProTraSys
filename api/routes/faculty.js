@@ -1,6 +1,7 @@
 // Importing Dependencies
 const router = require('express').Router();
 const Faculty = require('../models/Faculty');
+const eNotice = require('../models/eNotice');
 const ProjectGroup = require('../models/ProjectGroup');
 const bcrypt = require('bcryptjs');
 const config = require('config');
@@ -400,5 +401,37 @@ router.get(
     }
   }
 );
+
+// @route     POST   /faculty/enotice
+// @desc      Upload eNotice
+// @access    Private
+router.post('/enotice', facultyAuth, async (req, res, next) => {
+  const { title, description } = req.body;
+  try {
+    await new eNotice({
+      faculty: req.faculty.id,
+      title,
+      description
+    })
+      .save()
+      .then((result) => {
+        res.status(200).json({
+          message: 'Notice is added !',
+          notice: result
+        });
+      })
+      .catch((err) => {
+        res.status(401).json({
+          message: 'Something went wrong, Please try again later'
+        });
+      });
+  } catch (err) {
+    console.log('POST E-NOTICE ROUTE ERROR', err);
+    res.status(500).json({
+      error: 'Internal Server Error',
+      desc: err
+    });
+  }
+});
 
 module.exports = router;

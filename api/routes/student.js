@@ -1,6 +1,7 @@
 // Importing Dependencies
 const router = require('express').Router();
 const Student = require('../models/Student');
+const eNotice = require('../models/eNotice');
 const ProjectGroup = require('../models/ProjectGroup');
 const bcrypt = require('bcryptjs');
 const config = require('config');
@@ -187,6 +188,40 @@ router.post('/uploadProjectFiles/:projectId', studentAuth, async (req, res) => {
     console.log(err);
     res.status(500).json({
       err: err
+    });
+  }
+});
+
+// @route     GET   /students/enotice
+// @desc      View eNotice
+// @access    public
+router.get('/enotice', async (req, res) => {
+  try {
+    await eNotice
+      .find()
+      .exec()
+      .then((result) => {
+        if (result.length > 0) {
+          return res.status(200).json({
+            eNotice: result
+          });
+        } else {
+          return res.status(404).json({
+            message: 'No more eNotice, Kindly visit sometimes later'
+          });
+        }
+      })
+      .catch((err) => {
+        res.status(401).json({
+          message: 'Something went wrong, Please try again later',
+          desc: err
+        });
+      });
+  } catch (err) {
+    console.log('GET STUDENT E-NOTICE ROUTE ERROR', err);
+    res.status(500).json({
+      error: 'Internal Server Error',
+      desc: err
     });
   }
 });

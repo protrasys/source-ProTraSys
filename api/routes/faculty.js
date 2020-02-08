@@ -1,11 +1,14 @@
 // Importing Dependencies
 const router = require('express').Router();
 const Faculty = require('../models/Faculty');
+const Student = require('../models/Student');
 const eNotice = require('../models/eNotice');
+const eReport = require('../models/eReports');
 const ProjectGroup = require('../models/ProjectGroup');
 const bcrypt = require('bcryptjs');
 const config = require('config');
 const jwt = require('jsonwebtoken');
+const nodemailer = require('nodemailer');
 const { facultyAuth } = require('../middlewares/auth');
 
 // @route     GET   /faculty/
@@ -405,7 +408,7 @@ router.get(
 // @route     POST   /faculty/enotice
 // @desc      Upload eNotice
 // @access    Private
-router.post('/enotice', facultyAuth, async (req, res, next) => {
+router.post('/enotice', facultyAuth, async (req, res) => {
   const { title, description } = req.body;
   try {
     await new eNotice({
@@ -422,16 +425,155 @@ router.post('/enotice', facultyAuth, async (req, res, next) => {
       })
       .catch((err) => {
         res.status(401).json({
-          message: 'Something went wrong, Please try again later'
+          message: 'Something went wrong, Please try again later',
+          desc: err
         });
       });
   } catch (err) {
-    console.log('POST E-NOTICE ROUTE ERROR', err);
+    console.log('POST FACULTY E-NOTICE ROUTE ERROR', err);
     res.status(500).json({
       error: 'Internal Server Error',
       desc: err
     });
   }
 });
+
+// @route     POST   /faculty/ereport
+// @desc      Generate E-Reporting
+// @access    Private
+router.post(
+  '/ereport/:projectGroupId/:filesId',
+  facultyAuth,
+  async (req, res) => {
+    const { discussion, feedback } = req.body;
+    const { projectGroupId, filesId } = req.params;
+    try {
+      const newReport = await new eReport({
+        discussion,
+        feedback,
+        faculty: req.faculty.id,
+        projectGroup: projectGroupId
+      });
+
+      if (!newReport) {
+        return res.status(401).json({
+          message: 'Something went wrong, Please try again later',
+          desc: err
+        });
+      }
+
+      const projectGroup = await ProjectGroup.findOne({ _id: projectGroupId });
+
+      const faculty = await Faculty.findOne({ _id: req.faculty.id });
+      const facultyEmail = faculty.email;
+
+      const stu01 = await Student.findOne({ _id: projectGroup.stu01 });
+      const stu01Email = stu01.email;
+      const stu02 = await Student.findOne({ _id: projectGroup.stu02 });
+      const stu02Email = stu02.email;
+      const stu03 = await Student.findOne({ _id: projectGroup.stu03 });
+      const stu03Email = stu03.email;
+      const stu04 = await Student.findOne({ _id: projectGroup.stu04 });
+      const stu04Email = stu04.email;
+
+      const cDate = projectGroup.updatedAt.getDate();
+      const cMonth = projectGroup.updatedAt.getMonth() + 1;
+      const cYear = projectGroup.updatedAt.getFullYear();
+
+      // Code to send email to the above users (Faculty and Students)
+      const output = `
+    Hello , </br> Your Report Card </br>
+    <h3>: Message :</h3>
+    <p>Today We have Discusses about :- ${newReport.discussion} </p> </br>
+    <h6 align='right'>Faculty Feedback</h6>
+    <p align='right'>${newReport.feedback}</p>
+    `;
+
+      const outputForFaculty = `
+        
+      `;
+
+      // create reusable transporter object using the default SMTP transport
+      let transporter = nodemailer.createTransport({
+        host: 'smtp.gmail.com',
+        port: 587,
+        secure: false, // true for 465, false for other ports
+        auth: {
+          user: 'badboysecurities@gmail.com', // generated ethereal user
+          pass: 'LaW6rXvEguCHB2V' // generated ethereal password
+        },
+        tls: {
+          rejectUnauthorized: false
+        }
+      });
+
+      // send mail with defined transport object
+      if (stu01Email !== 'undefined') {
+        await transporter.sendMail({
+          from: `"Pro-Tra-Sys Team 🔖" <bhaainichaal@yahoo.in>`, // sender address
+          to: stu01Email, // list of receivers
+          subject: `${
+            stu01.name
+          }, Grand Project Report Card : ${new Date().toISOString()}`, // Subject line
+          html: output // html body
+        });
+      }
+      if (stu02Email !== 'undefined') {
+        await transporter.sendMail({
+          from: `"Pro-Tra-Sys Team 🔖" <bhaainichaal@yahoo.in>`, // sender address
+          to: stu02Email, // list of receivers
+          subject: `${
+            stu02.name
+          }, Grand Project Report Card : ${new Date().toISOString()}`, // Subject line
+          html: output // html body
+        });
+      }
+      if (stu03Email !== 'undefined') {
+        await transporter.sendMail({
+          from: `"Pro-Tra-Sys Team 🔖" <bhaainichaal@yahoo.in>`, // sender address
+          to: stu03Email, // list of receivers
+          subject: `${
+            stu03.name
+          }, Grand Project Report Card : ${new Date().toISOString()}`, // Subject line
+          html: output // html body
+        });
+      }
+      if (stu04Email !== 'undefined') {
+        await transporter.sendMail({
+          from: `"Pro-Tra-Sys Team 🔖" <bhaainichaal@yahoo.in>`, // sender address
+          to: stu04Email, // list of receivers
+          subject: `${
+            stu04.name
+          }, Grand Project Report Card : ${new Date().toISOString()}`, // Subject line
+          html: output // html body
+        });
+      }
+
+      if (facultyEmail !== 'undefined') {
+        await transporter.sendMail({
+          from: `"Pro-Tra-Sys Team 🔖" <bhaainichaal@yahoo.in>`, // sender address
+          to: 'manavoza7@gmail.com', // list of receivers
+          subject: ` Hello, ${
+            faculty.name
+          }, Grand Project Report Card : ${new Date()}`, // Subject line
+          html: outputForFaculty // html body
+        });
+      }
+
+      res.status(200).json({
+        message: 'Report Generated and sent to the Students Mail',
+        notice: newReport
+      });
+
+      await newReport.save();
+    } catch (err) {
+      console.log('POST FACULTY E-REPORT ROUTE ERROR', err);
+      res.status(500).json({
+        error: 'Internal Server Error',
+        desc: err
+      });
+    }
+  }
+);
 
 module.exports = router;

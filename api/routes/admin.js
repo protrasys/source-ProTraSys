@@ -1,6 +1,7 @@
 // Importing Dependencies
 const router = require('express').Router();
 const Admin = require('../models/Admin');
+const eNotice = require('../models/eNotice');
 const Faculty = require('../models/Faculty');
 const Student = require('../models/Student');
 const ProjectGroup = require('../models/ProjectGroup');
@@ -247,6 +248,41 @@ router.delete('/deleteProjectGroup/:id', adminAuth, async (req, res) => {
     console.log(err);
     res.status(500).json({
       err: err
+    });
+  }
+});
+
+// @route     Delete   /admin/deleteENotice/:noticeId
+// @desc      Delete eNotice
+// @access    private
+router.delete('/deleteENotice/:noticeId', adminAuth, async (req, res) => {
+  const noticeId = req.params.noticeId;
+  try {
+    await eNotice
+      .deleteOne({ _id: noticeId })
+      .exec()
+      .then((result) => {
+        if (result.deletedCount > 0) {
+          return res.status(200).json({
+            msg: 'Deleted Successfully'
+          });
+        } else {
+          return res.status(400).json({
+            msg: 'No eNotice Found to Delete'
+          });
+        }
+      })
+      .catch((err) => {
+        console.log(err);
+        return res.status(400).json({
+          err: err
+        });
+      });
+  } catch (err) {
+    console.log('DELETE ADMIN E-NOTICE ROUTE ERROR', err);
+    res.status(500).json({
+      error: 'Internal Server Error',
+      desc: err
     });
   }
 });

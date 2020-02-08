@@ -6,21 +6,33 @@ const ProjectSchema = new mongoose.Schema(
   {
     projectName: { type: mongoose.Schema.Types.String, required: true },
     definition: { type: mongoose.Schema.Types.String, required: true },
-    stu01: { type: mongoose.Schema.Types.ObjectId, ref: 'Student' },
-    stu02: { type: mongoose.Schema.Types.ObjectId, ref: 'Student' },
-    stu03: { type: mongoose.Schema.Types.ObjectId, ref: 'Student' },
-    stu04: { type: mongoose.Schema.Types.ObjectId, ref: 'Student' },
+    stu01: {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: 'Student',
+      require: true
+    },
+    stu02: {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: 'Student',
+      require: true
+    },
+    stu03: {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: 'Student',
+      require: true
+    },
+    stu04: {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: 'Student',
+      require: true
+    },
     technology: { type: [mongoose.Schema.Types.String] },
     faculty: { type: mongoose.Schema.Types.ObjectId, ref: 'Faculty' },
-    files: [
-      {
-        StudentID: { type: mongoose.Schema.Types.ObjectId, ref: 'Student' },
-        StudentName: { type: mongoose.Schema.Types.String, required: true },
-        UploadedFile: { type: mongoose.Schema.Types.String, required: true },
-        Description: { type: mongoose.Schema.Types.String },
-        Date: { type: mongoose.Schema.Types.Date, default: Date.now }
-      }
-    ]
+    teamLeader: {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: 'Student',
+      require: true
+    }
   },
   {
     minimize: false,

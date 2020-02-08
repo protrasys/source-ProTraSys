@@ -176,7 +176,8 @@ router.post('/addNewProjectGroup', facultyAuth, async (req, res) => {
     stu02,
     stu03,
     stu04,
-    technology
+    technology,
+    teamLeader
   } = req.body;
   try {
     let faculty = await Faculty.findById(req.faculty.id).select('-password');
@@ -187,13 +188,14 @@ router.post('/addNewProjectGroup', facultyAuth, async (req, res) => {
       stu02,
       stu03,
       stu04,
+      teamLeader,
       technology: technology.split(',').map((tech) => tech.trim()),
       faculty: faculty.id
     });
 
     await projectGroup.save();
     res.status(200).json({
-      msg: `Hey ${faculty.name}, Your Group : ${projectName} is now added Successfully`
+      msg: `Hello~ ${faculty.name}, Your Group : ${projectName} is now added Successfully`
     });
   } catch (err) {
     console.log(err);
@@ -435,11 +437,21 @@ router.post(
   '/ereport/:projectGroupId/:filesId',
   facultyAuth,
   async (req, res) => {
-    const { discussion, feedback } = req.body;
+    const { feedback } = req.body;
     const { projectGroupId, filesId } = req.params;
     try {
+      const projectGroup = await ProjectGroup.findOne({ _id: projectGroupId });
+      const uploadedFile = projectGroup.files.filter(
+        (file) => file._id == filesId
+      );
+
+      if (uploadedFile.length <= 0) {
+        return res.status(401).json({
+          msg: 'Something went wrong, Please contact to admin'
+        });
+      }
       const newReport = await new eReport({
-        discussion,
+        discussion: uploadedFile[0].Description,
         feedback,
         faculty: req.faculty.id,
         projectGroup: projectGroupId
@@ -452,7 +464,7 @@ router.post(
         });
       }
 
-      const projectGroup = await ProjectGroup.findOne({ _id: projectGroupId });
+      console.log(uploadedFile);
 
       const faculty = await Faculty.findOne({ _id: req.faculty.id });
       const facultyEmail = faculty.email;
@@ -474,50 +486,50 @@ router.post(
 
       // Code to send email to the above users (Faculty and Students)
       const output = `
-      <div class="main" style="text-align: center; font-size: 1.3rem; font-family: Operator SSm; font-style: italic; width: 55%; border: 0.2rem solid black; border-bottom-right-radius: 4rem; border-top-left-radius: 4rem;">
-          <div class="header" style="background-color: teal; padding: 1rem; color: aliceblue; border-top-left-radius: 4rem;">
-              Your Report Card
-          </div>
-          <hr style="border: 1rem solid rgb(104, 214, 159); border-top-right-radius: 90%;">
-          <div class="content" style="margin-top: -3.5rem;">
-              <h3>: Message :</h3>
-              <p>Today We have Discusses about :- ${newReport.discussion} </p> </br>
-          </div>
-          <hr style="border: 1rem solid rgb(104, 214, 159); border-top-left-radius: 90%;">
-          <div class="feedback" style="margin-top: -3rem;">
-              <p>Faculty Feedback</p>
-              <h5>${newReport.feedback}</h5>
-          </div>
-      </div>
-    `;
+        <div class="main" style="text-align: center; font-size: 1.3rem; font-family: Operator SSm; font-style: italic; width: 95%; border: 0.2rem solid black; border-bottom-right-radius: 4rem; border-top-left-radius: 4rem;">
+            <div class="header" style="background-color: teal; padding: 1rem; color: aliceblue; border-top-left-radius: 4rem;">
+                Your Report Card
+            </div>
+            <hr style="border: 1rem solid rgb(104, 214, 159); border-top-right-radius: 90%;">
+            <div class="content" style="margin-top: -3.5rem;">
+                <h3>: Message :</h3>
+                <p>Today We have Discusses about :- ${uploadedFile[0].Description} </p> </br>
+            </div>
+            <hr style="border: 1rem solid rgb(104, 214, 159); border-top-left-radius: 90%;">
+            <div class="feedback" style="margin-top: -3rem;">
+                <p>Faculty Feedback</p>
+                <h5>${newReport.feedback}</h5>
+            </div>
+        </div>
+      `;
 
       const outputForFaculty = `
-          <table style="padding: .2rem; user-select: none; background-color: lightgoldenrodyellow; border-radius: 5%;" cellpadding='20' cellspacing='0' align="center" width='60%' >   
-              <thead   style="font-family: Operator SSm; font-style: italic; text-align: center;">
-                  <td colspan="4">E-Report Project Tracking System</td>
-              </thead>
-              <tr style="background-color: darkslateblue; color: white;">
-                  <th>Date</th>
-                  <th>Discussion</th>
-                  <th>Feedback</th>
-                  <th>Status</th>
-              </tr>
-              <tbody  style="font-family: verdana;">
-                  <tr>
-                      <td align="center"> ${FullDate} </td>
-                      <td> ${newReport.discussion} </td>
-                      <td> ${newReport.feedback} </td>
-                      <td align='center'> Pending </td>
-                  </tr>
-                  <tr style="font-family: Operator SSm; font-style: bold;color:wheat; text-align: right; font-size: .8rem;">
-                      <td colspan="4"> 
-                          Contact Admin For any Query or Complain regarding e-report </br>
-                          &copy; ProTraSys   
-                      </td>
-                  </tr>
-              </tbody>
-          </table>
-      `;
+            <table style="padding: .2rem; user-select: none; background-color: lightgoldenrodyellow; border-radius: 5%;" cellpadding='20' cellspacing='0' align="center" width='80%' >
+                <thead   style="font-family: Operator SSm; font-style: italic; text-align: center;">
+                    <td colspan="4">E-Report Project Tracking System</td>
+                </thead>
+                <tr style="background-color: darkslateblue; color: white;">
+                    <th>Date</th>
+                    <th>Discussion</th>
+                    <th>Feedback</th>
+                    <th>Uploads</th>
+                </tr>
+                <tbody  style="font-family: verdana;">
+                    <tr>
+                        <td align="center"> ${FullDate} </td>
+                        <td> ${uploadedFile[0].Description} </td>
+                        <td> ${newReport.feedback} </td>
+                        <td> <a href="${uploadedFile[0].UploadedFile}" target="_blank" >View File</a> </td>
+                    </tr>
+                    <tr style="font-family: Operator SSm; font-style: bold;color:wheat; text-align: right; font-size: .8rem;">
+                        <td colspan="4">
+                            Contact Admin For any Query or Complain regarding e-report </br>
+                            &copy; ProTraSys
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        `;
 
       // create reusable transporter object using the default SMTP transport
       let transporter = nodemailer.createTransport({
@@ -581,7 +593,7 @@ router.post(
         notice: newReport
       });
 
-      await newReport.save();
+      // await newReport.save();
     } catch (err) {
       console.log('POST FACULTY E-REPORT ROUTE ERROR', err);
       res.status(500).json({

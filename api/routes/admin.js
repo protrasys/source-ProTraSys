@@ -6,7 +6,7 @@ const Faculty = require('../models/Faculty');
 const Student = require('../models/Student');
 const ProjectGroup = require('../models/ProjectGroup');
 const bcrypt = require('bcryptjs');
-const config = require('config');
+const { jwtSecret } = require('../../config');
 const jwt = require('jsonwebtoken');
 const { adminAuth } = require('../middlewares/auth');
 
@@ -47,21 +47,16 @@ router.post('/addNewAdmin', async (req, res) => {
       .save()
       .then(() => {
         // returning jwt
-        jwt.sign(
-          payload,
-          config.get('jwtSecret'),
-          { expiresIn: '24h' },
-          (err, token) => {
-            if (err) {
-              throw err;
-            } else {
-              return res.status(200).json({
-                msg: `${admin.name}, You are welcome to the ProTraSys Family !🙏`,
-                token
-              });
-            }
+        jwt.sign(payload, jwtSecret, { expiresIn: '24h' }, (err, token) => {
+          if (err) {
+            throw err;
+          } else {
+            return res.status(200).json({
+              msg: `${admin.name}, You are welcome to the ProTraSys Family !🙏`,
+              token
+            });
           }
-        );
+        });
       })
       .catch((mongoErr) => {
         return res.status(500).json({
@@ -108,20 +103,15 @@ router.post('/', async (req, res) => {
       }
     };
     // return json web token to frontend
-    jwt.sign(
-      payload,
-      config.get('jwtSecret'),
-      { expiresIn: '24h' },
-      (err, token) => {
-        if (!err) {
-          return res.json({
-            msg: `${admin.name}, Welcome Back 😉`,
-            token
-          });
-        }
-        throw err;
+    jwt.sign(payload, jwtSecret, { expiresIn: '24h' }, (err, token) => {
+      if (!err) {
+        return res.json({
+          msg: `${admin.name}, Welcome Back 😉`,
+          token
+        });
       }
-    );
+      throw err;
+    });
   } catch (err) {
     console.log(err);
     return res.status(500).json({

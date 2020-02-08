@@ -1,6 +1,6 @@
 // importing dependencies
 const jwt = require('jsonwebtoken');
-const config = require('config');
+const { jwtSecret } = require('../../config');
 
 // Handling Middleware Function
 module.exports.adminAuth = (req, res, next) => {
@@ -16,7 +16,7 @@ module.exports.adminAuth = (req, res, next) => {
 
   // Verify the token
   try {
-    const decoded = jwt.verify(token, config.get('jwtSecret'));
+    const decoded = jwt.verify(token, jwtSecret);
     req.admin = decoded.admin;
     next();
   } catch (err) {
@@ -40,7 +40,7 @@ module.exports.studentAuth = (req, res, next) => {
 
   // Verify the token
   try {
-    const decoded = jwt.verify(token, config.get('jwtSecret'));
+    const decoded = jwt.verify(token, jwtSecret);
     req.student = decoded.student;
     next();
   } catch (err) {
@@ -64,7 +64,7 @@ module.exports.facultyAuth = (req, res, next) => {
 
   // Verify the token
   try {
-    const decoded = jwt.verify(token, config.get('jwtSecret'));
+    const decoded = jwt.verify(token, jwtSecret);
     req.faculty = decoded.faculty;
     next();
   } catch (err) {

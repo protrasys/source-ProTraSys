@@ -1,4 +1,0 @@
-{
-  "mongoURL": "mongodb+srv://admin:admin123@bhainichaal-tutym.mongodb.net/protrasys?retryWrites=true&w=majority",
-  "jwtSecret": "badboysecurities"
-}

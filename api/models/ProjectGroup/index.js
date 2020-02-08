@@ -32,6 +32,14 @@ const ProjectSchema = new mongoose.Schema(
       type: mongoose.Schema.Types.ObjectId,
       ref: 'Student',
       require: true
+    },
+    files: {
+      StudentID: { type: mongoose.Schema.Types.ObjectId, ref: 'Student' },
+      StudentName: { type: mongoose.Schema.Types.String, required: true },
+      UploadedFile: { type: mongoose.Schema.Types.String, required: true },
+      Description: { type: mongoose.Schema.Types.String },
+      Date: { type: mongoose.Schema.Types.Date, default: Date.now },
+      status: { type: mongoose.Schema.Types.String, default: 'pending' }
     }
   },
   {

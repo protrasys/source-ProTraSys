@@ -1,42 +1,38 @@
-// Importing Dependencies
+// =============== Importing Dependencies ====================
 const express = require('express');
 const app = express();
-const port = process.env.PORT || 5000;
 const cors = require('cors');
 const databaseConnectionHandler = require('./config/database');
 
-// Importing Routes
+// ======================= Importing Routes  ==================
 const StudentRoutes = require('./api/routes/student');
 const FacultyRoutes = require('./api/routes/faculty');
 const AdminRoutes = require('./api/routes/admin');
 
-// Database Connection
+// ======================= Connecting to the Database ==================
 databaseConnectionHandler();
 
-// Handling Cross Origin Resource Sharing
+//=======================  Handling Cross Origin Resource Sharing =======================
 app.use(cors());
 
-// Declare Middleware
+// ======================= Declare Middleware=======================
 app.use(
   express.json({
     extended: false
   })
 );
 
+// =======================  Handling Requests =======================
 app.use('/students', StudentRoutes);
 app.use('/faculty', FacultyRoutes);
 app.use('/admin', AdminRoutes);
 
-// Temporary Handling Home Page
+// ======================= Temporary Handling Home Page=======================
 app.use('/', (req, res) => {
   res.send(
     '<h1 align="center">Testing Backend Kindly contact to <a target="_blank" href="https://github.com/protrasys">PROTRASYS - ADMIN</a></h1>'
   );
 });
 
-// Listening port to create server
-app.listen(port, (error) => {
-  if (!error) {
-    console.log(`Backend Port: ${port}`);
-  }
-});
+// ===================== Exporting app =====================
+module.exports = app;

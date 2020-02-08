@@ -480,17 +480,53 @@ router.post(
       const cMonth = projectGroup.updatedAt.getMonth() + 1;
       const cYear = projectGroup.updatedAt.getFullYear();
 
+      const FullDate = `${cDate}/${cMonth}/${cYear}`;
+
       // Code to send email to the above users (Faculty and Students)
       const output = `
-    Hello , </br> Your Report Card </br>
-    <h3>: Message :</h3>
-    <p>Today We have Discusses about :- ${newReport.discussion} </p> </br>
-    <h6 align='right'>Faculty Feedback</h6>
-    <p align='right'>${newReport.feedback}</p>
+      <div class="main" style="text-align: center; font-size: 1.3rem; font-family: Operator SSm; font-style: italic; width: 55%; border: 0.2rem solid black; border-bottom-right-radius: 4rem; border-top-left-radius: 4rem;">
+          <div class="header" style="background-color: teal; padding: 1rem; color: aliceblue; border-top-left-radius: 4rem;">
+              Your Report Card
+          </div>
+          <hr style="border: 1rem solid rgb(104, 214, 159); border-top-right-radius: 90%;">
+          <div class="content" style="margin-top: -3.5rem;">
+              <h3>: Message :</h3>
+              <p>Today We have Discusses about :- ${newReport.discussion} </p> </br>
+          </div>
+          <hr style="border: 1rem solid rgb(104, 214, 159); border-top-left-radius: 90%;">
+          <div class="feedback" style="margin-top: -3rem;">
+              <p>Faculty Feedback</p>
+              <h5>${newReport.feedback}</h5>
+          </div>
+      </div>
     `;
 
       const outputForFaculty = `
-        
+          <table style="padding: .2rem; user-select: none; background-color: lightgoldenrodyellow; border-radius: 5%;" cellpadding='20' cellspacing='0' align="center" width='60%' >   
+              <thead   style="font-family: Operator SSm; font-style: italic; text-align: center;">
+                  <td colspan="4">E-Report Project Tracking System</td>
+              </thead>
+              <tr style="background-color: darkslateblue; color: white;">
+                  <th>Date</th>
+                  <th>Discussion</th>
+                  <th>Feedback</th>
+                  <th>Status</th>
+              </tr>
+              <tbody  style="font-family: verdana;">
+                  <tr>
+                      <td align="center"> ${FullDate} </td>
+                      <td> ${newReport.discussion} </td>
+                      <td> ${newReport.feedback} </td>
+                      <td align='center'> Pending </td>
+                  </tr>
+                  <tr style="font-family: Operator SSm; font-style: bold;color:wheat; text-align: right; font-size: .8rem;">
+                      <td colspan="4"> 
+                          Contact Admin For any Query or Complain regarding e-report </br>
+                          &copy; ProTraSys   
+                      </td>
+                  </tr>
+              </tbody>
+          </table>
       `;
 
       // create reusable transporter object using the default SMTP transport
@@ -512,9 +548,7 @@ router.post(
         await transporter.sendMail({
           from: `"Pro-Tra-Sys Team 🔖" <bhaainichaal@yahoo.in>`, // sender address
           to: stu01Email, // list of receivers
-          subject: `${
-            stu01.name
-          }, Grand Project Report Card : ${new Date().toISOString()}`, // Subject line
+          subject: `${stu01.name}, Grand Project Report Card : ${FullDate}`, // Subject line
           html: output // html body
         });
       }
@@ -522,9 +556,7 @@ router.post(
         await transporter.sendMail({
           from: `"Pro-Tra-Sys Team 🔖" <bhaainichaal@yahoo.in>`, // sender address
           to: stu02Email, // list of receivers
-          subject: `${
-            stu02.name
-          }, Grand Project Report Card : ${new Date().toISOString()}`, // Subject line
+          subject: `${stu02.name}, Grand Project Report Card : ${FullDate}`, // Subject line
           html: output // html body
         });
       }
@@ -532,9 +564,7 @@ router.post(
         await transporter.sendMail({
           from: `"Pro-Tra-Sys Team 🔖" <bhaainichaal@yahoo.in>`, // sender address
           to: stu03Email, // list of receivers
-          subject: `${
-            stu03.name
-          }, Grand Project Report Card : ${new Date().toISOString()}`, // Subject line
+          subject: `${stu03.name}, Grand Project Report Card : ${FullDate}`, // Subject line
           html: output // html body
         });
       }
@@ -542,9 +572,7 @@ router.post(
         await transporter.sendMail({
           from: `"Pro-Tra-Sys Team 🔖" <bhaainichaal@yahoo.in>`, // sender address
           to: stu04Email, // list of receivers
-          subject: `${
-            stu04.name
-          }, Grand Project Report Card : ${new Date().toISOString()}`, // Subject line
+          subject: `${stu04.name}, Grand Project Report Card : ${FullDate}`, // Subject line
           html: output // html body
         });
       }
@@ -553,9 +581,7 @@ router.post(
         await transporter.sendMail({
           from: `"Pro-Tra-Sys Team 🔖" <bhaainichaal@yahoo.in>`, // sender address
           to: 'manavoza7@gmail.com', // list of receivers
-          subject: ` Hello, ${
-            faculty.name
-          }, Grand Project Report Card : ${new Date()}`, // Subject line
+          subject: ` Hello, ${faculty.name}, Grand Project Report Card : ${FullDate}`, // Subject line
           html: outputForFaculty // html body
         });
       }

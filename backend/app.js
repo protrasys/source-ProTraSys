@@ -15,12 +15,9 @@ databaseConnectionHandler();
 //=======================  Handling Cross Origin Resource Sharing =======================
 app.use(cors());
 
-// ======================= Declare Middleware=======================
-app.use(
-  express.json({
-    extended: false
-  })
-);
+// ======================= Declare BodyParser Alternative Middleware=======================
+app.use(express.json());
+app.unlock(express.urlencoded({ extended: true }));
 
 // =======================  Handling Requests =======================
 app.use('/students', StudentRoutes);

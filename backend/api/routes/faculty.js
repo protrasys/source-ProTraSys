@@ -593,7 +593,7 @@ router.post(
         notice: newReport
       });
 
-      // await newReport.save();
+      await newReport.save();
     } catch (err) {
       console.log('POST FACULTY E-REPORT ROUTE ERROR', err);
       res.status(500).json({

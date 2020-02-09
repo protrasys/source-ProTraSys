@@ -1,0 +1,39 @@
+{
+  "name": "protrasys",
+  "version": "0.1.1",
+  "description": "Project Tracking and Monitoring System for students",
+  "main": "index.js",
+  "scripts": {
+    "start": "node server.js",
+    "dev": "nodemon server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/protrasys/source-ProTraSys.git"
+  },
+  "keywords": [
+    "nodejs",
+    "react",
+    "mern",
+    "firebase"
+  ],
+  "author": "ma-9",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/protrasys/source-ProTraSys/issues"
+  },
+  "homepage": "https://github.com/protrasys/source-ProTraSys#readme",
+  "dependencies": {
+    "bcryptjs": "^2.4.3",
+    "cors": "^2.8.5",
+    "dotenv": "^8.2.0",
+    "express": "^4.17.1",
+    "jsdom": "^16.1.0",
+    "jsonwebtoken": "^8.5.1",
+    "mongoose": "^5.8.3",
+    "nodemailer": "^6.4.2"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.2"
+  }
+}

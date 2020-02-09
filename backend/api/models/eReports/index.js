@@ -1,5 +1,6 @@
 // Importing Dependencies
 const mongoose = require('mongoose');
+const schmeaOptions = require('../SchemaOptions');
 
 // Admin Model
 const eReportSchema = new mongoose.Schema(
@@ -10,16 +11,7 @@ const eReportSchema = new mongoose.Schema(
     projectGroup: { type: mongoose.Schema.Types.ObjectId, ref: 'ProjectGroup' },
     status: { type: mongoose.Schema.Types.String, default: 'pending' }
   },
-  {
-    minimize: false,
-    writeConcern: {
-      w: 'majority',
-      j: true,
-      wtimeout: 1000
-    },
-    versionKey: false,
-    timestamps: true
-  }
+  schmeaOptions
 );
 
 // Exporting eReport Schema to a database

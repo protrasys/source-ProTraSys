@@ -1,5 +1,6 @@
 // Importing Dependencies
 const mongoose = require('mongoose');
+const schmeaOptions = require('../SchemaOptions');
 
 // Faculty Model
 const FacultySchema = new mongoose.Schema(
@@ -39,19 +40,8 @@ const FacultySchema = new mongoose.Schema(
     },
     password: { type: mongoose.Schema.Types.String, required: true }
   },
-  {
-    minimize: false,
-    writeConcern: {
-      w: 'majority',
-      j: true,
-      wtimeout: 1000
-    },
-    versionKey: false,
-    timestamps: true
-  }
+  schmeaOptions
 );
-
-FacultySchema.index({ name: 1, type: -1 }); // Schema Level
 
 // Exporting Faculty Schema to a database
 module.exports = mongoose.model('Faculty', FacultySchema);

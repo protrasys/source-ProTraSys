@@ -1,5 +1,6 @@
 // Importing Dependencies
 const mongoose = require('mongoose');
+const schmeaOptions = require('../SchemaOptions');
 
 // ProjectGroup Model
 const ProjectSchema = new mongoose.Schema(
@@ -43,19 +44,8 @@ const ProjectSchema = new mongoose.Schema(
       }
     ]
   },
-  {
-    minimize: false,
-    writeConcern: {
-      w: 'majority',
-      j: true,
-      wtimeout: 1000
-    },
-    versionKey: false,
-    timestamps: true
-  }
+  schmeaOptions
 );
-
-ProjectSchema.index({ name: 1, type: -1 }); // Schema Level
 
 // Exporting Project Group Schema to a database
 module.exports = mongoose.model('ProjectGroup', ProjectSchema);

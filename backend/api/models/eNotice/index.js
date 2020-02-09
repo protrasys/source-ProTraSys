@@ -1,5 +1,6 @@
 // Importing Dependencies
 const mongoose = require('mongoose');
+const schmeaOptions = require('../SchemaOptions');
 
 // Admin Model
 const eNoticeSchema = new mongoose.Schema(
@@ -10,16 +11,7 @@ const eNoticeSchema = new mongoose.Schema(
     file: { type: mongoose.Schema.Types.String },
     description: { type: mongoose.Schema.Types.String, required: true }
   },
-  {
-    minimize: false,
-    writeConcern: {
-      w: 'majority',
-      j: true,
-      wtimeout: 1000
-    },
-    versionKey: false,
-    timestamps: true
-  }
+  schmeaOptions
 );
 
 // Exporting eNotice Schema to a database

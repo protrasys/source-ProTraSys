@@ -1,5 +1,6 @@
 // Importing Dependencies
 const mongoose = require('mongoose');
+const schmeaOptions = require('../SchemaOptions');
 
 // Admin Model
 const AdminSchema = new mongoose.Schema(
@@ -13,19 +14,8 @@ const AdminSchema = new mongoose.Schema(
     name: { type: mongoose.Schema.Types.String, required: true },
     password: { type: mongoose.Schema.Types.String, required: true }
   },
-  {
-    minimize: false,
-    writeConcern: {
-      w: 'majority',
-      j: true,
-      wtimeout: 1000
-    },
-    versionKey: false,
-    timestamps: true
-  }
+  schmeaOptions
 );
-
-AdminSchema.index({ name: 1, type: -1 }); // Schema Level
 
 // Exporting Admin Schema to a database
 module.exports = mongoose.model('Admin', AdminSchema);

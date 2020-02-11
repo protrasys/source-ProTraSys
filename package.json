@@ -2,15 +2,12 @@
   "name": "source-protrasys",
   "version": "1.0.0",
   "description": "Project Tracking and Monitoring System",
-  "main": "index.js",
   "scripts": {
-    "start:frontend": "cd frontend && npm start && cd ..",
+    "frontend": "npm start --prefix frontend",
     "install": "cd frontend && npm install && cd .. && cd backend && npm install && cd ..",
-    "start:backend": "cd backend && npm start && cd ..",
-    "dev": "cd backend && npm run dev && cd ..",
-    "start": "npm run start:backend",
-    "build:frontend": "cd frontend && npm run build && cd ..",
-    "build": "npm run build:frontend && cd .."
+    "dev": "npm run dev --prefix backend",
+    "start": "npm start --prefix backend",
+    "build": "npm run build --prefix frontend"
   },
   "keywords": [
     "MERN",

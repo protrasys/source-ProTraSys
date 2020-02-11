@@ -9,40 +9,26 @@ const ProjectSchema = new mongoose.Schema(
     definition: { type: mongoose.Schema.Types.String, required: true },
     stu01: {
       type: mongoose.Schema.Types.ObjectId,
-      ref: 'Student',
-      require: true
+      ref: 'Student'
     },
     stu02: {
       type: mongoose.Schema.Types.ObjectId,
-      ref: 'Student',
-      require: true
+      ref: 'Student'
     },
     stu03: {
       type: mongoose.Schema.Types.ObjectId,
-      ref: 'Student',
-      require: true
+      ref: 'Student'
     },
     stu04: {
       type: mongoose.Schema.Types.ObjectId,
-      ref: 'Student',
-      require: true
+      ref: 'Student'
     },
     technology: { type: [mongoose.Schema.Types.String] },
     faculty: { type: mongoose.Schema.Types.ObjectId, ref: 'Faculty' },
     teamLeader: {
       type: mongoose.Schema.Types.ObjectId,
-      ref: 'Student',
-      require: true
-    },
-    files: [
-      {
-        StudentID: { type: mongoose.Schema.Types.ObjectId, ref: 'Student' },
-        StudentName: { type: mongoose.Schema.Types.String, required: true },
-        UploadedFile: { type: mongoose.Schema.Types.String, required: true },
-        Description: { type: mongoose.Schema.Types.String },
-        Date: { type: mongoose.Schema.Types.Date, default: Date.now }
-      }
-    ]
+      ref: 'Student'
+    }
   },
   schmeaOptions
 );

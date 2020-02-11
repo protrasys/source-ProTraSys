@@ -5,6 +5,7 @@ const Student = require('../models/Student');
 const eNotice = require('../models/eNotice');
 const eReport = require('../models/eReports');
 const ProjectGroup = require('../models/ProjectGroup');
+const ProjectFiles = require('../models/ProjectFIles');
 const bcrypt = require('bcryptjs');
 const { jwtSecret } = require('../../config');
 const jwt = require('jsonwebtoken');
@@ -263,7 +264,7 @@ router.get('/projects/:id', facultyAuth, async (req, res) => {
   try {
     const faculty = await Faculty.findOne({ _id: req.faculty.id });
     const projectGroup = await ProjectGroup.findOne({ _id: id }).populate(
-      'faculty stu01 stu02 stu03 stu04',
+      'faculty stu01 stu02 stu03 stu04 teamLeader',
       'name profile sem enrollmentId email phone'
     );
 
@@ -318,84 +319,72 @@ router.delete('/projects/:id', facultyAuth, async (req, res) => {
 // @route     Delete   /faculty/projects/files/:projectID/:fileID
 // @desc      Delete Project Files
 // @access    private
-router.delete(
-  '/projects/files/:projectID/:fileID',
-  facultyAuth,
-  async (req, res) => {
-    const fileID = req.params.fileID;
-    const projectID = req.params.projectID;
-    try {
-      const projectGroup = await ProjectGroup.findById(projectID);
+router.delete('/files/:fileID', facultyAuth, async (req, res) => {
+  const fileID = req.params.fileID;
+  try {
+    const projectFIle = await ProjectFiles.findOne({ _id: fileID });
 
-      // find Uploaded Files
-      const uploadedFile = projectGroup.files.find(
-        (file) => file.id === fileID
-      );
+    const groupId = projectFIle.projectGroup;
+    const projectGroup = await ProjectGroup.findOne({ _id: groupId });
 
-      // If no such file found to delete
-      if (!uploadedFile) {
-        return res.status(400).json({
-          msg: 'No Such File found to delete'
-        });
-      }
-
-      // Check if Faculty is Authorized or not
-      if (projectGroup.faculty.toString() !== req.faculty.id) {
-        return res.status(401).json({
-          msg: 'Faculty Unauthorized'
-        });
-      }
-
-      // Finding Index of File to Delete
-      const removeIndex = projectGroup.files
-        .map((file) => file.id.toString())
-        .indexOf(fileID);
-
-      projectGroup.files.splice(removeIndex, 1);
-
-      await projectGroup.save();
-
-      if (projectGroup.files.length === 0) {
-        return res.status(200).json({
-          msg: 'File Successfully Deleted'
-        });
-      }
-      res.status(400).json({
-        msg: 'Something Went Wrong, Kindly Contact to DB Admin'
+    // If no such file found to delete
+    if (!projectFIle) {
+      return res.status(400).json({
+        msg: 'No Such File found to delete'
       });
-    } catch (err) {
-      console.log(err);
-      res.status(500).json(err);
     }
-  }
-);
 
-// @route     GET   /faculty/projects/files/:projectID/:fileID
+    // Check if Faculty is Authorized or not
+    if (projectGroup.faculty.toString() !== req.faculty.id) {
+      return res.status(401).json({
+        msg: 'Faculty Unauthorized'
+      });
+    }
+    await ProjectFiles.deleteOne({ _id: fileID })
+      .exec()
+      .then((result) => {
+        if (result.deletedCount > 0) {
+          return res.status(200).json({
+            msg: 'Deleted Successfully'
+          });
+        } else {
+          return res.status(400).json({
+            msg: 'No Project File Found to Delete'
+          });
+        }
+      })
+      .catch((err) => {
+        console.log(err);
+        return res.status(400).json({
+          err: err
+        });
+      });
+  } catch (err) {
+    console.log(err);
+    res.status(500).json(err);
+  }
+});
+
+// @route     GET   /faculty/files/:fileID
 // @desc      View Students Uploaded Files
 // @access    Private
-router.get(
-  '/projects/files/:projectID/:fileID',
-  facultyAuth,
-  async (req, res) => {
-    const projectID = req.params.projectID;
-    const fileID = req.params.fileID;
-    try {
-      const projectGroup = await ProjectGroup.findById(projectID).select(
-        'files'
-      );
+router.get('/files/:fileID', facultyAuth, async (req, res) => {
+  const fileID = req.params.fileID;
+  try {
+    const projectFile = await ProjectFiles.find({ _id: fileID });
 
-      // Finding Index fo File
-      const uploadFileIndex = projectGroup.files
-        .map((file) => file.id.toString())
-        .indexOf(fileID);
-
-      res.json(projectGroup.files[uploadFileIndex]);
-    } catch (err) {
-      console.log(err);
-      res.status(500).json(err);
+    if (!projectFile) {
+      return res.status(404).json({
+        msg: 'No Such File Found to View'
+      });
     }
+
+    res.json(projectFile);
+  } catch (err) {
+    console.log(err);
+    res.status(500).json(err);
   }
-);
+});
 
 // @route     POST   /faculty/enotice
 // @desc      Upload eNotice
@@ -433,59 +422,56 @@ router.post('/enotice', facultyAuth, async (req, res) => {
 // @route     POST   /faculty/ereport
 // @desc      Generate E-Reporting
 // @access    Private
-router.post(
-  '/ereport/:projectGroupId/:filesId',
-  facultyAuth,
-  async (req, res) => {
-    const { feedback } = req.body;
-    const { projectGroupId, filesId } = req.params;
-    try {
-      const projectGroup = await ProjectGroup.findOne({ _id: projectGroupId });
-      const uploadedFile = projectGroup.files.filter(
-        (file) => file._id == filesId
-      );
+router.post('/ereport/:filesId', facultyAuth, async (req, res) => {
+  const { feedback } = req.body;
+  const { filesId } = req.params;
+  try {
+    const projectGroup = await ProjectGroup.findOne({ _id: projectGroupId });
+    const uploadedFile = projectGroup.files.filter(
+      (file) => file._id == filesId
+    );
 
-      if (uploadedFile.length <= 0) {
-        return res.status(401).json({
-          msg: 'Something went wrong, Please contact to admin'
-        });
-      }
-      const newReport = await new eReport({
-        discussion: uploadedFile[0].Description,
-        feedback,
-        faculty: req.faculty.id,
-        projectGroup: projectGroupId
+    if (uploadedFile.length <= 0) {
+      return res.status(401).json({
+        msg: 'Something went wrong, Please contact to admin'
       });
+    }
+    const newReport = await new eReport({
+      discussion: uploadedFile[0].Description,
+      feedback,
+      faculty: req.faculty.id,
+      projectGroup: projectGroupId
+    });
 
-      if (!newReport) {
-        return res.status(401).json({
-          message: 'Something went wrong, Please try again later',
-          desc: err
-        });
-      }
+    if (!newReport) {
+      return res.status(401).json({
+        message: 'Something went wrong, Please try again later',
+        desc: err
+      });
+    }
 
-      console.log(uploadedFile);
+    console.log(uploadedFile);
 
-      const faculty = await Faculty.findOne({ _id: req.faculty.id });
-      const facultyEmail = faculty.email;
+    const faculty = await Faculty.findOne({ _id: req.faculty.id });
+    const facultyEmail = faculty.email;
 
-      const stu01 = await Student.findOne({ _id: projectGroup.stu01 });
-      const stu01Email = stu01.email;
-      const stu02 = await Student.findOne({ _id: projectGroup.stu02 });
-      const stu02Email = stu02.email;
-      const stu03 = await Student.findOne({ _id: projectGroup.stu03 });
-      const stu03Email = stu03.email;
-      const stu04 = await Student.findOne({ _id: projectGroup.stu04 });
-      const stu04Email = stu04.email;
+    const stu01 = await Student.findOne({ _id: projectGroup.stu01 });
+    const stu01Email = stu01.email;
+    const stu02 = await Student.findOne({ _id: projectGroup.stu02 });
+    const stu02Email = stu02.email;
+    const stu03 = await Student.findOne({ _id: projectGroup.stu03 });
+    const stu03Email = stu03.email;
+    const stu04 = await Student.findOne({ _id: projectGroup.stu04 });
+    const stu04Email = stu04.email;
 
-      const cDate = projectGroup.updatedAt.getDate();
-      const cMonth = projectGroup.updatedAt.getMonth() + 1;
-      const cYear = projectGroup.updatedAt.getFullYear();
+    const cDate = projectGroup.updatedAt.getDate();
+    const cMonth = projectGroup.updatedAt.getMonth() + 1;
+    const cYear = projectGroup.updatedAt.getFullYear();
 
-      const FullDate = `${cDate}/${cMonth}/${cYear}`;
+    const FullDate = `${cDate}/${cMonth}/${cYear}`;
 
-      // Code to send email to the above users (Faculty and Students)
-      const output = `
+    // Code to send email to the above users (Faculty and Students)
+    const output = `
         <div class="main" style="text-align: center; font-size: 1.3rem; font-family: Operator SSm; font-style: italic; width: 95%; border: 0.2rem solid black; border-bottom-right-radius: 4rem; border-top-left-radius: 4rem;">
             <div class="header" style="background-color: teal; padding: 1rem; color: aliceblue; border-top-left-radius: 4rem;">
                 Your Report Card
@@ -503,7 +489,7 @@ router.post(
         </div>
       `;
 
-      const outputForFaculty = `
+    const outputForFaculty = `
             <table style="padding: .2rem; user-select: none; background-color: lightgoldenrodyellow; border-radius: 5%;" cellpadding='20' cellspacing='0' align="center" width='80%' >
                 <thead   style="font-family: Operator SSm; font-style: italic; text-align: center;">
                     <td colspan="4">E-Report Project Tracking System</td>
@@ -531,80 +517,79 @@ router.post(
             </table>
         `;
 
-      // create reusable transporter object using the default SMTP transport
-      let transporter = nodemailer.createTransport({
-        host: 'smtp.gmail.com',
-        port: 587,
-        secure: false, // true for 465, false for other ports
-        auth: {
-          user: 'badboysecurities@gmail.com', // generated ethereal user
-          pass: 'LaW6rXvEguCHB2V' // generated ethereal password
-        },
-        tls: {
-          rejectUnauthorized: false
-        }
-      });
+    // create reusable transporter object using the default SMTP transport
+    let transporter = nodemailer.createTransport({
+      host: 'smtp.gmail.com',
+      port: 587,
+      secure: false, // true for 465, false for other ports
+      auth: {
+        user: 'badboysecurities@gmail.com', // generated ethereal user
+        pass: 'LaW6rXvEguCHB2V' // generated ethereal password
+      },
+      tls: {
+        rejectUnauthorized: false
+      }
+    });
 
-      // send mail with defined transport object
-      if (stu01Email !== 'undefined') {
-        await transporter.sendMail({
-          from: `"Pro-Tra-Sys Team 🔖" <bhaainichaal@yahoo.in>`, // sender address
-          to: stu01Email, // list of receivers
-          subject: `${stu01.name}, Grand Project Report Card : ${FullDate}`, // Subject line
-          html: output // html body
-        });
-      }
-      if (stu02Email !== 'undefined') {
-        await transporter.sendMail({
-          from: `"Pro-Tra-Sys Team 🔖" <bhaainichaal@yahoo.in>`, // sender address
-          to: stu02Email, // list of receivers
-          subject: `${stu02.name}, Grand Project Report Card : ${FullDate}`, // Subject line
-          html: output // html body
-        });
-      }
-      if (stu03Email !== 'undefined') {
-        await transporter.sendMail({
-          from: `"Pro-Tra-Sys Team 🔖" <bhaainichaal@yahoo.in>`, // sender address
-          to: stu03Email, // list of receivers
-          subject: `${stu03.name}, Grand Project Report Card : ${FullDate}`, // Subject line
-          html: output // html body
-        });
-      }
-      if (stu04Email !== 'undefined') {
-        await transporter.sendMail({
-          from: `"Pro-Tra-Sys Team 🔖" <bhaainichaal@yahoo.in>`, // sender address
-          to: stu04Email, // list of receivers
-          subject: `${stu04.name}, Grand Project Report Card : ${FullDate}`, // Subject line
-          html: output // html body
-        });
-      }
-
-      if (facultyEmail !== 'undefined') {
-        await transporter.sendMail({
-          from: `"Pro-Tra-Sys Team 🔖" <bhaainichaal@yahoo.in>`, // sender address
-          to: 'manavoza7@gmail.com', // list of receivers
-          subject: ` Hello, ${faculty.name}, Grand Project Report Card : ${FullDate}`, // Subject line
-          html: outputForFaculty // html body
-        });
-      }
-
-      res.status(200).json({
-        message: 'Report Generated and sent to the Students Mail',
-        notice: newReport
-      });
-
-      await newReport.save();
-    } catch (err) {
-      console.log('POST FACULTY E-REPORT ROUTE ERROR', err);
-      res.status(500).json({
-        error: 'Internal Server Error',
-        desc: err
+    // send mail with defined transport object
+    if (stu01Email !== 'undefined') {
+      await transporter.sendMail({
+        from: `"Pro-Tra-Sys Team 🔖" <bhaainichaal@yahoo.in>`, // sender address
+        to: stu01Email, // list of receivers
+        subject: `${stu01.name}, Grand Project Report Card : ${FullDate}`, // Subject line
+        html: output // html body
       });
     }
-  }
-);
+    if (stu02Email !== 'undefined') {
+      await transporter.sendMail({
+        from: `"Pro-Tra-Sys Team 🔖" <bhaainichaal@yahoo.in>`, // sender address
+        to: stu02Email, // list of receivers
+        subject: `${stu02.name}, Grand Project Report Card : ${FullDate}`, // Subject line
+        html: output // html body
+      });
+    }
+    if (stu03Email !== 'undefined') {
+      await transporter.sendMail({
+        from: `"Pro-Tra-Sys Team 🔖" <bhaainichaal@yahoo.in>`, // sender address
+        to: stu03Email, // list of receivers
+        subject: `${stu03.name}, Grand Project Report Card : ${FullDate}`, // Subject line
+        html: output // html body
+      });
+    }
+    if (stu04Email !== 'undefined') {
+      await transporter.sendMail({
+        from: `"Pro-Tra-Sys Team 🔖" <bhaainichaal@yahoo.in>`, // sender address
+        to: stu04Email, // list of receivers
+        subject: `${stu04.name}, Grand Project Report Card : ${FullDate}`, // Subject line
+        html: output // html body
+      });
+    }
 
-// @route     POST  /faculty/
+    if (facultyEmail !== 'undefined') {
+      await transporter.sendMail({
+        from: `"Pro-Tra-Sys Team 🔖" <bhaainichaal@yahoo.in>`, // sender address
+        to: 'manavoza7@gmail.com', // list of receivers
+        subject: ` Hello, ${faculty.name}, Grand Project Report Card : ${FullDate}`, // Subject line
+        html: outputForFaculty // html body
+      });
+    }
+
+    res.status(200).json({
+      message: 'Report Generated and sent to the Students Mail',
+      notice: newReport
+    });
+
+    await newReport.save();
+  } catch (err) {
+    console.log('POST FACULTY E-REPORT ROUTE ERROR', err);
+    res.status(500).json({
+      error: 'Internal Server Error',
+      desc: err
+    });
+  }
+});
+
+// @route     POST  /faculty/addNewStudent
 // @desc      Add New Student
 // @access    Private
 router.post('/addNewStudent', facultyAuth, async (req, res) => {
@@ -659,7 +644,66 @@ router.post('/addNewStudent', facultyAuth, async (req, res) => {
   }
 });
 
-// @route     GET   /faculty/
+// @route     PATCH  /faculty/updateStudent/:stuId
+// @desc      Update the details of existing Student
+// @access    Private
+router.patch('/updateStudent/:stuId', facultyAuth, async (req, res) => {
+  const { stuId } = req.params;
+  const {
+    name,
+    sem,
+    enrollmentId,
+    email,
+    phone,
+    password,
+    projectGroupId,
+    teamLeader
+  } = req.body;
+  const updatedStudent = {};
+  if (name) updatedStudent.name = name;
+  if (sem) updatedStudent.sem = sem;
+  if (enrollmentId) updatedStudent.enrollmentId = enrollmentId;
+  if (email) updatedStudent.email = email;
+  if (phone) updatedStudent.phone = phone;
+  if (password) {
+    const genSalt = bcrypt.genSalt(10);
+    const newPassword = bcrypt.hashSync(password, genSalt);
+    updatedStudent.password = newPassword;
+  }
+  if (projectGroupId) updatedStudent.projectGroupId = projectGroupId;
+  if (teamLeader) updatedStudent.teamLeader = teamLeader;
+
+  try {
+    let faculty = await Faculty.findById(req.faculty.id).select('-password');
+    let student = await Student.findOne({ _id: stuId });
+    if (!student) {
+      return res.status(401).json({
+        msg: `${faculty.name}, No Such Student found to update`
+      });
+    }
+    await Student.findOneAndUpdate(
+      { _id: stuId },
+      { $set: updatedStudent },
+      { new: true }
+    )
+      .exec()
+      .then((result) => {
+        res.status(200).json(result);
+      })
+      .catch((err) => {
+        res.status(401).json({
+          msg: `Opps! Something went Wrong.. Please Try again after few moments`
+        });
+      });
+  } catch (err) {
+    console.log(err);
+    return res.status(500).json({
+      Error: err.errmsg || err.message
+    });
+  }
+});
+
+// @route     GET   /faculty/getAllStudents
 // @desc      Get All Students
 // @access    Private
 router.get('/getAllStudents', facultyAuth, async (req, res) => {

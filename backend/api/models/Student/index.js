@@ -9,7 +9,8 @@ const StudentSchema = new mongoose.Schema(
     sem: { type: mongoose.Schema.Types.Number, required: true, maxlength: 1 },
     enrollmentId: {
       type: mongoose.Schema.Types.String,
-      required: true
+      required: true,
+      unique: true
       // match: /([0-9]{4})+([A-Z]{3})+([0-9]{5})/g    // Put this at frontend
     },
     email: {
@@ -23,7 +24,9 @@ const StudentSchema = new mongoose.Schema(
       required: true,
       maxlength: 10
     },
-    password: { type: mongoose.Schema.Types.String, required: true }
+    password: { type: mongoose.Schema.Types.String, required: true },
+    projectGroupId: { type: mongoose.Schema.Types.String },
+    teamLeader: { type: mongoose.Schema.Types.Boolean }
   },
   schmeaOptions
 );

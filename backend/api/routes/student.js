@@ -3,6 +3,7 @@ const router = require('express').Router();
 const Student = require('../models/Student');
 const eNotice = require('../models/eNotice');
 const ProjectGroup = require('../models/ProjectGroup');
+const ProjectFile = require('../models/ProjectFIles');
 const bcrypt = require('bcryptjs');
 const { jwtSecret } = require('../../config');
 const jwt = require('jsonwebtoken');
@@ -14,6 +15,11 @@ const { studentAuth } = require('../middlewares/auth');
 router.get('/me', studentAuth, async (req, res) => {
   try {
     const student = await Student.findById(req.student.id).select('-password');
+    if (!student) {
+      return res.status(404).json({
+        msg: 'No Student Record Found'
+      });
+    }
     res.status(200).json(student);
   } catch (err) {
     res.status(500).json({
@@ -82,7 +88,6 @@ router.post('/uploadProjectFiles/:projectId', studentAuth, async (req, res) => {
   const projectId = req.params.projectId;
   const { UploadedFile, Description } = req.body;
   try {
-    const student = await Student.findOne({ _id: req.student.id });
     const projectGroup = await ProjectGroup.findOne({ _id: projectId });
 
     if (!projectGroup) {
@@ -91,17 +96,22 @@ router.post('/uploadProjectFiles/:projectId', studentAuth, async (req, res) => {
       });
     }
 
-    const newFile = {
-      StudentID: student.id,
-      StudentName: student.name,
-      UploadedFile,
-      Description
-    };
-
-    projectGroup.files.unshift(newFile);
-    await projectGroup.save();
-
-    res.status(200).json(projectGroup);
+    await new ProjectFile({
+      StudentID: req.student.id,
+      projectGroup: projectId,
+      UploadedFile: UploadedFile,
+      Description: Description
+    })
+      .save()
+      .then((result) => {
+        res.status(200).json(result);
+      })
+      .catch((err) => {
+        res.status(403).json({
+          msg: 'Opps! Something Went Wrong... Please try after few moments',
+          err: err
+        });
+      });
   } catch (err) {
     console.log(err);
     res.status(500).json({

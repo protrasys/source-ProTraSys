@@ -17,5 +17,6 @@
     "NodeJS"
   ],
   "author": "protrasys_admin",
-  "license": "ISC"
+  "license": "ISC",
+  "dependencies": {}
 }

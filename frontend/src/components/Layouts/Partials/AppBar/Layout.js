@@ -115,7 +115,7 @@ function ButtonAppBar(props) {
               color='inherit'
             >
               <Button disableElevation color='primary' variant='text'>
-                Features
+                Notice Board
               </Button>
             </Typography>
             <Typography
@@ -124,7 +124,7 @@ function ButtonAppBar(props) {
               color='inherit'
             >
               <Button disableElevation color='primary' variant='outlined'>
-                Login
+                Faculty Corner
               </Button>
             </Typography>
             <Typography
@@ -133,7 +133,7 @@ function ButtonAppBar(props) {
               color='inherit'
             >
               <Button disableElevation color='primary' variant='contained'>
-                Signup
+                Student Corner
               </Button>
             </Typography>
           </Toolbar>

@@ -1,7 +1,7 @@
 // Import Dependencies
 import React, { useEffect } from 'react';
 import useStyles from './Style';
-import { Container, Typography, Box } from '@material-ui/core';
+import { Container, Typography, Box, Button } from '@material-ui/core';
 
 const LandingPage = () => {
   const classes = useStyles();
@@ -13,9 +13,27 @@ const LandingPage = () => {
   return (
     <Container maxWidth='xl'>
       <Box component='div' className={classes.center}>
-        <Typography variant='h6' className={classes.tagline}>
+        <Typography variant='h5' className={classes.tagline}>
           Launching Soon
         </Typography>
+        <Typography variant='h2' className={classes.heading}>
+          тracĸ yoυr projecт onlιne
+        </Typography>
+        <Typography variant='caption' className={classes.moto}>
+          Upload Day to Day Reports and get notified when Faculty gives their
+          feedbacks, <br /> Speedup your development cycle with Online Reporting
+          and Backup Services
+        </Typography>
+        <br />
+        <Button
+          className={classes.signUpButton}
+          disableElevation
+          color='secondary'
+          variant='contained'
+          size='large'
+        >
+          Sign Up now, It's Free
+        </Button>
       </Box>
     </Container>
   );

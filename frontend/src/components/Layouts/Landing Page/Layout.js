@@ -1,13 +1,8 @@
 // Import Dependencies
 import React, { useEffect } from 'react';
 import useStyles from './Style';
-import { Container, Typography, Box, Button, List } from '@material-ui/core';
-import BGForCarousel from '../../../assets/BG for Carousel.png';
-import Pic1 from '../../../assets/pic (1).jpg';
-import Pic2 from '../../../assets/pic (2).jpg';
-import Pic3 from '../../../assets/pic (3).jpg';
-import Pic4 from '../../../assets/pic (4).jpg';
-import ReactCarousel from 'react-material-ui-carousel';
+import { Container, Typography, Box, Button } from '@material-ui/core';
+import ReactCarousel from './Carousel';
 
 const LandingPage = () => {
   const classes = useStyles();
@@ -47,31 +42,20 @@ const LandingPage = () => {
           </Typography>
         </Box>
       </Container>
-      <Box component='div' className={classes.carouselDivision}>
-        <img className={classes.carouselBgImage} alt='' src={BGForCarousel} />
-        <Box component='div'>
-          <ReactCarousel
-            autoPlay={true}
-            interval={5000}
-            indicators={false}
-            animation='slide'
-            className={classes.carouselItem}
-          >
-            <List className={classes.List}>
-              <img src={Pic1} alt='' className={classes.carouselInnerImage} />
-            </List>
-            <List className={classes.List}>
-              <img src={Pic2} alt='' className={classes.carouselInnerImage} />
-            </List>
-            <List className={classes.List}>
-              <img src={Pic3} alt='' className={classes.carouselInnerImage} />
-            </List>
-            <List className={classes.List}>
-              <img src={Pic4} alt='' className={classes.carouselInnerImage} />
-            </List>
-          </ReactCarousel>
+      <ReactCarousel />\
+      <Container maxWidth='xl'>
+        <Box component='div' className={classes.center}>
+          <Typography variant='h3' className={classes.heading}>
+            hσw cαn prσtrαsчs hєlp чσu?
+          </Typography>
+          <Typography variant='caption' className={classes.moto}>
+            You have a groundbreaking idea, but you feel lost, alone, or just
+            uncertain <br /> your execution will live up to the idea. Sound
+            familiar? <br /> ProTraSys will light your way from concept to
+            completion.
+          </Typography>
         </Box>
-      </Box>
+      </Container>
     </Box>
   );
 };

@@ -1,8 +1,8 @@
 import React from 'react';
-import { Typography } from '@material-ui/core';
+import Appbar from './components/Partials/AppBar';
 
 const App = () => {
-  return <Typography variant='h1'>Welcome To ProTraSys</Typography>;
+  return <Appbar />;
 };
 
 export default App;

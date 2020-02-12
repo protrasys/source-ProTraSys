@@ -3,6 +3,7 @@ const express = require('express');
 const app = express();
 const cors = require('cors');
 const databaseConnectionHandler = require('./config/database');
+const path = require('path');
 
 // ======================= Importing Routes  ==================
 const StudentRoutes = require('./api/routes/student');
@@ -24,11 +25,10 @@ app.use('/students', StudentRoutes);
 app.use('/faculty', FacultyRoutes);
 app.use('/admin', AdminRoutes);
 
-// ======================= Temporary Handling Home Page=======================
-app.use('/', (req, res) => {
-  res.send(
-    '<h1 align="center">Testing Backend Kindly contact to <a target="_blank" href="https://github.com/protrasys">PROTRASYS - ADMIN</a></h1>'
-  );
+// ======================= Serve Static assets in production =======================
+app.use(express.static('../frontend/build/'));
+app.get('*', (req, res) => {
+  res.sendFile(path.join(__dirname, '../frontend/build/index.html'));
 });
 
 // ===================== Exporting app =====================

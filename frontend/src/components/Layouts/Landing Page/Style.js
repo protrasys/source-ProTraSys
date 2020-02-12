@@ -1,14 +1,13 @@
 import { makeStyles } from '@material-ui/core/styles';
 
 const useStyles = makeStyles((theme) => ({
-  root: {
-    flexGrow: 1
+  center: {
+    textAlign: 'center',
+    marginTop: 70
   },
-  menuButton: {
-    marginRight: theme.spacing(2)
-  },
-  title: {
-    flexGrow: 1
+  tagline: {
+    color: '#e65100',
+    textTransform: 'uppercase'
   }
 }));
 

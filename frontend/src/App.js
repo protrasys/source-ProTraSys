@@ -1,8 +1,14 @@
-import React from 'react';
-import Appbar from './components/Partials/AppBar';
+import React, { Fragment } from 'react';
+import Appbar from './components/Layouts/Partials/AppBar';
+import LandingPage from './components/Layouts/Landing Page';
 
 const App = () => {
-  return <Appbar />;
+  return (
+    <Fragment>
+      <Appbar />
+      <LandingPage />
+    </Fragment>
+  );
 };
 
 export default App;

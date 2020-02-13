@@ -13,6 +13,7 @@ const theme = createMuiTheme({
     },
     secondary: {
       main: lightGreen.A400
+      // main: '#1e90ff'
     },
     type: 'dark'
   },

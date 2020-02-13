@@ -53,7 +53,9 @@ module.exports.studentAuth = (req, res, next) => {
 
 module.exports.facultyAuth = (req, res, next) => {
   // Get token from header
-  const token = req.header('x-auth-token');
+  let authToken = req.headers['authorization'];
+  let token = authToken.replace('Bearer ', '');
+  console.log(token);
 
   // Check if token is not valid or not available
   if (!token) {

@@ -23,7 +23,7 @@ const useStyles = makeStyles((theme) => ({
   },
   carouselInnerImage: {
     width: '70%',
-    height: '97vh'
+    // height: '97vh'
   }
 }));
 

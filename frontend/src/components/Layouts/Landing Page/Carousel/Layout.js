@@ -1,5 +1,5 @@
 import React from 'react';
-import BGForCarousel from '../../../../assets/BG for Carousel.png';
+import BGForCarousel from '../../../../assets/BG_for_Carousel.svg';
 import Pic2 from '../../../../assets/pic (2).jpg';
 import Pic1 from '../../../../assets/pic (1).jpg';
 import Pic3 from '../../../../assets/pic (3).jpg';

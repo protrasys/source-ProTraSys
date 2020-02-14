@@ -38,7 +38,12 @@ function ButtonAppBar(props) {
   const createDrawer = () => {
     return (
       <Fragment>
-        <AppBar color={AppBarColor} position='static' variant='outlined'>
+        <AppBar
+          className={classes.appbar}
+          color={AppBarColor}
+          position='static'
+          variant='outlined'
+        >
           <Toolbar>
             <Grid
               container

@@ -13,14 +13,12 @@ const useStyles = makeStyles((theme) => ({
   },
   heading: {
     textTransform: 'capitalize',
-    color: '#292F4D',
     fontWeight: '400',
     marginTop: theme.spacing(1),
     marginBottom: theme.spacing(3)
   },
   moto: {
     fontSize: '1.3rem',
-    color: '#292F4D',
     letterSpacing: 2
   },
   signUpButton: {
@@ -33,9 +31,6 @@ const useStyles = makeStyles((theme) => ({
     '&:hover': {
       boxShadow: '.2rem .2rem .2rem .2rem #aed581'
     }
-  },
-  caption: {
-    color: '#292F4D'
   }
 }));
 

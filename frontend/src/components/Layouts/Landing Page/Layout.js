@@ -42,7 +42,7 @@ const LandingPage = () => {
           </Typography>
         </Box>
       </Container>
-      <ReactCarousel />\
+
       <Container maxWidth='xl'>
         <Box component='div' className={classes.center}>
           <Typography variant='h3' className={classes.heading}>

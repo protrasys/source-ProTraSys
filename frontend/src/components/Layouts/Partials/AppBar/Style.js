@@ -11,6 +11,9 @@ const useStyles = makeStyles((theme) => ({
   sideBarIcon: {
     padding: 0,
     cursor: 'pointer'
+  },
+  appbar: {
+    border: 'none'
   }
 }));
 

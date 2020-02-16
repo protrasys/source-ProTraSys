@@ -2,7 +2,7 @@
 import React, { useEffect } from 'react';
 import useStyles from './Style';
 import { Container, Typography, Box, Button } from '@material-ui/core';
-import ReactCarousel from './Carousel';
+// import ReactCarousel from './Carousel';
 
 const LandingPage = () => {
   const classes = useStyles();

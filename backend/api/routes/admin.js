@@ -3,6 +3,7 @@ const router = require('express').Router();
 const { adminAuth } = require('../middlewares/auth');
 const {
   PostAddNewAdmin,
+  PostAddNewFaculty,
   PostAdminLogin,
   GetIndividualAdmin,
   GetAllAdmins,
@@ -11,6 +12,11 @@ const {
   DeleteENotice,
   DeleteFaculty
 } = require('../controllers/admin');
+
+// @route     Post   /admin/addNewFaculty
+// @desc      Add New Faculty
+// @access    Private
+router.post('/addNewFaculty', adminAuth, PostAddNewFaculty);
 
 // @route     Post   /admin/addNewAdmin
 // @desc      Add New Admin

@@ -4,8 +4,9 @@ const { jwtSecret } = require('../../config');
 
 // Handling Middleware Function
 module.exports.adminAuth = (req, res, next) => {
-  // Get token from header
-  const token = req.header('x-auth-token');
+  // Get token from headers
+  const jwtToken = req.headers.authorization;
+  const token = jwtToken.substr(7);
 
   // Check if token is not valid or not available
   if (!token) {
@@ -28,8 +29,9 @@ module.exports.adminAuth = (req, res, next) => {
 };
 
 module.exports.studentAuth = (req, res, next) => {
-  // Get token from header
-  const token = req.header('x-auth-token');
+  // Get token from headers
+  const jwtToken = req.headers.authorization;
+  const token = jwtToken.substr(7);
 
   // Check if token is not valid or not available
   if (!token) {
@@ -52,10 +54,9 @@ module.exports.studentAuth = (req, res, next) => {
 };
 
 module.exports.facultyAuth = (req, res, next) => {
-  // Get token from header
-  let authToken = req.headers['authorization'];
-  let token = authToken.replace('Bearer ', '');
-  console.log(token);
+  // Get token from headers
+  const jwtToken = req.headers.authorization;
+  const token = jwtToken.substr(7);
 
   // Check if token is not valid or not available
   if (!token) {

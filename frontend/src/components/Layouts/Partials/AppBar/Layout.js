@@ -13,6 +13,7 @@ import {
 import { Menu } from '@material-ui/icons';
 import useStyles from './Style';
 import ProTraSysLogo from '../../../../assets/ProTraSys_Logo.png';
+import { Link } from 'react-router-dom';
 
 function ButtonAppBar(props) {
   const classes = useStyles();
@@ -80,12 +81,19 @@ function ButtonAppBar(props) {
               </ListItem>
               <ListItem key={2} button divider>
                 <Button disableElevation color='primary' variant='contained'>
-                  Login
+                  Notice Board
                 </Button>
               </ListItem>
               <ListItem key={3} button divider>
-                <Button disableElevation color='secondary' variant='outlined'>
-                  Signup
+                <Link to='/facultylogin'>
+                  <Button disableElevation color='primary' variant='contained'>
+                    Faculty Corner
+                  </Button>
+                </Link>
+              </ListItem>
+              <ListItem key={4} button divider>
+                <Button disableElevation color='primary' variant='contained'>
+                  Student Corner
                 </Button>
               </ListItem>
             </List>
@@ -123,9 +131,11 @@ function ButtonAppBar(props) {
               className={classes.padding}
               color='inherit'
             >
-              <Button disableElevation color='primary' variant='outlined'>
-                Faculty Corner
-              </Button>
+              <Link to='/facultylogin' className={classes.Link}>
+                <Button disableElevation color='primary' variant='outlined'>
+                  Faculty Corner
+                </Button>
+              </Link>
             </Typography>
             <Typography
               variant='subtitle2'

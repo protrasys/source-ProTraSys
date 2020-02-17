@@ -14,7 +14,8 @@ const useStyles = makeStyles((theme) => ({
   },
   appbar: {
     border: 'none'
-  }
+  },
+  Link: { textDecoration: 'none' }
 }));
 
 export default useStyles;

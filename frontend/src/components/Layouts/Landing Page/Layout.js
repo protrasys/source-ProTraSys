@@ -3,7 +3,7 @@ import React, { useEffect } from 'react';
 import useStyles from './Style';
 import { Container, Typography, Box, Button } from '@material-ui/core';
 // import ReactCarousel from './Carousel';
-
+import Appbar from '../Partials/AppBar';
 const LandingPage = () => {
   const classes = useStyles();
 
@@ -13,6 +13,7 @@ const LandingPage = () => {
 
   return (
     <Box component='div'>
+      <Appbar />
       <Container maxWidth='xl'>
         <Box component='div' className={classes.center}>
           <Typography variant='h5' className={classes.tagline}>

@@ -7,14 +7,19 @@ const useStyles = makeStyles((theme) => ({
     marginTop: theme.spacing(2)
   },
   Card: {
+    margin: 0,
+    position: 'absolute',
     [theme.breakpoints.down('sm')]: {
-      minWidth: '80vw'
+      minWidth: '80vw',
+      top: '10%'
     },
     [theme.breakpoints.up('md')]: {
-      minWidth: '70vw'
+      minWidth: '70vw',
+      top: '10%'
     },
     [theme.breakpoints.up('lg')]: {
-      minWidth: '40vw'
+      minWidth: '40vw',
+      top: '10%'
     },
     borderRadius: 15
   },
@@ -38,6 +43,18 @@ const useStyles = makeStyles((theme) => ({
     textAlign: 'left',
     fontSize: 14,
     marginTop: theme.spacing(3)
+  },
+  cardAction: {
+    justifyContent: 'space-between',
+    paddingLeft: theme.spacing(5),
+    paddingBottom: theme.spacing(5),
+    paddingRight: theme.spacing(5)
+  },
+  submitButton: {
+    width: 100,
+    '&:hover': {
+      boxShadow: '.1rem .1rem .1rem .1rem #aed581'
+    }
   }
 }));
 

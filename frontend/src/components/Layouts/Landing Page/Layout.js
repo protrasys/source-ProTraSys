@@ -1,7 +1,7 @@
 // Import Dependencies
 import React, { useEffect } from 'react';
 import useStyles from './Style';
-import { Container, Typography, Box, Button } from '@material-ui/core';
+import { Container, Typography, Box, Button, Card, CardActions, CardContent, Grid } from '@material-ui/core';
 import ReactCarousel from './Carousel';
 
 const LandingPage = () => {
@@ -55,6 +55,77 @@ const LandingPage = () => {
             completion.
           </Typography>
         </Box>
+          <Grid container spacing={3}>
+            <Grid item xs={12} md={4} xl={4}>
+              <Card className={classes.root}>
+                <CardContent>
+                  <Typography color="textSecondary" gutterBottom>
+                    Word of the Day
+                  </Typography>
+                  <Typography variant="h5" component="h2">
+                  Lorem, ipsum dolor sit amet consectetur adipisicing elit. Id, modi.
+                  </Typography>
+                  <Typography className={classes.pos} color="textSecondary">
+                    adjective
+                  </Typography>
+                  <Typography variant="body2" component="p">
+                    well meaning and kindly.
+                    <br />
+                    {'"a benevolent smile"'}
+                  </Typography>
+                </CardContent>
+                <CardActions>
+                  <Button size="small">Learn More</Button>
+                </CardActions>
+              </Card>
+            </Grid>
+            <Grid item xs={12} md={4} xl={4}>
+              <Card className={classes.root}>
+                <CardContent>
+                  <Typography color="textSecondary" gutterBottom>
+                    Word of the Day
+                  </Typography>
+                  <Typography variant="h5" component="h2">
+                  Lorem, ipsum dolor sit amet consectetur adipisicing elit. Id, modi.
+                  </Typography>
+                  <Typography className={classes.pos} color="textSecondary">
+                    adjective
+                  </Typography>
+                  <Typography variant="body2" component="p">
+                    well meaning and kindly.
+                    <br />
+                    {'"a benevolent smile"'}
+                  </Typography>
+                </CardContent>
+                <CardActions>
+                  <Button size="small">Learn More</Button>
+                </CardActions>
+              </Card>
+            </Grid>
+            <Grid item xs={12} md={4} xl={4}>
+              <Card className={classes.root}>
+                <CardContent>
+                  <Typography color="textSecondary" gutterBottom>
+                    Word of the Day
+                  </Typography>
+                  <Typography variant="h5" component="h2">
+                  Lorem, ipsum dolor sit amet consectetur adipisicing elit. Id, modi.
+                  </Typography>
+                  <Typography className={classes.pos} color="textSecondary">
+                    adjective
+                  </Typography>
+                  <Typography variant="body2" component="p">
+                    well meaning and kindly.
+                    <br />
+                    {'"a benevolent smile"'}
+                  </Typography>
+                </CardContent>
+                <CardActions>
+                  <Button size="small">Learn More</Button>
+                </CardActions>
+              </Card>
+            </Grid>
+          </Grid>
       </Container>
     </Box>
   );

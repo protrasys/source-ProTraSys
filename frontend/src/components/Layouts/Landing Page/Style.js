@@ -1,4 +1,4 @@
-import { makeStyles } from '@material-ui/core';
+import { makeStyles, CardContent } from '@material-ui/core';
 
 const useStyles = makeStyles((theme) => ({
   center: {
@@ -30,8 +30,18 @@ const useStyles = makeStyles((theme) => ({
     transition: '0.5s',
     '&:hover': {
       boxShadow: '.2rem .2rem .2rem .2rem #aed581'
-    }
-  }
+    },
+  },
+  root: {
+    backgroundColor: '#388e3c',
+    color: '#ffffff',
+    transition: '0.5s',
+    '&:hover': {
+      boxShadow: '.2rem .2rem .2rem .2rem #aed581',
+      transform: 'scale(1.05)',
+      backgroundColor: '#1b5e20',
+    },
+  },
 }));
 
 export default useStyles;

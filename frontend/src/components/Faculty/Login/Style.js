@@ -55,6 +55,11 @@ const useStyles = makeStyles((theme) => ({
     '&:hover': {
       boxShadow: '.1rem .1rem .1rem .1rem #aed581'
     }
+  },
+  popover: {
+    textAlign: 'center',
+    padding: theme.spacing(2),
+    backgroundColor: '#EAF0F1'
   }
 }));
 

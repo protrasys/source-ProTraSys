@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import {
   Box,
   Typography,
@@ -6,7 +6,8 @@ import {
   CardContent,
   CardActions,
   Button,
-  TextField
+  TextField,
+  Popover
 } from '@material-ui/core';
 import { Link } from 'react-router-dom';
 import useStyles from './Style';
@@ -14,10 +15,29 @@ import Logo from '../../../assets/ProTraSys_Logo.png';
 
 const FacultyLogin = () => {
   const classes = useStyles();
+  const [anchorEl, setAnchorEl] = useState(null);
+  const [anchorEl2, setAnchorEl2] = useState(null);
 
   useEffect(() => {
     document.title = 'Login - Faculty Accounts';
   }, []);
+
+  const handleClick = (event) => {
+    setAnchorEl(event.currentTarget);
+  };
+  const handleClick2 = (event) => {
+    setAnchorEl2(event.currentTarget);
+  };
+
+  const handleClose = () => {
+    setAnchorEl(null);
+  };
+  const handleClose2 = () => {
+    setAnchorEl2(null);
+  };
+
+  const open = Boolean(anchorEl);
+  const open2 = Boolean(anchorEl2);
 
   return (
     <Box className={classes.root} component='div'>
@@ -42,8 +62,8 @@ const FacultyLogin = () => {
               label='Enrollment ID'
             />
             <Typography className={classes.forgotLinkText} color='primary'>
-              <Link to='/' className={classes.Link}>
-                Forgot enrollment Id?
+              <Link onClick={handleClick} className={classes.Link}>
+                What is enrollment Id?
               </Link>
             </Typography>
             <Typography color='textPrimary' className={classes.Caption}>
@@ -64,8 +84,8 @@ const FacultyLogin = () => {
 
         <CardActions className={classes.cardAction}>
           <Typography className={classes.forgotLinkText} color='primary'>
-            <Link to='/' className={classes.Link}>
-              Create Account
+            <Link onClick={handleClick2} className={classes.Link}>
+              Don't have an account
             </Link>
           </Typography>
           <Button
@@ -77,6 +97,47 @@ const FacultyLogin = () => {
           </Button>
         </CardActions>
       </Card>
+
+      <Popover
+        open={open}
+        anchorEl={anchorEl}
+        onClose={handleClose}
+        anchorOrigin={{
+          vertical: 'bottom',
+          horizontal: 'center'
+        }}
+        transformOrigin={{
+          vertical: 'top',
+          horizontal: 'center'
+        }}
+      >
+        <Box>
+          <Typography variant='subtitle2' className={classes.popover}>
+            Enrollment ID can be found in your I-Card
+          </Typography>
+        </Box>
+      </Popover>
+
+      <Popover
+        open={open2}
+        anchorEl={anchorEl2}
+        onClose={handleClose2}
+        anchorOrigin={{
+          vertical: 'bottom',
+          horizontal: 'center'
+        }}
+        transformOrigin={{
+          vertical: 'top',
+          horizontal: 'center'
+        }}
+      >
+        <Box>
+          <Typography variant='subtitle2' className={classes.popover}>
+            Sorry, for the inconvenience... <br /> Please Contact to
+            Administrator for Opening Faculty Account
+          </Typography>
+        </Box>
+      </Popover>
     </Box>
   );
 };

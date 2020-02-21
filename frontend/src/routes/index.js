@@ -1,8 +1,6 @@
 import React, { Fragment } from 'react';
 import { Route, Switch } from 'react-router-dom';
-import FacultyLogin from '../components/Faculty/Login';
-// import FacultyControlPanel from '../components/Faculty/ControlPanel';
-// import Appbar from '../components/Layouts/Partials/AppBar';
+import { FacultyLogin } from '../components/Faculty';
 import LandingPage from '../components/Layouts/Landing Page';
 
 const Routes = () => {

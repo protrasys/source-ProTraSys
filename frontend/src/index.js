@@ -20,7 +20,17 @@ const theme = createMuiTheme({
     },
     type: 'light'
   },
-  spacing: 10
+  spacing: 10,
+  overrides: {
+    // Style sheet name ⚛️
+    MuiMobileStepper: {
+      // Name of the rule
+      progress: {
+        // Some CSS
+        width: '100%'
+      }
+    }
+  }
 });
 
 ReactDOM.render(

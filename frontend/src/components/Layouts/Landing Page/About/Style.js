@@ -13,6 +13,7 @@ const useStyles = makeStyles((theme) => ({
     },
     title: {
         color: theme.palette.primary.main,
+        letterSpacing: '0.2rem',
         marginBottom: '0.3rem',
     },
     heading: {

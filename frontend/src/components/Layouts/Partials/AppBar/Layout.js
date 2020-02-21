@@ -114,7 +114,7 @@ function ButtonAppBar(props) {
               className={classes.padding}
               color='inherit'
             >
-              <Button disableElevation color='primary' variant='text'>
+              <Button disableElevation color='primary' variant='text' size='large'>
                 Notice Board
               </Button>
             </Typography>
@@ -123,7 +123,7 @@ function ButtonAppBar(props) {
               className={classes.padding}
               color='inherit'
             >
-              <Button disableElevation color='primary' variant='outlined'>
+              <Button disableElevation color='primary' variant='outlined' size='large'>
                 Faculty Corner
               </Button>
             </Typography>
@@ -132,7 +132,7 @@ function ButtonAppBar(props) {
               className={classes.padding}
               color='inherit'
             >
-              <Button disableElevation color='primary' variant='contained'>
+              <Button disableElevation color='primary' variant='contained' size='large'>
                 Student Corner
               </Button>
             </Typography>

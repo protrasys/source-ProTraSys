@@ -3,7 +3,7 @@ import { makeStyles } from '@material-ui/core';
 const useStyles = makeStyles((theme) => ({
   root: {
     backgroundColor: '#ffffff',
-    color: theme.palette.primary.dark,
+    color: "#333333",
     height: '20rem',
     padding: '1rem 0.6rem',
     marginBottom: '4rem',
@@ -17,11 +17,11 @@ const useStyles = makeStyles((theme) => ({
   },
   heading: {
     letterSpacing: '0.2rem',
-    marginBottom: '0.8rem',
+    marginBottom: '0.6rem',
   },
   subHeading: {
-    fontSize: '1.3rem',
-    marginBottom: '0.5rem',
+    fontSize: '1.25rem',
+    marginBottom: '0.6rem',
     color: theme.palette.primary.light,
   },
 }));

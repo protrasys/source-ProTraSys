@@ -33,13 +33,13 @@ const useStyles = makeStyles((theme) => ({
     },
   },
   root: {
-    backgroundColor: '#388e3c',
+    backgroundColor: theme.palette.primary.main,
     color: '#ffffff',
     transition: '0.5s',
     '&:hover': {
       boxShadow: '.2rem .2rem .2rem .2rem #aed581',
       transform: 'scale(1.05)',
-      backgroundColor: '#1b5e20',
+      backgroundColor: theme.palette.primary.dark,
     },
   },
 }));

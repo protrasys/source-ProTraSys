@@ -1,8 +1,11 @@
 // Import Dependencies
 import React, { useEffect } from 'react';
 import useStyles from './Style';
-import { Container, Typography, Box, Button, Card, CardActions, CardContent, Grid } from '@material-ui/core';
-import ReactCarousel from './Carousel';
+import { Container, Typography, Box, Button, Grid, AccessAlarm, ThreeDRotation } from '@material-ui/core';
+import EmojiObjectsOutlinedIcon from '@material-ui/icons/EmojiObjectsOutlined';
+// import ReactCarousel from './Carousel';
+import Cards from './Cards';
+import About from './About';
 
 const LandingPage = () => {
   const classes = useStyles();
@@ -55,77 +58,23 @@ const LandingPage = () => {
             completion.
           </Typography>
         </Box>
-          <Grid container spacing={3}>
-            <Grid item xs={12} md={4} xl={4}>
-              <Card className={classes.root}>
-                <CardContent>
-                  <Typography color="textSecondary" gutterBottom>
-                    Word of the Day
-                  </Typography>
-                  <Typography variant="h5" component="h2">
-                  Lorem, ipsum dolor sit amet consectetur adipisicing elit. Id, modi.
-                  </Typography>
-                  <Typography className={classes.pos} color="textSecondary">
-                    adjective
-                  </Typography>
-                  <Typography variant="body2" component="p">
-                    well meaning and kindly.
-                    <br />
-                    {'"a benevolent smile"'}
-                  </Typography>
-                </CardContent>
-                <CardActions>
-                  <Button size="small">Learn More</Button>
-                </CardActions>
-              </Card>
-            </Grid>
-            <Grid item xs={12} md={4} xl={4}>
-              <Card className={classes.root}>
-                <CardContent>
-                  <Typography color="textSecondary" gutterBottom>
-                    Word of the Day
-                  </Typography>
-                  <Typography variant="h5" component="h2">
-                  Lorem, ipsum dolor sit amet consectetur adipisicing elit. Id, modi.
-                  </Typography>
-                  <Typography className={classes.pos} color="textSecondary">
-                    adjective
-                  </Typography>
-                  <Typography variant="body2" component="p">
-                    well meaning and kindly.
-                    <br />
-                    {'"a benevolent smile"'}
-                  </Typography>
-                </CardContent>
-                <CardActions>
-                  <Button size="small">Learn More</Button>
-                </CardActions>
-              </Card>
-            </Grid>
-            <Grid item xs={12} md={4} xl={4}>
-              <Card className={classes.root}>
-                <CardContent>
-                  <Typography color="textSecondary" gutterBottom>
-                    Word of the Day
-                  </Typography>
-                  <Typography variant="h5" component="h2">
-                  Lorem, ipsum dolor sit amet consectetur adipisicing elit. Id, modi.
-                  </Typography>
-                  <Typography className={classes.pos} color="textSecondary">
-                    adjective
-                  </Typography>
-                  <Typography variant="body2" component="p">
-                    well meaning and kindly.
-                    <br />
-                    {'"a benevolent smile"'}
-                  </Typography>
-                </CardContent>
-                <CardActions>
-                  <Button size="small">Learn More</Button>
-                </CardActions>
-              </Card>
-            </Grid>
+    
+        <Grid container spacing={3}>
+          <Grid item xs={12} md={3} xl={3}>
+            <Cards heading="IDEA PLAN" subHeading="Create a one-page business plan" text="Structure your idea and cover all the major points on a business canvas, which lets you brainstorm easily with friends and partners."/>
           </Grid>
+          <Grid item xs={12} md={3} xl={3}>
+            <Cards heading="STORY MODE" subHeading="Develop the idea through Story Mode" text="Structure your idea and cover all the major points on a business canvas, which lets you brainstorm easily with friends and partners."/>
+          </Grid>
+          <Grid item xs={12} md={3} xl={3}>
+            <Cards heading="VALIDATION" subHeading="Test-run and get a validation score" text="Structure your idea and cover all the major points on a business canvas, which lets you brainstorm easily with friends and partners."/>
+          </Grid>
+          <Grid item xs={12} md={3} xl={3}>
+            <Cards heading="JOURNAL" subHeading="Get an internal business plan" text="Structure your idea and cover all the major points on a business canvas, which lets you brainstorm easily with friends and partners."/>
+          </Grid>
+        </Grid>
+
+        <About/>
       </Container>
     </Box>
   );

@@ -19,5 +19,7 @@
   ],
   "author": "protrasys_admin",
   "license": "ISC",
-  "dependencies": {}
+  "dependencies": {
+    "@fortawesome/react-fontawesome": "^0.1.8"
+  }
 }

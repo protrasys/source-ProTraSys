@@ -1,9 +1,15 @@
 // Import Dependencies
 import React, { useEffect } from 'react';
 import useStyles from './Style';
-import { Container, Typography, Box, Button } from '@material-ui/core';
+
+import { Container, Typography, Box, Button, Grid, AccessAlarm, ThreeDRotation } from '@material-ui/core';
+import EmojiObjectsOutlinedIcon from '@material-ui/icons/EmojiObjectsOutlined';
+import MenuBookOutlinedIcon from '@material-ui/icons/MenuBookOutlined';
+import ExploreOutlinedIcon from '@material-ui/icons/ExploreOutlined';
+import PollOutlinedIcon from '@material-ui/icons/PollOutlined';
 // import ReactCarousel from './Carousel';
-import Appbar from '../Partials/AppBar';
+import Cards from './Cards';
+import About from './About';
 const LandingPage = () => {
   const classes = useStyles();
 
@@ -56,6 +62,23 @@ const LandingPage = () => {
             completion.
           </Typography>
         </Box>
+    
+        <Grid container spacing={3}>
+          <Grid item xs={12} md={3} xl={3}>
+            <Cards icon={<EmojiObjectsOutlinedIcon/>} heading="IDEA PLAN" subHeading="Create a one-page business plan" text="Structure your idea and cover all the major points on a business canvas, which lets you brainstorm easily with friends and partners."/>
+          </Grid>
+          <Grid item xs={12} md={3} xl={3}>
+            <Cards icon={<MenuBookOutlinedIcon/>} heading="STORY MODE" subHeading="Develop the idea through Story Mode" text="Structure your idea and cover all the major points on a business canvas, which lets you brainstorm easily with friends and partners."/>
+          </Grid>
+          <Grid item xs={12} md={3} xl={3}>
+            <Cards icon={<ExploreOutlinedIcon/>} heading="VALIDATION" subHeading="Test-run and get a validation score" text="Structure your idea and cover all the major points on a business canvas, which lets you brainstorm easily with friends and partners."/>
+          </Grid>
+          <Grid item xs={12} md={3} xl={3}>
+            <Cards icon={<PollOutlinedIcon/>} heading="JOURNAL" subHeading="Get an internal business plan" text="Structure your idea and cover all the major points on a business canvas, which lets you brainstorm easily with friends and partners."/>
+          </Grid>
+        </Grid>
+
+        <About/>
       </Container>
     </Box>
   );

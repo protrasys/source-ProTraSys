@@ -12,7 +12,7 @@ const Cards = (props) =>{
                 <Card className={classes.root}>
                     <CardContent>
                         <Typography variant="h5" component="h2" className={classes.heading}>
-                            {heading}
+                            {icon} {heading}
                         </Typography>
                         <Typography variant="p" component="p" className={classes.subHeading}>
                             {subHeading}

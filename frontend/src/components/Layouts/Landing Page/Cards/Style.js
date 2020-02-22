@@ -5,7 +5,7 @@ const useStyles = makeStyles((theme) => ({
     backgroundColor: '#ffffff',
     color: "#333333",
     height: '20rem',
-    padding: '1rem 0.6rem',
+    padding: '1rem 0.8rem',
     marginBottom: '4rem',
     transition: '0.35s',
     '&:hover': {

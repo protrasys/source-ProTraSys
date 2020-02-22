@@ -12,7 +12,6 @@ const {
   GetIndividualProjectGroup,
   GetStudentsUploadedFile,
   PatchStudentDetails,
-  PostAddNewFaculty,
   PostAddNewProjectGroup,
   PostAddNewStudent,
   PostFacultyLogin,
@@ -34,11 +33,6 @@ router.post('/', PostFacultyLogin);
 // @desc      Get Individual Faculty
 // @access    Private
 router.get('/me', facultyAuth, GetIndividualFaculty);
-
-// @route     Post   /faculty/addNewFaculty
-// @desc      Add New Faculty
-// @access    Public
-router.post('/addNewFaculty', PostAddNewFaculty);
 
 // @route     Post   /faculty/addNewProjectGroup
 // @desc      Add New Project Group

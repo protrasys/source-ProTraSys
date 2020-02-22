@@ -1,13 +1,12 @@
-import React, { Fragment } from 'react';
-import Appbar from './components/Layouts/Partials/AppBar';
-import LandingPage from './components/Layouts/Landing Page';
+import React from 'react';
+import { BrowserRouter, Route } from 'react-router-dom';
+import CustomRoutes from './routes';
 
 const App = () => {
   return (
-    <Fragment>
-      <Appbar />
-      <LandingPage />
-    </Fragment>
+    <BrowserRouter>
+      <Route component={CustomRoutes} />
+    </BrowserRouter>
   );
 };
 

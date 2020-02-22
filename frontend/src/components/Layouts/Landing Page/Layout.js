@@ -1,6 +1,7 @@
 // Import Dependencies
 import React, { useEffect } from 'react';
 import useStyles from './Style';
+
 import { Container, Typography, Box, Button, Grid, AccessAlarm, ThreeDRotation } from '@material-ui/core';
 import EmojiObjectsOutlinedIcon from '@material-ui/icons/EmojiObjectsOutlined';
 import MenuBookOutlinedIcon from '@material-ui/icons/MenuBookOutlined';
@@ -9,7 +10,6 @@ import PollOutlinedIcon from '@material-ui/icons/PollOutlined';
 // import ReactCarousel from './Carousel';
 import Cards from './Cards';
 import About from './About';
-
 const LandingPage = () => {
   const classes = useStyles();
 
@@ -19,6 +19,7 @@ const LandingPage = () => {
 
   return (
     <Box component='div'>
+      <Appbar />
       <Container maxWidth='xl'>
         <Box component='div' className={classes.center}>
           <Typography variant='h5' className={classes.tagline}>

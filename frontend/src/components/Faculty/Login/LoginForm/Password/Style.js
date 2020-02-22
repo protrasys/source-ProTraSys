@@ -49,7 +49,7 @@ const useStyles = makeStyles((theme) => ({
     display: 'flex'
   },
   FormControl: {
-    marginTop: theme.spacing(1),
+    marginTop: theme.spacing(2),
     [theme.breakpoints.down('sm')]: {
       minWidth: '50vw'
     },

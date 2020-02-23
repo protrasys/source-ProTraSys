@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Grid, Typography, Button, Box, List, ListItem, ListItemIcon, ListItemText, Icon, AccessAlarm, ThreeDRotation } from '@material-ui/core';
+import { Grid, Typography, Button, Box, List, ListItem, ListItemIcon, ListItemText } from '@material-ui/core';
 import CheckIcon from '@material-ui/icons/Check';
 import IdeaPlan from '../../../../assets/undraw_ideas_s70l.svg';
 import DevelopIdea from '../../../../assets/undraw_forming_ideas_0pav.svg';
@@ -21,13 +21,13 @@ const About = (props) => {
             <Grid item md={6} xl={6}>
                 <Box component="div" className={classes.main}>
                     <Typography variant="h5" className={classes.title}>
-                        IDEA PLAN
+                        Idea Plan
                     </Typography>
                     <Typography variant='h3' component="h3" className={classes.heading}>
-                        Make A One-Page Plan
+                        Create a one-page business plan
                     </Typography>
                     <Typography variant='p' component="p" className={classes.paragraph}>
-                        Design the basic business model on a single page, share it with others, and get a better understanding of your idea before going into details.
+                        Structure your idea and cover all the major points on a business canvas, which lets you brainstorm easily with friends and partners.
                     </Typography>
                     <List component="nav" aria-label="main listitem folders" className={classes.listItem}>
                         <ListItem>
@@ -56,7 +56,7 @@ const About = (props) => {
             <Grid item md={6} xl={6}>
                 <Box component="div" className={classes.main}>
                     <Typography variant="h5" className={classes.title}>
-                        STORY MODE
+                        Story Mode
                     </Typography>
                     <Typography variant='h3' component="h3" className={classes.heading}>
                         Develop Your Idea
@@ -103,7 +103,7 @@ const About = (props) => {
             <Grid item md={6} xl={6}>
                 <Box component="div" className={classes.main}>
                     <Typography variant="h5" className={classes.title}>
-                        VALIDATION
+                        Validation
                     </Typography>
                     <Typography variant='h3' component="h3" className={classes.heading}>
                         Validate The Concept
@@ -138,7 +138,7 @@ const About = (props) => {
             <Grid item md={6} xl={6}>
                 <Box component="div" className={classes.main}>
                     <Typography variant="h5" className={classes.title}>
-                        JOURNAL
+                        Journal
                     </Typography>
                     <Typography variant='h3' component="h3" className={classes.heading}>
                         Get A Business Plan

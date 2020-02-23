@@ -15,10 +15,12 @@ const useStyles = makeStyles((theme) => ({
         color: theme.palette.primary.main,
         letterSpacing: '0.2rem',
         marginBottom: '0.3rem',
+        textTransform: 'uppercase',
     },
     heading: {
         color: '#212121',
         marginBottom: '1.3rem',
+        fontSize: '2.8rem',
     },
     paragraph: {
         marginBottom: '1rem',

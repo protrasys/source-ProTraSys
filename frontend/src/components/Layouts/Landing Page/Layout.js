@@ -1,12 +1,15 @@
 // Import Dependencies
 import React, { useEffect } from 'react';
 import useStyles from './Style';
-// import Appbar from '../Partials/Appbar';
+import Appbar from '../Partials/AppBar';
+import Footer from '../Partials/Footer';
 import { Container, Typography, Box, Button, Grid, List, ListItem, ListItemIcon, ListItemText } from '@material-ui/core';
-import { EmojiObjectsOutlined, MenuBookOutlined, ExploreOutlined, PollOutlined, Check } from '@material-ui/icons';
+import { EmojiObjectsOutlined, MenuBookOutlined, ExploreOutlined, PollOutlined } from '@material-ui/icons';
 // import ReactCarousel from './Carousel';
 import Cards from './Cards';
 import About from './About';
+import Lists from './Lists';
+import Responsiveness from '../../.././assets/hold-idea@2x.png';
 
 const LandingPage = () => {
   const classes = useStyles();
@@ -18,7 +21,7 @@ const LandingPage = () => {
   return (
     <Box component='div'>
       <Container maxWidth='xl'>
-  
+      <Appbar />
         <Box component='div' className={classes.center}>
           <Typography variant='h5' className={classes.tagline}>
             Launching Soon
@@ -78,111 +81,25 @@ const LandingPage = () => {
         
         <About /> 
 
-        <Box variant='div' className={classes.center}>
-          <Box component='div' className={classes.svg} container> 
-            <Typography variant='h4' className={classes.center}>
-                  ...and we've only scratched the surface. Check what else you <br/> can do with IdeaBuddy
-            </Typography>
-            <Grid container className={classes.center}>  
-              <Grid item xs={12} md={4} xl={4}>
-                <List component="nav" aria-label="main listitem folders" className={classes.listItem} style={{marginLeft: "5rem"}}>
-                  <ListItem>
-                      <ListItemIcon  className={classes.check}>
-                          {<Check/>}
-                      </ListItemIcon>
-                      <ListItemText primary="Follow step-by-step guidance" />
-                  </ListItem>
-                  <ListItem>
-                      <ListItemIcon  className={classes.check}>
-                          {<Check/>}
-                      </ListItemIcon>
-                      <ListItemText primary="See the relevant examples" />
-                  </ListItem>
-                  <ListItem>
-                      <ListItemIcon  className={classes.check}>
-                          {<Check/>}
-                      </ListItemIcon>
-                      <ListItemText primary="Calculate profit and cash flow without being finance-savvy" />
-                  </ListItem>
-                  <ListItem>
-                      <ListItemIcon  className={classes.check}>
-                          {<Check/>}
-                      </ListItemIcon>
-                      <ListItemText primary="Get the 360 degree view of your idea" />
-                  </ListItem>
-                </List>
-              </Grid>
-              
-              <Grid item xs={12} md={4} xl={4}>
-                <List component="nav" aria-label="main listitem folders" className={classes.listItem} style={{margin: "0 1rem"}}>
-                  <ListItem>
-                      <ListItemIcon  className={classes.check}>
-                          {<Check/>}
-                      </ListItemIcon>
-                      <ListItemText primary="Follow step-by-step guidance" />
-                  </ListItem>
-                  <ListItem>
-                      <ListItemIcon  className={classes.check}>
-                          {<Check/>}
-                      </ListItemIcon>
-                      <ListItemText primary="See the relevant examples" />
-                  </ListItem>
-                  <ListItem>
-                      <ListItemIcon  className={classes.check}>
-                          {<Check/>}
-                      </ListItemIcon>
-                      <ListItemText primary="Calculate profit and cash flow without being finance-savvy" />
-                  </ListItem>
-                  <ListItem>
-                      <ListItemIcon  className={classes.check}>
-                          {<Check/>}
-                      </ListItemIcon>
-                      <ListItemText primary="Get the 360 degree view of your idea" />
-                  </ListItem>
-                </List>
-              </Grid>
-              
-              <Grid item xs={12} md={4} xl={4}>
-                <List component="nav" aria-label="main listitem folders" className={classes.listItem} style={{marginRight: "5rem"}}>
-                  <ListItem>
-                      <ListItemIcon  className={classes.check}>
-                          {<Check/>}
-                      </ListItemIcon>
-                      <ListItemText primary="Follow step-by-step guidance" />
-                  </ListItem>
-                  <ListItem>
-                      <ListItemIcon  className={classes.check}>
-                          {<Check/>}
-                      </ListItemIcon>
-                      <ListItemText primary="See the relevant examples" />
-                  </ListItem>
-                  <ListItem>
-                      <ListItemIcon  className={classes.check}>
-                          {<Check/>}
-                      </ListItemIcon>
-                      <ListItemText primary="Calculate profit and cash flow without being finance-savvy" />
-                  </ListItem>
-                  <ListItem>
-                      <ListItemIcon  className={classes.check}>
-                          {<Check/>}
-                      </ListItemIcon>
-                      <ListItemText primary="Get the 360 degree view of your idea" />
-                  </ListItem>
-                </List>
-              </Grid> 
-            </Grid>
-            <Typography variant='p' style={{color:'#666', fontSize: '1rem'}}>
-              Don’t be afraid of customer profiling, competitor analysis, financials, or administrative <br/>procedures. At every step of the journey, you’ll be guided and shown a relevant example. We <br/> want to make sure you are on the right track.
-            </Typography>
-          </Box>
-          <Button className={classes.btn} size='large'>Start Now - It's Free</Button>
-          <Typography style={{fontSize: '0.8rem'}}> 
-            Seriously. No credit card required.
+        <Lists />
+
+        <Box variant="p" className={classes.center}>
+          <Typography variant='h3' style={{marginBottom: '1rem'}}>
+            Hold on to your idea, no <br/>
+            matter where you are
           </Typography>
+          <Typography variant="p" style={{color: '#666666'}}>
+            Be it a beach bar, mountain hike, or executive meeting — wherever you <br/>
+            are struck by inspiration, you can easily capture your thoughts on your <br/>
+            laptop, mobile, or tablet.
+          </Typography>
+          <img src={Responsiveness} alt="" style={{width: '100%', marginTop: '2rem'}} />
         </Box>
-        
+
       </Container>
+      <Footer />
     </Box>
+    
   );
 };
 

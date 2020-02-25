@@ -92,9 +92,11 @@ function ButtonAppBar(props) {
                 </Link>
               </ListItem>
               <ListItem key={4} button divider>
-                <Button disableElevation color='primary' variant='contained'>
-                  Student Corner
-                </Button>
+                <Link to='/studentlogin' className={classes.Link}>
+                  <Button disableElevation color='primary' variant='contained'>
+                    Student Corner
+                  </Button>
+                </Link>
               </ListItem>
             </List>
           </Box>
@@ -122,7 +124,12 @@ function ButtonAppBar(props) {
               className={classes.padding}
               color='inherit'
             >
-              <Button disableElevation color='primary' variant='text' size='large'>
+              <Button
+                disableElevation
+                color='primary'
+                variant='text'
+                size='large'
+              >
                 Notice Board
               </Button>
             </Typography>
@@ -131,22 +138,27 @@ function ButtonAppBar(props) {
               className={classes.padding}
               color='inherit'
             >
-
               <Link to='/facultylogin' className={classes.Link}>
                 <Button disableElevation color='primary' variant='outlined'>
                   Faculty Corner
                 </Button>
               </Link>
-
             </Typography>
             <Typography
               variant='subtitle2'
               className={classes.padding}
               color='inherit'
             >
-              <Button disableElevation color='primary' variant='contained' size='large'>
-                Student Corner
-              </Button>
+              <Link to='/studentlogin' className={classes.Link}>
+                <Button
+                  disableElevation
+                  color='primary'
+                  variant='contained'
+                  size='large'
+                >
+                  Student Corner
+                </Button>
+              </Link>
             </Typography>
           </Toolbar>
         </AppBar>

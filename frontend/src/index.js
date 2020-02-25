@@ -6,7 +6,7 @@ import { green, lightGreen } from '@material-ui/core/colors';
 
 // Importing Redux
 import { Provider } from 'react-redux';
-import Store from './redux/store';
+import Store from './store';
 
 const theme = createMuiTheme({
   palette: {

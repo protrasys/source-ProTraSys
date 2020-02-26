@@ -14,6 +14,9 @@ const useStyles = makeStyles((theme) => ({
       color: '#ffffff',
       backgroundColor: theme.palette.primary.main,
     },
+    [theme.breakpoints.down('sm')]: {
+      marginBottom: '.5rem',
+    }
   },
   heading: {
     letterSpacing: '0.2rem',

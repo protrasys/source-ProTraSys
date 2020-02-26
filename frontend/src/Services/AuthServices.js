@@ -1,7 +1,7 @@
 import Config from '../Config';
 import { NetworkServices, LogServices } from './index';
-import { store } from '../store';
-import { getStudentAction } from '../store/reducers';
+// import { store } from '../store';
+// import { getStudentAction } from '../store/reducers';
 
 const logger = LogServices.getInstance('AuthServices');
 const AUTH_LOCALSTORAGEKEY = 'badboysecurities';
@@ -20,25 +20,15 @@ class AuthService {
    */
 
   async login(enrollmentId, password) {
-    store.dispatch(getStudentAction.init());
     const response = await NetworkServices.post(
       `${Config.SERVER_URL}/students`,
       { enrollmentId, password }
     );
-    // console.log('AUTH SERVICE', response.token);
     if (response) {
-      localStorage.setItem(
-        AUTH_LOCALSTORAGEKEY,
-        JSON.stringify(response.token)
-      );
+      localStorage.setItem(AUTH_LOCALSTORAGEKEY, JSON.stringify(response));
       this._auth = response;
-      store.dispatch(getStudentAction.success(response.student || {}));
     } else {
-      store.dispatch(
-        getStudentAction.failed({
-          displayMessage: 'Error in gettingStudentLogin'
-        })
-      );
+      console.log('STUDENT LOGIN');
     }
     logger.debug(response);
     return response;

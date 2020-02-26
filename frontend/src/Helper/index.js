@@ -1,5 +1,5 @@
 import { isNullOrUndefined } from 'util';
 
-export const getFormattedString = (element) => {
-  return isNullOrUndefined(element) ? 'N/A' : element;
+export const getFormattedString = (data) => {
+  return isNullOrUndefined(data) ? 'N/A' : data;
 };

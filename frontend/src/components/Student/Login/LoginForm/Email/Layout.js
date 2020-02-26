@@ -8,32 +8,26 @@ import {
   Popover,
   Typography
 } from '@material-ui/core';
+import { HomeOutlined } from '@material-ui/icons';
 import Logo from '../../../../../assets/ProTraSys_Logo.png';
 import useStyles from './Style';
+import { Link } from 'react-router-dom';
 
 const Email = (props) => {
   const classes = useStyles();
   const { nextStep, handleChange, values } = props;
 
   const [anchorEl, setAnchorEl] = useState(null);
-  const [anchorEl2, setAnchorEl2] = useState(null);
 
   const handleClick = (event) => {
     setAnchorEl(event.currentTarget);
-  };
-  const handleClick2 = (event) => {
-    setAnchorEl2(event.currentTarget);
   };
 
   const handleClose = () => {
     setAnchorEl(null);
   };
-  const handleClose2 = () => {
-    setAnchorEl2(null);
-  };
 
   const open = Boolean(anchorEl);
-  const open2 = Boolean(anchorEl2);
 
   const Continue = (e) => {
     e.preventDefault();
@@ -67,7 +61,7 @@ const Email = (props) => {
             />
             <Typography className={classes.forgotLinkText} color='primary'>
               <b onClick={handleClick} className={classes.Link}>
-                What is enrollment Id?
+                Don't have Student Account?
               </b>
             </Typography>
             <Typography color='textPrimary' className={classes.Caption}>
@@ -87,11 +81,15 @@ const Email = (props) => {
         </CardContent>
 
         <CardActions className={classes.cardAction}>
-          <Typography className={classes.forgotLinkText} color='primary'>
-            <b onClick={handleClick2} className={classes.Link}>
-              Don't have an account
-            </b>
-          </Typography>
+          <Link to='/' className={classes.Link}>
+            <Button
+              className={classes.submitButton}
+              variant='contained'
+              color='primary'
+            >
+              <HomeOutlined />
+            </Button>
+          </Link>
           <Button
             className={classes.submitButton}
             variant='contained'
@@ -106,26 +104,6 @@ const Email = (props) => {
         open={open}
         anchorEl={anchorEl}
         onClose={handleClose}
-        anchorOrigin={{
-          vertical: 'bottom',
-          horizontal: 'center'
-        }}
-        transformOrigin={{
-          vertical: 'top',
-          horizontal: 'center'
-        }}
-      >
-        <Box>
-          <Typography variant='subtitle2' className={classes.popover}>
-            Enrollment ID can be found in your I-Card
-          </Typography>
-        </Box>
-      </Popover>
-
-      <Popover
-        open={open2}
-        anchorEl={anchorEl2}
-        onClose={handleClose2}
         anchorOrigin={{
           vertical: 'bottom',
           horizontal: 'center'

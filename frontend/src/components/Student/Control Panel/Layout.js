@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import clsx from 'clsx';
 import { useTheme } from '@material-ui/core/styles';
 import {
@@ -12,7 +12,8 @@ import {
   IconButton,
   ListItemIcon,
   ListItem,
-  ListItemText
+  ListItemText,
+  Button
 } from '@material-ui/core';
 
 import { AuthServices } from '../../../Services';
@@ -20,6 +21,7 @@ import { useHistory } from 'react-router-dom';
 import { selectStudent } from '../../../store/selectors';
 import { useSelector } from 'react-redux';
 import { getFormattedString } from '../../../Helper';
+import { getIndividualStudent } from '../../../store/actions';
 
 import {
   Face,
@@ -31,7 +33,8 @@ import {
   ChevronRight
 } from '@material-ui/icons';
 import useStyles from './Style';
-import { Button } from '@material-ui/core';
+
+import StudentProfile from './Profile';
 
 const StudentControlPanel = () => {
   const classes = useStyles();
@@ -42,7 +45,11 @@ const StudentControlPanel = () => {
 
   const StudentDetails = useSelector(selectStudent);
   const Student = { ...StudentDetails.data };
-  console.log('CONTROL PANEL PAGE', Student);
+  // console.log('CONTROL PANEL PAGE', Student);
+
+  useEffect(() => {
+    getIndividualStudent();
+  }, []);
 
   const handleDrawerOpen = () => {
     setOpen(true);
@@ -143,9 +150,7 @@ const StudentControlPanel = () => {
       </Drawer>
       <main className={classes.content}>
         <div className={classes.toolbar} />
-        <Typography variant='h3'>
-          Welcome {getFormattedString(Student.name)}
-        </Typography>
+        <StudentProfile data={Student} />
       </main>
     </div>
   );

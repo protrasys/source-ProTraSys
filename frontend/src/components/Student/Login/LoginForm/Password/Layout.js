@@ -56,9 +56,9 @@ const Password = (props) => {
   };
 
   return (
-    <Box component='div'>
+    <div>
       <CardContent className={classes.cardContent}>
-        <Box component='div'>
+        <div>
           <img src={Logo} alt='ProTraSys' className={classes.logo} />
           <Typography variant='h5'>Welcome</Typography>
           <Box component='div' className={classes.IconButton}>
@@ -66,8 +66,8 @@ const Password = (props) => {
               <AccountCircle /> {values.enrollmentId}
             </Box>
           </Box>
-        </Box>
-        <Box component='div'>
+        </div>
+        <div>
           <FormControl variant='outlined' className={classes.FormControl}>
             <InputLabel htmlFor='outlined-adornment-password'>
               Password
@@ -96,7 +96,7 @@ const Password = (props) => {
               }
             />
           </FormControl>
-        </Box>
+        </div>
       </CardContent>
 
       <CardActions className={classes.cardAction}>
@@ -118,7 +118,7 @@ const Password = (props) => {
           {isLogin ? 'Signing in...' : 'Sign in'}
         </Button>
       </CardActions>
-    </Box>
+    </div>
   );
 };
 

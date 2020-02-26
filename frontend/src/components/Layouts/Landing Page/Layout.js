@@ -2,6 +2,7 @@
 import React, { useEffect } from 'react';
 import useStyles from './Style';
 import Appbar from '../Partials/AppBar';
+
 import Footer from '../Partials/Footer';
 import { Container, Typography, Box, Button, Grid, List, ListItem, ListItemIcon, ListItemText } from '@material-ui/core';
 import { EmojiObjectsOutlined, MenuBookOutlined, ExploreOutlined, PollOutlined } from '@material-ui/icons';
@@ -10,6 +11,7 @@ import Cards from './Cards';
 import About from './About';
 import Lists from './Lists';
 import Responsiveness from '../../.././assets/hold-idea@2x.png';
+import { Link } from 'react-router-dom';
 
 const LandingPage = () => {
   const classes = useStyles();
@@ -35,15 +37,17 @@ const LandingPage = () => {
             Reporting and Backup Services
           </Typography>
           <br />
-          <Button
-            className={classes.signUpButton}
-            disableElevation
-            color='primary'
-            variant='contained'
-            size='large'
-          >
-            Welcome Back, Login Now
-          </Button>
+          <Link to='/studentlogin' style={{ textDecoration: 'none' }}>
+            <Button
+              className={classes.signUpButton}
+              disableElevation
+              color='primary'
+              variant='contained'
+              size='large'
+            >
+              Welcome Back, Login Now
+            </Button>
+          </Link>
           <br />
           <Typography variant='caption' className={classes.caption}>
             Not have an account, Contact to Your Faculty
@@ -63,7 +67,7 @@ const LandingPage = () => {
             completion.
           </Typography>
         </Box>
-    
+
         <Grid container spacing={3}>
           <Grid item xs={12} md={3} xl={3}>
             <Cards icon={<EmojiObjectsOutlined />} heading="IDEA PLAN" subHeading="Create a one-page business plan" text="Structure your idea and cover all the major points on a business canvas, which lets you brainstorm easily with friends and partners." />

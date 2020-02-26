@@ -1,6 +1,7 @@
 import React, { Fragment } from 'react';
 import { Route, Switch } from 'react-router-dom';
 import { FacultyLogin, FacultyControlPanel } from '../components/Faculty';
+import { StudentControlPanel, StudentLogin } from '../components/Student';
 import LandingPage from '../components/Layouts/Landing Page';
 
 const Routes = () => {
@@ -14,6 +15,12 @@ const Routes = () => {
           path='/facultycontrolpanel'
           component={FacultyControlPanel}
         />
+        <Route
+          exact
+          path='/studentcontrolpanel'
+          component={StudentControlPanel}
+        />
+        <Route exact path='/studentlogin' component={StudentLogin} />
       </Switch>
     </Fragment>
   );

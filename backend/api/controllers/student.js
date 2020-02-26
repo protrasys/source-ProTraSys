@@ -65,7 +65,8 @@ module.exports.PostStudentLogin = async (req, res) => {
       if (!err) {
         return res.json({
           msg: `${student.name}, Welcome Back 😉`,
-          token
+          token,
+          student
         });
       }
       throw err;

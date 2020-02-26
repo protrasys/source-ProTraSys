@@ -9,7 +9,7 @@ const connectDB = async () => {
       useCreateIndex: true,
       useFindAndModify: false
     });
-    console.log('ıllıllı мongodв connecтed ıllıllı');
+    console.log('мongodв connecтed');
   } catch (error) {
     console.log('Opps! Something Went Wrong in the Database' + error);
   }

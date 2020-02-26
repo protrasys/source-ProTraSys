@@ -10,6 +10,9 @@ const useStyles = makeStyles((theme) => ({
     },
     main: {
         padding: '5rem',
+        [theme.breakpoints.down('sm')]: {
+            padding: '.5rem',
+        }
     },
     title: {
         color: theme.palette.primary.main,

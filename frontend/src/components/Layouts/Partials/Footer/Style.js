@@ -1,5 +1,5 @@
 import { makeStyles } from '@material-ui/core/styles';
-import { Copyright } from '@material-ui/icons';
+import { Copyright, LinearScale } from '@material-ui/icons';
 
 const useStyles = makeStyles((theme) => ({
     center: {
@@ -10,13 +10,19 @@ const useStyles = makeStyles((theme) => ({
         color: '#FFFFFF'
     },
     left: {
-        textAlignLast: 'left',
+        textAlignLast: 'left',  
         padding: '0 5rem',
         display: 'flex',
-        justifyContent: 'space-between'
+        justifyContent: 'space-between',
+        [theme.breakpoints.down('sm')]: {
+            marginBottom: '1rem',
+        }
     },
     heading: {
         marginBottom: '1.2rem',
+        [theme.breakpoints.down('sm')]: {
+            fontSize: '2rem',
+        }
     },
     para: {
         color: theme.palette.primary.light,
@@ -37,14 +43,21 @@ const useStyles = makeStyles((theme) => ({
     divider: {
         backgroundColor: theme.palette.primary.light,
         opacity: '.5',
-        margin: '5rem 6rem'
+        margin: '5rem 6rem',
+        [theme.breakpoints.down('sm')]: {
+            margin: '3rem 3rem',
+        }
     },
     icon: {
         fontSize: '1.5rem',
         marginRight: '1.5rem',
+        transition: '.25s',
+        '&:hover': {
+            transform: 'scale(1.2)',
+        }
     },
     copyright: {
-        color: theme.palette.primary.light,    
+        color: theme.palette.primary.light,   
     }
 }));
 

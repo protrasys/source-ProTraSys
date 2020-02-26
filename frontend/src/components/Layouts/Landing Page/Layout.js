@@ -97,6 +97,8 @@ const LandingPage = () => {
         </Box>
 
       </Container>
+
+      
       <Footer />
     </Box>
     

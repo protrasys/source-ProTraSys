@@ -5,15 +5,38 @@ const useStyles = makeStyles((theme) => ({
     center: {
     textAlign: 'center',
     marginTop: theme.spacing(7),
-    marginBottom: theme.spacing(10)
+    marginBottom: theme.spacing(10),
+    // display: 'none'
+    [theme.breakpoints.down('sm')]: {
+      marginTop: theme.spacing(5),
+      marginBottom: theme.spacing(5),
+    }
   },
-  svg: {
-    backgroundImage: `URL(${Svg})`,
+  overlay: {
+    // backgroundImage: `URL(${Svg})`,
+    // backgroundRepeat: 'no-repeat',
     height: '100%',
     width: '100%',
+    position: 'absolute',
+    top: '240rem',
+    left: '0',
+    // display:'none',
+    [theme.breakpoints.down('sm')]: {
+      display: 'none',
+    }
+  },
+  heading: {
+    [theme.breakpoints.down('sm')]: {
+      fontSize: '1.65rem',
+    }
   },
   listItem: {
     color: "#666",
+    padding: '0 4rem',
+    marginBottom: '2rem',
+    [theme.breakpoints.down('sm')]: {
+      padding: '0',
+    }
   },
   btn: {
     color: "#ffffff",
@@ -27,6 +50,9 @@ const useStyles = makeStyles((theme) => ({
       backgroundColor: theme.palette.primary.dark,
       boxShadow: '5px 10px 20px 1px rgba(27, 94, 32, 0.253)',
     },
+    [theme.breakpoints.down('sm')]: {
+      marginTop: '0',
+    }
   },
   check: {
     color: theme.palette.primary.main,

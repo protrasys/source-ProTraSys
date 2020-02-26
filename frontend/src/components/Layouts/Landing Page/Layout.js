@@ -2,15 +2,7 @@
 import React, { useEffect } from 'react';
 import useStyles from './Style';
 import Appbar from '../Partials/AppBar';
-import {
-  Container,
-  Typography,
-  Box,
-  Button,
-  Grid,
-  AccessAlarm,
-  ThreeDRotation
-} from '@material-ui/core';
+import { Container, Typography, Box, Button, Grid } from '@material-ui/core';
 import {
   MenuBookOutlined,
   ExploreOutlined,
@@ -21,6 +13,7 @@ import {
 // import ReactCarousel from './Carousel';
 import Cards from './Cards';
 import About from './About';
+import { Link } from 'react-router-dom';
 const LandingPage = () => {
   const classes = useStyles();
 
@@ -45,15 +38,17 @@ const LandingPage = () => {
             Reporting and Backup Services
           </Typography>
           <br />
-          <Button
-            className={classes.signUpButton}
-            disableElevation
-            color='primary'
-            variant='contained'
-            size='large'
-          >
-            Welcome Back, Login Now
-          </Button>
+          <Link to='/studentlogin' style={{ textDecoration: 'none' }}>
+            <Button
+              className={classes.signUpButton}
+              disableElevation
+              color='primary'
+              variant='contained'
+              size='large'
+            >
+              Welcome Back, Login Now
+            </Button>
+          </Link>
           <br />
           <Typography variant='caption' className={classes.caption}>
             Not have an account, Contact to Your Faculty

@@ -11,8 +11,9 @@ import {
 import Logo from '../../../../../assets/ProTraSys_Logo.png';
 import useStyles from './Style';
 
-const Email = ({ nextStep, handleChange, values }) => {
+const Email = (props) => {
   const classes = useStyles();
+  const { nextStep, handleChange, values } = props;
 
   const [anchorEl, setAnchorEl] = useState(null);
   const [anchorEl2, setAnchorEl2] = useState(null);
@@ -58,7 +59,7 @@ const Email = ({ nextStep, handleChange, values }) => {
               name='enrollmentId'
               required
               onChange={handleChange}
-              defaultValue={values.enrollment}
+              defaultValue={values.enrollmentId}
               placeholder='Student Enrollment ID Only'
               margin='normal'
               size='medium'

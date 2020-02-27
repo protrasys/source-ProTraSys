@@ -1,4 +1,2 @@
-import FacultyLogin from './Login';
-import FacultyControlPanel from './ControlPanel';
-
-export { FacultyControlPanel, FacultyLogin };
+export { default as FacultyLogin } from './Login';
+export { default as FacultyControlPanel } from './ControlPanel';

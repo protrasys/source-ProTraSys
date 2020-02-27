@@ -30,7 +30,7 @@ const useStyles = makeStyles((theme) => ({
     transition: '0.5s',
     '&:hover': {
       boxShadow: '.2rem .2rem .2rem .2rem #aed581'
-    },
+    }
   },
   root: {
     backgroundColor: theme.palette.primary.main,
@@ -39,9 +39,9 @@ const useStyles = makeStyles((theme) => ({
     '&:hover': {
       boxShadow: '.2rem .2rem .2rem .2rem #aed581',
       transform: 'scale(1.05)',
-      backgroundColor: theme.palette.primary.dark,
-    },
-  },
+      backgroundColor: theme.palette.primary.dark
+    }
+  }
 }));
 
 export default useStyles;

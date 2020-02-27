@@ -1,5 +1,14 @@
-import React, { Component } from 'react';
-import { Grid, Typography, Button, Box, List, ListItem, ListItemIcon, ListItemText } from '@material-ui/core';
+import React from 'react';
+import {
+  Grid,
+  Typography,
+  Button,
+  Box,
+  List,
+  ListItem,
+  ListItemIcon,
+  ListItemText
+} from '@material-ui/core';
 import CheckIcon from '@material-ui/icons/Check';
 import IdeaPlan from '../../../../assets/undraw_ideas_s70l.svg';
 import DevelopIdea from '../../../../assets/undraw_forming_ideas_0pav.svg';
@@ -7,14 +16,10 @@ import ValidateConcept from '../../../../assets/undraw_mind_map_cwng.svg';
 import BusinessPlan from '../../../../assets/undraw_business_plan_5i9d.svg';
 import useStyles from './Style';
 
-
 const About = (props) => {
-    const classes = useStyles();
-    const { title, heading, paragraph } = props;
-
-    return(
-
-        <Grid container spacing={3}>
+  const classes = useStyles();
+  return (
+    <Grid container spacing={3}>
             <Grid item md={6} xl={6}>
                 <img src={IdeaPlan}  alt='' className={classes.img}/>
             </Grid>
@@ -168,8 +173,7 @@ const About = (props) => {
                 <img src={BusinessPlan}  alt='' className={classes.img}/>
             </Grid>
         </Grid>
-        
-    );
-}
+  );
+};
 
-export default About
+export default About;

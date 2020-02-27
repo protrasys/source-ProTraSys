@@ -9,7 +9,7 @@ const server = http.createServer(app);
 // ========== Listening PORT ===============
 server.listen(port, (err) => {
   if (!err) {
-    console.log(`▀▄▀▄▀▄ ωєℓ¢σмє тσ ρяσтяαѕуѕ ▄▀▄▀▄`);
-    console.log(` вα¢кєи∂ ιѕ ℓιѕтєиιиg σи ρσят : [${port}]`);
+    // console.log(`▀▄▀▄▀▄ ωєℓ¢σмє тσ ρяσтяαѕуѕ ▄▀▄▀▄`);
+    console.log(` Backend is Listening on: [${port}]`);
   }
 });

@@ -10,9 +10,6 @@ const Lists = () => {
 
     return(
         <Box variant='div' style={{textAlign: 'center'}}>
-          <Box variant="div" className={classes.overlay}>
-            <img src={Svg} alt="" />
-          </Box>
           <Box component='div' container className={classes.center}> 
             <Typography variant='h4' className={classes.heading}>
                   ...and we've only scratched the surface. Check what else you <br/> can do with IdeaBuddy

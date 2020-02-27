@@ -16,7 +16,7 @@ const useStyles = makeStyles((theme) => ({
     // backgroundImage: `URL(${Svg})`,
     // backgroundRepeat: 'no-repeat',
     height: '100%',
-    width: '100%',
+    width: '80%',
     position: 'absolute',
     top: '240rem',
     left: '0',

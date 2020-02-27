@@ -17,11 +17,12 @@ import {
 } from '@material-ui/core';
 
 import { AuthServices } from '../../../Services';
-import { useHistory } from 'react-router-dom';
+import { useHistory, Switch, Route } from 'react-router-dom';
 import { selectStudent } from '../../../store/selectors';
 import { useSelector } from 'react-redux';
-import { getFormattedString } from '../../../Helper';
 import { getIndividualStudent } from '../../../store/actions';
+
+import InnterRoutes from './InnerRoutes';
 
 import {
   Face,
@@ -33,8 +34,6 @@ import {
   ChevronRight
 } from '@material-ui/icons';
 import useStyles from './Style';
-
-import StudentProfile from './Profile';
 
 const StudentControlPanel = () => {
   const classes = useStyles();
@@ -127,7 +126,11 @@ const StudentControlPanel = () => {
         </div>
         <Divider />
         <List>
-          <ListItem button key={1}>
+          <ListItem
+            button
+            key={1}
+            onClick={() => history.push('/student/profile')}
+          >
             <ListItemIcon>
               <Face />
             </ListItemIcon>
@@ -150,7 +153,9 @@ const StudentControlPanel = () => {
       </Drawer>
       <main className={classes.content}>
         <div className={classes.toolbar} />
-        <StudentProfile data={Student} />
+        <Switch>
+          <Route component={InnterRoutes} />
+        </Switch>
       </main>
     </div>
   );

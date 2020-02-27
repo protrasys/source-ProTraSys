@@ -11,7 +11,7 @@ import {
 } from '@material-ui/core';
 import useStyles from './Style';
 import Moment from 'react-moment';
-import { getFormattedString } from '../../../../Helper';
+import { getFormattedString } from '../../../../../Helper';
 
 const StudnetProfile = (props) => {
   const classes = useStyles();

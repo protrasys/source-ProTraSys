@@ -1,9 +1,12 @@
 import React, { Fragment } from 'react';
 import { Route, Switch } from 'react-router-dom';
 import { FacultyLogin, FacultyControlPanel } from '../components/Faculty';
-import { StudentControlPanel, StudentLogin } from '../components/Student';
+import { StudentLogin } from '../components/Student';
 import LandingPage from '../components/Layouts/Landing Page';
-import FileUpload from '../components/Layouts/Landing Page/FileUpload';
+
+import StudentControlPanel from '../components/Student/Control Panel';
+import FileUpload from '../components/Student/Control Panel/';
+import ViewENotice from '../components/Student/Control Panel/';
 
 const Routes = () => {
   return (
@@ -18,16 +21,13 @@ const Routes = () => {
         />
         <Route
           exact
-<<<<<<< HEAD
-          path='/file'
-          component={FileUpload}
-        />
-=======
           path='/studentcontrolpanel'
           component={StudentControlPanel}
         />
         <Route exact path='/studentlogin' component={StudentLogin} />
->>>>>>> 458cbc1bd240b44776d4e2867802b4ed0cea85b4
+
+        <Route exact path='/fileupload' component={FileUpload} />
+        <Route exact path='/viewenotice' component={ViewENotice} />
       </Switch>
     </Fragment>
   );

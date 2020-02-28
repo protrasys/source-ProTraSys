@@ -12,14 +12,19 @@ import {
 import useStyles from './Style';
 import Moment from 'react-moment';
 import { getFormattedString } from '../../../../../Helper';
+import { selectStudent } from '../../../../../store/selectors';
+import { useSelector } from 'react-redux';
 
-const StudnetProfile = (props) => {
+const StudnetProfile = () => {
   const classes = useStyles();
-  const { data } = props;
+
+  const StudentDetails = useSelector(selectStudent);
+  const Student = { ...StudentDetails.data };
+
   return (
     <div>
       <Typography variant='h3'>
-        Welcome {getFormattedString(data.name)}
+        Welcome {getFormattedString(Student.name)}
       </Typography>
       <TableContainer component={Paper}>
         <Table className={classes.table}>
@@ -35,14 +40,14 @@ const StudnetProfile = (props) => {
           </TableHead>
           <TableBody>
             <TableRow>
-              <TableCell> {getFormattedString(data.name)} </TableCell>
-              <TableCell> {getFormattedString(data.email)} </TableCell>
-              <TableCell> {getFormattedString(data.enrollmentId)} </TableCell>
-              <TableCell> {getFormattedString(data.phone)} </TableCell>
-              <TableCell> {getFormattedString(data.sem)} </TableCell>
+              <TableCell> {getFormattedString(Student.name)} </TableCell>
+              <TableCell> {getFormattedString(Student.email)} </TableCell>
+              <TableCell>{getFormattedString(Student.enrollmentId)}</TableCell>
+              <TableCell> {getFormattedString(Student.phone)} </TableCell>
+              <TableCell> {getFormattedString(Student.sem)} </TableCell>
               <TableCell>
-                <Moment format='YYYY/MM/DD'>
-                  {getFormattedString(data.createdAt)}
+                <Moment format='DD/MM/YYYY'>
+                  {getFormattedString(Student.createdAt)}
                 </Moment>
               </TableCell>
             </TableRow>

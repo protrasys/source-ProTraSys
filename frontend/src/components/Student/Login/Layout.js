@@ -42,7 +42,7 @@ class StudentLogin extends Component {
     const { classes } = this.props;
     const { step, enrollmentId, password } = this.state;
     const values = { enrollmentId, password };
-    
+
     switch (step) {
       case 1:
         return (

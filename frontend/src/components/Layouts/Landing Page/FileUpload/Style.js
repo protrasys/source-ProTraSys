@@ -15,31 +15,15 @@ const useStyles = makeStyles((theme) => ({
         alignItems: 'center',
         padding: '8rem',
         borderRadius: 2,
-        textAlign: 'center',
         fontSize: '2rem',
         border: '2px dashed #cccccc',
         backgroundColor: '#ffffff',
         color: '#bdbdbd',
         outline: 'none',
-        transition: 'border .24s ease-in-out',
-        [theme.breakpoints.down('sm')]: {
-            fontSize: '1rem',
-            padding: '4rem',
-        },
+        transition: 'border .24s ease-in-out'
     },
-    uploadIcon: {
-      fontSize: '4rem',
-      [theme.breakpoints.down('sm')]: {
-        fontSize: '2rem',
-      },
-    },
-    fileStorage: {
-        flex: 1,
-        display: 'flex',
-        flexDirection: 'column',
-        alignItems: 'center',
-        justifyContent: 'center',
-    }
+
+    
 }));
 
 export default useStyles;

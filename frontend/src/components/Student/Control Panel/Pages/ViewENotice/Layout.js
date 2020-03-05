@@ -9,9 +9,9 @@ import {
   TableContainer,
   TableHead,
   TableRow,
-  Paper,
-  Typography
+  Paper
 } from '@material-ui/core';
+import { Skeleton } from '@material-ui/lab';
 import Moment from 'react-moment';
 
 // Import Redux Dependencies
@@ -62,7 +62,7 @@ const ViewENotice = () => {
   return (
     <div>
       <h1>View E Notice</h1>
-      {!ENotices ? <h2>Loading...</h2> : RenderENotices()}
+      {!ENotices ? <Skeleton variant='rect' height={400} /> : RenderENotices()}
     </div>
   );
 };

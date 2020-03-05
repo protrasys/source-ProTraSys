@@ -25,7 +25,10 @@ const StudentSchema = new mongoose.Schema(
       maxlength: 10
     },
     password: { type: mongoose.Schema.Types.String, required: true },
-    projectGroupId: { type: mongoose.Schema.Types.String },
+    projectGroupId: {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: 'ProjectGroup'
+    },
     teamLeader: { type: mongoose.Schema.Types.Boolean }
   },
   schmeaOptions

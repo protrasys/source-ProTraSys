@@ -2,7 +2,9 @@ import { makeStyles } from '@material-ui/core/styles';
 
 const useStyles = makeStyles((theme) => ({
   head: {
-    backgroundColor: theme.palette.common.black,
+    backgroundColor: theme.palette.secondary.dark
+  },
+  whiteFont: {
     color: theme.palette.common.white
   },
   body: {
@@ -15,6 +17,9 @@ const useStyles = makeStyles((theme) => ({
   },
   table: {
     minWidth: 700
+  },
+  right: {
+    textAlign: 'right'
   }
 }));
 

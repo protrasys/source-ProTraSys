@@ -46,7 +46,8 @@ const SideDrawer = () => {
   const [isLogout, setLogout] = useState(false);
 
   const StudentDetails = useSelector(selectStudent);
-  const Student = { ...StudentDetails.data };
+  const StudentData = { ...StudentDetails.data };
+  const Student = { ...StudentData.student };
   // console.log('CONTROL PANEL PAGE', Student);
 
   // Getting Student Details from Database (Redux)

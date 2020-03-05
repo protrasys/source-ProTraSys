@@ -12,13 +12,20 @@ const jwt = require('jsonwebtoken');
 // @access    Private
 module.exports.GetIndividualStudent = async (req, res) => {
   try {
-    const student = await Student.findById(req.student.id).select('-password');
+    const student = await Student.findById(req.student.id)
+      .select('-password')
+      .populate('projectGroupId')
+      .exec();
+    const projectGroup = await ProjectGroup.findById(
+      student.projectGroupId._id
+    ).populate('stu01 stu02 stu03 stu04 teamLeader faculty');
+
     if (!student) {
       return res.status(404).json({
         msg: 'No Student Record Found'
       });
     }
-    res.status(200).json(student);
+    res.status(200).json({ student, group: projectGroup });
   } catch (err) {
     res.status(500).json({
       error: err

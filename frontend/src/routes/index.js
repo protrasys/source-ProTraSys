@@ -18,16 +18,14 @@ const Routes = () => {
         />
         <Route
           exact
-<<<<<<< HEAD
           path='/file'
           component={FileUpload}
         />
-=======
           path='/studentcontrolpanel'
           component={StudentControlPanel}
         />
         <Route exact path='/studentlogin' component={StudentLogin} />
->>>>>>> 458cbc1bd240b44776d4e2867802b4ed0cea85b4
+
       </Switch>
     </Fragment>
   );

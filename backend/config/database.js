@@ -1,5 +1,5 @@
-const mongoose = require('mongoose');
-const { databaseString } = require('./index');
+const mongoose = require("mongoose");
+const { databaseString } = require("./index");
 
 const connectDB = async () => {
   try {
@@ -9,9 +9,9 @@ const connectDB = async () => {
       useCreateIndex: true,
       useFindAndModify: false
     });
-    console.log('мongodв connecтed');
+    console.log("мongodв connecтed");
   } catch (error) {
-    console.log('Opps! Something Went Wrong in the Database' + error);
+    console.log("Opps! Something Went Wrong in the Database" + error);
   }
 };
 

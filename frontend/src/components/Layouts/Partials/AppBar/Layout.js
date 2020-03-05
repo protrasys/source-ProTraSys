@@ -8,9 +8,14 @@ import {
   Box,
   Grid,
   SwipeableDrawer,
-  Button
+  Button,
+  Snackbar,
+  FormControl,
+  InputLabel,
+  Input,
 } from '@material-ui/core';
 import { Menu } from '@material-ui/icons';
+import { Alert } from '@material-ui/lab';
 import useStyles from './Style';
 import ProTraSysLogo from '../../../../assets/ProTraSys_Logo.png';
 import { Link } from 'react-router-dom';
@@ -21,7 +26,9 @@ function ButtonAppBar(props) {
 
   const [drawerActivate, setDrawerActivate] = useState(false);
   const [drawer, setDrawer] = useState(false);
-
+  const [open, setOpen] = useState(false);
+  const [write, setWrite] = useState(false);
+  
   useEffect(() => {
     if (window.innerWidth <= 600) {
       setDrawerActivate(true);
@@ -35,8 +42,31 @@ function ButtonAppBar(props) {
     });
   }, []);
 
+  const handleClick = () => {    
+    setOpen(true); 
+  }
+
+  const  handleClose = (event, reason) => {
+    if (reason === 'clickaway') {
+      return;
+    }
+    setOpen(false);
+  }
+
+  const writeInput = () =>  {
+    setWrite(true);
+  }
+
+  const textWrite = () =>{
+    const myInput = document.getElementById('myInput').value;
+    const myPara = document.getElementById('myPara').innerHTML = myInput;
+  }
+
+  
+
   // For Small Screens
   const createDrawer = () => {
+
     return (
       <Fragment>
         <AppBar
@@ -129,9 +159,19 @@ function ButtonAppBar(props) {
                 color='primary'
                 variant='text'
                 size='large'
-              >
-                Notice Board
+                onClick={handleClick}
+                >
+                  Notice Board
               </Button>
+              <Snackbar open={open} autoHideDuration={60000} onClose={handleClose} className={classes.notification}>
+                <Alert onClose={handleClose} severity="success">npm 
+                  <FormControl>
+                    <InputLabel htmlFor="my-input" onKeyPress={setWrite}>Enter Notice here...</InputLabel>
+                    <Input id="myInput" aria-describedby="my-helper-text" onKeyPress={textWrite} /><br />
+                  </FormControl>  
+                  <p id="myPara"></p>                  
+                </Alert>
+              </Snackbar>
             </Typography>
             <Typography
               variant='subtitle2'

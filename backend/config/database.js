@@ -1,18 +1,20 @@
-const mongoose = require("mongoose");
-const { databaseString } = require("./index");
+const mongoose = require('mongoose');
+const { databaseString } = require('./index');
 
 const connectDB = async () => {
-  try {
-    await mongoose.connect(databaseString, {
+  await mongoose
+    .connect(databaseString, {
       useNewUrlParser: true,
       useUnifiedTopology: true,
       useCreateIndex: true,
       useFindAndModify: false
+    })
+    .then(() => {
+      console.log('мongodв connecтed');
+    })
+    .catch((err) => {
+      console.log('Opps! Something Went Wrong in the Database' + err);
     });
-    console.log("мongodв connecтed");
-  } catch (error) {
-    console.log("Opps! Something Went Wrong in the Database" + error);
-  }
 };
 
 module.exports = connectDB;

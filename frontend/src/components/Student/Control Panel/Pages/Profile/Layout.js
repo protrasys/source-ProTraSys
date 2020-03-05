@@ -10,6 +10,7 @@ import {
   Typography,
   Box
 } from '@material-ui/core';
+import { Skeleton } from '@material-ui/lab';
 import useStyles from './Style';
 import Moment from 'react-moment';
 import { getFormattedString } from '../../../../../Helper';
@@ -33,7 +34,13 @@ const StudnetProfile = () => {
     techArray.push(value);
   });
 
-  console.log(projectGroup.teamLeaderv);
+  // Lets Destructuring the Teamleader and Other Student Details
+  const teamLeader = { ...projectGroup.teamLeader };
+  const Stu01 = { ...projectGroup.stu01 };
+  const Stu02 = { ...projectGroup.stu02 };
+  const Stu03 = { ...projectGroup.stu03 };
+  const Stu04 = { ...projectGroup.stu04 };
+  const faculty = { ...projectGroup.faculty };
 
   return (
     <div>
@@ -81,8 +88,8 @@ const StudnetProfile = () => {
             <Table className={classes.table}>
               <TableHead>
                 <TableRow>
-                  <TableCell>Name: </TableCell>
-                  <TableCell>
+                  <TableCell style={{ width: '30%' }}>Name: </TableCell>
+                  <TableCell style={{ width: '70%' }}>
                     {getFormattedString(projectGroup.projectName)}
                   </TableCell>
                 </TableRow>
@@ -95,9 +102,69 @@ const StudnetProfile = () => {
                 <TableRow>
                   <TableCell>Technologies Used: </TableCell>
                   <TableCell>
-                    {techArray.map((data) => (
-                      <span> {data} </span>
+                    {techArray.map((data, index) => (
+                      <p key={index}> {data} </p>
                     ))}
+                  </TableCell>
+                </TableRow>
+                <TableRow>
+                  <TableCell>Team Leader: </TableCell>
+                  <TableCell>
+                    {Student.teamLeader ? (
+                      <p>You are a Team Leader</p>
+                    ) : (
+                      <p>
+                        Your TeamLeader is :{' '}
+                        {getFormattedString(teamLeader.name)}
+                      </p>
+                    )}
+                  </TableCell>
+                </TableRow>
+                <TableRow>
+                  <TableCell>Team Members: </TableCell>
+                  <TableCell>
+                    <Typography paragraph>
+                      Name : {getFormattedString(Stu01.name)} &nbsp; Email:{' '}
+                      {getFormattedString(Stu01.email)}
+                    </Typography>
+                    <Typography paragraph>
+                      Name : {getFormattedString(Stu02.name)} &nbsp; Email:{' '}
+                      {getFormattedString(Stu02.email)}
+                    </Typography>
+                    <Typography paragraph>
+                      Name : {getFormattedString(Stu03.name)} &nbsp; Email:{' '}
+                      {getFormattedString(Stu03.email)}
+                    </Typography>
+                    <Typography paragraph>
+                      Name : {getFormattedString(Stu04.name)} &nbsp; Email:{' '}
+                      {getFormattedString(Stu04.email)}
+                    </Typography>
+                  </TableCell>
+                </TableRow>
+                <TableRow>
+                  <TableCell>Faculty or Project Guide: </TableCell>
+                  <TableCell>
+                    {faculty.profile ? (
+                      <img
+                        src={faculty.profile}
+                        alt='Faculty Profile Image'
+                        height={110}
+                      />
+                    ) : (
+                      <Skeleton variant='rect' height={110} width={110} />
+                    )}
+                    <Typography paragraph>
+                      Name : {getFormattedString(faculty.name)}
+                    </Typography>
+                    <Typography paragraph>
+                      Email : {getFormattedString(faculty.email)}
+                    </Typography>
+                    <Typography paragraph>
+                      Phone : {getFormattedString(faculty.phone)}
+                    </Typography>
+                    <Typography paragraph>
+                      Designation : {getFormattedString(faculty.designation)}
+                    </Typography>
                   </TableCell>
                 </TableRow>
               </TableHead>

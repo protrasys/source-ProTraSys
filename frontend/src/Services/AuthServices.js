@@ -1,7 +1,5 @@
 import Config from '../Config';
 import { NetworkServices, LogServices } from './index';
-// import { store } from '../store';
-// import { getStudentAction } from '../store/reducers';
 
 const logger = LogServices.getInstance('AuthServices');
 const AUTH_LOCALSTORAGEKEY = 'badboysecurities';

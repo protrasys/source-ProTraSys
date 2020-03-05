@@ -4,8 +4,13 @@ import useStyles from './Style';
 import Appbar from '../Partials/AppBar';
 
 import Footer from '../Partials/Footer';
-import { Container, Typography, Box, Button, Grid, List, ListItem, ListItemIcon, ListItemText } from '@material-ui/core';
-import { EmojiObjectsOutlined, MenuBookOutlined, ExploreOutlined, PollOutlined } from '@material-ui/icons';
+import { Container, Typography, Box, Button, Grid } from '@material-ui/core';
+import {
+  EmojiObjectsOutlined,
+  MenuBookOutlined,
+  ExploreOutlined,
+  PollOutlined
+} from '@material-ui/icons';
 // import ReactCarousel from './Carousel';
 import Cards from './Cards';
 import About from './About';
@@ -23,7 +28,7 @@ const LandingPage = () => {
   return (
     <Box component='div'>
       <Container maxWidth='xl'>
-      <Appbar />
+        <Appbar />
         <Box component='div' className={classes.center}>
           <Typography variant='h5' className={classes.tagline}>
             Launching Soon
@@ -70,41 +75,65 @@ const LandingPage = () => {
 
         <Grid container spacing={3}>
           <Grid item xs={12} md={3} xl={3}>
-            <Cards icon={<EmojiObjectsOutlined />} heading="IDEA PLAN" subHeading="Create a one-page business plan" text="Structure your idea and cover all the major points on a business canvas, which lets you brainstorm easily with friends and partners." />
+            <Cards
+              icon={<EmojiObjectsOutlined />}
+              heading='IDEA PLAN'
+              subHeading='Create a one-page business plan'
+              text='Structure your idea and cover all the major points on a business canvas, which lets you brainstorm easily with friends and partners.'
+            />
           </Grid>
           <Grid item xs={12} md={3} xl={3}>
-            <Cards icon={<MenuBookOutlined />} heading="STORY MODE" subHeading="Develop the idea through Story Mode" text="Structure your idea and cover all the major points on a business canvas, which lets you brainstorm easily with friends and partners." />
+            <Cards
+              icon={<MenuBookOutlined />}
+              heading='STORY MODE'
+              subHeading='Develop the idea through Story Mode'
+              text='Structure your idea and cover all the major points on a business canvas, which lets you brainstorm easily with friends and partners.'
+            />
           </Grid>
           <Grid item xs={12} md={3} xl={3}>
-            <Cards icon={<ExploreOutlined />} heading="VALIDATION" subHeading="Test-run and get a validation score" text="Structure your idea and cover all the major points on a business canvas, which lets you brainstorm easily with friends and partners." />
+            <Cards
+              icon={<ExploreOutlined />}
+              heading='VALIDATION'
+              subHeading='Test-run and get a validation score'
+              text='Structure your idea and cover all the major points on a business canvas, which lets you brainstorm easily with friends and partners.'
+            />
           </Grid>
           <Grid item xs={12} md={3} xl={3}>
-            <Cards icon={<PollOutlined />} heading="JOURNAL" subHeading="Get an internal business plan" text="Structure your idea and cover all the major points on a business canvas, which lets you brainstorm easily with friends and partners." />
+            <Cards
+              icon={<PollOutlined />}
+              heading='JOURNAL'
+              subHeading='Get an internal business plan'
+              text='Structure your idea and cover all the major points on a business canvas, which lets you brainstorm easily with friends and partners.'
+            />
           </Grid>
         </Grid>
-        
-        <About /> 
+
+        <About />
 
         <Lists />
 
-        <Box variant="p" className={classes.center}>
-          <Typography variant='h3' style={{marginBottom: '1rem'}}>
-            Hold on to your idea, no <br/>
+        <Box component='div' className={classes.center}>
+          <Typography variant='h3' style={{ marginBottom: '1rem' }}>
+            Hold on to your idea, no <br />
             matter where you are
           </Typography>
-          <Typography variant="p" style={{color: '#666666'}}>
-            Be it a beach bar, mountain hike, or executive meeting — wherever you <br/>
-            are struck by inspiration, you can easily capture your thoughts on your <br/>
+          <Typography paragraph style={{ color: '#666666' }}>
+            Be it a beach bar, mountain hike, or executive meeting — wherever
+            you <br />
+            are struck by inspiration, you can easily capture your thoughts on
+            your <br />
             laptop, mobile, or tablet.
           </Typography>
-          <img src={Responsiveness} alt="" style={{width: '100%', marginTop: '2rem'}} />
+          <img
+            src={Responsiveness}
+            alt=''
+            style={{ width: '100%', marginTop: '2rem' }}
+          />
         </Box>
-
       </Container>
 
       <Footer />
     </Box>
-    
   );
 };
 

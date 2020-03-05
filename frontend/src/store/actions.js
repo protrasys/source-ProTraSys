@@ -10,8 +10,9 @@ export const fetchENoticeListing = async () => {
     const response = await NetworkServices.get(
       `${Config.SERVER_URL}/students/enotice`
     );
+    // console.log('FETCH E NOTICE', response.eNotice);
     // Save Data To Redux
-    store.dispatch(eNoticeListingAction.success(response.data || {}));
+    store.dispatch(eNoticeListingAction.success(response.eNotice || {}));
   } catch (err) {
     handleError(err);
     store.dispatch(

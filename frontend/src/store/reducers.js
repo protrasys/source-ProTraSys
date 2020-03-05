@@ -82,7 +82,7 @@ const initialState = {
 };
 
 const reducer = new ReducerFactory(initialState)
-  .addCustom(addDataAction(eNoticeListingAction, 'enotices'))
+  .addCustom(addDataAction(eNoticeListingAction, 'eNotices'))
   .addCustom(addDataAction(getStudentAction, 'student'))
   .toReducer();
 

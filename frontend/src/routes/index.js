@@ -1,5 +1,7 @@
 import React, { Fragment } from 'react';
 import { Route, Switch } from 'react-router-dom';
+// import StudentPrivateRouter from './PrivateRouter';
+
 import { FacultyLogin, FacultyControlPanel } from '../components/Faculty';
 import { StudentLogin } from '../components/Student';
 import LandingPage from '../components/Layouts/Landing Page';

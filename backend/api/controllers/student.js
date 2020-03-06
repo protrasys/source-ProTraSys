@@ -110,7 +110,10 @@ module.exports.PostUploadFile = async (req, res) => {
     })
       .save()
       .then((result) => {
-        res.status(200).json(result);
+        res.status(200).json({
+          msg: 'File Uploaded...',
+          result
+        });
       })
       .catch((err) => {
         res.status(403).json({

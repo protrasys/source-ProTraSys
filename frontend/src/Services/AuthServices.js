@@ -26,7 +26,7 @@ class AuthService {
       localStorage.setItem(AUTH_LOCALSTORAGEKEY, JSON.stringify(response));
       this._auth = response;
     } else {
-      console.log('STUDENT LOGIN');
+      console.log('STUDENT LOGIN AUTHSERVICE ERROR: NO RESPONSE FOUND');
     }
     logger.debug(response);
     return response;

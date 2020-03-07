@@ -14,6 +14,8 @@ import { Skeleton } from '@material-ui/lab';
 import useStyles from './Style';
 import Moment from 'react-moment';
 import { getFormattedString } from '../../../../../Helper';
+
+// Redux Integration Dependencies
 import { selectStudent } from '../../../../../store/selectors';
 import { useSelector } from 'react-redux';
 
@@ -21,6 +23,9 @@ const StudnetProfile = () => {
   const classes = useStyles();
 
   const StudentDetails = useSelector(selectStudent);
+
+  const isStudentLoading = StudentDetails.loading;
+
   const StudentData = { ...StudentDetails.data };
   const Student = { ...StudentData.student };
   const projectGroup = { ...StudentData.group };
@@ -42,7 +47,9 @@ const StudnetProfile = () => {
   const Stu04 = { ...projectGroup.stu04 };
   const faculty = { ...projectGroup.faculty };
 
-  return (
+  return isStudentLoading ? (
+    <Skeleton variant='rect' height={500} animation='wave' />
+  ) : (
     <div>
       <Typography variant='h3'>
         Welcome {getFormattedString(Student.name)}
@@ -151,7 +158,12 @@ const StudnetProfile = () => {
                         height={110}
                       />
                     ) : (
-                      <Skeleton variant='rect' height={110} width={110} />
+                      <Skeleton
+                        variant='rect'
+                        height={110}
+                        width={110}
+                        animation='wave'
+                      />
                     )}
                     <Typography paragraph>
                       Name : {getFormattedString(faculty.name)}

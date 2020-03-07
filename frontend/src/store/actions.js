@@ -1,7 +1,11 @@
 import { store } from './index';
 import { handleError } from './helper';
-import { NetworkServices, AuthServices } from '../Services';
-import { eNoticeListingAction, getStudentAction } from './reducers';
+import { NetworkServices } from '../Services';
+import {
+  eNoticeListingAction,
+  getStudentAction,
+  getFacultyAction
+} from './reducers';
 import Config from '../Config';
 
 export const fetchENoticeListing = async () => {
@@ -37,6 +41,24 @@ export const getIndividualStudent = async () => {
       getStudentAction.failed({
         internalMessage: err.message,
         displayMessage: 'Error in GetIndividualStudent'
+      })
+    );
+  }
+};
+
+export const getIndividualFaculty = async () => {
+  try {
+    store.dispatch(getFacultyAction.init());
+    const response = await NetworkServices.facultyGet(
+      `${Config.SERVER_URL}/faculty/me`
+    );
+    store.dispatch(getFacultyAction.success(response || {}));
+  } catch (err) {
+    handleError(err);
+    store.dispatch(
+      getFacultyAction.failed({
+        internalMessage: err.message,
+        displayMessage: 'Error in GetIndividualFaculty'
       })
     );
   }

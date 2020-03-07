@@ -5,7 +5,8 @@ const {
   GetIndividualStudent,
   GetViewNotice,
   PostStudentLogin,
-  PostUploadFile
+  PostUploadFile,
+  GetEReports
 } = require('../controllers/student');
 
 // @route     GET   /students/me
@@ -26,6 +27,11 @@ router.post('/uploadProjectFiles/:projectId', studentAuth, PostUploadFile);
 // @route     GET   /students/enotice
 // @desc      View eNotice
 // @access    public
-router.get('/enotice', GetViewNotice);
+router.get('/enotice', studentAuth, GetViewNotice);
+
+// @route     GET /students/ereports/:groupId
+// @desc      View Individual Project Group eReport
+// @access    private
+router.get('/ereports/:groupId', studentAuth, GetEReports);
 
 module.exports = router;

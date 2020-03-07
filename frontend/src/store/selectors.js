@@ -9,3 +9,7 @@ export const selectENotices = (state) => {
 export const selectStudent = (state) => {
   return selectState(state).student;
 };
+
+export const selectFaculty = (state) => {
+  return selectState(state).faculty;
+};

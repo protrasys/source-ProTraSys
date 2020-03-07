@@ -1,6 +1,7 @@
 // Importing Dependencies
 const Student = require('../models/Student');
 const eNotice = require('../models/eNotice');
+const eReport = require('../models/eReports');
 const ProjectGroup = require('../models/ProjectGroup');
 const ProjectFile = require('../models/ProjectFIles');
 const bcrypt = require('bcryptjs');
@@ -160,6 +161,31 @@ module.exports.GetViewNotice = async (req, res) => {
     res.status(500).json({
       error: 'Internal Server Error',
       desc: err
+    });
+  }
+};
+
+// @route     GET /students/ereports
+// @desc      View Individual Project Group eReport
+// @access    private
+module.exports.GetEReports = async (req, res) => {
+  const { groupId } = req.params;
+  try {
+    const response = await eReport.find({ projectGroup: groupId });
+
+    if (response.length <= 0) {
+      return res.status(404).json({
+        error: 'There is No reporting done yet from your Group...'
+      });
+    }
+
+    res.status(200).json({
+      data: response
+    });
+  } catch (err) {
+    console.log(err);
+    res.status(500).json({
+      error: 'Internal Server Error'
     });
   }
 };

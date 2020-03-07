@@ -7,7 +7,7 @@ import PasswordForm from './LoginForm/Password';
 class FacultyLogin extends Component {
   state = {
     step: 1,
-    enrollment: '',
+    enrollmentId: '',
     password: ''
   };
 
@@ -40,8 +40,8 @@ class FacultyLogin extends Component {
 
   render() {
     const { classes } = this.props;
-    const { step, enrollment, password } = this.state;
-    const values = { enrollment, password };
+    const { step, enrollmentId, password } = this.state;
+    const values = { enrollmentId, password };
 
     switch (step) {
       case 1:

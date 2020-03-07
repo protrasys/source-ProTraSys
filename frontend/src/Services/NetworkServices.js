@@ -133,6 +133,101 @@ class NetworkService {
       this.handleError(err);
     }
   }
+
+  // For Faculty
+
+  getFacultyHeader(options) {
+    const header = {};
+
+    if (options && options.headers) {
+      Object.assign(header, options.headers);
+    }
+
+    if (options && options.external) {
+      return header;
+    }
+
+    const token = AuthServices.getFacultyToken();
+    if (token) {
+      header.authorization = `Bearer ${token}`;
+    }
+
+    return header;
+  }
+
+  /**
+   * @param {string} url
+   * @param {any} options
+   */
+
+  async facultyGet(url, options) {
+    logger.debug('get', url);
+    try {
+      const response = await axios.get(url, {
+        headers: this.getFacultyHeader(options)
+      });
+      logger.debug('get response', response);
+
+      return this.handleResponse(response);
+    } catch (err) {
+      this.handleError(err);
+    }
+  }
+
+  /**
+   * @param {string} url
+   * @param {any} data
+   * @param {any} options
+   */
+
+  async facultyPost(url, data, options) {
+    logger.debug('post', url, data);
+    try {
+      const response = await axios.post(url, data, {
+        headers: this.getFacultyHeader(options)
+      });
+      logger.debug('post response', response);
+
+      return this.handleResponse(response);
+    } catch (err) {
+      this.handleError(err);
+    }
+  }
+
+  /**
+   * @param {string} url
+   * @param {any} data
+   * @param {any} options
+   */
+  async facultyPatch(url, data, options) {
+    logger.debug('patch', url, data);
+    try {
+      const response = await axios.patch(url, data, {
+        headers: this.getFacultyHeader(options)
+      });
+      logger.debug('patch response', response);
+      this.handleResponse(response);
+    } catch (err) {
+      this.handleError(err);
+    }
+  }
+
+  /**
+   * @param {string} url
+   * @param {any} options
+   */
+  async facultyDelete(url, options) {
+    logger.debug('delete', url);
+    try {
+      const response = await axios.delete(url, {
+        headers: this.getFacultyHeader(options)
+      });
+      logger.debug('delete response', response);
+      return this.handleResponse(response);
+    } catch (err) {
+      this.handleError(err);
+    }
+  }
 }
 
 export default new NetworkService();

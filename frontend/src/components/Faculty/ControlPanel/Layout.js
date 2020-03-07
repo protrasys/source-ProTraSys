@@ -1,6 +1,6 @@
-import React, { useState, useEffect } from "react";
-import clsx from "clsx";
-import { useTheme } from "@material-ui/core/styles";
+import React, { useState, useEffect } from 'react';
+import clsx from 'clsx';
+import { useTheme } from '@material-ui/core/styles';
 import {
   Drawer,
   AppBar,
@@ -14,14 +14,13 @@ import {
   ListItem,
   ListItemText,
   Button
-} from "@material-ui/core";
+} from '@material-ui/core';
 
-import { AuthServices } from "../../../Services";
-import { useHistory } from "react-router-dom";
-import { selectStudent } from "../../../store/selectors";
-import { useSelector } from "react-redux";
-import { getFormattedString } from "../../../Helper";
-import { getIndividualStudent } from "../../../store/actions";
+import { AuthServices } from '../../../Services';
+import { useHistory } from 'react-router-dom';
+import { selectFaculty } from '../../../store/selectors';
+import { useSelector } from 'react-redux';
+import { getIndividualFaculty } from '../../../store/actions';
 
 import {
   PeopleAlt,
@@ -36,8 +35,8 @@ import {
   Menu,
   ChevronLeft,
   ChevronRight
-} from "@material-ui/icons";
-import useStyles from "./Style";
+} from '@material-ui/icons';
+import useStyles from './Style';
 
 // import StudentProfile from "./Profile";
 
@@ -48,12 +47,8 @@ const FacultyControlPanel = () => {
   const [open, setOpen] = useState(false);
   const [isLogout, setLogout] = useState(false);
 
-  const StudentDetails = useSelector(selectStudent);
-  const Student = { ...StudentDetails.data };
-  // console.log('CONTROL PANEL PAGE', Student);
-
   useEffect(() => {
-    getIndividualStudent();
+    getIndividualFaculty();
   }, []);
 
   const handleDrawerOpen = () => {
@@ -67,11 +62,11 @@ const FacultyControlPanel = () => {
   const handleLogout = async () => {
     try {
       setLogout(true);
-      await AuthServices.logout();
+      await AuthServices.facultyLogout();
       setLogout(false);
-      history.push("/facultylogin");
+      history.push('/facultylogin');
     } catch (err) {
-      console.log("err", err);
+      console.log('err', err);
     } finally {
       setLogout(false);
     }
@@ -81,39 +76,39 @@ const FacultyControlPanel = () => {
     <div className={classes.root}>
       <CssBaseline />
       <AppBar
-        position="fixed"
+        position='fixed'
         className={clsx(classes.appBar, {
           [classes.appBarShift]: open
         })}
       >
         <Toolbar>
           <IconButton
-            color="inherit"
-            aria-label="open drawer"
+            color='inherit'
+            aria-label='open drawer'
             onClick={handleDrawerOpen}
-            edge="start"
+            edge='start'
             className={clsx(classes.menuButton, {
               [classes.hide]: open
             })}
           >
             <Menu />
           </IconButton>
-          <Typography variant="h6" style={{ flexGrow: "1" }} noWrap>
+          <Typography variant='h6' style={{ flexGrow: '1' }} noWrap>
             Faculty Control Panel
           </Typography>
           <Button
-            color="inherit"
-            variant="outlined"
+            color='inherit'
+            variant='outlined'
             onClick={handleLogout}
             disabled={isLogout}
           >
             <ExitToApp />
-            {isLogout ? "Logging Out..." : "Logout"}
+            {isLogout ? 'Logging Out...' : 'Logout'}
           </Button>
         </Toolbar>
       </AppBar>
       <Drawer
-        variant="permanent"
+        variant='permanent'
         className={clsx(classes.drawer, {
           [classes.drawerOpen]: open,
           [classes.drawerClose]: !open
@@ -127,7 +122,7 @@ const FacultyControlPanel = () => {
       >
         <div className={classes.toolbar}>
           <IconButton onClick={handleDrawerClose}>
-            {theme.direction === "rtl" ? <ChevronRight /> : <ChevronLeft />}
+            {theme.direction === 'rtl' ? <ChevronRight /> : <ChevronLeft />}
           </IconButton>
         </div>
         <Divider />

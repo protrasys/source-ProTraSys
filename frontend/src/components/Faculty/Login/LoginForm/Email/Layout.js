@@ -8,31 +8,26 @@ import {
   Popover,
   Typography
 } from '@material-ui/core';
+import { HomeOutlined } from '@material-ui/icons';
 import Logo from '../../../../../assets/ProTraSys_Logo.png';
 import useStyles from './Style';
+import { Link } from 'react-router-dom';
 
-const Email = ({ nextStep, handleChange, values }) => {
+const Email = (props) => {
   const classes = useStyles();
+  const { nextStep, handleChange, values } = props;
 
   const [anchorEl, setAnchorEl] = useState(null);
-  const [anchorEl2, setAnchorEl2] = useState(null);
 
   const handleClick = (event) => {
     setAnchorEl(event.currentTarget);
-  };
-  const handleClick2 = (event) => {
-    setAnchorEl2(event.currentTarget);
   };
 
   const handleClose = () => {
     setAnchorEl(null);
   };
-  const handleClose2 = () => {
-    setAnchorEl2(null);
-  };
 
   const open = Boolean(anchorEl);
-  const open2 = Boolean(anchorEl2);
 
   const Continue = (e) => {
     e.preventDefault();
@@ -55,10 +50,10 @@ const Email = ({ nextStep, handleChange, values }) => {
               variant='outlined'
               fullWidth
               type='text'
-              name='enrollment'
+              name='enrollmentId'
               required
               onChange={handleChange}
-              defaultValue={values.enrollment}
+              defaultValue={values.enrollmentId}
               placeholder='Faculty Enrollment ID Only'
               margin='normal'
               size='medium'
@@ -66,7 +61,7 @@ const Email = ({ nextStep, handleChange, values }) => {
             />
             <Typography className={classes.forgotLinkText} color='primary'>
               <b onClick={handleClick} className={classes.Link}>
-                What is enrollment Id?
+                Don't have Faculty Account?
               </b>
             </Typography>
             <Typography color='textPrimary' className={classes.Caption}>
@@ -86,11 +81,15 @@ const Email = ({ nextStep, handleChange, values }) => {
         </CardContent>
 
         <CardActions className={classes.cardAction}>
-          <Typography className={classes.forgotLinkText} color='primary'>
-            <b onClick={handleClick2} className={classes.Link}>
-              Don't have an account
-            </b>
-          </Typography>
+          <Link to='/' className={classes.Link}>
+            <Button
+              className={classes.submitButton}
+              variant='contained'
+              color='primary'
+            >
+              <HomeOutlined />
+            </Button>
+          </Link>
           <Button
             className={classes.submitButton}
             variant='contained'
@@ -116,28 +115,8 @@ const Email = ({ nextStep, handleChange, values }) => {
       >
         <Box>
           <Typography variant='subtitle2' className={classes.popover}>
-            Enrollment ID can be found in your I-Card
-          </Typography>
-        </Box>
-      </Popover>
-
-      <Popover
-        open={open2}
-        anchorEl={anchorEl2}
-        onClose={handleClose2}
-        anchorOrigin={{
-          vertical: 'bottom',
-          horizontal: 'center'
-        }}
-        transformOrigin={{
-          vertical: 'top',
-          horizontal: 'center'
-        }}
-      >
-        <Box>
-          <Typography variant='subtitle2' className={classes.popover}>
-            Sorry, for the inconvenience... <br /> Please Contact to
-            Administrator for Opening Faculty Account
+            Sorry, for the inconvenience... <br /> Please Contact to Admin for
+            Opening new Faculty Account
           </Typography>
         </Box>
       </Popover>

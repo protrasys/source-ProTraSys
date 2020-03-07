@@ -16,6 +16,7 @@ const getDataAction = (name) => {
 
 export const eNoticeListingAction = getDataAction('GET_ENOTICE');
 export const getStudentAction = getDataAction('GET_STUDENT');
+export const getFacultyAction = getDataAction('GET_FACULTY');
 
 const addDataAction = (action, key) => {
   return (reducerFactory) => {
@@ -78,12 +79,19 @@ const initialState = {
     loading: false,
     error: null,
     data: null
+  },
+  faculty: {
+    initialized: false,
+    loading: false,
+    error: null,
+    data: null
   }
 };
 
 const reducer = new ReducerFactory(initialState)
   .addCustom(addDataAction(eNoticeListingAction, 'eNotices'))
   .addCustom(addDataAction(getStudentAction, 'student'))
+  .addCustom(addDataAction(getFacultyAction, 'faculty'))
   .toReducer();
 
 export default reducer;

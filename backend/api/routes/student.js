@@ -6,7 +6,8 @@ const {
   GetViewNotice,
   PostStudentLogin,
   PostUploadFile,
-  GetEReports
+  GetEReports,
+  GetUploadedProjectFileByMyGroup
 } = require('../controllers/student');
 
 // @route     GET   /students/me
@@ -33,5 +34,14 @@ router.get('/enotice', studentAuth, GetViewNotice);
 // @desc      View Individual Project Group eReport
 // @access    private
 router.get('/ereports/:groupId', studentAuth, GetEReports);
+
+// @route     GET /students/projectfiles/:groupId
+// @desc      View Uploaded File by Project Group
+// @access    private
+router.get(
+  '/projectfiles/:groupId',
+  studentAuth,
+  GetUploadedProjectFileByMyGroup
+);
 
 module.exports = router;

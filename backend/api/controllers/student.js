@@ -189,3 +189,28 @@ module.exports.GetEReports = async (req, res) => {
     });
   }
 };
+
+// @route     GET /students/projectfiles/:groupId
+// @desc      View Uploaded File by Project Group
+// @access    private
+module.exports.GetUploadedProjectFileByMyGroup = async (req, res) => {
+  const { groupId } = req.params;
+  try {
+    const response = await ProjectFile.find({ projectGroup: groupId });
+
+    if (response.length <= 0) {
+      return res.status(404).json({
+        error: 'There is No File uploaded yet from your Group...'
+      });
+    }
+
+    res.status(200).json({
+      data: response
+    });
+  } catch (err) {
+    console.log(err);
+    res.status(500).json({
+      error: 'Internal Server Error'
+    });
+  }
+};

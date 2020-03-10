@@ -1,5 +1,13 @@
 import Config from '../Config';
 import { NetworkServices, LogServices } from './index';
+import { store } from '../store';
+import {
+  getFacultyAction,
+  getStudentAction,
+  eNoticeListingAction,
+  fetchOurProjectFiles,
+  eReportingListingAction
+} from '../store/reducers';
 
 const logger = LogServices.getInstance('AuthServices');
 const AUTH_LOCALSTORAGEKEY = 'badboysecurities';
@@ -29,10 +37,7 @@ class AuthService {
     );
 
     if (response) {
-      localStorage.setItem(
-        AUTH_LOCALSTORAGEKEY,
-        JSON.stringify(response.token)
-      );
+      localStorage.setItem(AUTH_LOCALSTORAGEKEY, JSON.stringify(response));
       this._auth = response;
     } else {
       console.log('STUDENT LOGIN AUTHSERVICE ERROR: NO RESPONSE FOUND');
@@ -58,6 +63,10 @@ class AuthService {
   async logout() {
     localStorage.removeItem(AUTH_LOCALSTORAGEKEY);
     this._auth = undefined;
+    store.dispatch(getStudentAction.reset());
+    store.dispatch(eNoticeListingAction.reset());
+    store.dispatch(eReportingListingAction.reset());
+    store.dispatch(fetchOurProjectFiles.reset());
   }
 
   /**
@@ -101,6 +110,7 @@ class AuthService {
   async facultyLogout() {
     localStorage.removeItem(FACULTY_AUTH_LOCALSTORAGEKEY);
     this._facultyAuth = undefined;
+    store.dispatch(getFacultyAction.reset());
   }
 }
 

@@ -6,6 +6,14 @@ export const selectENotices = (state) => {
   return selectState(state).eNotices;
 };
 
+export const selectEReports = (state) => {
+  return selectState(state).eReporting;
+};
+
+export const selectOurProjectFiles = (state) => {
+  return selectState(state).projectFiles;
+};
+
 export const selectStudent = (state) => {
   return selectState(state).student;
 };

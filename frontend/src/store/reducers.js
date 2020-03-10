@@ -14,9 +14,17 @@ const getDataAction = (name) => {
   };
 };
 
+// Actions for Student
 export const eNoticeListingAction = getDataAction('GET_ENOTICE');
 export const getStudentAction = getDataAction('GET_STUDENT');
+export const eReportingListingAction = getDataAction('GET_E-REPORTING');
+export const fetchOurProjectFiles = getDataAction('GET_PROJECTFILES');
+
+// Actions for Faculty
 export const getFacultyAction = getDataAction('GET_FACULTY');
+
+// Actions for Administrator
+export const getAdminAction = getDataAction('GET_ADMIN');
 
 const addDataAction = (action, key) => {
   return (reducerFactory) => {
@@ -74,6 +82,18 @@ const initialState = {
     error: null,
     data: null
   },
+  eReporting: {
+    initialized: false,
+    loading: false,
+    error: null,
+    data: null
+  },
+  projectFiles: {
+    initialized: false,
+    loading: false,
+    error: null,
+    data: null
+  },
   student: {
     initialized: false,
     loading: false,
@@ -85,13 +105,22 @@ const initialState = {
     loading: false,
     error: null,
     data: null
+  },
+  admin: {
+    initialized: false,
+    loading: false,
+    error: null,
+    data: null
   }
 };
 
 const reducer = new ReducerFactory(initialState)
   .addCustom(addDataAction(eNoticeListingAction, 'eNotices'))
+  .addCustom(addDataAction(eReportingListingAction, 'eReporting'))
+  .addCustom(addDataAction(fetchOurProjectFiles, 'projectFiles'))
   .addCustom(addDataAction(getStudentAction, 'student'))
   .addCustom(addDataAction(getFacultyAction, 'faculty'))
+  .addCustom(addDataAction(getAdminAction, 'admin'))
   .toReducer();
 
 export default reducer;

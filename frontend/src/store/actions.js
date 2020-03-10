@@ -4,7 +4,9 @@ import { NetworkServices } from '../Services';
 import {
   eNoticeListingAction,
   getStudentAction,
-  getFacultyAction
+  getFacultyAction,
+  eReportingListingAction,
+  fetchOurProjectFiles
 } from './reducers';
 import Config from '../Config';
 
@@ -14,7 +16,6 @@ export const fetchENoticeListing = async () => {
     const response = await NetworkServices.get(
       `${Config.SERVER_URL}/students/enotice`
     );
-    // console.log('FETCH E NOTICE', response.eNotice);
     // Save Data To Redux
     store.dispatch(eNoticeListingAction.success(response.eNotice || {}));
   } catch (err) {
@@ -59,6 +60,60 @@ export const getIndividualFaculty = async () => {
       getFacultyAction.failed({
         internalMessage: err.message,
         displayMessage: 'Error in GetIndividualFaculty'
+      })
+    );
+  }
+};
+
+export const fetchEReportListing = async (groupId) => {
+  try {
+    store.dispatch(eReportingListingAction.init());
+    const response = await NetworkServices.get(
+      `${Config.SERVER_URL}/students/ereports/${groupId}`
+    );
+    if (response.error) {
+      store.dispatch(
+        eReportingListingAction.failed({
+          internalMessage: response.error,
+          displayMessage: 'Error in fetchEReportListing'
+        })
+      );
+    } else {
+      store.dispatch(eReportingListingAction.success(response.data || {}));
+    }
+  } catch (err) {
+    handleError(err);
+    store.dispatch(
+      eReportingListingAction.failed({
+        internalMessage: err.message,
+        displayMessage: 'Error in fetchEReportListing'
+      })
+    );
+  }
+};
+
+export const fetchProjectFiles = async (groupId) => {
+  try {
+    store.dispatch(fetchOurProjectFiles.init());
+    const response = await NetworkServices.get(
+      `${Config.SERVER_URL}/students/projectfiles/${groupId}`
+    );
+    if (response.error) {
+      store.dispatch(
+        fetchOurProjectFiles.failed({
+          internalMessage: response.error,
+          displayMessage: 'Error in FetchOurProjectFiles'
+        })
+      );
+    } else {
+      store.dispatch(fetchOurProjectFiles.success(response.data || {}));
+    }
+  } catch (err) {
+    handleError(err);
+    store.dispatch(
+      fetchOurProjectFiles.failed({
+        internalMessage: err.message,
+        displayMessage: 'Error in FetchOurProjectFiles'
       })
     );
   }

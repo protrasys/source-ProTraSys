@@ -366,12 +366,23 @@ module.exports.PostGenerateEReport = async (req, res) => {
     // Check if Faculty is Authorized or not
     if (projectGroup.faculty.toString() !== req.faculty.id) {
       return res.status(401).json({
-        msg: 'Faculty Unauthorized'
+        error: 'Faculty Unauthorized'
       });
     }
 
+    await ProjectFiles.findOneAndUpdate(
+      { _id: filesId },
+      {
+        $set: {
+          status
+        }
+      },
+      { new: true }
+    );
+
     const newReport = await new eReport({
       discussion: projectFIle.Description,
+      file: projectFIle.UploadedFile,
       feedback,
       faculty: req.faculty.id,
       projectGroup: projectFIle.projectGroup,
@@ -380,7 +391,7 @@ module.exports.PostGenerateEReport = async (req, res) => {
 
     if (!newReport) {
       return res.status(401).json({
-        message: 'Something went wrong, Please try again later',
+        error: 'Something went wrong, Please try again later',
         desc: err
       });
     }

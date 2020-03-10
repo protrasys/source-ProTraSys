@@ -27,7 +27,9 @@ import {
   ExitToApp,
   Menu,
   ChevronLeft,
-  ChevronRight
+  ChevronRight,
+  Receipt,
+  ViewCarousel
 } from '@material-ui/icons';
 import useStyles from './Style';
 
@@ -35,6 +37,8 @@ import useStyles from './Style';
 import ProfileComponent from '../Pages/Profile';
 import FileUploadComponent from '../Pages/FileUpload';
 import ViewENoticeComponent from '../Pages/ViewENotice';
+import MyReportings from '../Pages/MyReportings';
+import ViewFiles from '../Pages/ViewFiles';
 
 const SideDrawer = () => {
   const classes = useStyles();
@@ -159,6 +163,22 @@ const SideDrawer = () => {
               <ListItemText>View E Notice</ListItemText>
             </ListItem>
           </div>
+          <div onClick={() => setStep(4)}>
+            <ListItem button key={4}>
+              <ListItemIcon>
+                <Receipt />
+              </ListItemIcon>
+              <ListItemText>My Reportings</ListItemText>
+            </ListItem>
+          </div>
+          <div onClick={() => setStep(5)}>
+            <ListItem button key={5}>
+              <ListItemIcon>
+                <ViewCarousel />
+              </ListItemIcon>
+              <ListItemText>View Files</ListItemText>
+            </ListItem>
+          </div>
         </List>
         <Divider />
       </Drawer>
@@ -167,6 +187,8 @@ const SideDrawer = () => {
         {step == 1 && <ProfileComponent />}
         {step == 2 && <FileUploadComponent />}
         {step == 3 && <ViewENoticeComponent />}
+        {step == 4 && <MyReportings />}
+        {step == 5 && <ViewFiles />}
       </main>
     </div>
   );

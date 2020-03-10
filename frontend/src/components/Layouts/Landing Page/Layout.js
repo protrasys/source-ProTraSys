@@ -14,7 +14,6 @@ import {
 // import ReactCarousel from './Carousel';
 import Cards from './Cards';
 import About from './About';
-import Lists from './Lists';
 import Responsiveness from '../../.././assets/hold-idea@2x.png';
 import { Link } from 'react-router-dom';
 
@@ -109,8 +108,6 @@ const LandingPage = () => {
         </Grid>
 
         <About />
-
-        <Lists />
 
         <Box component='div' className={classes.center}>
           <Typography variant='h3' style={{ marginBottom: '1rem' }}>

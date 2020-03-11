@@ -148,6 +148,9 @@ class NetworkService {
     }
 
     const token = AuthServices.getFacultyToken();
+
+    console.log('NETWORK SERVICW INSIDE GET FACULTY HEADER LOG', token);
+
     if (token) {
       header.authorization = `Bearer ${token}`;
     }
@@ -166,10 +169,15 @@ class NetworkService {
       const response = await axios.get(url, {
         headers: this.getFacultyHeader(options)
       });
+
       logger.debug('get response', response);
 
       return this.handleResponse(response);
     } catch (err) {
+      console.log(
+        'NETWORK SERVICE GET FACULTY HEADER LOG',
+        this.getFacultyHeader(options)
+      );
       this.handleError(err);
     }
   }

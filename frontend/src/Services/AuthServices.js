@@ -21,6 +21,8 @@ class AuthService {
     );
     if (authString) {
       this._auth = JSON.parse(authString);
+    }
+    if (FacultyAuthString) {
       this._facultyAuth = JSON.parse(FacultyAuthString);
     }
   }
@@ -83,7 +85,7 @@ class AuthService {
     if (response) {
       localStorage.setItem(
         FACULTY_AUTH_LOCALSTORAGEKEY,
-        JSON.stringify(response.token)
+        JSON.stringify(response)
       );
       this._facultyAuth = response;
     } else {
@@ -104,7 +106,8 @@ class AuthService {
     if (!this._facultyAuth) {
       return null;
     }
-    return this._facultyAuth.token;
+
+    return this._facultyAuth;
   }
 
   async facultyLogout() {

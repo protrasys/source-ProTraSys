@@ -22,6 +22,7 @@ export const fetchOurProjectFiles = getDataAction('GET_PROJECTFILES');
 
 // Actions for Faculty
 export const getFacultyAction = getDataAction('GET_FACULTY');
+export const getAllFacultiesAction = getDataAction('GET_ALL_FACULTIES');
 
 // Actions for Administrator
 export const getAdminAction = getDataAction('GET_ADMIN');
@@ -106,6 +107,12 @@ const initialState = {
     error: null,
     data: null
   },
+  allFaculties: {
+    initialized: false,
+    loading: false,
+    error: null,
+    data: null
+  },
   admin: {
     initialized: false,
     loading: false,
@@ -121,6 +128,7 @@ const reducer = new ReducerFactory(initialState)
   .addCustom(addDataAction(getStudentAction, 'student'))
   .addCustom(addDataAction(getFacultyAction, 'faculty'))
   .addCustom(addDataAction(getAdminAction, 'admin'))
+  .addCustom(addDataAction(getAllFacultiesAction, 'allFaculties'))
   .toReducer();
 
 export default reducer;

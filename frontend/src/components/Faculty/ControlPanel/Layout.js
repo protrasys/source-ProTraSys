@@ -18,8 +18,6 @@ import {
 
 import { AuthServices } from '../../../Services';
 import { useHistory } from 'react-router-dom';
-import { selectFaculty } from '../../../store/selectors';
-import { useSelector } from 'react-redux';
 import { getIndividualFaculty } from '../../../store/actions';
 
 import {
@@ -38,7 +36,8 @@ import {
 } from '@material-ui/icons';
 import useStyles from './Style';
 
-// import StudentProfile from "./Profile";
+import FacultyProfile from './Pages/Profile';
+import AllFaculty from './Pages/AllFaculty';
 
 const FacultyControlPanel = () => {
   const classes = useStyles();
@@ -46,6 +45,7 @@ const FacultyControlPanel = () => {
   const theme = useTheme();
   const [open, setOpen] = useState(false);
   const [isLogout, setLogout] = useState(false);
+  const [step, setStep] = useState(1);
 
   useEffect(() => {
     getIndividualFaculty();
@@ -127,24 +127,30 @@ const FacultyControlPanel = () => {
         </div>
         <Divider />
         <List>
-          <ListItem button key={1}>
-            <ListItemIcon>
-              <PeopleAlt />
-            </ListItemIcon>
-            <ListItemText>All Faculty</ListItemText>
-          </ListItem>
-          <ListItem button key={2}>
-            <ListItemIcon>
-              <AccountCircle />
-            </ListItemIcon>
-            <ListItemText>Faculty Login</ListItemText>
-          </ListItem>
-          <ListItem button key={3}>
-            <ListItemIcon>
-              <Person />
-            </ListItemIcon>
-            <ListItemText>Individual Faculty</ListItemText>
-          </ListItem>
+          <div onClick={() => setStep(1)}>
+            <ListItem button key={1}>
+              <ListItemIcon>
+                <PeopleAlt />
+              </ListItemIcon>
+              <ListItemText>Faculty Profile</ListItemText>
+            </ListItem>
+          </div>
+          <div onClick={() => setStep(2)}>
+            <ListItem button key={2}>
+              <ListItemIcon>
+                <AccountCircle />
+              </ListItemIcon>
+              <ListItemText>All Faculty</ListItemText>
+            </ListItem>
+          </div>
+          <div>
+            <ListItem button key={3}>
+              <ListItemIcon>
+                <Person />
+              </ListItemIcon>
+              <ListItemText>Individual Faculty</ListItemText>
+            </ListItem>
+          </div>
           <ListItem button key={4}>
             <ListItemIcon>
               <GroupAdd />
@@ -222,6 +228,8 @@ const FacultyControlPanel = () => {
       </Drawer>
       <main className={classes.content}>
         <div className={classes.toolbar} />
+        {step === 1 && <FacultyProfile />}
+        {step === 2 && <AllFaculty />}
       </main>
     </div>
   );

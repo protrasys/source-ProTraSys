@@ -19,7 +19,7 @@ module.exports.GetAllFaculty = async (req, res) => {
 
     if (faculties.length === 0) {
       return res.status(404).json({
-        msg: 'No Faculties were found in our record !'
+        error: 'No Faculties were found in our record !'
       });
     }
     res.status(200).json(faculties);
@@ -67,10 +67,7 @@ module.exports.PostFacultyLogin = async (req, res) => {
     // return json web token to frontend
     jwt.sign(payload, jwtSecret, { expiresIn: '24h' }, (err, token) => {
       if (!err) {
-        return res.json({
-          msg: `${faculty.name}, Welcome Back 😉`,
-          token
-        });
+        return res.json(token);
       }
       throw err;
     });

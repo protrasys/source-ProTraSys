@@ -6,7 +6,8 @@ import {
   getStudentAction,
   getFacultyAction,
   eReportingListingAction,
-  fetchOurProjectFiles
+  fetchOurProjectFiles,
+  getAllFacultiesAction
 } from './reducers';
 import Config from '../Config';
 
@@ -114,6 +115,33 @@ export const fetchProjectFiles = async (groupId) => {
       fetchOurProjectFiles.failed({
         internalMessage: err.message,
         displayMessage: 'Error in FetchOurProjectFiles'
+      })
+    );
+  }
+};
+
+export const GetAllFaculties = async () => {
+  try {
+    store.dispatch(getAllFacultiesAction.init());
+    const response = await NetworkServices.facultyGet(
+      `${Config.SERVER_URL}/faculty`
+    );
+    if (response.error) {
+      store.dispatch(
+        getAllFacultiesAction.failed({
+          internalMessage: response.error,
+          displayMessage: 'Error to GetAllFaculties'
+        })
+      );
+    } else {
+      store.dispatch(getAllFacultiesAction.success(response || {}));
+    }
+  } catch (err) {
+    handleError(err);
+    store.dispatch(
+      getAllFacultiesAction.failed({
+        internalMessage: err.message,
+        displayMessage: 'Error in Get All Faculties'
       })
     );
   }

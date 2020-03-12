@@ -39,6 +39,9 @@ import useStyles from './Style';
 import FacultyProfile from './Pages/Profile';
 import AllFaculty from './Pages/AllFaculty';
 
+import { selectFaculty } from '../../../store/selectors';
+import { useSelector } from 'react-redux';
+
 const FacultyControlPanel = () => {
   const classes = useStyles();
   const history = useHistory();
@@ -46,6 +49,13 @@ const FacultyControlPanel = () => {
   const [open, setOpen] = useState(false);
   const [isLogout, setLogout] = useState(false);
   const [step, setStep] = useState(1);
+
+  const FacultyDetails = useSelector(selectFaculty);
+  const Faculty = { ...FacultyDetails.data };
+
+  useEffect(() => {
+    document.title = `Welcome ${!FacultyDetails.loading ? Faculty.name : ''}`;
+  });
 
   useEffect(() => {
     getIndividualFaculty();

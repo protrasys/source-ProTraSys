@@ -149,8 +149,6 @@ class NetworkService {
 
     const token = AuthServices.getFacultyToken();
 
-    console.log('NETWORK SERVICW INSIDE GET FACULTY HEADER LOG', token);
-
     if (token) {
       header.authorization = `Bearer ${token}`;
     }

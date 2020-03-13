@@ -130,7 +130,7 @@ module.exports.PostAddNewProjectGroup = async (req, res) => {
   } catch (err) {
     console.log(err);
     res.status(500).json({
-      err: err
+      error: err
     });
   }
 };
@@ -650,11 +650,13 @@ module.exports.PatchStudentDetails = async (req, res) => {
 // @access    Private
 module.exports.GetAllStudents = async (req, res) => {
   try {
-    const students = await Student.find().select('-password');
+    const students = await Student.find()
+      .populate('projectGroupId')
+      .select('-password');
 
     if (students.length === 0) {
       return res.status(404).json({
-        msg: 'No Students were found in our record !'
+        error: 'No Students were found in our record !'
       });
     }
     res.status(200).json(students);

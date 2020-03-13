@@ -184,11 +184,11 @@ const SideDrawer = () => {
       </Drawer>
       <main className={classes.content}>
         <div className={classes.toolbar} />
-        {step == 1 && <ProfileComponent />}
-        {step == 2 && <FileUploadComponent />}
-        {step == 3 && <ViewENoticeComponent />}
-        {step == 4 && <MyReportings />}
-        {step == 5 && <ViewFiles />}
+        {step === 1 && <ProfileComponent />}
+        {step === 2 && <FileUploadComponent />}
+        {step === 3 && <ViewENoticeComponent />}
+        {step === 4 && <MyReportings />}
+        {step === 5 && <ViewFiles />}
       </main>
     </div>
   );

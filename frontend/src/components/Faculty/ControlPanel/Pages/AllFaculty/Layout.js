@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react';
 import useStyles from './Style';
-
+import Moment from 'react-moment';
 import {
   Table,
   TableBody,
@@ -44,14 +44,13 @@ function AllFaculty() {
                 <TableCell>Phone </TableCell>
                 <TableCell>Designation </TableCell>
                 <TableCell>Joining Date </TableCell>
-                <TableCell>Registered At </TableCell>
                 <TableCell>Last Updated At </TableCell>
               </TableRow>
             </TableHead>
             <TableBody>
               {AllFaculty &&
                 AllFaculty.map((data, index) => (
-                  <TableRow>
+                  <TableRow key={index}>
                     <TableCell> {getFormattedString(index + 1)} </TableCell>
                     <TableCell> {getFormattedString(data.name)} </TableCell>
                     <TableCell>
@@ -66,9 +65,16 @@ function AllFaculty() {
                     <TableCell>
                       {getFormattedString(data.designation)}
                     </TableCell>
-                    <TableCell>{getFormattedString(data.date.from)}</TableCell>
-                    <TableCell>{getFormattedString(data.createdAt)}</TableCell>
-                    <TableCell>{getFormattedString(data.updatedAt)}</TableCell>
+                    <TableCell>
+                      <Moment format='DD/MM/YYYY HH:MM:SS'>
+                        {getFormattedString(data.date.from)}
+                      </Moment>
+                    </TableCell>
+                    <TableCell>
+                      <Moment format='DD/MM/YYYY HH:MM:SS'>
+                        {getFormattedString(data.updatedAt)}
+                      </Moment>
+                    </TableCell>
                   </TableRow>
                 ))}
             </TableBody>

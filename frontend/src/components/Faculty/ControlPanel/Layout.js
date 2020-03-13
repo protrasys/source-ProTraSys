@@ -15,32 +15,36 @@ import {
   ListItemText,
   Button
 } from '@material-ui/core';
-
 import { AuthServices } from '../../../Services';
 import { useHistory } from 'react-router-dom';
 import { getIndividualFaculty } from '../../../store/actions';
-
 import {
   PeopleAlt,
   AccountCircle,
-  Person,
   GroupAdd,
-  Group,
-  SupervisedUserCircle,
-  CloudUpload,
-  EventNote,
   ExitToApp,
   Menu,
+  Pageview,
   ChevronLeft,
-  ChevronRight
+  ChevronRight,
+  GroupWork,
+  PostAdd,
+  PersonAdd,
+  LocalLibrary
 } from '@material-ui/icons';
 import useStyles from './Style';
-
-import FacultyProfile from './Pages/Profile';
-import AllFaculty from './Pages/AllFaculty';
-
 import { selectFaculty } from '../../../store/selectors';
 import { useSelector } from 'react-redux';
+
+// Importing Custom Pages here
+import FacultyProfile from './Pages/Profile';
+import AllFaculty from './Pages/AllFaculty';
+import AddProjectGroup from './Pages/AddProjectGroup';
+import ViewAllGroups from './Pages/ViewAllGroups';
+import MineProjectGroups from './Pages/My Project Groups';
+import AddENotice from './Pages/Add E Notice';
+import AddNewStudent from './Pages/AddStudent';
+import GetAllStudents from './Pages/All Students';
 
 const FacultyControlPanel = () => {
   const classes = useStyles();
@@ -140,99 +144,67 @@ const FacultyControlPanel = () => {
           <div onClick={() => setStep(1)}>
             <ListItem button key={1}>
               <ListItemIcon>
-                <PeopleAlt />
+                <AccountCircle />
               </ListItemIcon>
-              <ListItemText>Faculty Profile</ListItemText>
+              <ListItemText>My Profile</ListItemText>
             </ListItem>
           </div>
           <div onClick={() => setStep(2)}>
             <ListItem button key={2}>
               <ListItemIcon>
-                <AccountCircle />
+                <PeopleAlt />
               </ListItemIcon>
-              <ListItemText>All Faculty</ListItemText>
+              <ListItemText>All Faculties</ListItemText>
             </ListItem>
           </div>
-          <div>
+          <div onClick={() => setStep(3)}>
             <ListItem button key={3}>
               <ListItemIcon>
-                <Person />
+                <GroupAdd />
               </ListItemIcon>
-              <ListItemText>Individual Faculty</ListItemText>
+              <ListItemText>Add Project Group</ListItemText>
             </ListItem>
           </div>
-          <ListItem button key={4}>
-            <ListItemIcon>
-              <GroupAdd />
-            </ListItemIcon>
-            <ListItemText>Add New Project Group</ListItemText>
-          </ListItem>
-          <ListItem button key={5}>
-            <ListItemIcon>
-              <Group />
-            </ListItemIcon>
-            <ListItemText>All Project Group</ListItemText>
-          </ListItem>
-          <ListItem button key={6}>
-            <ListItemIcon>
-              <SupervisedUserCircle />
-            </ListItemIcon>
-            <ListItemText>Indiividual Faculty All Project Groups</ListItemText>
-          </ListItem>
-          <ListItem button key={7}>
-            <ListItemIcon>
-              <EventNote />
-            </ListItemIcon>
-            <ListItemText>Individual Project Group</ListItemText>
-          </ListItem>
-          <ListItem button key={8}>
-            <ListItemIcon>
-              <EventNote />
-            </ListItemIcon>
-            <ListItemText>Delete Project Group</ListItemText>
-          </ListItem>
-          <ListItem button key={9}>
-            <ListItemIcon>
-              <EventNote />
-            </ListItemIcon>
-            <ListItemText>Delete Project File</ListItemText>
-          </ListItem>
-          <ListItem button key={10}>
-            <ListItemIcon>
-              <EventNote />
-            </ListItemIcon>
-            <ListItemText>Students Uploaded File</ListItemText>
-          </ListItem>
-          <ListItem button key={11}>
-            <ListItemIcon>
-              <EventNote />
-            </ListItemIcon>
-            <ListItemText>Upload E-Notice</ListItemText>
-          </ListItem>
-          <ListItem button key={12}>
-            <ListItemIcon>
-              <EventNote />
-            </ListItemIcon>
-            <ListItemText>Generate E-Report</ListItemText>
-          </ListItem>
-          <ListItem button key={13}>
-            <ListItemIcon>
-              <EventNote />
-            </ListItemIcon>
-            <ListItemText>Add New Student</ListItemText>
-          </ListItem>
-          <ListItem button key={14}>
-            <ListItemIcon>
-              <EventNote />
-            </ListItemIcon>
-            <ListItemText>Student Details</ListItemText>
-          </ListItem>
-          <ListItem button key={15}>
-            <ListItemIcon>
-              <EventNote />
-            </ListItemIcon>
-            <ListItemText>All Students</ListItemText>
-          </ListItem>
+          <div onClick={() => setStep(4)}>
+            <ListItem button key={4}>
+              <ListItemIcon>
+                <Pageview />
+              </ListItemIcon>
+              <ListItemText>View All Group</ListItemText>
+            </ListItem>
+          </div>
+          <div onClick={() => setStep(5)}>
+            <ListItem button key={5}>
+              <ListItemIcon>
+                <GroupWork />
+              </ListItemIcon>
+              <ListItemText>Mine Groups</ListItemText>
+            </ListItem>
+          </div>
+          <div onClick={() => setStep(6)}>
+            <ListItem button key={6}>
+              <ListItemIcon>
+                <PostAdd />
+              </ListItemIcon>
+              <ListItemText>Add New Notice</ListItemText>
+            </ListItem>
+          </div>
+          <div onClick={() => setStep(7)}>
+            <ListItem button key={7}>
+              <ListItemIcon>
+                <PersonAdd />
+              </ListItemIcon>
+              <ListItemText>Add New Student</ListItemText>
+            </ListItem>
+          </div>
+          <div onClick={() => setStep(8)}>
+            <ListItem button key={8}>
+              <ListItemIcon>
+                <LocalLibrary />
+              </ListItemIcon>
+              <ListItemText>All Students</ListItemText>
+            </ListItem>
+          </div>
         </List>
         <Divider />
       </Drawer>
@@ -240,6 +212,12 @@ const FacultyControlPanel = () => {
         <div className={classes.toolbar} />
         {step === 1 && <FacultyProfile />}
         {step === 2 && <AllFaculty />}
+        {step === 3 && <AddProjectGroup />}
+        {step === 4 && <ViewAllGroups />}
+        {step === 5 && <MineProjectGroups />}
+        {step === 6 && <AddENotice />}
+        {step === 7 && <AddNewStudent />}
+        {step === 8 && <GetAllStudents />}
       </main>
     </div>
   );

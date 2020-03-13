@@ -7,7 +7,9 @@ import {
   getFacultyAction,
   eReportingListingAction,
   fetchOurProjectFiles,
-  getAllFacultiesAction
+  getAllFacultiesAction,
+  getAllStudentsAction,
+  setAlert
 } from './reducers';
 import Config from '../Config';
 
@@ -142,6 +144,63 @@ export const GetAllFaculties = async () => {
       getAllFacultiesAction.failed({
         internalMessage: err.message,
         displayMessage: 'Error in Get All Faculties'
+      })
+    );
+  }
+};
+
+export const GetAllStudents = async () => {
+  try {
+    store.dispatch(getAllStudentsAction.init());
+    const response = await NetworkServices.facultyGet(
+      `${Config.SERVER_URL}/faculty/getAllStudents`
+    );
+    if (response.error) {
+      store.dispatch(
+        getAllStudentsAction.failed({
+          internalMessage: response.error,
+          displayMessage: 'Error in getting All Students Action'
+        })
+      );
+    } else {
+      store.dispatch(getAllStudentsAction.success(response || {}));
+    }
+  } catch (err) {
+    handleError(err);
+    store.dispatch(
+      getAllStudentsAction.failed({
+        internalMessage: err.message,
+        displayMessage: 'Error in Get All Students'
+      })
+    );
+  }
+};
+
+export const AddNewProjectGroup = async (data) => {
+  try {
+    store.dispatch(setAlert.init());
+    const response = await NetworkServices.facultyPost(
+      `${Config.SERVER_URL}/faculty/addNewProjectGroup`,
+      data
+    );
+    if (response.error) {
+      store.dispatch(
+        setAlert.failed({
+          internalMessage: response.error,
+          displayMessage:
+            'Error in Adding New Project Group from Faculty Control Panel'
+        })
+      );
+    } else {
+      store.dispatch(setAlert.success(response.msg || {}));
+    }
+  } catch (err) {
+    handleError(err);
+    store.dispatch(
+      setAlert.failed({
+        internalMessage: err.message,
+        displayMessage:
+          'Error in Adding New Project Group from Faculty Control Panel'
       })
     );
   }

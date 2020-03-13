@@ -25,3 +25,11 @@ export const selectFaculty = (state) => {
 export const selectAllFaculties = (state) => {
   return selectState(state).allFaculties;
 };
+
+export const selectAllStudents = (state) => {
+  return selectState(state).allStudents;
+};
+
+export const selectAlerts = (state) => {
+  return selectState(state).alerts;
+};

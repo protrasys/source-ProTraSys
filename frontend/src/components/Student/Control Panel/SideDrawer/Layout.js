@@ -15,18 +15,11 @@ import {
   ListItemText,
   Button
 } from '@material-ui/core';
-
-import { getFormattedString } from '../../../../Helper';
 import { AuthServices } from '../../../../Services';
 import { useHistory } from 'react-router-dom';
 import { selectStudent } from '../../../../store/selectors';
 import { useSelector } from 'react-redux';
 import { getIndividualStudent } from '../../../../store/actions';
-
-import { Switch, Route as InnerRoutes } from 'react-router-dom';
-
-import Routes from '../routes';
-
 import {
   Face,
   CloudUpload,
@@ -34,9 +27,18 @@ import {
   ExitToApp,
   Menu,
   ChevronLeft,
-  ChevronRight
+  ChevronRight,
+  Receipt,
+  ViewCarousel
 } from '@material-ui/icons';
 import useStyles from './Style';
+
+// Importing Components
+import ProfileComponent from '../Pages/Profile';
+import FileUploadComponent from '../Pages/FileUpload';
+import ViewENoticeComponent from '../Pages/ViewENotice';
+import MyReportings from '../Pages/MyReportings';
+import ViewFiles from '../Pages/ViewFiles';
 
 const SideDrawer = () => {
   const classes = useStyles();
@@ -44,11 +46,12 @@ const SideDrawer = () => {
   const theme = useTheme();
   const [open, setOpen] = useState(false);
   const [isLogout, setLogout] = useState(false);
+  const [step, setStep] = useState(1);
 
   const StudentDetails = useSelector(selectStudent);
+  const isStudentLoaded = StudentDetails.loading;
   const StudentData = { ...StudentDetails.data };
   const Student = { ...StudentData.student };
-  // console.log('CONTROL PANEL PAGE', Student);
 
   // Getting Student Details from Database (Redux)
   useEffect(() => {
@@ -57,7 +60,7 @@ const SideDrawer = () => {
 
   // Title of the Page
   useEffect(() => {
-    document.title = `Welcome, ${getFormattedString(Student.name)} `;
+    document.title = `Welcome ${isStudentLoaded ? '' : Student.name} `;
   });
 
   const handleDrawerOpen = () => {
@@ -136,7 +139,7 @@ const SideDrawer = () => {
         </div>
         <Divider />
         <List>
-          <div onClick={() => history.push('/studentcontrolpanel')}>
+          <div onClick={() => setStep(1)}>
             <ListItem button key={1}>
               <ListItemIcon>
                 <Face />
@@ -144,7 +147,7 @@ const SideDrawer = () => {
               <ListItemText>My Profile</ListItemText>
             </ListItem>
           </div>
-          <div onClick={() => history.push('/fileupload')}>
+          <div onClick={() => setStep(2)}>
             <ListItem button key={2}>
               <ListItemIcon>
                 <CloudUpload />
@@ -152,7 +155,7 @@ const SideDrawer = () => {
               <ListItemText>Upload File</ListItemText>
             </ListItem>
           </div>
-          <div onClick={() => history.push('/viewenotice')}>
+          <div onClick={() => setStep(3)}>
             <ListItem button key={3}>
               <ListItemIcon>
                 <EventNote />
@@ -160,14 +163,32 @@ const SideDrawer = () => {
               <ListItemText>View E Notice</ListItemText>
             </ListItem>
           </div>
+          <div onClick={() => setStep(4)}>
+            <ListItem button key={4}>
+              <ListItemIcon>
+                <Receipt />
+              </ListItemIcon>
+              <ListItemText>My Reportings</ListItemText>
+            </ListItem>
+          </div>
+          <div onClick={() => setStep(5)}>
+            <ListItem button key={5}>
+              <ListItemIcon>
+                <ViewCarousel />
+              </ListItemIcon>
+              <ListItemText>View Files</ListItemText>
+            </ListItem>
+          </div>
         </List>
         <Divider />
       </Drawer>
       <main className={classes.content}>
         <div className={classes.toolbar} />
-        <Switch>
-          <InnerRoutes component={Routes} />
-        </Switch>
+        {step === 1 && <ProfileComponent />}
+        {step === 2 && <FileUploadComponent />}
+        {step === 3 && <ViewENoticeComponent />}
+        {step === 4 && <MyReportings />}
+        {step === 5 && <ViewFiles />}
       </main>
     </div>
   );

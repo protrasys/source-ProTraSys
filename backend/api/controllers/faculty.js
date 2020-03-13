@@ -19,7 +19,7 @@ module.exports.GetAllFaculty = async (req, res) => {
 
     if (faculties.length === 0) {
       return res.status(404).json({
-        msg: 'No Faculties were found in our record !'
+        error: 'No Faculties were found in our record !'
       });
     }
     res.status(200).json(faculties);
@@ -67,10 +67,7 @@ module.exports.PostFacultyLogin = async (req, res) => {
     // return json web token to frontend
     jwt.sign(payload, jwtSecret, { expiresIn: '24h' }, (err, token) => {
       if (!err) {
-        return res.json({
-          msg: `${faculty.name}, Welcome Back 😉`,
-          token
-        });
+        return res.json(token);
       }
       throw err;
     });
@@ -97,6 +94,7 @@ module.exports.GetIndividualFaculty = async (req, res) => {
     });
   }
 };
+
 // @route     Post   /faculty/addNewProjectGroup
 // @desc      Add New Project Group
 // @access    Private
@@ -132,7 +130,7 @@ module.exports.PostAddNewProjectGroup = async (req, res) => {
   } catch (err) {
     console.log(err);
     res.status(500).json({
-      err: err
+      error: err
     });
   }
 };
@@ -365,12 +363,23 @@ module.exports.PostGenerateEReport = async (req, res) => {
     // Check if Faculty is Authorized or not
     if (projectGroup.faculty.toString() !== req.faculty.id) {
       return res.status(401).json({
-        msg: 'Faculty Unauthorized'
+        error: 'Faculty Unauthorized'
       });
     }
 
+    await ProjectFiles.findOneAndUpdate(
+      { _id: filesId },
+      {
+        $set: {
+          status
+        }
+      },
+      { new: true }
+    );
+
     const newReport = await new eReport({
       discussion: projectFIle.Description,
+      file: projectFIle.UploadedFile,
       feedback,
       faculty: req.faculty.id,
       projectGroup: projectFIle.projectGroup,
@@ -379,7 +388,7 @@ module.exports.PostGenerateEReport = async (req, res) => {
 
     if (!newReport) {
       return res.status(401).json({
-        message: 'Something went wrong, Please try again later',
+        error: 'Something went wrong, Please try again later',
         desc: err
       });
     }
@@ -641,17 +650,88 @@ module.exports.PatchStudentDetails = async (req, res) => {
 // @access    Private
 module.exports.GetAllStudents = async (req, res) => {
   try {
-    const students = await Student.find().select('-password');
+    const students = await Student.find()
+      .populate('projectGroupId')
+      .select('-password');
 
     if (students.length === 0) {
       return res.status(404).json({
-        msg: 'No Students were found in our record !'
+        error: 'No Students were found in our record !'
       });
     }
     res.status(200).json(students);
   } catch (err) {
     res.status(500).json({
       error: err
+    });
+  }
+};
+
+// @route     GET /faculty/ereports
+// @desc      View All Reportings from your ProjectGroups
+// @access    Private
+module.exports.GetIndividualFacultyReportings = async (req, res) => {
+  try {
+    let response = await eReport.find({ faculty: req.faculty.id });
+
+    if (response.length <= 0) {
+      return res.status(404).json({
+        error: 'You have not done any reporting yet...'
+      });
+    }
+
+    res.status(200).json({
+      data: response
+    });
+  } catch (err) {
+    console.log(err);
+    res.status(500).json({
+      error: 'Internal Server Error'
+    });
+  }
+};
+
+// @route     PATCH /faculty/ereports/:groupId
+// @desc      Update Reporting Status
+// @access    Private
+module.exports.PatchEReportings = async (req, res) => {
+  const { groupId } = req.params;
+  const { status, feedback } = req.body;
+  const updatedReport = {};
+  if (status) updatedReport.status = status;
+  if (feedback) updatedReport.feedback = feedback;
+
+  try {
+    const response = await eReport.find({ projectGroup: groupId });
+
+    if (response.length <= 0) {
+      return res.status(404).json({
+        error: 'There is no group with this Group Id'
+      });
+    }
+
+    await eReport
+      .findOneAndUpdate(
+        { projectGroup: groupId },
+        { $set: updatedReport },
+        { new: true }
+      )
+      .exec()
+      .then((result) => {
+        res.status(200).json({
+          data: 'Data is Updated',
+          result: result
+        });
+      })
+      .catch((err) => {
+        res.status(401).json({
+          error: `Opps! Something went Wrong.. Please Try again after few moments`
+        });
+      });
+  } catch (err) {
+    console.log(err);
+    res.status(500).json({
+      error: 'Internal Server Error'
     });
   }
 };

@@ -1,7 +1,16 @@
 import { store } from './index';
 import { handleError } from './helper';
-import { NetworkServices, AuthServices } from '../Services';
-import { eNoticeListingAction, getStudentAction } from './reducers';
+import { NetworkServices } from '../Services';
+import {
+  eNoticeListingAction,
+  getStudentAction,
+  getFacultyAction,
+  eReportingListingAction,
+  fetchOurProjectFiles,
+  getAllFacultiesAction,
+  getAllStudentsAction,
+  setAlert
+} from './reducers';
 import Config from '../Config';
 
 export const fetchENoticeListing = async () => {
@@ -10,7 +19,6 @@ export const fetchENoticeListing = async () => {
     const response = await NetworkServices.get(
       `${Config.SERVER_URL}/students/enotice`
     );
-    // console.log('FETCH E NOTICE', response.eNotice);
     // Save Data To Redux
     store.dispatch(eNoticeListingAction.success(response.eNotice || {}));
   } catch (err) {
@@ -37,6 +45,162 @@ export const getIndividualStudent = async () => {
       getStudentAction.failed({
         internalMessage: err.message,
         displayMessage: 'Error in GetIndividualStudent'
+      })
+    );
+  }
+};
+
+export const getIndividualFaculty = async () => {
+  try {
+    store.dispatch(getFacultyAction.init());
+    const response = await NetworkServices.facultyGet(
+      `${Config.SERVER_URL}/faculty/me`
+    );
+    store.dispatch(getFacultyAction.success(response || {}));
+  } catch (err) {
+    handleError(err);
+    store.dispatch(
+      getFacultyAction.failed({
+        internalMessage: err.message,
+        displayMessage: 'Error in GetIndividualFaculty'
+      })
+    );
+  }
+};
+
+export const fetchEReportListing = async (groupId) => {
+  try {
+    store.dispatch(eReportingListingAction.init());
+    const response = await NetworkServices.get(
+      `${Config.SERVER_URL}/students/ereports/${groupId}`
+    );
+    if (response.error) {
+      store.dispatch(
+        eReportingListingAction.failed({
+          internalMessage: response.error,
+          displayMessage: 'Error in fetchEReportListing'
+        })
+      );
+    } else {
+      store.dispatch(eReportingListingAction.success(response.data || {}));
+    }
+  } catch (err) {
+    handleError(err);
+    store.dispatch(
+      eReportingListingAction.failed({
+        internalMessage: err.message,
+        displayMessage: 'Error in fetchEReportListing'
+      })
+    );
+  }
+};
+
+export const fetchProjectFiles = async (groupId) => {
+  try {
+    store.dispatch(fetchOurProjectFiles.init());
+    const response = await NetworkServices.get(
+      `${Config.SERVER_URL}/students/projectfiles/${groupId}`
+    );
+    if (response.error) {
+      store.dispatch(
+        fetchOurProjectFiles.failed({
+          internalMessage: response.error,
+          displayMessage: 'Error in FetchOurProjectFiles'
+        })
+      );
+    } else {
+      store.dispatch(fetchOurProjectFiles.success(response.data || {}));
+    }
+  } catch (err) {
+    handleError(err);
+    store.dispatch(
+      fetchOurProjectFiles.failed({
+        internalMessage: err.message,
+        displayMessage: 'Error in FetchOurProjectFiles'
+      })
+    );
+  }
+};
+
+export const GetAllFaculties = async () => {
+  try {
+    store.dispatch(getAllFacultiesAction.init());
+    const response = await NetworkServices.facultyGet(
+      `${Config.SERVER_URL}/faculty`
+    );
+    if (response.error) {
+      store.dispatch(
+        getAllFacultiesAction.failed({
+          internalMessage: response.error,
+          displayMessage: 'Error to GetAllFaculties'
+        })
+      );
+    } else {
+      store.dispatch(getAllFacultiesAction.success(response || {}));
+    }
+  } catch (err) {
+    handleError(err);
+    store.dispatch(
+      getAllFacultiesAction.failed({
+        internalMessage: err.message,
+        displayMessage: 'Error in Get All Faculties'
+      })
+    );
+  }
+};
+
+export const GetAllStudents = async () => {
+  try {
+    store.dispatch(getAllStudentsAction.init());
+    const response = await NetworkServices.facultyGet(
+      `${Config.SERVER_URL}/faculty/getAllStudents`
+    );
+    if (response.error) {
+      store.dispatch(
+        getAllStudentsAction.failed({
+          internalMessage: response.error,
+          displayMessage: 'Error in getting All Students Action'
+        })
+      );
+    } else {
+      store.dispatch(getAllStudentsAction.success(response || {}));
+    }
+  } catch (err) {
+    handleError(err);
+    store.dispatch(
+      getAllStudentsAction.failed({
+        internalMessage: err.message,
+        displayMessage: 'Error in Get All Students'
+      })
+    );
+  }
+};
+
+export const AddNewProjectGroup = async (data) => {
+  try {
+    store.dispatch(setAlert.init());
+    const response = await NetworkServices.facultyPost(
+      `${Config.SERVER_URL}/faculty/addNewProjectGroup`,
+      data
+    );
+    if (response.error) {
+      store.dispatch(
+        setAlert.failed({
+          internalMessage: response.error,
+          displayMessage:
+            'Error in Adding New Project Group from Faculty Control Panel'
+        })
+      );
+    } else {
+      store.dispatch(setAlert.success(response.msg || {}));
+    }
+  } catch (err) {
+    handleError(err);
+    store.dispatch(
+      setAlert.failed({
+        internalMessage: err.message,
+        displayMessage:
+          'Error in Adding New Project Group from Faculty Control Panel'
       })
     );
   }

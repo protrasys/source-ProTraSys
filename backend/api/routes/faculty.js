@@ -16,7 +16,9 @@ const {
   PostAddNewStudent,
   PostFacultyLogin,
   PostGenerateEReport,
-  PostUploadENotice
+  PostUploadENotice,
+  GetIndividualFacultyReportings,
+  PatchEReportings
 } = require('../controllers/faculty');
 
 // @route     GET   /faculty/
@@ -97,5 +99,15 @@ router.patch('/updateStudent/:stuId', facultyAuth, PatchStudentDetails);
 // @desc      Get All Students
 // @access    Private
 router.get('/getAllStudents', facultyAuth, GetAllStudents);
+
+// @route     GET /faculty/ereports
+// @desc      View All Reportings from your ProjectGroups
+// @access    Private
+router.get('/ereports', facultyAuth, GetIndividualFacultyReportings);
+
+// @route     PATCH /faculty/ereports/:groupId
+// @desc      Update Reporting Status
+// @access    Private
+router.patch('/ereports/:groupId', facultyAuth, PatchEReportings);
 
 module.exports = router;

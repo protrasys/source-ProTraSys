@@ -79,13 +79,8 @@ function ButtonAppBar(props) {
               <ListItem key={1} button>
                 <img src={ProTraSysLogo} height={80} alt='ProTraSys' />
               </ListItem>
-              <ListItem key={2} button divider>
-                <Button disableElevation color='primary' variant='contained'>
-                  Notice Board
-                </Button>
-              </ListItem>
               <ListItem key={3} button divider>
-                <Link to='/facultylogin'>
+                <Link to='/facultylogin' className={classes.Link}>
                   <Button disableElevation color='primary' variant='contained'>
                     Faculty Corner
                   </Button>
@@ -118,20 +113,6 @@ function ButtonAppBar(props) {
           <Toolbar>
             <Typography variant='h4' style={{ flexGrow: 1 }} color='primary'>
               {title}
-            </Typography>
-            <Typography
-              variant='subtitle2'
-              className={classes.padding}
-              color='inherit'
-            >
-              <Button
-                disableElevation
-                color='primary'
-                variant='text'
-                size='large'
-              >
-                Notice Board
-              </Button>
             </Typography>
             <Typography
               variant='subtitle2'

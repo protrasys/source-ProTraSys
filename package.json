@@ -8,7 +8,8 @@
     "dev": "npm run dev --prefix backend",
     "start": "npm start --prefix backend",
     "build": "npm run build --prefix frontend",
-    "heroku-postbuild": "NPM_CONFIG_PRODUCTION=false npm install --prefix frontend && npm run build --prefix frontend"
+    "heroku-postbuild": "NPM_CONFIG_PRODUCTION=false npm install --prefix frontend && npm run build --prefix frontend",
+    "mobile": "cd mobile && npx react-native run-android"
   },
   "keywords": [
     "MERN",

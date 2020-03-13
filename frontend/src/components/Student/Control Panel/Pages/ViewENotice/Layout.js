@@ -62,7 +62,11 @@ const ViewENotice = () => {
   return (
     <div>
       <h1>View E Notice</h1>
-      {!ENotices ? <Skeleton variant='rect' height={400} /> : RenderENotices()}
+      {!ENotices ? (
+        <Skeleton variant='rect' height={400} animation='wave' />
+      ) : (
+        RenderENotices()
+      )}
     </div>
   );
 };

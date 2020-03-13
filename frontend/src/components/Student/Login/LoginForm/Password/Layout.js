@@ -40,6 +40,7 @@ const Password = (props) => {
       history.push('/studentcontrolpanel');
     } catch (err) {
       console.log('err', err);
+      setLogin(false);
     } finally {
       values.enrollmentId = '';
       values.password = '';

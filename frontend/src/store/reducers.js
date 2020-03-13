@@ -14,8 +14,21 @@ const getDataAction = (name) => {
   };
 };
 
+// Actions for Student
 export const eNoticeListingAction = getDataAction('GET_ENOTICE');
 export const getStudentAction = getDataAction('GET_STUDENT');
+export const eReportingListingAction = getDataAction('GET_E-REPORTING');
+export const fetchOurProjectFiles = getDataAction('GET_PROJECTFILES');
+export const getAllStudentsAction = getDataAction('GET_ALL_STUDENTS');
+
+// Actions for Faculty
+export const getFacultyAction = getDataAction('GET_FACULTY');
+export const getAllFacultiesAction = getDataAction('GET_ALL_FACULTIES');
+export const getAllProjectGroupsAction = getDataAction('GET_ALL_PROJECTGROUPS');
+
+// Actions for Administrator
+export const setAlert = getDataAction('SET_ALERT');
+export const getAdminAction = getDataAction('GET_ADMIN');
 
 const addDataAction = (action, key) => {
   return (reducerFactory) => {
@@ -73,7 +86,55 @@ const initialState = {
     error: null,
     data: null
   },
+  eReporting: {
+    initialized: false,
+    loading: false,
+    error: null,
+    data: null
+  },
+  projectFiles: {
+    initialized: false,
+    loading: false,
+    error: null,
+    data: null
+  },
   student: {
+    initialized: false,
+    loading: false,
+    error: null,
+    data: null
+  },
+  faculty: {
+    initialized: false,
+    loading: false,
+    error: null,
+    data: null
+  },
+  allFaculties: {
+    initialized: false,
+    loading: false,
+    error: null,
+    data: null
+  },
+  allStudents: {
+    initialized: false,
+    loading: false,
+    error: null,
+    data: null
+  },
+  allProjectGroups: {
+    initialized: false,
+    loading: false,
+    error: null,
+    data: null
+  },
+  admin: {
+    initialized: false,
+    loading: false,
+    error: null,
+    data: null
+  },
+  alerts: {
     initialized: false,
     loading: false,
     error: null,
@@ -83,7 +144,15 @@ const initialState = {
 
 const reducer = new ReducerFactory(initialState)
   .addCustom(addDataAction(eNoticeListingAction, 'eNotices'))
+  .addCustom(addDataAction(eReportingListingAction, 'eReporting'))
+  .addCustom(addDataAction(fetchOurProjectFiles, 'projectFiles'))
   .addCustom(addDataAction(getStudentAction, 'student'))
+  .addCustom(addDataAction(getFacultyAction, 'faculty'))
+  .addCustom(addDataAction(getAdminAction, 'admin'))
+  .addCustom(addDataAction(getAllFacultiesAction, 'allFaculties'))
+  .addCustom(addDataAction(getAllStudentsAction, 'allStudents'))
+  .addCustom(addDataAction(getAllProjectGroupsAction, 'allProjectGroups'))
+  .addCustom(addDataAction(setAlert, 'alerts'))
   .toReducer();
 
 export default reducer;

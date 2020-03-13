@@ -12,6 +12,7 @@ import {
   PollOutlined
 } from '@material-ui/icons';
 // import ReactCarousel from './Carousel';
+
 import Cards from './Cards';
 import About from './About';
 import Responsiveness from '../../.././assets/hold-idea@2x.png';
@@ -128,6 +129,8 @@ const LandingPage = () => {
           />
         </Box>
       </Container>
+
+      <ENotice />
 
       <Footer />
     </Box>

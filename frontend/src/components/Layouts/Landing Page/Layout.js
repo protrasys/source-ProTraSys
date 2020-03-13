@@ -129,9 +129,6 @@ const LandingPage = () => {
           />
         </Box>
       </Container>
-
-      <ENotice />
-
       <Footer />
     </Box>
   );

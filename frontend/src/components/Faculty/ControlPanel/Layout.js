@@ -13,7 +13,8 @@ import {
   ListItemIcon,
   ListItem,
   ListItemText,
-  Button
+  Button,
+  Box
 } from "@material-ui/core";
 
 import { AuthServices } from "../../../Services";

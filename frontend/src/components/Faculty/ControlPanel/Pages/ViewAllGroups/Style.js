@@ -1,12 +1,10 @@
 import { makeStyles } from '@material-ui/core/styles';
 
 const useStyles = makeStyles((theme) => ({
-  head: {
+  root: {
     backgroundColor: '#d3d3d3',
-    color: theme.palette.common.white
-  },
-  table: {
-    minWidth: 700
+    color: theme.palette.common.black,
+    padding: theme.spacing(3)
   }
 }));
 

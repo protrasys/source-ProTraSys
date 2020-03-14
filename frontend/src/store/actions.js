@@ -9,7 +9,9 @@ import {
   fetchOurProjectFiles,
   getAllFacultiesAction,
   getAllStudentsAction,
-  setAlert
+  setAlert,
+  getAllProjectGroupsAction,
+  getMineProjectGroups
 } from './reducers';
 import Config from '../Config';
 
@@ -201,6 +203,122 @@ export const AddNewProjectGroup = async (data) => {
         internalMessage: err.message,
         displayMessage:
           'Error in Adding New Project Group from Faculty Control Panel'
+      })
+    );
+  }
+};
+
+export const fetchAllProjectGroups = async () => {
+  try {
+    store.dispatch(getAllProjectGroupsAction.init());
+    const response = await NetworkServices.facultyGet(
+      `${Config.SERVER_URL}/faculty/getAllProjectGroups`
+    );
+    if (response.error) {
+      store.dispatch(
+        getAllProjectGroupsAction.failed({
+          internalMessage: response.error,
+          displayMessage: 'Error in fetch All Project Groups'
+        })
+      );
+    } else if (response.msg) {
+      store.dispatch(setAlert.success(response.msg || {}));
+    } else {
+      store.dispatch(getAllProjectGroupsAction.success(response.data || {}));
+    }
+  } catch (err) {
+    handleError(err);
+    store.dispatch(
+      getAllProjectGroupsAction.failed({
+        internalMessage: err.message,
+        displayMessage: 'Error in fetch All Project Groups'
+      })
+    );
+  }
+};
+
+export const fetchMineProjectGroups = async () => {
+  try {
+    store.dispatch(getMineProjectGroups.init());
+    const response = await NetworkServices.facultyGet(
+      `${Config.SERVER_URL}/faculty/mineProjectGroups`
+    );
+    if (response.error) {
+      store.dispatch(
+        getMineProjectGroups.failed({
+          internalMessage: response.error,
+          displayMessage: 'Error in Fetching Mine Projects'
+        })
+      );
+    } else if (response.msg) {
+      store.dispatch(setAlert.success(response.msg || {}));
+    } else {
+      store.dispatch(getMineProjectGroups.success(response.data || {}));
+    }
+  } catch (err) {
+    handleError(err);
+    store.dispatch(
+      getMineProjectGroups.failed({
+        internalMessage: err.message,
+        displayMessage: 'Error in Fetching Mine Projects'
+      })
+    );
+  }
+};
+
+export const AddNewENotice = async (data) => {
+  try {
+    store.dispatch(setAlert.init());
+    const response = await NetworkServices.facultyPost(
+      `${Config.SERVER_URL}/faculty/enotice`,
+      data
+    );
+    if (response.error) {
+      store.dispatch(
+        setAlert.failed({
+          internalMessage: response.error,
+          displayMessage: 'Error in Adding New E Notice'
+        })
+      );
+    } else {
+      store.dispatch(setAlert.success(response.msg || {}));
+    }
+  } catch (err) {
+    handleError(err);
+    store.dispatch(
+      setAlert.failed({
+        internalMessage: err.message,
+        displayMessage:
+          'Error in Adding new E Notice from Faculty Control Panel'
+      })
+    );
+  }
+};
+
+export const AddNewStudent = async (data) => {
+  try {
+    store.dispatch(setAlert.init());
+    const response = await NetworkServices.facultyPost(
+      `${Config.SERVER_URL}/faculty/addNewStudent`,
+      data
+    );
+    if (response.error) {
+      store.dispatch(
+        setAlert.failed({
+          internalMessage: response.error,
+          displayMessage: 'Error in Adding New Student'
+        })
+      );
+    } else {
+      let msg = `${response.msg}\n Username : ${response.StudentData.username}\n and Passwword : ${response.StudentData.password}`;
+      store.dispatch(setAlert.success(msg || {}));
+    }
+  } catch (err) {
+    handleError(err);
+    store.dispatch(
+      setAlert.failed({
+        internalMessage: err.message,
+        displayMessage: 'Error in Adding New Student from Faculty Control Panel'
       })
     );
   }

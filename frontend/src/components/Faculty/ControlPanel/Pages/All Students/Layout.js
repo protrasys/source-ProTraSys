@@ -86,7 +86,11 @@ const AllStudents = () => {
                       </Grid>
                       <Grid item xs={2}>
                         <TableCell>
-                          {getFormattedString(data.projectGroupId.projectName)}
+                          {data.projectGroupId
+                            ? getFormattedString(
+                                data.projectGroupId.projectName
+                              )
+                            : 'N/A'}
                         </TableCell>
                       </Grid>
                       <Grid item xs={2}>

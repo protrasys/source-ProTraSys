@@ -5,6 +5,8 @@ import { AuthServices } from '../Services';
 // Importing Private Routers
 import IsStudentLoggedIn from './PrivateRouters/Student/isLoggedIn';
 import IsStudentLoggedOut from './PrivateRouters/Student/isLoggedOut';
+import IsFacultyLoggedIn from './PrivateRouters/Faculty/isLoggedin';
+import IsFacultyLoggedOut from './PrivateRouters/Faculty/isLoggedOut';
 
 import { FacultyLogin, FacultyControlPanel } from '../components/Faculty';
 import { StudentLogin, StudentControlPanel } from '../components/Student';
@@ -17,11 +19,17 @@ const Routes = () => {
     <Fragment>
       <Switch>
         <Route exact path='/' component={LandingPage} />
-        <Route exact path='/facultylogin' component={FacultyLogin} />
-        <Route
+        <IsFacultyLoggedOut
+          exact
+          path='/facultylogin'
+          component={FacultyLogin}
+          authorized={AuthServices.isFacultyAuthenticated()}
+        />
+        <IsFacultyLoggedIn
           exact
           path='/facultycontrolpanel'
           component={FacultyControlPanel}
+          authorized={AuthServices.isFacultyAuthenticated()}
         />
         <IsStudentLoggedIn
           exact

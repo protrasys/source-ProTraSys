@@ -323,3 +323,31 @@ export const AddNewStudent = async (data) => {
     );
   }
 };
+
+export const patchStudent = async (data, stuId) => {
+  try {
+    store.dispatch(setAlert.init());
+    const response = await NetworkServices.facultyPatch(
+      `${Config.SERVER_URL}/faculty/updateStudent/${stuId}`,
+      data
+    );
+    if (response.error) {
+      store.dispatch(
+        setAlert.failed({
+          internalMessage: response.error,
+          displayMessage: 'Error in Updating Student'
+        })
+      );
+    } else {
+      store.dispatch(setAlert.success(response.msg || {}));
+    }
+  } catch (err) {
+    handleError(err);
+    store.dispatch(
+      setAlert.failed({
+        internalMessage: err.message,
+        displayMessage: 'Error in Updating Student'
+      })
+    );
+  }
+};

@@ -2,10 +2,10 @@ import React, { useEffect } from 'react';
 import useStyles from './Style';
 import { Skeleton } from '@material-ui/lab';
 import { useSelector } from 'react-redux';
+import { Link } from 'react-router-dom';
 import { GetAllStudents } from '../../../../../store/actions';
 import { selectAllStudents } from '../../../../../store/selectors';
 import { getFormattedString } from '../../../../../Helper';
-import Moment from 'react-moment';
 import {
   Table,
   TableBody,
@@ -96,8 +96,16 @@ const AllStudents = () => {
                       <Grid item xs={2}>
                         <TableCell>
                           <div className={classes.iconSpacing}>
-                            <Edit color='primary' />
-                            <Delete color='error' />
+                            <Link
+                              onClick={() => console.log(`Clicked ${data._id}`)}
+                            >
+                              <Edit color='primary' />
+                            </Link>
+                            <Link
+                              onClick={() => console.log(`Clicked ${data._id}`)}
+                            >
+                              <Delete color='error' />
+                            </Link>
                           </div>
                         </TableCell>
                       </Grid>

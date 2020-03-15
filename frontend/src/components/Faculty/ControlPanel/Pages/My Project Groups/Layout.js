@@ -3,23 +3,26 @@ import useStyles from './Style';
 import { fetchMineProjectGroups } from '../../../../../store/actions';
 import { useSelector } from 'react-redux';
 import { selectMineProjectGroups } from '../../../../../store/selectors';
+import { Skeleton } from '@material-ui/lab';
 import Moment from 'react-moment';
 import { getFormattedString } from '../../../../../Helper';
 const MineProjectGroups = () => {
   const classes = useStyles();
 
+  useEffect(() => {
+    fetchMineProjectGroups();
+  }, []);
+
   // Select state from Redux
   const MineProjectGroupsState = useSelector(selectMineProjectGroups);
-
   const isLoading = MineProjectGroupsState.loading;
-
   const GroupData = MineProjectGroupsState.data;
 
   const RenderMineProjectGroups = () => {
     return (
       GroupData &&
       GroupData.map((data, index) => (
-        <div>
+        <div key={index} className={classes.root}>
           <p> Sr. No {getFormattedString(index + 1)} </p>
           <p> Project Name: {getFormattedString(data.projectName)} </p>
           <p> Defination : {getFormattedString(data.definition)} </p>
@@ -30,10 +33,11 @@ const MineProjectGroups = () => {
           <p> Faculty Name: {getFormattedString(data.faculty.name)} </p>
           <p> Faculty Phone : {getFormattedString(data.faculty.phone)} </p>
           <p>
-            {' '}
-            Faculty Skill :{' '}
+            Faculty Skill :
             {getFormattedString(
-              data.technology.map((value) => <span> {value} </span>)
+              data.technology.map((value, index) => (
+                <span key={index}> {value} </span>
+              ))
             )}{' '}
           </p>
           <p>
@@ -50,13 +54,14 @@ const MineProjectGroups = () => {
     );
   };
 
-  useEffect(() => {
-    fetchMineProjectGroups();
-  }, []);
   return (
     <div>
       <h1>Mine Project Group</h1>
-      {RenderMineProjectGroups()}
+      {isLoading ? (
+        <Skeleton variant='rect' animation='wave' height={500} />
+      ) : (
+        RenderMineProjectGroups()
+      )}
     </div>
   );
 };

@@ -10,6 +10,9 @@ const useStyles = makeStyles((theme) => ({
   },
   iconSpacing: {
     padding: theme.spacing(1)
+  },
+  delete: {
+    marginLeft: theme.spacing(2)
   }
 }));
 

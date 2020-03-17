@@ -4,8 +4,7 @@ const useStyles = makeStyles(theme => ({
   root: {
     display: "flex",
     justifyContent: "center",
-    alignItem: "center",
-    textAlign: "center"
+    alignItem: "center"
   },
   card: {
     width: "36rem",

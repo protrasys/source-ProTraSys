@@ -5,39 +5,72 @@ const useStyles = makeStyles(theme => ({
     flex: "1"
   },
   card: {
-    padding: "1rem"
+    padding: ".8rem 1rem"
   },
   cardContent: {
+    display: "flex"
+  },
+  facultyInfo: {
     display: "flex",
-    flexDirection: "row"
+    flexDirection: "column",
+    justifyContent: "center",
+    alignItem: "center",
+    textAlign: "center",
+    width: "18rem",
+    borderRight: "1px solid #555",
+    paddingRight: "2rem"
   },
-  Img: {
-    width: "15rem",
-    height: "15rem",
-    borderRadius: ".2rem",
-    marginRight: "1.5rem"
+  profileImg: {
+    width: "8rem",
+    height: "8rem",
+    borderRadius: "50%",
+    backgroundColor: "#eee",
+    padding: ".4rem",
+    textAlign: "center",
+    marginBottom: "1rem"
   },
-  Name: {
-    fontSize: "1.7rem",
-    fontWeight: "500",
-    // textTransform: "uppercase",
-    letterSpacing: ".1rem",
-    marginBottom: "0"
-  },
-  designation: {
-    marginBottom: "2rem"
-  },
-  About: {
-    fontSize: "1.2rem",
-    fontWeight: "500",
-    borderBottom: "1px solid #ccc",
+  facultyName: {
+    fontSize: "1.3rem",
+    fontWeight: "400",
     marginBottom: ".5rem"
   },
-  aboutFaculty: {},
-  Dates: {
+  facultyDesignation: {
+    fontSize: ".8rem",
+    fontWeight: "lighter",
+    color: "#999",
+    marginBottom: "2rem"
+  },
+  facultyDates: {
     display: "flex",
     justifyContent: "space-between",
-    paddingTop: "1rem"
+    fontSize: ".8rem",
+    fontWeight: "lighter",
+    marginBottom: ".8rem"
+  },
+  btn: {
+    padding: ".8rem 1.4rem",
+    backgroundColor: theme.palette.primary.main,
+    color: "#fff",
+    marginBottom: "1rem",
+    transition: ".3s",
+    "&:hover": {
+      backgroundColor: theme.palette.primary.dark
+    },
+    heading: {
+      marginBottom: ".5rem",
+      fontSize: ".9rem",
+      fontWeight: "400",
+      textTransform: "uppercase"
+    },
+    FacultySkills: {
+      border: "1px solid #777",
+      padding: ".6rem .8rem",
+      borderRadius: ".15rem",
+      fontWeight: "100",
+      fontSize: ".9rem",
+      marginRight: ".8rem",
+      marginBottom: ".8rem"
+    }
   }
 }));
 

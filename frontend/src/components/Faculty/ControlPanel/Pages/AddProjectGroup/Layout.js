@@ -121,10 +121,12 @@ const AddProjectGroup = () => {
       <Box variant="div" className={classes.root}>
         <Card className={classes.card}>
           <CardContent className={classes.cardContent}>
-            <img src={ProTraSys} alt="Logo" className={classes.img} />
-            <Typography className={classes.text} color="inherit">
-              Add New Project Group
-            </Typography>
+            <Box style={{ textAlign: "center" }}>
+              <img src={ProTraSys} alt="Logo" className={classes.img} />
+              <Typography className={classes.text} color="inherit">
+                Add New Project Group
+              </Typography>
+            </Box>
             <form onSubmit={handleFormSubmit} className={classes.form}>
               <TextField
                 type="text"

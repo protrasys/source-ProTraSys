@@ -1,11 +1,11 @@
-import React, { useEffect } from 'react';
-import useStyles from './Style';
-import { Skeleton } from '@material-ui/lab';
-import { useSelector } from 'react-redux';
-import { GetAllStudents } from '../../../../../store/actions';
-import { selectAllStudents } from '../../../../../store/selectors';
-import { getFormattedString } from '../../../../../Helper';
-import Moment from 'react-moment';
+import React, { useEffect } from "react";
+import useStyles from "./Style";
+import { Skeleton } from "@material-ui/lab";
+import { useSelector } from "react-redux";
+import { GetAllStudents } from "../../../../../store/actions";
+import { selectAllStudents } from "../../../../../store/selectors";
+import { getFormattedString } from "../../../../../Helper";
+import Moment from "react-moment";
 import {
   Table,
   TableBody,
@@ -16,8 +16,8 @@ import {
   Paper,
   Box,
   Grid
-} from '@material-ui/core';
-import { Edit, Delete } from '@material-ui/icons';
+} from "@material-ui/core";
+import { Edit, Delete } from "@material-ui/icons";
 
 const AllStudents = () => {
   const classes = useStyles();
@@ -32,7 +32,7 @@ const AllStudents = () => {
 
   const RenderAllStudents = () => {
     return (
-      <Box component='div'>
+      <Box component="div">
         <TableContainer component={Paper}>
           <Table className={classes.table}>
             <TableHead className={classes.head}>
@@ -85,15 +85,13 @@ const AllStudents = () => {
                         <TableCell>{getFormattedString(data.phone)}</TableCell>
                       </Grid>
                       <Grid item xs={2}>
-                        <TableCell>
-                          {getFormattedString(data.projectGroupId.projectName)}
-                        </TableCell>
+                        <TableCell></TableCell>
                       </Grid>
                       <Grid item xs={2}>
                         <TableCell>
                           <div className={classes.iconSpacing}>
-                            <Edit color='primary' />
-                            <Delete color='error' />
+                            <Edit color="primary" />
+                            <Delete color="error" />
                           </div>
                         </TableCell>
                       </Grid>
@@ -108,7 +106,7 @@ const AllStudents = () => {
   };
 
   return isDataLoading ? (
-    <Skeleton variant='rect' animation='wave' height={500} />
+    <Skeleton variant="rect" animation="wave" height={500} />
   ) : (
     <div>
       <h1>Get All Students</h1>

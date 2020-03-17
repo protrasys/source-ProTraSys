@@ -7,7 +7,8 @@ import {
   CardContent,
   CardActions,
   Typography,
-  Divider
+  Divider,
+  Button
 } from "@material-ui/core";
 import { getFormattedString } from "../../../../../Helper";
 import { selectFaculty } from "../../../../../store/selectors";
@@ -24,56 +25,199 @@ function FacultyProfile() {
     <Box variant="div" component="div" className={classes.root}>
       <Card className={classes.card}>
         <CardContent className={classes.cardContent}>
-          <Box variant="div">
-            <img
-              src={Faculty.profile}
-              alt="Faculty Profile Image"
-              className={classes.Img}
-            />
-          </Box>
-          <Box variant="div">
-            <Typography color="inherit" className={classes.Name}>
+          <Box className={classes.facultyInfo} component="div">
+            <Box className={classes.facultyDates} component="div">
+              <Moment format="DD/MM/YYYY">
+                {getFormattedString(Faculty.createdAt)}
+              </Moment>
+              <Moment format="DD/MM/YYYY">
+                {getFormattedString(Faculty.updatedAt)}
+              </Moment>
+            </Box>
+            <Box component="div">
+              <img
+                src={Faculty.profile}
+                alt="Faculty Profile Image"
+                className={classes.profileImg}
+              />
+            </Box>
+            <Typography className={classes.facultyName}>
               {getFormattedString(Faculty.name)}
             </Typography>
-            <Typography className={classes.designation} color="primary">
+            <Typography className={classes.facultyDesignation}>
               {getFormattedString(Faculty.designation)}
             </Typography>
-            <Box variant="div">
-              <Typography className={classes.About} color="primary">
-                About
+            <Button variant="contained" className={classes.btn}>
+              Send Email
+            </Button>
+          </Box>
+          <Box component="div">
+            <Box component="div" style={{ padding: "2rem" }}>
+              <Typography
+                className={classes.heading}
+                style={{
+                  marginBottom: ".5rem",
+                  fontSize: ".9rem",
+                  fontWeight: "500",
+                  textTransform: "uppercase"
+                }}
+              >
+                Official Information
               </Typography>
-              <Typography className={classes.aboutFaculty}>
-                <p>
-                  Enrollment ID
-                  <span>{getFormattedString(Faculty.enrollmentId)}</span>
-                </p>
+              <Box
+                component="div"
+                style={{
+                  display: "flex"
+                }}
+              >
+                <Box component="div">
+                  <Typography
+                    style={{
+                      fontSize: ".8rem",
+                      fontWeight: "500",
+                      color: "#ccc",
+                      marginRight: "1rem"
+                    }}
+                  >
+                    Email
+                  </Typography>
+                  <Typography
+                    style={{
+                      fontSize: ".8rem",
+                      color: "#ccc",
+                      marginRight: "1rem"
+                    }}
+                  >
+                    {getFormattedString(Faculty.email)}
+                  </Typography>
+                </Box>
+                <Box component="div">
+                  <Typography
+                    style={{
+                      fontSize: ".8rem",
+                      fontWeight: "500",
+                      color: "#ccc",
+                      marginRight: "1rem"
+                    }}
+                  >
+                    Phone
+                  </Typography>
+                  <Typography
+                    style={{
+                      fontSize: ".8rem",
+                      color: "#ccc",
+                      marginRight: "1rem"
+                    }}
+                  >
+                    {getFormattedString(Faculty.phone)}
+                  </Typography>
+                </Box>
+              </Box>
+            </Box>
+            <Divider />
+            <Box component="div" style={{ padding: "2rem" }}>
+              <Typography
+                className={classes.heading}
+                style={{
+                  marginBottom: ".5rem",
+                  fontSize: ".9rem",
+                  fontWeight: "500",
+                  textTransform: "uppercase"
+                }}
+              >
+                Personal Information
               </Typography>
-              <Typography className={classes.aboutFaculty}>
-                <p>
-                  Phone Number <span>{getFormattedString(Faculty.phone)}</span>
-                </p>
+              <Box
+                component="div"
+                style={{
+                  display: "flex"
+                }}
+              >
+                <Box component="div">
+                  <Typography
+                    style={{
+                      fontSize: ".8rem",
+                      fontWeight: "500",
+                      color: "#ccc",
+                      marginRight: "1rem"
+                    }}
+                  >
+                    Enrollment ID
+                  </Typography>
+                  <Typography
+                    style={{
+                      fontSize: ".8rem",
+
+                      color: "#ccc",
+                      marginRight: "1rem"
+                    }}
+                  >
+                    {getFormattedString(Faculty.enrollmentId)}
+                  </Typography>
+                </Box>
+                <Box component="div">
+                  <Typography
+                    style={{
+                      fontSize: ".8rem",
+                      fontWeight: "500",
+                      color: "#ccc",
+                      marginRight: "1rem"
+                    }}
+                  >
+                    Phone
+                  </Typography>
+                  <Typography
+                    style={{
+                      fontSize: ".8rem",
+                      color: "#ccc",
+                      marginRight: "1rem"
+                    }}
+                  >
+                    {getFormattedString(Faculty.phone)}
+                  </Typography>
+                </Box>
+              </Box>
+            </Box>
+            <Divider />
+            <Box component="div" style={{ padding: "2rem" }}>
+              <Typography
+                className={classes.heading}
+                style={{
+                  marginBottom: ".5rem",
+                  fontSize: ".9rem",
+                  fontWeight: "500",
+                  textTransform: "uppercase"
+                }}
+              >
+                Skills
               </Typography>
-              <Typography className={classes.aboutFaculty}>
-                <p>Email Id {getFormattedString(Faculty.email)}</p>
-              </Typography>
+              <Box
+                component="div"
+                style={{ display: "flex", flexWrap: "wrap" }}
+              >
+                {Faculty.skills &&
+                  Faculty.skills.map(value => (
+                    <Box component="div">
+                      <Typography
+                        className={classes.FacultySkills}
+                        style={{
+                          border: "1px solid #777",
+                          padding: ".6rem .8rem",
+                          borderRadius: ".15rem",
+                          fontWeight: "100",
+                          fontSize: ".9rem",
+                          marginRight: ".8rem",
+                          marginBottom: ".8rem"
+                        }}
+                      >
+                        {value}
+                      </Typography>
+                    </Box>
+                  ))}
+              </Box>
             </Box>
           </Box>
         </CardContent>
-        <Divider />
-        <Box variant="div" className={classes.Dates}>
-          <Typography className={classes.JoiningDate}>
-            Joining Date :
-            <Moment format="DD/MM/YYYY HH:MM:SS">
-              {getFormattedString(Faculty.createdAt)}
-            </Moment>
-          </Typography>
-          <Typography className={classes.UpdatedAt}>
-            Updated At :
-            <Moment format="DD/MM/YYYY HH:MM:SS">
-              {getFormattedString(Faculty.updatedAt)}
-            </Moment>
-          </Typography>
-        </Box>
       </Card>
     </Box>
   );

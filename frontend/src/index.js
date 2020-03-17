@@ -1,13 +1,13 @@
-import React from 'react';
-import ReactDOM from 'react-dom';
-import App from './App';
-import { createMuiTheme, ThemeProvider, CssBaseline } from '@material-ui/core';
-import { green, lightGreen } from '@material-ui/core/colors';
-import * as ServiceWorker from './serviceWorker';
+import React from "react";
+import ReactDOM from "react-dom";
+import App from "./App";
+import { createMuiTheme, ThemeProvider, CssBaseline } from "@material-ui/core";
+import { green, lightGreen } from "@material-ui/core/colors";
+import * as ServiceWorker from "./serviceWorker";
 
 // Importing Redux
-import { Provider } from 'react-redux';
-import Store from './store';
+import { Provider } from "react-redux";
+import Store from "./store";
 
 const theme = createMuiTheme({
   palette: {
@@ -19,12 +19,12 @@ const theme = createMuiTheme({
     secondary: {
       main: lightGreen.A400
     },
-    type: 'light'
+    type: "dark"
   },
   overrides: {
     MuiMobileStepper: {
       progress: {
-        width: '100%'
+        width: "100%"
       }
     }
   }
@@ -37,7 +37,7 @@ ReactDOM.render(
       <App />
     </Provider>
   </ThemeProvider>,
-  document.getElementById('root')
+  document.getElementById("root")
 );
 
 ServiceWorker.register();

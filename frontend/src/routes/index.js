@@ -29,7 +29,6 @@ const Routes = () => {
           component={StudentControlPanel}
           authorized={AuthServices.isAuthenticated()}
         />
-
         <IsStudentLoggedOut
           exact
           path="/studentlogin"

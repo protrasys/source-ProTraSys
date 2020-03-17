@@ -1,13 +1,13 @@
-import axios, { AxiosResponse } from 'axios';
-import { ApplicationError, LogServices, AuthServices } from './index';
+import axios, { AxiosResponse } from "axios";
+import { ApplicationError, LogServices, AuthServices } from "./index";
 
-const logger = LogServices.getInstance('Service:Network');
+const logger = LogServices.getInstance("Service:Network");
 
 const MESSAGES = {
-  OFFLINE: 'You are offline, Kindly turn on Internet',
+  OFFLINE: "You are offline, Kindly turn on Internet",
   NOT_REACHABLE:
-    'Sorry, We are not able to connect to the server at the moment',
-  UNKNOWN: 'Something went wrong, please contact to the ProTraSys Administrator'
+    "Sorry, We are not able to connect to the server at the moment",
+  UNKNOWN: "Something went wrong, please contact to the ProTraSys Administrator"
 };
 
 class NetworkService {
@@ -16,7 +16,7 @@ class NetworkService {
       throw error;
     }
 
-    if (error.message === 'Network Error') {
+    if (error.message === "Network Error") {
       throw new ApplicationError(MESSAGES.NOT_REACHABLE);
     }
 
@@ -66,12 +66,12 @@ class NetworkService {
    */
 
   async get(url, options) {
-    logger.debug('get', url);
+    logger.debug("get", url);
     try {
       const response = await axios.get(url, {
         headers: this.getHeader(options)
       });
-      logger.debug('get response', response);
+      logger.debug("get response", response);
 
       return this.handleResponse(response);
     } catch (err) {
@@ -86,12 +86,12 @@ class NetworkService {
    */
 
   async post(url, data, options) {
-    logger.debug('post', url, data);
+    logger.debug("post", url, data);
     try {
       const response = await axios.post(url, data, {
         headers: this.getHeader(options)
       });
-      logger.debug('post response', response);
+      logger.debug("post response", response);
 
       return this.handleResponse(response);
     } catch (err) {
@@ -105,12 +105,12 @@ class NetworkService {
    * @param {any} options
    */
   async patch(url, data, options) {
-    logger.debug('patch', url, data);
+    logger.debug("patch", url, data);
     try {
       const response = await axios.patch(url, data, {
         headers: this.getHeader(options)
       });
-      logger.debug('patch response', response);
+      logger.debug("patch response", response);
       this.handleResponse(response);
     } catch (err) {
       this.handleError(err);
@@ -122,12 +122,12 @@ class NetworkService {
    * @param {any} options
    */
   async delete(url, options) {
-    logger.debug('delete', url);
+    logger.debug("delete", url);
     try {
       const response = await axios.delete(url, {
         headers: this.getHeader(options)
       });
-      logger.debug('delete response', response);
+      logger.debug("delete response", response);
       return this.handleResponse(response);
     } catch (err) {
       this.handleError(err);
@@ -162,18 +162,18 @@ class NetworkService {
    */
 
   async facultyGet(url, options) {
-    logger.debug('get', url);
+    logger.debug("get", url);
     try {
       const response = await axios.get(url, {
         headers: this.getFacultyHeader(options)
       });
 
-      logger.debug('get response', response);
+      logger.debug("get response", response);
 
       return this.handleResponse(response);
     } catch (err) {
       console.log(
-        'NETWORK SERVICE GET FACULTY HEADER LOG',
+        "NETWORK SERVICE GET FACULTY HEADER LOG",
         this.getFacultyHeader(options)
       );
       this.handleError(err);
@@ -187,12 +187,12 @@ class NetworkService {
    */
 
   async facultyPost(url, data, options) {
-    logger.debug('post', url, data);
+    logger.debug("post", url, data);
     try {
       const response = await axios.post(url, data, {
         headers: this.getFacultyHeader(options)
       });
-      logger.debug('post response', response);
+      logger.debug("post response", response);
 
       return this.handleResponse(response);
     } catch (err) {
@@ -206,12 +206,12 @@ class NetworkService {
    * @param {any} options
    */
   async facultyPatch(url, data, options) {
-    logger.debug('patch', url, data);
+    logger.debug("patch", url, data);
     try {
       const response = await axios.patch(url, data, {
         headers: this.getFacultyHeader(options)
       });
-      logger.debug('patch response', response);
+      logger.debug("patch response", response);
       this.handleResponse(response);
     } catch (err) {
       this.handleError(err);
@@ -223,12 +223,12 @@ class NetworkService {
    * @param {any} options
    */
   async facultyDelete(url, options) {
-    logger.debug('delete', url);
+    logger.debug("delete", url);
     try {
       const response = await axios.delete(url, {
         headers: this.getFacultyHeader(options)
       });
-      logger.debug('delete response', response);
+      logger.debug("delete response", response);
       return this.handleResponse(response);
     } catch (err) {
       this.handleError(err);

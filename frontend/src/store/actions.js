@@ -331,6 +331,7 @@ export const patchStudent = async (data, stuId) => {
       `${Config.SERVER_URL}/faculty/updateStudent/${stuId}`,
       data
     );
+
     if (response.error) {
       store.dispatch(
         setAlert.failed({
@@ -339,7 +340,7 @@ export const patchStudent = async (data, stuId) => {
         })
       );
     } else {
-      store.dispatch(setAlert.success(response.msg || {}));
+      store.dispatch(setAlert.success(response.msg || 'Student Updated'));
     }
   } catch (err) {
     handleError(err);

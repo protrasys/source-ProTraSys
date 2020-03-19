@@ -11,8 +11,25 @@ const useStyles = makeStyles((theme) => ({
   iconSpacing: {
     padding: theme.spacing(1)
   },
-  delete: {
-    marginLeft: theme.spacing(2)
+  appBar: {
+    position: 'relative'
+  },
+  title: {
+    marginLeft: theme.spacing(2),
+    flex: 1
+  },
+  Form: {
+    display: 'block',
+    padding: theme.spacing(5)
+  },
+  margin: {
+    margin: '.2rem'
+  },
+  success: {
+    backgroundColor: 'green'
+  },
+  danger: {
+    backgroundColor: 'red'
   }
 }));
 

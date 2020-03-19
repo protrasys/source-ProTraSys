@@ -600,8 +600,7 @@ module.exports.PatchStudentDetails = async (req, res) => {
     email,
     phone,
     password,
-    projectGroupId,
-    teamLeader
+    projectGroupId
   } = req.body;
   const updatedStudent = {};
   if (name) updatedStudent.name = name;
@@ -610,12 +609,9 @@ module.exports.PatchStudentDetails = async (req, res) => {
   if (email) updatedStudent.email = email;
   if (phone) updatedStudent.phone = phone;
   if (password) {
-    const genSalt = bcrypt.genSalt(10);
-    const newPassword = bcrypt.hashSync(password, genSalt);
-    updatedStudent.password = newPassword;
+    updatedStudent.password = password;
   }
   if (projectGroupId) updatedStudent.projectGroupId = projectGroupId;
-  if (teamLeader) updatedStudent.teamLeader = teamLeader;
 
   try {
     let faculty = await Faculty.findById(req.faculty.id).select('-password');

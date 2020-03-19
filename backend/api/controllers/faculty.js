@@ -140,7 +140,10 @@ module.exports.PostAddNewProjectGroup = async (req, res) => {
 // @access    public
 module.exports.GetAllProjectGroups = async (req, res) => {
   try {
-    const projectGroups = await ProjectGroup.find();
+    const projectGroups = await ProjectGroup.find().populate(
+      'stu01 stu02 stu03 stu04 teamLeader faculty',
+      '-password'
+    );
 
     // check if projectGroup available or not
     if (projectGroups.length === 0) {
@@ -150,12 +153,12 @@ module.exports.GetAllProjectGroups = async (req, res) => {
     }
 
     res.status(200).json({
-      projectGroups
+      data: projectGroups
     });
   } catch (err) {
     console.log(err);
     res.status(500).json({
-      err: err
+      error: err
     });
   }
 };
@@ -168,7 +171,7 @@ module.exports.GetIndiividualFacultyAllProjectGroups = async (req, res) => {
     const faculty = await Faculty.findOne({ _id: req.faculty.id });
     const myProjectGroups = await ProjectGroup.find({
       faculty: req.faculty.id
-    });
+    }).populate('stu01 stu02 stu03 stu04 teamLeader faculty', '-password');
 
     if (!myProjectGroups) {
       return res.status(400).json({
@@ -176,11 +179,13 @@ module.exports.GetIndiividualFacultyAllProjectGroups = async (req, res) => {
       });
     }
 
-    res.status(200).json(myProjectGroups);
+    res.status(200).json({
+      data: myProjectGroups
+    });
   } catch (err) {
     console.log(err);
     res.status(500).json({
-      err: err
+      error: err
     });
   }
 };
@@ -329,21 +334,18 @@ module.exports.PostUploadENotice = async (req, res) => {
       .save()
       .then((result) => {
         res.status(200).json({
-          message: 'Notice is added !',
-          notice: result
+          msg: 'Notice is added !'
         });
       })
       .catch((err) => {
         res.status(401).json({
-          message: 'Something went wrong, Please try again later',
-          desc: err
+          msg: err
         });
       });
   } catch (err) {
     console.log('POST FACULTY E-NOTICE ROUTE ERROR', err);
     res.status(500).json({
-      error: 'Internal Server Error',
-      desc: err
+      error: err
     });
   }
 };
@@ -581,7 +583,7 @@ module.exports.PostAddNewStudent = async (req, res) => {
   } catch (err) {
     console.log(err);
     return res.status(500).json({
-      Error: err.errmsg || err.message
+      error: err.errmsg || err.message
     });
   }
 };
@@ -598,8 +600,7 @@ module.exports.PatchStudentDetails = async (req, res) => {
     email,
     phone,
     password,
-    projectGroupId,
-    teamLeader
+    projectGroupId
   } = req.body;
   const updatedStudent = {};
   if (name) updatedStudent.name = name;
@@ -608,12 +609,9 @@ module.exports.PatchStudentDetails = async (req, res) => {
   if (email) updatedStudent.email = email;
   if (phone) updatedStudent.phone = phone;
   if (password) {
-    const genSalt = bcrypt.genSalt(10);
-    const newPassword = bcrypt.hashSync(password, genSalt);
-    updatedStudent.password = newPassword;
+    updatedStudent.password = password;
   }
   if (projectGroupId) updatedStudent.projectGroupId = projectGroupId;
-  if (teamLeader) updatedStudent.teamLeader = teamLeader;
 
   try {
     let faculty = await Faculty.findById(req.faculty.id).select('-password');
@@ -630,7 +628,10 @@ module.exports.PatchStudentDetails = async (req, res) => {
     )
       .exec()
       .then((result) => {
-        res.status(200).json(result);
+        res.status(200).json({
+          msg: 'Student Updated',
+          result
+        });
       })
       .catch((err) => {
         res.status(401).json({
@@ -640,7 +641,7 @@ module.exports.PatchStudentDetails = async (req, res) => {
   } catch (err) {
     console.log(err);
     return res.status(500).json({
-      Error: err.errmsg || err.message
+      error: err.errmsg || err.message
     });
   }
 };

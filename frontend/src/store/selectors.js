@@ -33,3 +33,11 @@ export const selectAllStudents = (state) => {
 export const selectAlerts = (state) => {
   return selectState(state).alerts;
 };
+
+export const selectAllProjectGroups = (state) => {
+  return selectState(state).allProjectGroups;
+};
+
+export const selectMineProjectGroups = (state) => {
+  return selectState(state).mineGroups;
+};

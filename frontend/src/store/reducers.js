@@ -25,6 +25,7 @@ export const getAllStudentsAction = getDataAction('GET_ALL_STUDENTS');
 export const getFacultyAction = getDataAction('GET_FACULTY');
 export const getAllFacultiesAction = getDataAction('GET_ALL_FACULTIES');
 export const getAllProjectGroupsAction = getDataAction('GET_ALL_PROJECTGROUPS');
+export const getMineProjectGroups = getDataAction('GET_MINE_PROJECTGROUPS');
 
 // Actions for Administrator
 export const setAlert = getDataAction('SET_ALERT');
@@ -139,6 +140,12 @@ const initialState = {
     loading: false,
     error: null,
     data: null
+  },
+  mineGroups: {
+    initialized: false,
+    loading: false,
+    error: null,
+    data: null
   }
 };
 
@@ -153,6 +160,7 @@ const reducer = new ReducerFactory(initialState)
   .addCustom(addDataAction(getAllStudentsAction, 'allStudents'))
   .addCustom(addDataAction(getAllProjectGroupsAction, 'allProjectGroups'))
   .addCustom(addDataAction(setAlert, 'alerts'))
+  .addCustom(addDataAction(getMineProjectGroups, 'mineGroups'))
   .toReducer();
 
 export default reducer;

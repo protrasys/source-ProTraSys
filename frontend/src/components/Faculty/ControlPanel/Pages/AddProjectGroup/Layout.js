@@ -66,7 +66,6 @@ const AddProjectGroup = () => {
 
   const handleFormSubmit = async e => {
     e.preventDefault();
-    console.log(state);
     await AddNewProjectGroup(state);
     setOpen(true);
     setState({

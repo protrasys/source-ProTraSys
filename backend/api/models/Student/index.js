@@ -28,8 +28,7 @@ const StudentSchema = new mongoose.Schema(
     projectGroupId: {
       type: mongoose.Schema.Types.ObjectId,
       ref: 'ProjectGroup'
-    },
-    teamLeader: { type: mongoose.Schema.Types.Boolean }
+    }
   },
   schmeaOptions
 );

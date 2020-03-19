@@ -8,8 +8,9 @@ import IsStudentLoggedOut from './PrivateRouters/Student/isLoggedOut';
 import IsFacultyLoggedIn from './PrivateRouters/Faculty/isLoggedin';
 import IsFacultyLoggedOut from './PrivateRouters/Faculty/isLoggedOut';
 
-import { FacultyLogin, FacultyControlPanel } from '../components/Faculty';
-import { StudentLogin, StudentControlPanel } from '../components/Student';
+import { FacultyLogin, FacultyControlPanel } from "../components/Faculty";
+import { StudentLogin, StudentControlPanel } from "../components/Student";
+
 
 import LandingPage from '../components/Layouts/Landing Page';
 import ForOForPage from '../components/Layouts/Landing Page/PageNotFound';
@@ -39,7 +40,7 @@ const Routes = () => {
         />
         <IsStudentLoggedOut
           exact
-          path='/studentlogin'
+          path="/studentlogin"
           component={StudentLogin}
           authorized={AuthServices.isAuthenticated()}
         />

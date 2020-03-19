@@ -1,5 +1,4 @@
 import { makeStyles } from '@material-ui/core/styles';
-
 const useStyles = makeStyles((theme) => ({
   logo: {
     height: 50

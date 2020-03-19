@@ -10,11 +10,12 @@ import {
 } from '../../../../../store/selectors';
 import { getFormattedString } from '../../../../../Helper';
 import {
-  Table,
-  TableBody,
-  TableCell,
+  Typography,
+  Box,
   TableContainer,
+  Table,
   TableHead,
+  TableBody,
   TableRow,
   Paper,
   Box,
@@ -106,70 +107,55 @@ const AllStudents = () => {
 
   const RenderAllStudents = () => {
     return (
-      <Box component='div'>
-        <TableContainer component={Paper}>
-          <Table className={classes.table}>
+      <Box component="div">
+        <TableContainer container>
+          <Table
+            stickyHeader="true"
+            aria-label="sticky table"
+            style={{ textAlign: "center" }}
+          >
             <TableHead className={classes.head}>
               <TableRow>
-                <Grid container>
-                  <Grid item xs={1}>
-                    <TableCell>Sr. No. </TableCell>
-                  </Grid>
-                  <Grid item xs={2}>
-                    <TableCell>Name </TableCell>
-                  </Grid>
-                  <Grid item xs={1}>
-                    <TableCell>Sem </TableCell>
-                  </Grid>
-                  <Grid item xs={2}>
-                    <TableCell>Enrollment ID </TableCell>
-                  </Grid>
-                  <Grid item xs={2}>
-                    <TableCell>Phone </TableCell>
-                  </Grid>
-                  <Grid item xs={2}>
-                    <TableCell>Project Name </TableCell>
-                  </Grid>
-                  <Grid item xs={2}>
-                    <TableCell> Update & Delete </TableCell>
-                  </Grid>
-                </Grid>
+                <TableCell className={classes.heading}>Sr. No.</TableCell>
+                <TableCell className={classes.heading}>Name</TableCell>
+                <TableCell className={classes.heading}>Sem</TableCell>
+                <TableCell className={classes.heading}>Enrollment ID</TableCell>
+                <TableCell className={classes.heading}>Email</TableCell>
+                <TableCell className={classes.heading}>Phone</TableCell>
+                <TableCell className={classes.heading}>Project Name</TableCell>
+                <TableCell className={classes.heading}>Update</TableCell>
+                <TableCell className={classes.heading}>Delete</TableCell>
               </TableRow>
             </TableHead>
             <TableBody>
               {StudentsData &&
                 StudentsData.map((data, index) => (
                   <TableRow key={index}>
-                    <Grid container spacing={2}>
-                      <Grid item xs={1}>
-                        <TableCell> {getFormattedString(index + 1)} </TableCell>
-                      </Grid>
-                      <Grid item xs={2}>
-                        <TableCell> {getFormattedString(data.name)} </TableCell>
-                      </Grid>
-                      <Grid item xs={1}>
-                        <TableCell>{getFormattedString(data.sem)}</TableCell>
-                      </Grid>
-                      <Grid item xs={2}>
-                        <TableCell>
-                          {getFormattedString(data.enrollmentId)}
-                        </TableCell>
-                      </Grid>
-                      <Grid item xs={2}>
-                        <TableCell>{getFormattedString(data.phone)}</TableCell>
-                      </Grid>
-                      <Grid item xs={2}>
-                        <TableCell>
-                          {data.projectGroupId
-                            ? getFormattedString(
-                                data.projectGroupId.projectName
-                              )
-                            : 'N/A'}
-                        </TableCell>
-                      </Grid>
-                      <Grid item xs={2}>
-                        <TableCell>
-                          <div className={classes.iconSpacing}>
+                    <TableCell className={classes.studentData}>
+                      {getFormattedString(index + 1)}
+                    </TableCell>
+                    <TableCell className={classes.studentData}>
+                      {getFormattedString(data.name)}
+                    </TableCell>
+                    <TableCell className={classes.studentData}>
+                      {getFormattedString(data.sem)}
+                    </TableCell>
+                    <TableCell className={classes.studentData}>
+                      {getFormattedString(data.enrollmentId)}
+                    </TableCell>
+                    <TableCell className={classes.studentData}>
+                      {getFormattedString(data.email)}
+                    </TableCell>
+                    <TableCell className={classes.studentData}>
+                      {getFormattedString(data.phone)}
+                    </TableCell>
+                    <TableCell className={classes.studentData}>
+                      {data.projectGroupId
+                        ? getFormattedString(data.projectGroupId.projectName)
+                        : "N/A"}
+                    </TableCell>
+                    <TableCell className={classes.studentData}>
+                      <div className={classes.iconSpacing}>
                             <Link
                               onClick={() =>
                                 handleClickOpen(data, index, data._id)
@@ -183,9 +169,7 @@ const AllStudents = () => {
                               <Delete color='error' />
                             </Link>
                           </div>
-                        </TableCell>
-                      </Grid>
-                    </Grid>
+                    </TableCell>
                   </TableRow>
                 ))}
             </TableBody>
@@ -290,7 +274,7 @@ const AllStudents = () => {
   // console.log(data);
 
   return isDataLoading ? (
-    <Skeleton variant='rect' animation='wave' height={500} />
+    <Skeleton variant="rect" animation="wave" height={500} />
   ) : (
     <div>
       <h1>Get All Students</h1>

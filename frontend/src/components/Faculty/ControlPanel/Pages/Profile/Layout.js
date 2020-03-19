@@ -75,18 +75,20 @@ function FacultyProfile() {
                     style={{
                       fontSize: ".8rem",
                       fontWeight: "500",
-                      color: "#ccc",
+
                       marginRight: "1rem"
                     }}
+                    color="inherit"
                   >
                     Email
                   </Typography>
                   <Typography
                     style={{
                       fontSize: ".8rem",
-                      color: "#ccc",
+
                       marginRight: "1rem"
                     }}
+                    color="inherit"
                   >
                     {getFormattedString(Faculty.email)}
                   </Typography>
@@ -96,25 +98,27 @@ function FacultyProfile() {
                     style={{
                       fontSize: ".8rem",
                       fontWeight: "500",
-                      color: "#ccc",
+
                       marginRight: "1rem"
                     }}
+                    color="inherit"
                   >
                     Phone
                   </Typography>
                   <Typography
                     style={{
                       fontSize: ".8rem",
-                      color: "#ccc",
+
                       marginRight: "1rem"
                     }}
+                    color="inherit"
                   >
                     {getFormattedString(Faculty.phone)}
                   </Typography>
                 </Box>
               </Box>
             </Box>
-            <Divider />
+            <Divider style={{ backgroundColor: "#333" }} />
             <Box component="div" style={{ padding: "2rem" }}>
               <Typography
                 className={classes.heading}
@@ -138,9 +142,10 @@ function FacultyProfile() {
                     style={{
                       fontSize: ".8rem",
                       fontWeight: "500",
-                      color: "#ccc",
+
                       marginRight: "1rem"
                     }}
+                    color="inherit"
                   >
                     Enrollment ID
                   </Typography>
@@ -148,9 +153,9 @@ function FacultyProfile() {
                     style={{
                       fontSize: ".8rem",
 
-                      color: "#ccc",
                       marginRight: "1rem"
                     }}
+                    color="inherit"
                   >
                     {getFormattedString(Faculty.enrollmentId)}
                   </Typography>
@@ -160,25 +165,26 @@ function FacultyProfile() {
                     style={{
                       fontSize: ".8rem",
                       fontWeight: "500",
-                      color: "#ccc",
                       marginRight: "1rem"
                     }}
+                    color="inherit"
                   >
                     Phone
                   </Typography>
                   <Typography
                     style={{
                       fontSize: ".8rem",
-                      color: "#ccc",
+
                       marginRight: "1rem"
                     }}
+                    color="inherit"
                   >
                     {getFormattedString(Faculty.phone)}
                   </Typography>
                 </Box>
               </Box>
             </Box>
-            <Divider />
+            <Divider style={{ backgroundColor: "#333" }} />
             <Box component="div" style={{ padding: "2rem" }}>
               <Typography
                 className={classes.heading}

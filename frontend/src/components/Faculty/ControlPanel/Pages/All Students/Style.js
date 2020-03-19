@@ -1,15 +1,13 @@
-import { makeStyles } from '@material-ui/core/styles';
+import { makeStyles } from "@material-ui/core/styles";
 
-const useStyles = makeStyles((theme) => ({
-  head: {
-    backgroundColor: '#d3d3d3',
-    color: theme.palette.common.black
+const useStyles = makeStyles(theme => ({
+  heading: {
+    textAlign: "center",
+    color: "#333",
+    backgroundColor: "#eee"
   },
-  table: {
-    minWidth: 700
-  },
-  iconSpacing: {
-    padding: theme.spacing(1)
+  studentData: {
+    textAlign: "center"
   }
 }));
 

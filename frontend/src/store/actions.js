@@ -1,6 +1,6 @@
-import { store } from './index';
-import { handleError } from './helper';
-import { NetworkServices } from '../Services';
+import { store } from "./index";
+import { handleError } from "./helper";
+import { NetworkServices } from "../Services";
 import {
   eNoticeListingAction,
   getStudentAction,
@@ -12,8 +12,8 @@ import {
   setAlert,
   getAllProjectGroupsAction,
   getMineProjectGroups
-} from './reducers';
-import Config from '../Config';
+} from "./reducers";
+import Config from "../Config";
 
 export const fetchENoticeListing = async () => {
   try {
@@ -28,7 +28,7 @@ export const fetchENoticeListing = async () => {
     store.dispatch(
       eNoticeListingAction.failed({
         internalMessage: err.message,
-        displayMessage: 'Error in fetchENoticeListing'
+        displayMessage: "Error in fetchENoticeListing"
       })
     );
   }
@@ -46,7 +46,7 @@ export const getIndividualStudent = async () => {
     store.dispatch(
       getStudentAction.failed({
         internalMessage: err.message,
-        displayMessage: 'Error in GetIndividualStudent'
+        displayMessage: "Error in GetIndividualStudent"
       })
     );
   }
@@ -64,13 +64,13 @@ export const getIndividualFaculty = async () => {
     store.dispatch(
       getFacultyAction.failed({
         internalMessage: err.message,
-        displayMessage: 'Error in GetIndividualFaculty'
+        displayMessage: "Error in GetIndividualFaculty"
       })
     );
   }
 };
 
-export const fetchEReportListing = async (groupId) => {
+export const fetchEReportListing = async groupId => {
   try {
     store.dispatch(eReportingListingAction.init());
     const response = await NetworkServices.get(
@@ -80,7 +80,7 @@ export const fetchEReportListing = async (groupId) => {
       store.dispatch(
         eReportingListingAction.failed({
           internalMessage: response.error,
-          displayMessage: 'Error in fetchEReportListing'
+          displayMessage: "Error in fetchEReportListing"
         })
       );
     } else {
@@ -91,13 +91,13 @@ export const fetchEReportListing = async (groupId) => {
     store.dispatch(
       eReportingListingAction.failed({
         internalMessage: err.message,
-        displayMessage: 'Error in fetchEReportListing'
+        displayMessage: "Error in fetchEReportListing"
       })
     );
   }
 };
 
-export const fetchProjectFiles = async (groupId) => {
+export const fetchProjectFiles = async groupId => {
   try {
     store.dispatch(fetchOurProjectFiles.init());
     const response = await NetworkServices.get(
@@ -107,7 +107,7 @@ export const fetchProjectFiles = async (groupId) => {
       store.dispatch(
         fetchOurProjectFiles.failed({
           internalMessage: response.error,
-          displayMessage: 'Error in FetchOurProjectFiles'
+          displayMessage: "Error in FetchOurProjectFiles"
         })
       );
     } else {
@@ -118,7 +118,7 @@ export const fetchProjectFiles = async (groupId) => {
     store.dispatch(
       fetchOurProjectFiles.failed({
         internalMessage: err.message,
-        displayMessage: 'Error in FetchOurProjectFiles'
+        displayMessage: "Error in FetchOurProjectFiles"
       })
     );
   }
@@ -134,7 +134,7 @@ export const GetAllFaculties = async () => {
       store.dispatch(
         getAllFacultiesAction.failed({
           internalMessage: response.error,
-          displayMessage: 'Error to GetAllFaculties'
+          displayMessage: "Error to GetAllFaculties"
         })
       );
     } else {
@@ -145,7 +145,7 @@ export const GetAllFaculties = async () => {
     store.dispatch(
       getAllFacultiesAction.failed({
         internalMessage: err.message,
-        displayMessage: 'Error in Get All Faculties'
+        displayMessage: "Error in Get All Faculties"
       })
     );
   }
@@ -161,7 +161,7 @@ export const GetAllStudents = async () => {
       store.dispatch(
         getAllStudentsAction.failed({
           internalMessage: response.error,
-          displayMessage: 'Error in getting All Students Action'
+          displayMessage: "Error in getting All Students Action"
         })
       );
     } else {
@@ -172,13 +172,13 @@ export const GetAllStudents = async () => {
     store.dispatch(
       getAllStudentsAction.failed({
         internalMessage: err.message,
-        displayMessage: 'Error in Get All Students'
+        displayMessage: "Error in Get All Students"
       })
     );
   }
 };
 
-export const AddNewProjectGroup = async (data) => {
+export const AddNewProjectGroup = async data => {
   try {
     store.dispatch(setAlert.init());
     const response = await NetworkServices.facultyPost(
@@ -190,7 +190,7 @@ export const AddNewProjectGroup = async (data) => {
         setAlert.failed({
           internalMessage: response.error,
           displayMessage:
-            'Error in Adding New Project Group from Faculty Control Panel'
+            "Error in Adding New Project Group from Faculty Control Panel"
         })
       );
     } else {
@@ -202,7 +202,7 @@ export const AddNewProjectGroup = async (data) => {
       setAlert.failed({
         internalMessage: err.message,
         displayMessage:
-          'Error in Adding New Project Group from Faculty Control Panel'
+          "Error in Adding New Project Group from Faculty Control Panel"
       })
     );
   }
@@ -218,7 +218,7 @@ export const fetchAllProjectGroups = async () => {
       store.dispatch(
         getAllProjectGroupsAction.failed({
           internalMessage: response.error,
-          displayMessage: 'Error in fetch All Project Groups'
+          displayMessage: "Error in fetch All Project Groups"
         })
       );
     } else if (response.msg) {
@@ -231,7 +231,7 @@ export const fetchAllProjectGroups = async () => {
     store.dispatch(
       getAllProjectGroupsAction.failed({
         internalMessage: err.message,
-        displayMessage: 'Error in fetch All Project Groups'
+        displayMessage: "Error in fetch All Project Groups"
       })
     );
   }
@@ -247,7 +247,7 @@ export const fetchMineProjectGroups = async () => {
       store.dispatch(
         getMineProjectGroups.failed({
           internalMessage: response.error,
-          displayMessage: 'Error in Fetching Mine Projects'
+          displayMessage: "Error in Fetching Mine Projects"
         })
       );
     } else if (response.msg) {
@@ -260,13 +260,13 @@ export const fetchMineProjectGroups = async () => {
     store.dispatch(
       getMineProjectGroups.failed({
         internalMessage: err.message,
-        displayMessage: 'Error in Fetching Mine Projects'
+        displayMessage: "Error in Fetching Mine Projects"
       })
     );
   }
 };
 
-export const AddNewENotice = async (data) => {
+export const AddNewENotice = async data => {
   try {
     store.dispatch(setAlert.init());
     const response = await NetworkServices.facultyPost(
@@ -277,7 +277,7 @@ export const AddNewENotice = async (data) => {
       store.dispatch(
         setAlert.failed({
           internalMessage: response.error,
-          displayMessage: 'Error in Adding New E Notice'
+          displayMessage: "Error in Adding New E Notice"
         })
       );
     } else {
@@ -289,13 +289,13 @@ export const AddNewENotice = async (data) => {
       setAlert.failed({
         internalMessage: err.message,
         displayMessage:
-          'Error in Adding new E Notice from Faculty Control Panel'
+          "Error in Adding new E Notice from Faculty Control Panel"
       })
     );
   }
 };
 
-export const AddNewStudent = async (data) => {
+export const AddNewStudent = async data => {
   try {
     store.dispatch(setAlert.init());
     const response = await NetworkServices.facultyPost(
@@ -306,7 +306,7 @@ export const AddNewStudent = async (data) => {
       store.dispatch(
         setAlert.failed({
           internalMessage: response.error,
-          displayMessage: 'Error in Adding New Student'
+          displayMessage: "Error in Adding New Student"
         })
       );
     } else {
@@ -318,7 +318,7 @@ export const AddNewStudent = async (data) => {
     store.dispatch(
       setAlert.failed({
         internalMessage: err.message,
-        displayMessage: 'Error in Adding New Student from Faculty Control Panel'
+        displayMessage: "Error in Adding New Student from Faculty Control Panel"
       })
     );
   }
@@ -331,23 +331,23 @@ export const patchStudent = async (data, stuId) => {
       `${Config.SERVER_URL}/faculty/updateStudent/${stuId}`,
       data
     );
-
     if (response.error) {
+      console.log("Testing PAtch Student Response", response.error);
       store.dispatch(
         setAlert.failed({
           internalMessage: response.error,
-          displayMessage: 'Error in Updating Student'
+          displayMessage: "Error in Updating Student"
         })
       );
     } else {
-      store.dispatch(setAlert.success(response.msg || 'Student Updated'));
+      store.dispatch(setAlert.success(response.msg || "Student Updated"));
     }
   } catch (err) {
     handleError(err);
     store.dispatch(
       setAlert.failed({
         internalMessage: err.message,
-        displayMessage: 'Error in Updating Student'
+        displayMessage: "Error in Updating Student"
       })
     );
   }

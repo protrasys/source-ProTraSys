@@ -28,7 +28,7 @@ function FacultyProfile() {
           <Box className={classes.facultyInfo} component="div">
             <Box className={classes.facultyDates} component="div">
               <Moment format="DD/MM/YYYY">
-                {getFormattedString(Faculty.createdAt)}
+                {Faculty.date && getFormattedString(Faculty.date.from)}
               </Moment>
               <Moment format="DD/MM/YYYY">
                 {getFormattedString(Faculty.updatedAt)}
@@ -202,8 +202,8 @@ function FacultyProfile() {
                 style={{ display: "flex", flexWrap: "wrap" }}
               >
                 {Faculty.skills &&
-                  Faculty.skills.map(value => (
-                    <Box component="div">
+                  Faculty.skills.map((value, index) => (
+                    <Box component="div" key={index}>
                       <Typography
                         className={classes.FacultySkills}
                         style={{

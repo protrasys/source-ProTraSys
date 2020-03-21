@@ -213,8 +213,10 @@ class NetworkService {
       });
       logger.debug("patch response", response);
       this.handleResponse(response);
+      return response;
     } catch (err) {
       this.handleError(err);
+      return err;
     }
   }
 

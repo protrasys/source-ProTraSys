@@ -32,11 +32,10 @@ function AllFaculty() {
         <Grid container spacing={3}>
           {AllFaculty &&
             AllFaculty.map((data, index) => (
-              <Grid item xs={12} s={6} md={6} lg={4}>
+              <Grid item xs={12} s={6} md={6} lg={4} key={index}>
                 <Card
-                  key="index"
                   variant="elevation"
-                  elevation="1"
+                  elevation={1}
                   className={classes.Card}
                 >
                   <CardContent className={classes.CardContent}>
@@ -82,8 +81,11 @@ function AllFaculty() {
                     </Typography>
                     <Box style={{ display: "flex", flexWrap: "wrap" }}>
                       {getFormattedString(
-                        data.skills.map(value => (
-                          <Typography className={classes.IndividualSkills}>
+                        data.skills.map((value, index) => (
+                          <Typography
+                            key={index}
+                            className={classes.IndividualSkills}
+                          >
                             {value}
                           </Typography>
                         ))

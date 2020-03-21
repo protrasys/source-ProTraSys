@@ -19,7 +19,7 @@ const theme = createMuiTheme({
     secondary: {
       main: lightGreen.A400
     },
-    type: "dark"
+    type: "light"
   },
   overrides: {
     MuiMobileStepper: {

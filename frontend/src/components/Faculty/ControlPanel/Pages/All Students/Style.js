@@ -13,27 +13,32 @@ const useStyles = makeStyles(theme => ({
     minWidth: 700
   },
   iconSpacing: {
-    padding: theme.spacing(1)
+    display: "flex",
+    justifyContent: "center",
+    alignItems: "center"
   },
   appBar: {
-    position: 'relative'
+    position: "relative"
   },
   title: {
     marginLeft: theme.spacing(2),
     flex: 1
   },
   Form: {
-    display: 'block',
+    display: "block",
     padding: theme.spacing(5)
   },
   margin: {
-    margin: '.2rem'
+    margin: ".2rem"
   },
   success: {
-    backgroundColor: 'green'
+    backgroundColor: "green"
   },
   danger: {
-    backgroundColor: 'red'
+    backgroundColor: "red"
+  },
+  link: {
+    cursor: "pointer"
   }
 }));
 

@@ -134,11 +134,11 @@ const AddProjectGroup = () => {
                 value={state.projectName}
                 placeholder="Enter Project Name"
                 required
-                fullWidth="true"
+                fullWidth={true}
                 label="Project Name"
                 variant="outlined"
                 className={classes.formControl}
-                size={mobileView}
+                size={mobileView ? "small" : "medium"}
               ></TextField>
               <TextField
                 type="text"
@@ -147,7 +147,7 @@ const AddProjectGroup = () => {
                 name="definition"
                 placeholder="Enter Project Defintion"
                 required
-                fullWidth="true"
+                fullWidth={true}
                 label="Project Definition"
                 variant="outlined"
                 className={classes.formControl}
@@ -159,7 +159,7 @@ const AddProjectGroup = () => {
                 name="technology"
                 placeholder='Enter Project Technologies sepreated by Coma ","'
                 required
-                fullWidth="true"
+                fullWidth={true}
                 label="Project Technologies"
                 variant="outlined"
                 className={classes.formControl}
@@ -167,7 +167,7 @@ const AddProjectGroup = () => {
 
               <FormControl
                 variant="outlined"
-                fullWidth="true"
+                fullWidth={true}
                 className={classes.formControl}
               >
                 <InputLabel>Student 01</InputLabel>
@@ -191,7 +191,7 @@ const AddProjectGroup = () => {
 
               <FormControl
                 variant="outlined"
-                fullWidth="true"
+                fullWidth={true}
                 className={classes.formControl}
               >
                 <InputLabel>Student 02</InputLabel>
@@ -215,7 +215,7 @@ const AddProjectGroup = () => {
 
               <FormControl
                 variant="outlined"
-                fullWidth="true"
+                fullWidth={true}
                 className={classes.formControl}
               >
                 <InputLabel>Student 03</InputLabel>
@@ -239,7 +239,7 @@ const AddProjectGroup = () => {
 
               <FormControl
                 variant="outlined"
-                fullWidth="true"
+                fullWidth={true}
                 className={classes.formControl}
               >
                 <InputLabel>Student 04</InputLabel>
@@ -263,7 +263,7 @@ const AddProjectGroup = () => {
 
               <FormControl
                 variant="outlined"
-                fullWidth="true"
+                fullWidth={true}
                 className={classes.formControl}
               >
                 <InputLabel>TeamLeader</InputLabel>

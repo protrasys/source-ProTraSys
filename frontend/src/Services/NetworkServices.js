@@ -135,7 +135,6 @@ class NetworkService {
   }
 
   // For Faculty
-
   getFacultyHeader(options) {
     const header = {};
 
@@ -229,6 +228,108 @@ class NetworkService {
     try {
       const response = await axios.delete(url, {
         headers: this.getFacultyHeader(options)
+      });
+      logger.debug("delete response", response);
+      return this.handleResponse(response);
+    } catch (err) {
+      this.handleError(err);
+    }
+  }
+
+  // For Admin
+  getAdminHeader(options) {
+    const header = {};
+
+    if (options && options.headers) {
+      Object.assign(header, options.headers);
+    }
+
+    if (options && options.external) {
+      return header;
+    }
+
+    const token = AuthServices.getAdminToken();
+
+    if (token) {
+      header.authorization = `Bearer ${token}`;
+    }
+
+    return header;
+  }
+
+  /**
+   * @param {string} url
+   * @param {any} options
+   */
+
+  async adminGet(url, options) {
+    logger.debug("get", url);
+    try {
+      const response = await axios.get(url, {
+        headers: this.getAdminHeader(options)
+      });
+
+      logger.debug("get response", response);
+
+      return this.handleResponse(response);
+    } catch (err) {
+      console.log(
+        "NETWORK SERVICE GET ADMIN HEADER LOG",
+        this.getAdminHeader(options)
+      );
+      this.handleError(err);
+    }
+  }
+
+  /**
+   * @param {string} url
+   * @param {any} data
+   * @param {any} options
+   */
+
+  async adminPost(url, data, options) {
+    logger.debug("post", url, data);
+    try {
+      const response = await axios.post(url, data, {
+        headers: this.getAdminHeader(options)
+      });
+      logger.debug("post response", response);
+
+      return this.handleResponse(response);
+    } catch (err) {
+      this.handleError(err);
+    }
+  }
+
+  /**
+   * @param {string} url
+   * @param {any} data
+   * @param {any} options
+   */
+  async adminPatch(url, data, options) {
+    logger.debug("patch", url, data);
+    try {
+      const response = await axios.patch(url, data, {
+        headers: this.getAdminHeader(options)
+      });
+      logger.debug("patch response", response);
+      this.handleResponse(response);
+      return response;
+    } catch (err) {
+      this.handleError(err);
+      return err;
+    }
+  }
+
+  /**
+   * @param {string} url
+   * @param {any} options
+   */
+  async adminDelete(url, options) {
+    logger.debug("delete", url);
+    try {
+      const response = await axios.delete(url, {
+        headers: this.getAdminHeader(options)
       });
       logger.debug("delete response", response);
       return this.handleResponse(response);

@@ -1,40 +1,40 @@
-import React, { Fragment } from 'react';
-import { Route, Switch } from 'react-router-dom';
-import { AuthServices } from '../Services';
+import React, { Fragment } from "react";
+import { Route, Switch } from "react-router-dom";
+import { AuthServices } from "../Services";
 
 // Importing Private Routers
-import IsStudentLoggedIn from './PrivateRouters/Student/isLoggedIn';
-import IsStudentLoggedOut from './PrivateRouters/Student/isLoggedOut';
-import IsFacultyLoggedIn from './PrivateRouters/Faculty/isLoggedin';
-import IsFacultyLoggedOut from './PrivateRouters/Faculty/isLoggedOut';
+import IsStudentLoggedIn from "./PrivateRouters/Student/isLoggedIn";
+import IsStudentLoggedOut from "./PrivateRouters/Student/isLoggedOut";
+import IsFacultyLoggedIn from "./PrivateRouters/Faculty/isLoggedin";
+import IsFacultyLoggedOut from "./PrivateRouters/Faculty/isLoggedOut";
 
 import { FacultyLogin, FacultyControlPanel } from "../components/Faculty";
 import { StudentLogin, StudentControlPanel } from "../components/Student";
+import { AdminLogin } from "../components/Admin";
 
-
-import LandingPage from '../components/Layouts/Landing Page';
-import ForOForPage from '../components/Layouts/Landing Page/PageNotFound';
+import LandingPage from "../components/Layouts/Landing Page";
+import ForOForPage from "../components/Layouts/Landing Page/PageNotFound";
 
 const Routes = () => {
   return (
     <Fragment>
       <Switch>
-        <Route exact path='/' component={LandingPage} />
+        <Route exact path="/" component={LandingPage} />
         <IsFacultyLoggedOut
           exact
-          path='/facultylogin'
+          path="/facultylogin"
           component={FacultyLogin}
           authorized={AuthServices.isFacultyAuthenticated()}
         />
         <IsFacultyLoggedIn
           exact
-          path='/facultycontrolpanel'
+          path="/facultycontrolpanel"
           component={FacultyControlPanel}
           authorized={AuthServices.isFacultyAuthenticated()}
         />
         <IsStudentLoggedIn
           exact
-          path='/studentcontrolpanel'
+          path="/studentcontrolpanel"
           component={StudentControlPanel}
           authorized={AuthServices.isAuthenticated()}
         />
@@ -44,6 +44,7 @@ const Routes = () => {
           component={StudentLogin}
           authorized={AuthServices.isAuthenticated()}
         />
+        <Route exact path="/adminLogin" component={AdminLogin} />
         <Route component={ForOForPage} />
       </Switch>
     </Fragment>

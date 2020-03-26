@@ -16,7 +16,7 @@ const useStyles = makeStyles(theme => ({
     alignItem: "center",
     textAlign: "center",
     width: "18rem",
-    borderRight: "1px solid #333",
+    borderRight: "1px solid #ccc",
     paddingRight: "2rem",
     [theme.breakpoints.down("sm")]: {
       borderRight: "none",

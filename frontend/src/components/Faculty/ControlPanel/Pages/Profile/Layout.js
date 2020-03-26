@@ -118,7 +118,7 @@ function FacultyProfile() {
                 </Box>
               </Box>
             </Box>
-            <Divider style={{ backgroundColor: "#333" }} />
+            <Divider style={{ backgroundColor: "#ccc" }} />
             <Box component="div" style={{ padding: "2rem" }}>
               <Typography
                 className={classes.heading}
@@ -184,7 +184,7 @@ function FacultyProfile() {
                 </Box>
               </Box>
             </Box>
-            <Divider style={{ backgroundColor: "#333" }} />
+            <Divider style={{ backgroundColor: "#ccc" }} />
             <Box component="div" style={{ padding: "2rem" }}>
               <Typography
                 className={classes.heading}

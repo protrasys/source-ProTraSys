@@ -1,6 +1,6 @@
-import Config from "../Config";
-import { NetworkServices, LogServices } from "./index";
-import { store } from "../store";
+import Config from '../Config';
+import { NetworkServices, LogServices } from './index';
+import { store } from '../store';
 import {
   getStudentAction,
   eNoticeListingAction,
@@ -12,12 +12,12 @@ import {
   getAllStudentsAction,
   getMineProjectGroups,
   setAlert
-} from "../store/reducers";
+} from '../store/reducers';
 
-const logger = LogServices.getInstance("AuthServices");
-const AUTH_LOCALSTORAGEKEY = "badboysecurities";
-const FACULTY_AUTH_LOCALSTORAGEKEY = "badboysecurities_FACULTY";
-const ADMIN_AUTH_LOCALSTRATEGY = "badboysecurities_ADMIN";
+const logger = LogServices.getInstance('AuthServices');
+const AUTH_LOCALSTORAGEKEY = 'badboysecurities_STUDENT';
+const FACULTY_AUTH_LOCALSTORAGEKEY = 'badboysecurities_FACULTY';
+const ADMIN_AUTH_LOCALSTORAGEKEY = 'badboysecurities_ADMIN';
 
 class AuthService {
   constructor() {
@@ -25,7 +25,7 @@ class AuthService {
     const FacultyAuthString = localStorage.getItem(
       FACULTY_AUTH_LOCALSTORAGEKEY
     );
-    const AdminAuthString = localStorage.getItem(ADMIN_AUTH_LOCALSTRATEGY);
+    const AdminAuthString = localStorage.getItem(ADMIN_AUTH_LOCALSTORAGEKEY);
     if (authString) {
       this._auth = JSON.parse(authString);
     }
@@ -52,7 +52,7 @@ class AuthService {
       localStorage.setItem(AUTH_LOCALSTORAGEKEY, JSON.stringify(response));
       this._auth = response;
     } else {
-      console.log("STUDENT LOGIN AUTHSERVICE ERROR: NO RESPONSE FOUND");
+      console.log('STUDENT LOGIN AUTHSERVICE ERROR: NO RESPONSE FOUND');
     }
     logger.debug(response);
     return response;
@@ -100,7 +100,7 @@ class AuthService {
       );
       this._facultyAuth = response;
     } else {
-      console.log("FACULTY LOGIN AUTHSERVICE ERROR: NO RESPONSE FOUND");
+      console.log('FACULTY LOGIN AUTHSERVICE ERROR: NO RESPONSE FOUND');
     }
     logger.debug(response);
     return response;
@@ -143,16 +143,17 @@ class AuthService {
       { AID, password }
     );
 
-    if (response.msg) {
-      localStorage.setItem(ADMIN_AUTH_LOCALSTRATEGY, JSON.stringify(response));
-      this._adminAuth = response.token;
+    if (response) {
+      localStorage.setItem(
+        ADMIN_AUTH_LOCALSTORAGEKEY,
+        JSON.stringify(response.token)
+      );
+      this._adminAuth = response;
       store.dispatch(setAlert.success(response.msg) || {});
-    } else if (response.error) {
-      store.dispatch(setAlert.failed(response.error) || {});
     } else {
-      console.log("ADMIN LOGIN AUTHSERVICE ERROR: NO RESPONSE FOUND");
+      console.log('ADMIN LOGIN AUTHSERVICE ERROR: NO RESPONSE FOUND');
       store.dispatch(
-        setAlert.failed("Something went wrong, Please try again later")
+        setAlert.failed('Something went wrong, Please try again later')
       );
     }
     logger.debug(response);
@@ -170,12 +171,11 @@ class AuthService {
     if (!this._adminAuth) {
       return null;
     }
-
-    return this._adminAuth;
+    return this._adminAuth.token;
   }
 
   async adminLogout() {
-    localStorage.removeItem(ADMIN_AUTH_LOCALSTRATEGY);
+    localStorage.removeItem(ADMIN_AUTH_LOCALSTORAGEKEY);
     this._adminAuth = undefined;
   }
 }

@@ -32,7 +32,7 @@ class LogServices {
     this._console.log(`log${this._key}`, message, ...optionalParams);
   }
   warn(message, ...optionalParams) {
-    this._console.log(`warn${this._key}`, message, ...optionalParams);
+    this._console.warn(`warn${this._key}`, message, ...optionalParams);
   }
   debug(message, ...optionalParams) {
     this._console.log(`debug${this._key}`, message, ...optionalParams);

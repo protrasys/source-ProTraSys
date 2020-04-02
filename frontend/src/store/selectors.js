@@ -41,3 +41,7 @@ export const selectAllProjectGroups = (state) => {
 export const selectMineProjectGroups = (state) => {
   return selectState(state).mineGroups;
 };
+
+export const selectCountedAllDocuments = (state) => {
+  return selectState(state).AllDocuments;
+};

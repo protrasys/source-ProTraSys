@@ -1,25 +1,25 @@
 // Importing Dependencies
-const Faculty = require("../models/Faculty");
-const Student = require("../models/Student");
-const eNotice = require("../models/eNotice");
-const eReport = require("../models/eReports");
-const ProjectGroup = require("../models/ProjectGroup");
-const ProjectFiles = require("../models/ProjectFIles");
-const bcrypt = require("bcryptjs");
-const { jwtSecret } = require("../../config");
-const jwt = require("jsonwebtoken");
-const nodemailer = require("nodemailer");
+const Faculty = require('../models/Faculty');
+const Student = require('../models/Student');
+const eNotice = require('../models/eNotice');
+const eReport = require('../models/eReports');
+const ProjectGroup = require('../models/ProjectGroup');
+const ProjectFiles = require('../models/ProjectFIles');
+const bcrypt = require('bcryptjs');
+const { jwtSecret } = require('../../config');
+const jwt = require('jsonwebtoken');
+const nodemailer = require('nodemailer');
 
 // @route     GET   /faculty/
 // @desc      Get All Faculty
 // @access    Public
 module.exports.GetAllFaculty = async (req, res) => {
   try {
-    const faculties = await Faculty.find().select("-password");
+    const faculties = await Faculty.find().select('-password');
 
     if (faculties.length === 0) {
       return res.status(404).json({
-        error: "No Faculties were found in our record !"
+        error: 'No Faculties were found in our record !'
       });
     }
     res.status(200).json(faculties);
@@ -43,7 +43,7 @@ module.exports.PostFacultyLogin = async (req, res) => {
     // Check if faculty not found
     if (!faculty) {
       return res.status(400).json({
-        msg: "Invalid Credentials"
+        msg: 'Invalid Credentials'
       });
     }
 
@@ -53,7 +53,7 @@ module.exports.PostFacultyLogin = async (req, res) => {
     // Check is password is not valid
     if (!isCorrect) {
       return res.status(400).json({
-        msg: "Invalid Credentials"
+        msg: 'Invalid Credentials'
       });
     }
 
@@ -65,7 +65,7 @@ module.exports.PostFacultyLogin = async (req, res) => {
     };
 
     // return json web token to frontend
-    jwt.sign(payload, jwtSecret, { expiresIn: "24h" }, (err, token) => {
+    jwt.sign(payload, jwtSecret, { expiresIn: '24h' }, (err, token) => {
       if (!err) {
         return res.json(token);
       }
@@ -74,7 +74,7 @@ module.exports.PostFacultyLogin = async (req, res) => {
   } catch (err) {
     console.log(err);
     res.status(500).json({
-      msg: "Internal Server Error",
+      msg: 'Internal Server Error',
       description: err
     });
   }
@@ -85,7 +85,7 @@ module.exports.PostFacultyLogin = async (req, res) => {
 // @access    Private
 module.exports.GetIndividualFaculty = async (req, res) => {
   try {
-    const faculty = await Faculty.findById(req.faculty.id).select("-password");
+    const faculty = await Faculty.findById(req.faculty.id).select('-password');
     res.status(200).json(faculty);
   } catch (err) {
     console.log(err);
@@ -110,7 +110,7 @@ module.exports.PostAddNewProjectGroup = async (req, res) => {
     teamLeader
   } = req.body;
   try {
-    let faculty = await Faculty.findById(req.faculty.id).select("-password");
+    let faculty = await Faculty.findById(req.faculty.id).select('-password');
     let projectGroup = new ProjectGroup({
       projectName,
       definition,
@@ -119,7 +119,7 @@ module.exports.PostAddNewProjectGroup = async (req, res) => {
       stu03,
       stu04,
       teamLeader,
-      technology: technology.split(",").map(tech => tech.trim()),
+      technology: technology.split(',').map((tech) => tech.trim()),
       faculty: faculty.id
     });
 
@@ -141,14 +141,14 @@ module.exports.PostAddNewProjectGroup = async (req, res) => {
 module.exports.GetAllProjectGroups = async (req, res) => {
   try {
     const projectGroups = await ProjectGroup.find().populate(
-      "stu01 stu02 stu03 stu04 teamLeader faculty",
-      "-password"
+      'stu01 stu02 stu03 stu04 teamLeader faculty',
+      '-password'
     );
 
     // check if projectGroup available or not
     if (projectGroups.length === 0) {
       return res.status(400).json({
-        msg: "No ProjectGroups Records Found!"
+        msg: 'No ProjectGroups Records Found!'
       });
     }
 
@@ -171,7 +171,7 @@ module.exports.GetIndiividualFacultyAllProjectGroups = async (req, res) => {
     const faculty = await Faculty.findOne({ _id: req.faculty.id });
     const myProjectGroups = await ProjectGroup.find({
       faculty: req.faculty.id
-    }).populate("stu01 stu02 stu03 stu04 teamLeader faculty", "-password");
+    }).populate('stu01 stu02 stu03 stu04 teamLeader faculty', '-password');
 
     if (!myProjectGroups) {
       return res.status(400).json({
@@ -198,8 +198,8 @@ module.exports.GetIndividualProjectGroup = async (req, res) => {
   try {
     const faculty = await Faculty.findOne({ _id: req.faculty.id });
     const projectGroup = await ProjectGroup.findOne({ _id: id }).populate(
-      "faculty stu01 stu02 stu03 stu04 teamLeader",
-      "name profile sem enrollmentId email phone"
+      'faculty stu01 stu02 stu03 stu04 teamLeader',
+      'name profile sem enrollmentId email phone'
     );
 
     if (!projectGroup) {
@@ -225,18 +225,18 @@ module.exports.DeleteProjectGroup = async (req, res) => {
   try {
     await ProjectGroup.deleteOne({ _id: id })
       .exec()
-      .then(result => {
+      .then((result) => {
         if (result.deletedCount > 0) {
           return res.status(200).json({
-            msg: "Deleted Successfully"
+            msg: 'Deleted Successfully'
           });
         } else {
           return res.status(400).json({
-            msg: "No Project Group Found to Delete"
+            msg: 'No Project Group Found to Delete'
           });
         }
       })
-      .catch(err => {
+      .catch((err) => {
         console.log(err);
         return res.status(400).json({
           err: err
@@ -264,30 +264,30 @@ module.exports.DeleteProjectFile = async (req, res) => {
     // If no such file found to delete
     if (!projectFIle) {
       return res.status(400).json({
-        msg: "No Such File found to delete"
+        msg: 'No Such File found to delete'
       });
     }
 
     // Check if Faculty is Authorized or not
     if (projectGroup.faculty.toString() !== req.faculty.id) {
       return res.status(401).json({
-        msg: "Faculty Unauthorized"
+        msg: 'Faculty Unauthorized'
       });
     }
     await ProjectFiles.deleteOne({ _id: fileID })
       .exec()
-      .then(result => {
+      .then((result) => {
         if (result.deletedCount > 0) {
           return res.status(200).json({
-            msg: "Deleted Successfully"
+            msg: 'Deleted Successfully'
           });
         } else {
           return res.status(400).json({
-            msg: "No Project File Found to Delete"
+            msg: 'No Project File Found to Delete'
           });
         }
       })
-      .catch(err => {
+      .catch((err) => {
         console.log(err);
         return res.status(400).json({
           err: err
@@ -309,7 +309,7 @@ module.exports.GetStudentsUploadedFile = async (req, res) => {
 
     if (!projectFile) {
       return res.status(404).json({
-        msg: "No Such File Found to View"
+        msg: 'No Such File Found to View'
       });
     }
 
@@ -332,18 +332,18 @@ module.exports.PostUploadENotice = async (req, res) => {
       description
     })
       .save()
-      .then(result => {
+      .then((result) => {
         res.status(200).json({
-          msg: "Notice is added !"
+          msg: 'Notice is added !'
         });
       })
-      .catch(err => {
+      .catch((err) => {
         res.status(401).json({
           msg: err
         });
       });
   } catch (err) {
-    console.log("POST FACULTY E-NOTICE ROUTE ERROR", err);
+    console.log('POST FACULTY E-NOTICE ROUTE ERROR', err);
     res.status(500).json({
       error: err
     });
@@ -365,7 +365,7 @@ module.exports.PostGenerateEReport = async (req, res) => {
     // Check if Faculty is Authorized or not
     if (projectGroup.faculty.toString() !== req.faculty.id) {
       return res.status(401).json({
-        error: "Faculty Unauthorized"
+        error: 'Faculty Unauthorized'
       });
     }
 
@@ -390,7 +390,7 @@ module.exports.PostGenerateEReport = async (req, res) => {
 
     if (!newReport) {
       return res.status(401).json({
-        error: "Something went wrong, Please try again later",
+        error: 'Something went wrong, Please try again later',
         desc: err
       });
     }
@@ -463,12 +463,12 @@ module.exports.PostGenerateEReport = async (req, res) => {
 
     // create reusable transporter object using the default SMTP transport
     let transporter = nodemailer.createTransport({
-      host: "smtp.gmail.com",
+      host: 'smtp.gmail.com',
       port: 587,
       secure: false, // true for 465, false for other ports
       auth: {
-        user: "badboysecurities@gmail.com", // generated ethereal user
-        pass: "LaW6rXvEguCHB2V" // generated ethereal password
+        user: 'badboysecurities@gmail.com', // generated ethereal user
+        pass: 'LaW6rXvMANAVEguCHOZAB2V' // generated ethereal password
       },
       tls: {
         rejectUnauthorized: false
@@ -476,7 +476,7 @@ module.exports.PostGenerateEReport = async (req, res) => {
     });
 
     // send mail with defined transport object
-    if (stu01Email !== "undefined") {
+    if (stu01Email !== 'undefined') {
       await transporter.sendMail({
         from: `"Pro-Tra-Sys Team 🔖" <bhaainichaal@yahoo.in>`, // sender address
         to: stu01Email, // list of receivers
@@ -484,7 +484,7 @@ module.exports.PostGenerateEReport = async (req, res) => {
         html: output // html body
       });
     }
-    if (stu02Email !== "undefined") {
+    if (stu02Email !== 'undefined') {
       await transporter.sendMail({
         from: `"Pro-Tra-Sys Team 🔖" <bhaainichaal@yahoo.in>`, // sender address
         to: stu02Email, // list of receivers
@@ -492,7 +492,7 @@ module.exports.PostGenerateEReport = async (req, res) => {
         html: output // html body
       });
     }
-    if (stu03Email !== "undefined") {
+    if (stu03Email !== 'undefined') {
       await transporter.sendMail({
         from: `"Pro-Tra-Sys Team 🔖" <bhaainichaal@yahoo.in>`, // sender address
         to: stu03Email, // list of receivers
@@ -500,7 +500,7 @@ module.exports.PostGenerateEReport = async (req, res) => {
         html: output // html body
       });
     }
-    if (stu04Email !== "undefined") {
+    if (stu04Email !== 'undefined') {
       await transporter.sendMail({
         from: `"Pro-Tra-Sys Team 🔖" <bhaainichaal@yahoo.in>`, // sender address
         to: stu04Email, // list of receivers
@@ -509,7 +509,7 @@ module.exports.PostGenerateEReport = async (req, res) => {
       });
     }
 
-    if (facultyEmail !== "undefined") {
+    if (facultyEmail !== 'undefined') {
       await transporter.sendMail({
         from: `"Pro-Tra-Sys Team 🔖" <bhaainichaal@yahoo.in>`, // sender address
         to: `${faculty.email}`, // list of receivers
@@ -519,15 +519,15 @@ module.exports.PostGenerateEReport = async (req, res) => {
     }
 
     res.status(200).json({
-      message: "Report Generated and sent to the Students Mail",
+      message: 'Report Generated and sent to the Students Mail',
       notice: newReport
     });
 
     await newReport.save();
   } catch (err) {
-    console.log("POST FACULTY E-REPORT ROUTE ERROR", err);
+    console.log('POST FACULTY E-REPORT ROUTE ERROR', err);
     res.status(500).json({
-      error: "Internal Server Error",
+      error: 'Internal Server Error',
       desc: err
     });
   }
@@ -548,7 +548,7 @@ module.exports.PostAddNewStudent = async (req, res) => {
 
     if (student) {
       return res.status(400).json({
-        msg: "Student Already exists with same enrollment ID"
+        msg: 'Student Already exists with same enrollment ID'
       });
     }
 
@@ -567,7 +567,7 @@ module.exports.PostAddNewStudent = async (req, res) => {
       }
     };
 
-    jwt.sign(payload, jwtSecret, { expiresIn: "24h" }, (err, token) => {
+    jwt.sign(payload, jwtSecret, { expiresIn: '24h' }, (err, token) => {
       if (err) {
         throw err;
       }
@@ -616,7 +616,7 @@ module.exports.PatchStudentDetails = async (req, res) => {
   if (projectGroupId) updatedStudent.projectGroupId = projectGroupId;
 
   try {
-    let faculty = await Faculty.findById(req.faculty.id).select("-password");
+    let faculty = await Faculty.findById(req.faculty.id).select('-password');
     let student = await Student.findOne({ _id: stuId });
     if (!student) {
       return res.status(401).json({
@@ -629,13 +629,13 @@ module.exports.PatchStudentDetails = async (req, res) => {
       { new: true }
     )
       .exec()
-      .then(result => {
+      .then((result) => {
         res.status(200).json({
-          msg: "Student Updated",
+          msg: 'Student Updated',
           result
         });
       })
-      .catch(err => {
+      .catch((err) => {
         res.status(401).json({
           msg: `Opps! Something went Wrong.. Please Try again after few moments`
         });
@@ -653,11 +653,11 @@ module.exports.PatchStudentDetails = async (req, res) => {
 // @access    Private
 module.exports.GetAllStudents = async (req, res) => {
   try {
-    const students = await Student.find().populate("projectGroupId");
+    const students = await Student.find().populate('projectGroupId');
 
     if (students.length === 0) {
       return res.status(404).json({
-        error: "No Students were found in our record !"
+        error: 'No Students were found in our record !'
       });
     }
     res.status(200).json(students);
@@ -677,7 +677,7 @@ module.exports.GetIndividualFacultyReportings = async (req, res) => {
 
     if (response.length <= 0) {
       return res.status(404).json({
-        error: "You have not done any reporting yet..."
+        error: 'You have not done any reporting yet...'
       });
     }
 
@@ -687,7 +687,7 @@ module.exports.GetIndividualFacultyReportings = async (req, res) => {
   } catch (err) {
     console.log(err);
     res.status(500).json({
-      error: "Internal Server Error"
+      error: 'Internal Server Error'
     });
   }
 };
@@ -707,7 +707,7 @@ module.exports.PatchEReportings = async (req, res) => {
 
     if (response.length <= 0) {
       return res.status(404).json({
-        error: "There is no group with this Group Id"
+        error: 'There is no group with this Group Id'
       });
     }
 
@@ -718,13 +718,13 @@ module.exports.PatchEReportings = async (req, res) => {
         { new: true }
       )
       .exec()
-      .then(result => {
+      .then((result) => {
         res.status(200).json({
-          data: "Data is Updated",
+          data: 'Data is Updated',
           result: result
         });
       })
-      .catch(err => {
+      .catch((err) => {
         res.status(401).json({
           error: `Opps! Something went Wrong.. Please Try again after few moments`
         });
@@ -732,7 +732,7 @@ module.exports.PatchEReportings = async (req, res) => {
   } catch (err) {
     console.log(err);
     res.status(500).json({
-      error: "Internal Server Error"
+      error: 'Internal Server Error'
     });
   }
 };

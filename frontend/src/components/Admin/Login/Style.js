@@ -28,7 +28,7 @@ const useStyles = makeStyles(theme => ({
   },
   input: {
     margin: "8px 0px",
-    backgroundColor: "grey"
+    backgroundColor: "white"
   },
   button: {
     borderRadius: "30px",

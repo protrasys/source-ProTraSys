@@ -30,9 +30,9 @@ const useStyles = makeStyles(theme => ({
     marginBottom: "1rem"
   },
   skills: {
-    backgroundColor: "#333",
+    backgroundColor: "#f5f5f5",
     textAlign: "left",
-    color: "#fff",
+    color: "#333",
     padding: ".8rem 1.2rem"
   },
   skillsHeading: {

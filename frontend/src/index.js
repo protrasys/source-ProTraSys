@@ -21,6 +21,7 @@ const theme = createMuiTheme({
     },
     type: "light"
   },
+
   overrides: {
     MuiMobileStepper: {
       progress: {

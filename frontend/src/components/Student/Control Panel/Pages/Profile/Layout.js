@@ -1,25 +1,15 @@
-import React from 'react';
-import {
-  Table,
-  TableBody,
-  TableCell,
-  TableContainer,
-  TableHead,
-  TableRow,
-  Paper,
-  Typography,
-  Box
-} from '@material-ui/core';
-import { Skeleton } from '@material-ui/lab';
-import useStyles from './Style';
-import Moment from 'react-moment';
-import { getFormattedString } from '../../../../../Helper';
+import React from "react";
+import { Paper, Typography, Box, Divider, Button } from "@material-ui/core";
+import { Skeleton } from "@material-ui/lab";
+import useStyles from "./Style";
+import Moment from "react-moment";
+import { getFormattedString } from "../../../../../Helper";
 
 // Redux Integration Dependencies
-import { selectStudent } from '../../../../../store/selectors';
-import { useSelector } from 'react-redux';
+import { selectStudent } from "../../../../../store/selectors";
+import { useSelector } from "react-redux";
 
-const StudnetProfile = () => {
+const StudentProfile = () => {
   const classes = useStyles();
 
   const StudentDetails = useSelector(selectStudent);
@@ -48,156 +38,245 @@ const StudnetProfile = () => {
   const faculty = { ...projectGroup.faculty };
 
   return isStudentLoading ? (
-    <Skeleton variant='rect' height={500} animation='wave' />
+    <Skeleton variant="rect" height={500} animation="wave" />
   ) : (
-    <div>
-      <Typography variant='h3'>
-        Welcome {getFormattedString(Student.name)}
-      </Typography>
-      <br />
-      <TableContainer component={Paper}>
-        <Table className={classes.table}>
-          <TableHead className={classes.head}>
-            <TableRow>
-              <TableCell className={classes.whiteFont}>Full Name </TableCell>
-              <TableCell className={classes.whiteFont}>E-Mail </TableCell>
-              <TableCell className={classes.whiteFont}>Enrollment Id</TableCell>
-              <TableCell className={classes.whiteFont}>Phone </TableCell>
-              <TableCell className={classes.whiteFont}>Sem </TableCell>
-              <TableCell className={classes.whiteFont}>
-                Registered Date
-              </TableCell>
-            </TableRow>
-          </TableHead>
-          <TableBody>
-            <TableRow>
-              <TableCell> {getFormattedString(Student.name)} </TableCell>
-              <TableCell> {getFormattedString(Student.email)} </TableCell>
-              <TableCell>{getFormattedString(Student.enrollmentId)}</TableCell>
-              <TableCell> {getFormattedString(Student.phone)} </TableCell>
-              <TableCell> {getFormattedString(Student.sem)} </TableCell>
-              <TableCell>
-                <Moment format='DD/MM/YYYY'>
+    <Box variant="div">
+      <Paper className={classes.root}>
+        <Typography variant="h3" className={classes.userName}>
+          Welcome {getFormattedString(Student.name)}
+        </Typography>
+        <Divider style={{ marginBottom: "1rem" }} />
+        <Box variant="div">
+          <Typography className={classes.heading}>Student Details</Typography>
+          <Box variant="div" className={classes.allDetail}>
+            <Box className={classes.allDetails}>
+              <Typography className={classes.head}>Full Name</Typography>
+              <Typography className={classes.detail}>
+                {getFormattedString(Student.name)}
+              </Typography>
+            </Box>
+            <Box className={classes.allDetails}>
+              <Typography className={classes.head}>Email</Typography>
+              <Typography className={classes.detail}>
+                {getFormattedString(Student.email)}
+              </Typography>
+            </Box>
+            <Box className={classes.allDetails}>
+              <Typography className={classes.head}>enrollment Id</Typography>
+              <Typography className={classes.detail}>
+                {getFormattedString(Student.enrollmentId)}
+              </Typography>
+            </Box>
+            <Box className={classes.allDetails}>
+              <Typography className={classes.head}>Phone</Typography>
+              <Typography className={classes.detail}>
+                {getFormattedString(Student.phone)}
+              </Typography>
+            </Box>
+            <Box className={classes.allDetails}>
+              <Typography className={classes.head}>Sem</Typography>
+              <Typography className={classes.detail}>
+                {getFormattedString(Student.sem)}
+              </Typography>
+            </Box>
+            <Box className={classes.allDetails}>
+              <Typography className={classes.head}>Registered Date</Typography>
+              <Typography className={classes.detail}>
+                <Moment format="DD/MM/YYYY">
                   {getFormattedString(Student.createdAt)}
                 </Moment>
-              </TableCell>
-            </TableRow>
-          </TableBody>
-        </Table>
-      </TableContainer>
-      <br />
-      <Box component='div'>
-        <Typography variant='h4' className={classes.center}>
-          Project Group Details
-        </Typography>
-        <Paper square className={classes.paperRoot}>
-          <TableContainer component={Paper}>
-            <Table className={classes.table}>
-              <TableHead>
-                <TableRow>
-                  <TableCell style={{ width: '30%' }}>Name: </TableCell>
-                  <TableCell style={{ width: '70%' }}>
-                    {getFormattedString(projectGroup.projectName)}
-                  </TableCell>
-                </TableRow>
-                <TableRow>
-                  <TableCell>Definition: </TableCell>
-                  <TableCell>
-                    {getFormattedString(projectGroup.definition)}
-                  </TableCell>
-                </TableRow>
-                <TableRow>
-                  <TableCell>Technologies Used: </TableCell>
-                  <TableCell>
-                    {techArray.map((data, index) => (
-                      <p key={index}> {data} </p>
-                    ))}
-                  </TableCell>
-                </TableRow>
-                <TableRow>
-                  <TableCell>Team Leader: </TableCell>
-                  <TableCell>
-                    {Student.teamLeader ? (
-                      <p>You are a Team Leader</p>
-                    ) : (
-                      <p>
-                        Your TeamLeader is :{' '}
-                        {getFormattedString(teamLeader.name)}
-                      </p>
-                    )}
-                  </TableCell>
-                </TableRow>
-                <TableRow>
-                  <TableCell>Team Members: </TableCell>
-                  <TableCell>
-                    <Typography paragraph>
-                      Name : {getFormattedString(Stu01.name)} &nbsp; Email:{' '}
+              </Typography>
+            </Box>
+          </Box>
+        </Box>
+        <Box variant="div">
+          <Typography className={classes.heading}>
+            Project Group Details
+          </Typography>
+          <Box variant="div">
+            <Box variant="div" className={classes.allDetails}>
+              <Typography className={classes.head}>Name</Typography>
+              <Typography className={classes.detail}>
+                {getFormattedString(projectGroup.projectName)}
+              </Typography>
+            </Box>
+            <Box variant="div" className={classes.allDetails}>
+              <Typography className={classes.head}>Definition</Typography>
+              <Typography className={classes.detail}>
+                {getFormattedString(projectGroup.definition)}
+              </Typography>
+            </Box>
+            <Box variant="div" className={classes.allDetails}>
+              <Typography className={classes.head}>Technologies</Typography>
+
+              {techArray.map((data, index) => (
+                <Typography key={index} className={classes.detail}>
+                  {data}
+                </Typography>
+              ))}
+            </Box>
+            <Box variant="div" className={classes.allDetails}>
+              <Typography className={classes.head}>TeamLeader</Typography>
+              <Typography className={classes.detail}>
+                {Student.teamLeader ? (
+                  <Typography>You are a Team Leader</Typography>
+                ) : (
+                  <Typography>
+                    Your TeamLeader is : {getFormattedString(teamLeader.name)}
+                  </Typography>
+                )}
+              </Typography>
+            </Box>
+            <Box variant="div" className={classes.allDetails}>
+              <Typography className={classes.head}>Team Members</Typography>
+              <Box variant="div" className={classes.allDetail}>
+                <Box component="div" className={classes.student}>
+                  <Typography className={classes.individualStudentDetails}>
+                    1st Student Details
+                  </Typography>
+                  <Box variant="div" className={classes.allDetails}>
+                    <Typography className={classes.head}>Name</Typography>
+                    <Typography
+                      className={classes.detail}
+                      style={{ marginBottom: ".6rem" }}
+                    >
+                      {getFormattedString(Stu01.name)}
+                    </Typography>
+                    <Typography className={classes.head}>Email</Typography>
+                    <Typography
+                      className={classes.detail}
+                      style={{ marginBottom: ".6rem" }}
+                    >
                       {getFormattedString(Stu01.email)}
                     </Typography>
-                    <Typography paragraph>
-                      Name : {getFormattedString(Stu02.name)} &nbsp; Email:{' '}
+                  </Box>
+                </Box>
+                <Box component="div" className={classes.student}>
+                  <Typography className={classes.individualStudentDetails}>
+                    2nd Student Details
+                  </Typography>
+                  <Box variant="div" className={classes.allDetails}>
+                    <Typography className={classes.head}>Name</Typography>
+                    <Typography
+                      className={classes.detail}
+                      style={{ marginBottom: ".6rem" }}
+                    >
+                      {getFormattedString(Stu02.name)}
+                    </Typography>
+                    <Typography className={classes.head}>Email</Typography>
+                    <Typography
+                      className={classes.detail}
+                      style={{ marginBottom: ".6rem" }}
+                    >
                       {getFormattedString(Stu02.email)}
                     </Typography>
-                    <Typography paragraph>
-                      Name : {getFormattedString(Stu03.name)} &nbsp; Email:{' '}
+                  </Box>
+                </Box>
+                <Box component="div" className={classes.student}>
+                  <Typography className={classes.individualStudentDetails}>
+                    3rd Student Details
+                  </Typography>
+                  <Box variant="div" className={classes.allDetails}>
+                    <Typography className={classes.head}>Name</Typography>
+                    <Typography
+                      className={classes.detail}
+                      style={{ marginBottom: ".6rem" }}
+                    >
+                      {getFormattedString(Stu03.name)}
+                    </Typography>
+                    <Typography className={classes.head}>Email</Typography>
+                    <Typography
+                      className={classes.detail}
+                      style={{ marginBottom: ".6rem" }}
+                    >
                       {getFormattedString(Stu03.email)}
                     </Typography>
-                    <Typography paragraph>
-                      Name : {getFormattedString(Stu04.name)} &nbsp; Email:{' '}
+                  </Box>
+                </Box>
+                <Box component="div" className={classes.student}>
+                  <Typography className={classes.individualStudentDetails}>
+                    4th Student Details
+                  </Typography>
+                  <Box variant="div" className={classes.allDetails}>
+                    <Typography className={classes.head}>Name</Typography>
+                    <Typography
+                      className={classes.detail}
+                      style={{ marginBottom: ".6rem" }}
+                    >
+                      {getFormattedString(Stu04.name)}
+                    </Typography>
+                    <Typography className={classes.head}>Email</Typography>
+                    <Typography
+                      className={classes.detail}
+                      style={{ marginBottom: ".6rem" }}
+                    >
                       {getFormattedString(Stu04.email)}
                     </Typography>
-                  </TableCell>
-                </TableRow>
-                <TableRow>
-                  <TableCell>Faculty or Project Guide: </TableCell>
-                  <TableCell>
-                    {faculty.profile ? (
-                      <img
-                        src={faculty.profile}
-                        alt='Faculty Profile Image'
-                        height={110}
-                      />
-                    ) : (
-                      <Skeleton
-                        variant='rect'
-                        height={110}
-                        width={110}
-                        animation='wave'
-                      />
-                    )}
-                    <Typography paragraph>
-                      Name : {getFormattedString(faculty.name)}
-                    </Typography>
-                    <Typography paragraph>
-                      Email : {getFormattedString(faculty.email)}
-                    </Typography>
-                    <Typography paragraph>
-                      Phone : {getFormattedString(faculty.phone)}
-                    </Typography>
-                    <Typography paragraph>
-                      Designation : {getFormattedString(faculty.designation)}
-                    </Typography>
-                  </TableCell>
-                </TableRow>
-              </TableHead>
-              <TableBody>
-                <TableRow>
-                  <TableCell colSpan={2}>
-                    <Typography variant='h6' className={classes.right}>
-                      Group Created At :
-                      <Moment format='DD/MM/YYYY'>
-                        {getFormattedString(projectGroup.createdAt)}
-                      </Moment>
-                    </Typography>
-                  </TableCell>
-                </TableRow>
-              </TableBody>
-            </Table>
-          </TableContainer>
-        </Paper>
-      </Box>
-    </div>
+                  </Box>
+                </Box>
+              </Box>
+            </Box>
+            <Box variant="div">
+              <Typography className={classes.heading}>
+                Faculty or Project Guide
+              </Typography>
+              <Box variant="div" className={classes.allDetail}>
+                <Box variant="div" className={classes.allDetails}>
+                  {faculty.profile ? (
+                    <img
+                      src={faculty.profile}
+                      alt="Faculty Profile Image"
+                      className={classes.img}
+                    />
+                  ) : (
+                    <Skeleton
+                      variant="rect"
+                      height={110}
+                      width={110}
+                      animation="wave"
+                    />
+                  )}
+                </Box>
+                <Box variant="div" className={classes.allDetails}>
+                  <Typography className={classes.head}>Name</Typography>
+                  <Typography variant="h3" className={classes.detail}>
+                    {getFormattedString(faculty.name)}
+                  </Typography>
+                </Box>
+                <Box variant="div" className={classes.allDetails}>
+                  <Typography className={classes.head}>Email</Typography>
+                  <Typography variant="h3" className={classes.detail}>
+                    {getFormattedString(faculty.email)}
+                  </Typography>
+                </Box>
+                <Box variant="div" className={classes.allDetails}>
+                  <Typography className={classes.head}>Phone</Typography>
+                  <Typography variant="h3" className={classes.detail}>
+                    {getFormattedString(faculty.phone)}
+                  </Typography>
+                </Box>
+                <Box variant="div" className={classes.allDetails}>
+                  <Typography className={classes.head}>Designation</Typography>
+                  <Typography variant="h3" className={classes.detail}>
+                    {getFormattedString(faculty.designation)}
+                  </Typography>
+                </Box>
+              </Box>
+            </Box>
+          </Box>
+        </Box>
+        <Divider style={{ marginBottom: "1rem" }} />
+        <Box variant="div" style={{ textAlign: "right" }}>
+          <Typography className={classes.head}>
+            Group created at :&nbsp;
+            <Moment format="DD/MM/YYYY" className={classes.detail}>
+              {getFormattedString(projectGroup.createdAt)}
+            </Moment>{" "}
+          </Typography>
+        </Box>
+      </Paper>
+    </Box>
   );
 };
 
-export default StudnetProfile;
+export default StudentProfile;

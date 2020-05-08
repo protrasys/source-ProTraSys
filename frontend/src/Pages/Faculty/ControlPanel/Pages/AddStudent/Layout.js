@@ -1,11 +1,23 @@
 import React, { useState, useEffect } from 'react';
 import useStyles from './Style';
-import { Snackbar, IconButton, Slide } from '@material-ui/core';
+import {
+  Snackbar,
+  IconButton,
+  Slide,
+  Box,
+  Typography,
+  Card,
+  CardContent,
+  CardActions,
+  TextField,
+  Button,
+} from '@material-ui/core';
 import { Close, Add } from '@material-ui/icons';
 import { getFormattedString } from '../../../../../Helper';
 import { useSelector } from 'react-redux';
 import { AddNewStudent } from '../../../../../Store/actions';
 import { selectAlerts } from '../../../../../Store/selectors';
+import ProTraSys from '../../../../../assets/ProTraSys_Logo.png';
 
 const AddStudent = () => {
   const classes = useStyles();
@@ -74,57 +86,102 @@ const AddStudent = () => {
         }
       />
       <h1> Add New Student </h1>
-      <form onSubmit={handleFormSubmit}>
-        <input
-          type='text'
-          name='name'
-          required
-          onChange={handleValueChange}
-          value={state.name}
-          placeholder='Student Name'
-        />
-        <input
-          type='text'
-          name='sem'
-          required
-          onChange={handleValueChange}
-          value={state.sem}
-          placeholder='Current Semester'
-        />
-        <input
-          type='text'
-          name='enrollmentId'
-          required
-          onChange={handleValueChange}
-          value={state.enrollmentId}
-          placeholder='Enrollment Id'
-        />
-        <input
-          type='text'
-          name='email'
-          required
-          onChange={handleValueChange}
-          value={state.email}
-          placeholder='Email Id'
-        />
-        <input
-          type='text'
-          name='phone'
-          required
-          onChange={handleValueChange}
-          value={state.phone}
-          placeholder='Phone Number (Whatsapp)'
-        />
-        <input
-          type='password'
-          name='password'
-          required
-          onChange={handleValueChange}
-          value={state.password}
-          placeholder='Student Password'
-        />
-        <input type='submit' value='Add Student' />
-      </form>
+      <Box variant='div' className={classes.root}>
+        <Card className={classes.card}>
+          <CardContent className={classes.cardContent}>
+            <Box style={{ textAlign: 'center' }}>
+              <img src={ProTraSys} alt='Logo' className={classes.img} />
+              <Typography className={classes.text} color='inherit'>
+                Add New Student
+              </Typography>
+            </Box>
+            <form onSubmit={handleFormSubmit} className={classes.form}>
+              <TextField
+                type='text'
+                name='name'
+                onChange={handleValueChange}
+                value={state.name}
+                placeholder='Student Name'
+                required
+                fullWidth={true}
+                label='Name'
+                variant='outlined'
+                className={classes.formControl}
+              ></TextField>
+              <TextField
+                type='text'
+                name='sem'
+                onChange={handleValueChange}
+                value={state.sem}
+                placeholder='Current Semester'
+                required
+                fullWidth={true}
+                label='Semester'
+                variant='outlined'
+                className={classes.formControl}
+              ></TextField>
+              <TextField
+                type='text'
+                name='enrollmentId'
+                onChange={handleValueChange}
+                value={state.enrollmentId}
+                placeholder='Enrollment Id'
+                required
+                fullWidth={true}
+                label='Enrollment Id'
+                variant='outlined'
+                className={classes.formControl}
+              ></TextField>
+              <TextField
+                type='text'
+                name='email'
+                onChange={handleValueChange}
+                value={state.email}
+                placeholder='Student Email'
+                required
+                fullWidth={true}
+                label='Email'
+                variant='outlined'
+                className={classes.formControl}
+              ></TextField>
+              <TextField
+                type='text'
+                name='phone'
+                onChange={handleValueChange}
+                value={state.phone}
+                placeholder='Phone Number (Whatsapp)'
+                required
+                fullWidth={true}
+                label='Phone Number (Whatsapp)'
+                variant='outlined'
+                className={classes.formControl}
+              ></TextField>
+              <TextField
+                type='text'
+                name='password'
+                onChange={handleValueChange}
+                value={state.password}
+                placeholder='Student Password'
+                required
+                fullWidth={true}
+                label='Password'
+                variant='outlined'
+                className={classes.formControl}
+              ></TextField>
+            </form>
+          </CardContent>
+          <CardActions>
+            <Button
+              type='submit'
+              className={classes.btn}
+              variant='contained'
+              size='large'
+            >
+              Add New Student
+            </Button>
+          </CardActions>
+        </Card>
+      </Box>
     </div>
   );
 };

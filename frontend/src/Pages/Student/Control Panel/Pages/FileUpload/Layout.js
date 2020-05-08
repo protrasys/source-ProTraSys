@@ -154,9 +154,9 @@ const FileUpload = () => {
       />
       <Box variant='div' className={classes.dropzone}>
         {state.fileURL ? (
-          <CloudDownload style={{ fontSize: '5rem' }} />
+          <CloudDownload style={{ fontSize: '5rem', marginBottom: '1rem' }} />
         ) : (
-          <CloudUpload style={{ fontSize: '5rem' }} />
+          <CloudUpload style={{ fontSize: '5rem', marginBottom: '1rem' }} />
         )}
         {state.isUploading && (
           <div>
@@ -165,18 +165,21 @@ const FileUpload = () => {
               color='primary'
               value={state.progress}
             />
-            <p>progress: {state.progress}</p>
+            <p>progress : {state.progress}</p>
           </div>
         )}
         {state.fileURL ? (
           <Box component='div' className={classes.uploadForm}>
-            <Typography variant='h6'> Your File:- {state.fileName} </Typography>
+            <Typography variant='h6' style={{ marginBottom: '1rem' }}>
+              Your File :- {state.fileName}
+            </Typography>
             <TextField
               fullWidth
               onChange={handleOnChange}
               multiline={true}
               label='Description'
               variant='outlined'
+              style={{ marginBottom: '1rem' }}
             />
             <a
               href={state.fileURL}
@@ -184,13 +187,19 @@ const FileUpload = () => {
               target='_blank'
               rel='noopener noreferrer'
             >
-              <Button variant='contained' color='secondary'>
+              <Button
+                variant='contained'
+                color='primary'
+                size='large'
+                className={classes.downloadBtn}
+              >
                 Download File
               </Button>
             </a>
             <Button
               variant='contained'
-              color='primary'
+              className={classes.uploadBtn}
+              size='large'
               onClick={handleOnUploadButton}
               disabled={uploading}
             >
@@ -205,9 +214,12 @@ const FileUpload = () => {
               onUploadStart={handleUploadStart}
               onUploadError={handleUploadError}
               onUploadSuccess={handleUploadSuccess}
+              x
               onProgress={handleProgress}
+              className={classes.customFileInput}
             />
-            <p>Click to select files</p>
+            <br />
+            <span>Click to select files</span>
           </Box>
         )}
       </Box>

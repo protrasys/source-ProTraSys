@@ -5,24 +5,25 @@ const useStyles = (theme) =>
     root: {
       display: 'flex',
       justifyContent: 'center',
-      marginTop: theme.spacing(5),
+      marginTop: theme.spacing(2)
     },
     Card: {
-      minWidth: '40vw',
+      margin: 0,
+      position: 'absolute',
       [theme.breakpoints.down('sm')]: {
         minWidth: '60vw',
-        top: '10%',
+        top: '10%'
       },
       [theme.breakpoints.up('md')]: {
         minWidth: '70vw',
-        top: '10%',
+        top: '10%'
       },
       [theme.breakpoints.up('lg')]: {
         minWidth: '40vw',
-        top: '10%',
+        top: '10%'
       },
-      borderRadius: 15,
-    },
+      borderRadius: 15
+    }
   });
 
 export default useStyles;

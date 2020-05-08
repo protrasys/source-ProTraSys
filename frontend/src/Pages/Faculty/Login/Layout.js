@@ -1,25 +1,25 @@
-import React, { Component } from 'react';
-import { Box, Card, withStyles, MobileStepper } from '@material-ui/core';
-import useStyles from './Style';
-import EmailForm from './LoginForm/Email';
-import PasswordForm from './LoginForm/Password';
+import React, { Component } from "react";
+import { Box, Card, withStyles, MobileStepper } from "@material-ui/core";
+import useStyles from "./Style";
+import EmailForm from "./LoginForm/Email";
+import PasswordForm from "./LoginForm/Password";
 
 class FacultyLogin extends Component {
   state = {
     step: 1,
-    enrollmentId: '',
-    password: '',
+    enrollmentId: "",
+    password: ""
   };
 
   componentDidMount() {
-    document.title = 'Sign in - Faculty Accounts';
+    document.title = "Sign in - Faculty Accounts";
   }
 
   // Proceed to Next Step
   handleNextStep = () => {
     const { step } = this.state;
     this.setState({
-      step: step + 1,
+      step: step + 1
     });
   };
 
@@ -27,14 +27,14 @@ class FacultyLogin extends Component {
   handlePrevStep = () => {
     const { step } = this.state;
     this.setState({
-      step: step - 1,
+      step: step - 1
     });
   };
 
   // Handle Field Change Event
-  handleFieldChange = (e) => {
+  handleFieldChange = e => {
     this.setState({
-      [e.target.name]: e.target.value,
+      [e.target.name]: e.target.value
     });
   };
 
@@ -46,7 +46,7 @@ class FacultyLogin extends Component {
     switch (step) {
       case 1:
         return (
-          <Box className={classes.root} component='div'>
+          <Box className={classes.root} component="div">
             <Card className={classes.Card}>
               <EmailForm
                 nextStep={this.handleNextStep}
@@ -54,9 +54,9 @@ class FacultyLogin extends Component {
                 values={values}
               />
               <MobileStepper
-                position='static'
+                position="static"
                 style={{ flexGrow: 1 }}
-                variant='progress'
+                variant="progress"
                 steps={3}
                 activeStep={1}
               />
@@ -65,7 +65,7 @@ class FacultyLogin extends Component {
         );
       case 2:
         return (
-          <Box className={classes.root} component='div'>
+          <Box className={classes.root} component="div">
             <Card className={classes.Card}>
               <PasswordForm
                 prevStep={this.handlePrevStep}
@@ -73,8 +73,8 @@ class FacultyLogin extends Component {
                 values={values}
               />
               <MobileStepper
-                position='static'
-                variant='progress'
+                position="static"
+                variant="progress"
                 steps={3}
                 style={{ flexGrow: 1 }}
                 activeStep={2}

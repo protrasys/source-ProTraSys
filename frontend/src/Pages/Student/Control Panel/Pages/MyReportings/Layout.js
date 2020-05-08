@@ -36,11 +36,11 @@ const MyReportings = () => {
     EReports.map((data) => (
       <TableContainer key={data._id} component={Paper}>
         <Table className={classes.table}>
-          <TableHead>
+          <TableHead style={{ backgroundColor: '#eee' }}>
             <TableRow>
               <TableCell>Discussion </TableCell>
               <TableCell>Feedback </TableCell>
-              <TableCell>Reporting Date </TableCell>
+              <TableCell>Reporting Date</TableCell>
               <TableCell>Last Updated </TableCell>
             </TableRow>
           </TableHead>

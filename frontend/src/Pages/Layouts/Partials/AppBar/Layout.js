@@ -8,7 +8,7 @@ import {
   Box,
   Grid,
   SwipeableDrawer,
-  Button,
+  Button
 } from '@material-ui/core';
 import { Menu } from '@material-ui/icons';
 import useStyles from './Style';
@@ -159,7 +159,7 @@ function ButtonAppBar(props) {
 ButtonAppBar.defaultProps = {
   AppBarColor: 'transparent',
   title: 'P̾r̾o̾T̾r̾a̾S̾y̾s̾',
-  tagline: 'Project Tracking System',
+  tagline: 'Project Tracking System'
 };
 
 export default ButtonAppBar;

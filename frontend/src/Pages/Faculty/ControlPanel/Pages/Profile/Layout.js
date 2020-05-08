@@ -1,6 +1,6 @@
-import React from 'react';
-import useStyles from './Style';
-import { Skeleton } from '@material-ui/lab';
+import React from "react";
+import useStyles from "./Style";
+import { Skeleton } from "@material-ui/lab";
 import {
   Box,
   Card,
@@ -8,12 +8,12 @@ import {
   CardActions,
   Typography,
   Divider,
-  Button,
-} from '@material-ui/core';
-import { getFormattedString } from '../../../../../Helper';
-import { selectFaculty } from '../../../../../Store/selectors';
-import { useSelector } from 'react-redux';
-import Moment from 'react-moment';
+  Button
+} from "@material-ui/core";
+import { getFormattedString } from "../../../../../Helper";
+import { selectFaculty } from "../../../../../store/selectors";
+import { useSelector } from "react-redux";
+import Moment from "react-moment";
 
 function FacultyProfile() {
   const classes = useStyles();
@@ -22,22 +22,22 @@ function FacultyProfile() {
   const Faculty = { ...FacultyDetails.data };
 
   const RenderFacultyProfiles = () => (
-    <Box variant='div' component='div' className={classes.root}>
+    <Box variant="div" component="div" className={classes.root}>
       <Card className={classes.card}>
         <CardContent className={classes.cardContent}>
-          <Box className={classes.facultyInfo} component='div'>
-            <Box className={classes.facultyDates} component='div'>
-              <Moment format='DD/MM/YYYY'>
+          <Box className={classes.facultyInfo} component="div">
+            <Box className={classes.facultyDates} component="div">
+              <Moment format="DD/MM/YYYY">
                 {Faculty.date && getFormattedString(Faculty.date.from)}
               </Moment>
-              <Moment format='DD/MM/YYYY'>
+              <Moment format="DD/MM/YYYY">
                 {getFormattedString(Faculty.updatedAt)}
               </Moment>
             </Box>
-            <Box component='div'>
+            <Box component="div">
               <img
                 src={Faculty.profile}
-                alt='Faculty Profile Image'
+                alt="Faculty Profile Image"
                 className={classes.profileImg}
               />
             </Box>
@@ -47,173 +47,173 @@ function FacultyProfile() {
             <Typography className={classes.facultyDesignation}>
               {getFormattedString(Faculty.designation)}
             </Typography>
-            <Button variant='contained' className={classes.btn}>
+            <Button variant="contained" className={classes.btn}>
               Send Email
             </Button>
           </Box>
-          <Box component='div'>
-            <Box component='div' style={{ padding: '2rem' }}>
+          <Box component="div">
+            <Box component="div" style={{ padding: "2rem" }}>
               <Typography
                 className={classes.heading}
                 style={{
-                  marginBottom: '.5rem',
-                  fontSize: '.9rem',
-                  fontWeight: '500',
-                  textTransform: 'uppercase',
+                  marginBottom: ".5rem",
+                  fontSize: ".9rem",
+                  fontWeight: "500",
+                  textTransform: "uppercase"
                 }}
               >
                 Official Information
               </Typography>
               <Box
-                component='div'
+                component="div"
                 style={{
-                  display: 'flex',
+                  display: "flex"
                 }}
               >
-                <Box component='div'>
+                <Box component="div">
                   <Typography
                     style={{
-                      fontSize: '.8rem',
-                      fontWeight: '500',
+                      fontSize: ".8rem",
+                      fontWeight: "500",
 
-                      marginRight: '1rem',
+                      marginRight: "1rem"
                     }}
-                    color='inherit'
+                    color="inherit"
                   >
                     Email
                   </Typography>
                   <Typography
                     style={{
-                      fontSize: '.8rem',
+                      fontSize: ".8rem",
 
-                      marginRight: '1rem',
+                      marginRight: "1rem"
                     }}
-                    color='inherit'
+                    color="inherit"
                   >
                     {getFormattedString(Faculty.email)}
                   </Typography>
                 </Box>
-                <Box component='div'>
+                <Box component="div">
                   <Typography
                     style={{
-                      fontSize: '.8rem',
-                      fontWeight: '500',
+                      fontSize: ".8rem",
+                      fontWeight: "500",
 
-                      marginRight: '1rem',
+                      marginRight: "1rem"
                     }}
-                    color='inherit'
+                    color="inherit"
                   >
                     Phone
                   </Typography>
                   <Typography
                     style={{
-                      fontSize: '.8rem',
+                      fontSize: ".8rem",
 
-                      marginRight: '1rem',
+                      marginRight: "1rem"
                     }}
-                    color='inherit'
+                    color="inherit"
                   >
                     {getFormattedString(Faculty.phone)}
                   </Typography>
                 </Box>
               </Box>
             </Box>
-            <Divider style={{ backgroundColor: '#333' }} />
-            <Box component='div' style={{ padding: '2rem' }}>
+            <Divider style={{ backgroundColor: "#ccc" }} />
+            <Box component="div" style={{ padding: "2rem" }}>
               <Typography
                 className={classes.heading}
                 style={{
-                  marginBottom: '.5rem',
-                  fontSize: '.9rem',
-                  fontWeight: '500',
-                  textTransform: 'uppercase',
+                  marginBottom: ".5rem",
+                  fontSize: ".9rem",
+                  fontWeight: "500",
+                  textTransform: "uppercase"
                 }}
               >
                 Personal Information
               </Typography>
               <Box
-                component='div'
+                component="div"
                 style={{
-                  display: 'flex',
+                  display: "flex"
                 }}
               >
-                <Box component='div'>
+                <Box component="div">
                   <Typography
                     style={{
-                      fontSize: '.8rem',
-                      fontWeight: '500',
+                      fontSize: ".8rem",
+                      fontWeight: "500",
 
-                      marginRight: '1rem',
+                      marginRight: "1rem"
                     }}
-                    color='inherit'
+                    color="inherit"
                   >
                     Enrollment ID
                   </Typography>
                   <Typography
                     style={{
-                      fontSize: '.8rem',
+                      fontSize: ".8rem",
 
-                      marginRight: '1rem',
+                      marginRight: "1rem"
                     }}
-                    color='inherit'
+                    color="inherit"
                   >
                     {getFormattedString(Faculty.enrollmentId)}
                   </Typography>
                 </Box>
-                <Box component='div'>
+                <Box component="div">
                   <Typography
                     style={{
-                      fontSize: '.8rem',
-                      fontWeight: '500',
-                      marginRight: '1rem',
+                      fontSize: ".8rem",
+                      fontWeight: "500",
+                      marginRight: "1rem"
                     }}
-                    color='inherit'
+                    color="inherit"
                   >
                     Phone
                   </Typography>
                   <Typography
                     style={{
-                      fontSize: '.8rem',
+                      fontSize: ".8rem",
 
-                      marginRight: '1rem',
+                      marginRight: "1rem"
                     }}
-                    color='inherit'
+                    color="inherit"
                   >
                     {getFormattedString(Faculty.phone)}
                   </Typography>
                 </Box>
               </Box>
             </Box>
-            <Divider style={{ backgroundColor: '#333' }} />
-            <Box component='div' style={{ padding: '2rem' }}>
+            <Divider style={{ backgroundColor: "#ccc" }} />
+            <Box component="div" style={{ padding: "2rem" }}>
               <Typography
                 className={classes.heading}
                 style={{
-                  marginBottom: '.5rem',
-                  fontSize: '.9rem',
-                  fontWeight: '500',
-                  textTransform: 'uppercase',
+                  marginBottom: ".5rem",
+                  fontSize: ".9rem",
+                  fontWeight: "500",
+                  textTransform: "uppercase"
                 }}
               >
                 Skills
               </Typography>
               <Box
-                component='div'
-                style={{ display: 'flex', flexWrap: 'wrap' }}
+                component="div"
+                style={{ display: "flex", flexWrap: "wrap" }}
               >
                 {Faculty.skills &&
                   Faculty.skills.map((value, index) => (
-                    <Box component='div' key={index}>
+                    <Box component="div" key={index}>
                       <Typography
                         className={classes.FacultySkills}
                         style={{
-                          border: '1px solid #777',
-                          padding: '.6rem .8rem',
-                          borderRadius: '.15rem',
-                          fontWeight: '100',
-                          fontSize: '.9rem',
-                          marginRight: '.8rem',
-                          marginBottom: '.8rem',
+                          border: "1px solid #777",
+                          padding: ".6rem .8rem",
+                          borderRadius: ".15rem",
+                          fontWeight: "100",
+                          fontSize: ".9rem",
+                          marginRight: ".8rem",
+                          marginBottom: ".8rem"
                         }}
                       >
                         {value}
@@ -232,7 +232,7 @@ function FacultyProfile() {
     <div>
       <h1>Faculty Profile</h1>
       {FacultyDetails.loading ? (
-        <Skeleton height={400} variant='rect' animation='wave' />
+        <Skeleton height={400} variant="rect" animation="wave" />
       ) : (
         RenderFacultyProfiles()
       )}

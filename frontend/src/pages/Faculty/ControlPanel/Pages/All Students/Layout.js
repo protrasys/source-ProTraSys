@@ -1,13 +1,13 @@
-import React, { useEffect, forwardRef, useState } from "react";
-import useStyles from "./Style";
-import { Skeleton } from "@material-ui/lab";
-import { useSelector } from "react-redux";
-import { GetAllStudents, patchStudent } from "../../../../../store/actions";
+import React, { useEffect, forwardRef, useState } from 'react';
+import useStyles from './Style';
+import { Skeleton } from '@material-ui/lab';
+import { useSelector } from 'react-redux';
+import { GetAllStudents, patchStudent } from '../../../../../Store/actions';
 import {
   selectAllStudents,
-  selectAlerts
-} from "../../../../../store/selectors";
-import { getFormattedString } from "../../../../../Helper";
+  selectAlerts,
+} from '../../../../../Store/selectors';
+import { getFormattedString } from '../../../../../Helper';
 import {
   Typography,
   Box,
@@ -26,12 +26,12 @@ import {
   FormControl,
   FormHelperText,
   TextField,
-  Snackbar
-} from "@material-ui/core";
-import { Edit, Close } from "@material-ui/icons";
+  Snackbar,
+} from '@material-ui/core';
+import { Edit, Close } from '@material-ui/icons';
 
 const Transition = forwardRef(function Transition(props, ref) {
-  return <Slide direction="up" ref={ref} {...props} />;
+  return <Slide direction='up' ref={ref} {...props} />;
 });
 
 const AllStudents = () => {
@@ -43,21 +43,21 @@ const AllStudents = () => {
   };
   const [state, setState] = useState({
     data: {},
-    index: "",
-    uId: ""
+    index: '',
+    uId: '',
   });
 
   const [data, setData] = useState({
-    name: "",
-    sem: "",
-    enrollmentId: "",
-    email: "",
-    phone: "",
-    password: ""
+    name: '',
+    sem: '',
+    enrollmentId: '',
+    email: '',
+    phone: '',
+    password: '',
   });
 
   const handleClickOpen = (data, index, id) => {
-    setState(prevState => {
+    setState((prevState) => {
       return { ...prevState, data, index, uId: id };
     });
     setData({
@@ -66,7 +66,7 @@ const AllStudents = () => {
       enrollmentId: data.enrollmentId,
       email: data.email,
       phone: data.phone,
-      password: data.password
+      password: data.password,
     });
     setOpen(true);
   };
@@ -75,7 +75,7 @@ const AllStudents = () => {
     setOpen(false);
   };
 
-  const handleOnSubmit = async e => {
+  const handleOnSubmit = async (e) => {
     e.preventDefault();
     await patchStudent(data, state.uId);
     setSnackBarOpen(open);
@@ -83,9 +83,9 @@ const AllStudents = () => {
     setOpen(false);
   };
 
-  const handleOnChange = e => {
+  const handleOnChange = (e) => {
     e.persist();
-    setData(prevState => {
+    setData((prevState) => {
       return { ...prevState, [e.target.name]: e.target.value };
     });
   };
@@ -102,12 +102,12 @@ const AllStudents = () => {
 
   const RenderAllStudents = () => {
     return (
-      <Box component="div">
+      <Box component='div'>
         <TableContainer>
           <Table
             stickyHeader={true}
-            aria-label="sticky table"
-            style={{ textAlign: "center" }}
+            aria-label='sticky table'
+            style={{ textAlign: 'center' }}
           >
             <TableHead className={classes.head}>
               <TableRow>
@@ -134,7 +134,7 @@ const AllStudents = () => {
                     <TableCell className={classes.studentData}>
                       {data.projectGroupId
                         ? getFormattedString(data.projectGroupId.projectName)
-                        : "N/A"}
+                        : 'N/A'}
                     </TableCell>
                     <TableCell className={classes.studentData}>
                       <div className={classes.iconSpacing}>
@@ -142,7 +142,7 @@ const AllStudents = () => {
                           className={classes.link}
                           onClick={() => handleClickOpen(data, index, data._id)}
                         >
-                          <Edit color="primary" />
+                          <Edit color='primary' />
                         </p>
                       </div>
                     </TableCell>
@@ -161,83 +161,83 @@ const AllStudents = () => {
             <AppBar className={classes.appBar}>
               <Toolbar>
                 <IconButton
-                  edge="start"
-                  color="inherit"
+                  edge='start'
+                  color='inherit'
                   onClick={handleClose}
-                  aria-label="close"
+                  aria-label='close'
                 >
                   <Close />
                 </IconButton>
-                <Typography variant="h6" className={classes.title}>
+                <Typography variant='h6' className={classes.title}>
                   Update Student Details
                 </Typography>
-                <Button autoFocus color="inherit" type="submit">
+                <Button autoFocus color='inherit' type='submit'>
                   Save
                 </Button>
               </Toolbar>
             </AppBar>
-            <Box component="div" className={classes.Form}>
-              <Typography variant="h4"> Updation Form </Typography>
-              <FormControl fullWidth={true} margin="normal" required>
+            <Box component='div' className={classes.Form}>
+              <Typography variant='h4'> Updation Form </Typography>
+              <FormControl fullWidth={true} margin='normal' required>
                 <TextField
                   onChange={handleOnChange}
                   defaultValue={state.data.name}
-                  label="Student Name"
-                  variant="filled"
-                  name="name"
+                  label='Student Name'
+                  variant='filled'
+                  name='name'
                   required
                   className={classes.margin}
                 />
                 <TextField
                   onChange={handleOnChange}
                   defaultValue={state.data.sem}
-                  label="Student Semester"
-                  variant="filled"
+                  label='Student Semester'
+                  variant='filled'
                   required
-                  name="sem"
+                  name='sem'
                   className={classes.margin}
                 />
                 <TextField
                   onChange={handleOnChange}
                   defaultValue={state.data.enrollmentId}
-                  label="Student Enrollment Id"
-                  variant="filled"
-                  name="enrollmentId"
+                  label='Student Enrollment Id'
+                  variant='filled'
+                  name='enrollmentId'
                   required
                   className={classes.margin}
                 />
                 <TextField
                   onChange={handleOnChange}
                   defaultValue={state.data.email}
-                  label="Student Email Address"
-                  type="email"
-                  name="email"
-                  variant="filled"
+                  label='Student Email Address'
+                  type='email'
+                  name='email'
+                  variant='filled'
                   required
                   className={classes.margin}
                 />
                 <TextField
                   onChange={handleOnChange}
                   defaultValue={state.data.phone}
-                  label="Student Phone (Whatsapp)"
-                  variant="filled"
+                  label='Student Phone (Whatsapp)'
+                  variant='filled'
                   required
-                  name="phone"
+                  name='phone'
                   className={classes.margin}
                 />
                 <TextField
                   onChange={handleOnChange}
                   defaultValue={state.data.password}
-                  placeholder="Enter Your Password to Update"
-                  label="Student Password"
-                  variant="filled"
-                  type="text"
-                  name="password"
+                  placeholder='Enter Your Password to Update'
+                  label='Student Password'
+                  variant='filled'
+                  type='text'
+                  name='password'
                   required
-                  aria-describedby="my-helper-password"
+                  aria-describedby='my-helper-password'
                   className={classes.margin}
                 />
-                <FormHelperText id="my-helper-password">
+                <FormHelperText id='my-helper-password'>
                   We'll never share your password.
                 </FormHelperText>
               </FormControl>
@@ -251,7 +251,7 @@ const AllStudents = () => {
   // console.log(data);
 
   return isDataLoading ? (
-    <Skeleton variant="rect" animation="wave" height={500} />
+    <Skeleton variant='rect' animation='wave' height={500} />
   ) : (
     <div>
       <h1>Get All Students</h1>
@@ -259,23 +259,23 @@ const AllStudents = () => {
         open={snackBarOpen}
         transitionDuration={500}
         key={Math.random()}
-        anchorOrigin={{ vertical: "bottom", horizontal: "left" }}
+        anchorOrigin={{ vertical: 'bottom', horizontal: 'left' }}
         ContentProps={{
           classes: {
-            root: AlertState.data !== null ? classes.success : classes.danger
-          }
+            root: AlertState.data !== null ? classes.success : classes.danger,
+          },
         }}
         TransitionComponent={Slide}
         message={!AlertState.loading && getFormattedString(AlertState.data)}
         action={
           <React.Fragment>
             <IconButton
-              size="small"
-              aria-label="close"
-              color="inherit"
+              size='small'
+              aria-label='close'
+              color='inherit'
               onClick={handleSnackBarClose}
             >
-              <Close fontSize="small" />
+              <Close fontSize='small' />
             </IconButton>
           </React.Fragment>
         }

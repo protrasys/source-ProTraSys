@@ -1,19 +1,19 @@
-import React, { useEffect } from "react";
-import useStyles from "./Style";
-import Moment from "react-moment";
+import React, { useEffect } from 'react';
+import useStyles from './Style';
+import Moment from 'react-moment';
 import {
   Box,
   Card,
   CardContent,
   Grid,
   Typography,
-  Divider
-} from "@material-ui/core";
-import { getFormattedString } from "../../../../../Helper";
-import { selectAllFaculties } from "../../../../../store/selectors";
-import { GetAllFaculties } from "../../../../../store/actions";
-import { useSelector } from "react-redux";
-import { Skeleton } from "@material-ui/lab";
+  Divider,
+} from '@material-ui/core';
+import { getFormattedString } from '../../../../../Helper';
+import { selectAllFaculties } from '../../../../../Store/selectors';
+import { GetAllFaculties } from '../../../../../Store/actions';
+import { useSelector } from 'react-redux';
+import { Skeleton } from '@material-ui/lab';
 
 function AllFaculty() {
   const classes = useStyles();
@@ -28,34 +28,34 @@ function AllFaculty() {
 
   const RenderAllFaculties = () => {
     return (
-      <Box component="div">
+      <Box component='div'>
         <Grid container spacing={3}>
           {AllFaculty &&
             AllFaculty.map((data, index) => (
               <Grid item xs={12} s={6} md={6} lg={4} key={index}>
                 <Card
-                  variant="elevation"
+                  variant='elevation'
                   elevation={1}
                   className={classes.Card}
                 >
                   <CardContent className={classes.CardContent}>
-                    <Box component="div" className={classes.aboutFaculty}>
-                      <Moment format="DD/MM/YYYY">
+                    <Box component='div' className={classes.aboutFaculty}>
+                      <Moment format='DD/MM/YYYY'>
                         {getFormattedString(data.date.from)}
                       </Moment>
-                      <Moment format="DD/MM/YYYY">
+                      <Moment format='DD/MM/YYYY'>
                         {getFormattedString(data.updatedAt)}
                       </Moment>
                     </Box>
-                    <Box component="div">
+                    <Box component='div'>
                       <img
                         src={data.profile}
                         alt={data.name}
                         className={classes.profile}
                       />
                     </Box>
-                    <Box component="div">
-                      <Typography color="inherit" className={classes.name}>
+                    <Box component='div'>
+                      <Typography color='inherit' className={classes.name}>
                         {getFormattedString(data.name)}
                       </Typography>
                       <Typography className={classes.designation}>
@@ -72,14 +72,14 @@ function AllFaculty() {
                       </Typography>
                     </Box>
                   </CardContent>
-                  <Box component="div" className={classes.skills}>
+                  <Box component='div' className={classes.skills}>
                     <Typography
-                      color="inherit"
+                      color='inherit'
                       className={classes.skillsHeading}
                     >
                       Skills
                     </Typography>
-                    <Box style={{ display: "flex", flexWrap: "wrap" }}>
+                    <Box style={{ display: 'flex', flexWrap: 'wrap' }}>
                       {getFormattedString(
                         data.skills.map((value, index) => (
                           <Typography
@@ -100,7 +100,7 @@ function AllFaculty() {
     );
   };
   return isAllFacultyLoading ? (
-    <Skeleton variant="rect" height={500} animation="wave" />
+    <Skeleton variant='rect' height={500} animation='wave' />
   ) : (
     RenderAllFaculties()
   );

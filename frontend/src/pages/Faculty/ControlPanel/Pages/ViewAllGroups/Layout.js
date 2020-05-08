@@ -1,11 +1,11 @@
-import React, { useEffect } from "react";
-import useStyles from "./Style";
-import { getFormattedString } from "../../../../../Helper";
-import { useSelector } from "react-redux";
-import { fetchAllProjectGroups } from "../../../../../store/actions";
-import { selectAllProjectGroups } from "../../../../../store/selectors";
-import { Skeleton } from "@material-ui/lab";
-import { Box, Typography, Paper } from "@material-ui/core";
+import React, { useEffect } from 'react';
+import useStyles from './Style';
+import { getFormattedString } from '../../../../../Helper';
+import { useSelector } from 'react-redux';
+import { fetchAllProjectGroups } from '../../../../../Store/actions';
+import { selectAllProjectGroups } from '../../../../../Store/selectors';
+import { Skeleton } from '@material-ui/lab';
+import { Box, Typography, Paper } from '@material-ui/core';
 
 const ViewAllProjectGroups = () => {
   const classes = useStyles();
@@ -21,24 +21,24 @@ const ViewAllProjectGroups = () => {
 
   const RenderAllGroups = () => {
     return isAllGroupRendering ? (
-      <Skeleton variant="rect" animation="wave" height={500} />
+      <Skeleton variant='rect' animation='wave' height={500} />
     ) : (
       AllGroups &&
         AllGroups.map((data, index) => (
-          <Box component="div" key={index} className={classes.root}>
+          <Box component='div' key={index} className={classes.root}>
             <Box component={Paper} className={classes.paper}>
               <Typography className={classes.heading}>
-                Project Details{" "}
+                Project Details{' '}
                 <span className={classes.group}>Group No.{index + 1}</span>
               </Typography>
-              <Box component="div" className={classes.projectDetails}>
+              <Box component='div' className={classes.projectDetails}>
                 <Typography className={classes.head}>Name</Typography>
                 <Typography className={classes.detail}>
                   {data.projectName}
                 </Typography>
                 <Typography className={classes.head}>Technology</Typography>
                 <Typography>
-                  {data.technology.map(value => (
+                  {data.technology.map((value) => (
                     <Typography className={classes.detail}>{value}</Typography>
                   ))}
                 </Typography>
@@ -50,8 +50,8 @@ const ViewAllProjectGroups = () => {
               <Typography className={classes.heading}>
                 Student Details
               </Typography>
-              <Box component="div" className={classes.allStudent}>
-                <Box component="div" className={classes.student}>
+              <Box component='div' className={classes.allStudent}>
+                <Box component='div' className={classes.student}>
                   <Typography className={classes.individualStudentDetails}>
                     1st Student Details
                   </Typography>
@@ -68,7 +68,7 @@ const ViewAllProjectGroups = () => {
                     Enrollment Id : {data.stu01.enrollmentId}
                   </Typography>
                 </Box>
-                <Box component="div" className={classes.student}>
+                <Box component='div' className={classes.student}>
                   <Typography className={classes.individualStudentDetails}>
                     2nd Student Details
                   </Typography>
@@ -83,7 +83,7 @@ const ViewAllProjectGroups = () => {
                     Enrollment Id : {data.stu02.enrollmentId}
                   </Typography>
                 </Box>
-                <Box component="div" className={classes.student}>
+                <Box component='div' className={classes.student}>
                   <Typography className={classes.individualStudentDetails}>
                     3rd Student Details
                   </Typography>
@@ -99,7 +99,7 @@ const ViewAllProjectGroups = () => {
                     Enrollment Id : {data.stu03.enrollmentId}
                   </Typography>
                 </Box>
-                <Box component="div" className={classes.student}>
+                <Box component='div' className={classes.student}>
                   <Typography className={classes.individualStudentDetails}>
                     4th Student Details
                   </Typography>

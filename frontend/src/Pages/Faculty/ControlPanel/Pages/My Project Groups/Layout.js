@@ -1,11 +1,12 @@
-import React, { useEffect } from 'react';
-import useStyles from './Style';
-import { fetchMineProjectGroups } from '../../../../../Store/actions';
-import { useSelector } from 'react-redux';
-import { selectMineProjectGroups } from '../../../../../Store/selectors';
-import { Skeleton } from '@material-ui/lab';
-import Moment from 'react-moment';
-import { getFormattedString } from '../../../../../Helper';
+import React, { useEffect } from "react";
+import useStyles from "./Style";
+import { fetchMineProjectGroups } from "../../../../../store/actions";
+import { useSelector } from "react-redux";
+import { selectMineProjectGroups } from "../../../../../store/selectors";
+import { Skeleton } from "@material-ui/lab";
+import Moment from "react-moment";
+import { getFormattedString } from "../../../../../Helper";
+import { Box, Typography, Paper } from "@material-ui/core";
 const MineProjectGroups = () => {
   const classes = useStyles();
 
@@ -20,37 +21,198 @@ const MineProjectGroups = () => {
 
   const RenderMineProjectGroups = () => {
     return (
-      GroupData &&
-      GroupData.map((data, index) => (
-        <div key={index} className={classes.root}>
-          <p> Sr. No {getFormattedString(index + 1)} </p>
-          <p> Project Name: {getFormattedString(data.projectName)} </p>
-          <p> Defination : {getFormattedString(data.definition)} </p>
-          <p> Stu01 Name : {getFormattedString(data.stu01.name)} </p>
-          <p> Stu01 Sem : {getFormattedString(data.stu01.sem)} </p>
-          <p> Teamleader Name: {getFormattedString(data.teamLeader.name)} </p>
-          <p> TeamLeader Sem : {getFormattedString(data.teamLeader.sem)} </p>
-          <p> Faculty Name: {getFormattedString(data.faculty.name)} </p>
-          <p> Faculty Phone : {getFormattedString(data.faculty.phone)} </p>
-          <p>
-            Faculty Skill :
-            {getFormattedString(
-              data.technology.map((value, index) => (
-                <span key={index}> {value} </span>
-              ))
-            )}{' '}
-          </p>
-          <p>
-            Faculty Designation : {getFormattedString(data.faculty.designation)}
-          </p>
-          <p>
-            Date :
-            <Moment format='DD/MMM/YYYY'>
-              {getFormattedString(data.createdAt)}
-            </Moment>
-          </p>
-        </div>
-      ))
+      <Box variant="div">
+        {GroupData &&
+          GroupData.map((data, index) => (
+            <Box variant="div" key={index}>
+              <Box component={Paper} className={classes.paper}>
+                <Typography className={classes.heading}>
+                  Project Details
+                  <span className={classes.group}>Group No.{index + 1}</span>
+                </Typography>
+                <Box component="div" className={classes.projectDetails}>
+                  <Typography className={classes.head}>Name</Typography>
+                  <Typography className={classes.detail}>
+                    {getFormattedString(data.projectName)}
+                  </Typography>
+                  <Typography className={classes.head}>Technology</Typography>
+                  <Typography>
+                    {data.technology.map(value => (
+                      <Typography className={classes.detail}>
+                        {getFormattedString(value)}
+                      </Typography>
+                    ))}
+                  </Typography>
+                  <Typography className={classes.head}>Definition</Typography>
+                  <Typography className={classes.detail}>
+                    {getFormattedString(data.definition)}
+                  </Typography>
+                </Box>
+                <Typography className={classes.heading}>
+                  Student Details
+                </Typography>
+                <Box component="div" className={classes.allStudent}>
+                  <Box component="div" className={classes.student}>
+                    <Typography className={classes.individualStudentDetails}>
+                      1st Student Details
+                    </Typography>
+                    <Typography className={classes.head}>Name</Typography>
+                    <Typography className={classes.detail}>
+                      {getFormattedString(data.stu01.name)}
+                    </Typography>
+                    <Typography className={classes.head}>Semester</Typography>
+                    <Typography className={classes.detail}>
+                      {getFormattedString(data.stu01.sem)}
+                    </Typography>
+                    <Typography className={classes.head}>
+                      Enrollment Id
+                    </Typography>
+                    <Typography className={classes.detail}>
+                      {getFormattedString(data.stu01.enrollmentId)}
+                    </Typography>
+                    <Typography className={classes.head}>Email</Typography>
+                    <Typography className={classes.detail}>
+                      {getFormattedString(data.stu01.email)}
+                    </Typography>
+                    <Typography className={classes.head}>Phone</Typography>
+                    <Typography className={classes.detail}>
+                      {getFormattedString(data.stu01.phone)}
+                    </Typography>
+                  </Box>
+                  <Box component="div" className={classes.student}>
+                    <Typography className={classes.individualStudentDetails}>
+                      2nd Student Details
+                    </Typography>
+                    <Typography className={classes.head}>Name</Typography>
+                    <Typography className={classes.detail}>
+                      {getFormattedString(data.stu02.name)}
+                    </Typography>
+                    <Typography className={classes.head}>Semester</Typography>
+                    <Typography className={classes.detail}>
+                      {getFormattedString(data.stu02.sem)}
+                    </Typography>
+                    <Typography className={classes.head}>
+                      Enrollment Id
+                    </Typography>
+                    <Typography className={classes.detail}>
+                      {getFormattedString(data.stu02.enrollmentId)}
+                    </Typography>
+                    <Typography className={classes.head}>Email</Typography>
+                    <Typography className={classes.detail}>
+                      {getFormattedString(data.stu02.email)}
+                    </Typography>
+                    <Typography className={classes.head}>Phone</Typography>
+                    <Typography className={classes.detail}>
+                      {getFormattedString(data.stu02.phone)}
+                    </Typography>
+                  </Box>
+                  <Box component="div" className={classes.student}>
+                    <Typography className={classes.individualStudentDetails}>
+                      3rd Student Details
+                    </Typography>
+                    <Typography className={classes.head}>Name</Typography>
+                    <Typography className={classes.detail}>
+                      {getFormattedString(data.stu03.name)}
+                    </Typography>
+                    <Typography className={classes.head}>Semester</Typography>
+                    <Typography className={classes.detail}>
+                      {getFormattedString(data.stu03.sem)}
+                    </Typography>
+                    <Typography className={classes.head}>
+                      Enrollment Id
+                    </Typography>
+                    <Typography className={classes.detail}>
+                      {getFormattedString(data.stu03.enrollmentId)}
+                    </Typography>
+                    <Typography className={classes.head}>Email</Typography>
+                    <Typography className={classes.detail}>
+                      {getFormattedString(data.stu03.email)}
+                    </Typography>
+                    <Typography className={classes.head}>Phone</Typography>
+                    <Typography className={classes.detail}>
+                      {getFormattedString(data.stu03.phone)}
+                    </Typography>
+                  </Box>
+                  <Box component="div" className={classes.student}>
+                    <Typography className={classes.individualStudentDetails}>
+                      4th Student Details
+                    </Typography>
+                    <Typography className={classes.head}>Name</Typography>
+                    <Typography className={classes.detail}>
+                      {getFormattedString(data.stu04.name)}
+                    </Typography>
+                    <Typography className={classes.head}>Semester</Typography>
+                    <Typography className={classes.detail}>
+                      {getFormattedString(data.stu04.sem)}
+                    </Typography>
+                    <Typography className={classes.head}>
+                      Enrollment Id
+                    </Typography>
+                    <Typography className={classes.detail}>
+                      {getFormattedString(data.stu04.enrollmentId)}
+                    </Typography>
+                    <Typography className={classes.head}>Email</Typography>
+                    <Typography className={classes.detail}>
+                      {getFormattedString(data.stu04.email)}
+                    </Typography>
+                    <Typography className={classes.head}>Phone</Typography>
+                    <Typography className={classes.detail}>
+                      {getFormattedString(data.stu04.phone)}
+                    </Typography>
+                  </Box>
+                </Box>
+                <Typography className={classes.heading}>
+                  Faculty Details
+                </Typography>
+                <Box variant="div" className={classes.faculty}>
+                  <Typography className={classes.head}>Name</Typography>
+                  <Typography className={classes.detail}>
+                    {getFormattedString(data.faculty.name)}
+                  </Typography>
+                  <Typography className={classes.head}>Phone</Typography>
+                  <Typography className={classes.detail}>
+                    {getFormattedString(data.faculty.phone)}
+                  </Typography>
+                  <Typography className={classes.head}>Skills</Typography>
+                  {getFormattedString(
+                    data.technology.map((value, index) => (
+                      <Typography key={index} className={classes.detail}>
+                        {value}
+                      </Typography>
+                    ))
+                  )}
+                  <Typography className={classes.head}>Designation</Typography>
+                  <Typography className={classes.detail}>
+                    {getFormattedString(data.faculty.designation)}
+                  </Typography>
+                </Box>
+                <Typography className={classes.heading}>
+                  Other Details
+                </Typography>
+                <Box variant="div" className={classes.other}>
+                  <Typography className={classes.head}>
+                    TeamLeader Name
+                  </Typography>
+                  <Typography className={classes.detail}>
+                    {getFormattedString(data.teamLeader.name)}
+                  </Typography>
+                  <Typography className={classes.head}>
+                    TeamLeader Sem
+                  </Typography>
+                  <Typography className={classes.detail}>
+                    {getFormattedString(data.teamLeader.sem)}
+                  </Typography>
+                  <Typography className={classes.head}>Date</Typography>
+                  <Typography className={classes.detail}>
+                    <Moment format="DD/MMM/YYYY">
+                      {getFormattedString(data.createdAt)}
+                    </Moment>
+                  </Typography>
+                </Box>
+              </Box>
+            </Box>
+          ))}
+      </Box>
     );
   };
 
@@ -58,7 +220,7 @@ const MineProjectGroups = () => {
     <div>
       <h1>Mine Project Group</h1>
       {isLoading ? (
-        <Skeleton variant='rect' animation='wave' height={500} />
+        <Skeleton variant="rect" animation="wave" height={500} />
       ) : (
         RenderMineProjectGroups()
       )}

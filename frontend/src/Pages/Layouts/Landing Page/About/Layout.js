@@ -7,7 +7,7 @@ import {
   List,
   ListItem,
   ListItemIcon,
-  ListItemText,
+  ListItemText
 } from '@material-ui/core';
 import CheckIcon from '@material-ui/icons/Check';
 import IdeaPlan from '../../../../assets/undraw_ideas_s70l.svg';

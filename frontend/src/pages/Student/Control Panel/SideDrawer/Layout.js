@@ -13,13 +13,13 @@ import {
   ListItemIcon,
   ListItem,
   ListItemText,
-  Button
+  Button,
 } from '@material-ui/core';
 import { AuthServices } from '../../../../Services';
 import { useHistory } from 'react-router-dom';
-import { selectStudent } from '../../../../store/selectors';
+import { selectStudent } from '../../../../Store/selectors';
 import { useSelector } from 'react-redux';
-import { getIndividualStudent } from '../../../../store/actions';
+import { getIndividualStudent } from '../../../../Store/actions';
 import {
   Face,
   CloudUpload,
@@ -29,7 +29,7 @@ import {
   ChevronLeft,
   ChevronRight,
   Receipt,
-  ViewCarousel
+  ViewCarousel,
 } from '@material-ui/icons';
 import useStyles from './Style';
 
@@ -90,7 +90,7 @@ const SideDrawer = () => {
       <AppBar
         position='fixed'
         className={clsx(classes.appBar, {
-          [classes.appBarShift]: open
+          [classes.appBarShift]: open,
         })}
       >
         <Toolbar>
@@ -100,7 +100,7 @@ const SideDrawer = () => {
             onClick={handleDrawerOpen}
             edge='start'
             className={clsx(classes.menuButton, {
-              [classes.hide]: open
+              [classes.hide]: open,
             })}
           >
             <Menu />
@@ -123,13 +123,13 @@ const SideDrawer = () => {
         variant='permanent'
         className={clsx(classes.drawer, {
           [classes.drawerOpen]: open,
-          [classes.drawerClose]: !open
+          [classes.drawerClose]: !open,
         })}
         classes={{
           paper: clsx({
             [classes.drawerOpen]: open,
-            [classes.drawerClose]: !open
-          })
+            [classes.drawerClose]: !open,
+          }),
         }}
       >
         <div className={classes.toolbar}>

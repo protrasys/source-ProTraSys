@@ -9,7 +9,7 @@ import {
   IconButton,
   InputLabel,
   FormControl,
-  OutlinedInput,
+  OutlinedInput
 } from '@material-ui/core';
 import Logo from '../../../../../assets/ProTraSys_Logo.png';
 import useStyles from './Style';

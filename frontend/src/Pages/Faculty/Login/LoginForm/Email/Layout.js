@@ -6,7 +6,7 @@ import {
   Button,
   TextField,
   Popover,
-  Typography,
+  Typography
 } from '@material-ui/core';
 import { HomeOutlined } from '@material-ui/icons';
 import Logo from '../../../../../assets/ProTraSys_Logo.png';
@@ -106,11 +106,11 @@ const Email = (props) => {
         onClose={handleClose}
         anchorOrigin={{
           vertical: 'bottom',
-          horizontal: 'center',
+          horizontal: 'center'
         }}
         transformOrigin={{
           vertical: 'top',
-          horizontal: 'center',
+          horizontal: 'center'
         }}
       >
         <Box>

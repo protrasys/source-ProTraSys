@@ -1,45 +1,45 @@
-import { makeStyles } from '@material-ui/core/styles';
+import { makeStyles } from "@material-ui/core/styles";
 
-const useStyles = makeStyles((theme) => ({
+const useStyles = makeStyles(theme => ({
   heading: {
-    textAlign: 'center',
-    color: '#333',
-    backgroundColor: '#eee',
+    textAlign: "center",
+    color: "#333",
+    backgroundColor: "#eee"
   },
   studentData: {
-    textAlign: 'center',
+    textAlign: "center"
   },
   table: {
-    minWidth: 700,
+    minWidth: 700
   },
   iconSpacing: {
-    display: 'flex',
-    justifyContent: 'center',
-    alignItems: 'center',
+    display: "flex",
+    justifyContent: "center",
+    alignItems: "center"
   },
   appBar: {
-    position: 'relative',
+    position: "relative"
   },
   title: {
     marginLeft: theme.spacing(2),
-    flex: 1,
+    flex: 1
   },
   Form: {
-    display: 'block',
-    padding: theme.spacing(5),
+    display: "block",
+    padding: theme.spacing(5)
   },
   margin: {
-    margin: '.2rem',
+    margin: ".2rem"
   },
   success: {
-    backgroundColor: 'green',
+    backgroundColor: "green"
   },
   danger: {
-    backgroundColor: 'red',
+    backgroundColor: "red"
   },
   link: {
-    cursor: 'pointer',
-  },
+    cursor: "pointer"
+  }
 }));
 
 export default useStyles;

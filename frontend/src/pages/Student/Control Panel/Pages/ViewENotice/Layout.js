@@ -1,15 +1,15 @@
-import React, { useEffect } from "react";
-import { getFormattedString } from "../../../../../Helper";
-import { fetchENoticeListing } from "../../../../../store/actions";
-import useStyles from "./Style";
-import { Box, Paper, Typography, Divider } from "@material-ui/core";
-import { EventNote, Info } from "@material-ui/icons";
-import { Skeleton } from "@material-ui/lab";
-import Moment from "react-moment";
+import React, { useEffect } from 'react';
+import { getFormattedString } from '../../../../../Helper';
+import { fetchENoticeListing } from '../../../../../Store/actions';
+import useStyles from './Style';
+import { Box, Paper, Typography, Divider } from '@material-ui/core';
+import { EventNote, Info } from '@material-ui/icons';
+import { Skeleton } from '@material-ui/lab';
+import Moment from 'react-moment';
 
 // Import Redux Dependencies
-import { useSelector } from "react-redux";
-import { selectENotices } from "../../../../../store/selectors";
+import { useSelector } from 'react-redux';
+import { selectENotices } from '../../../../../Store/selectors';
 
 const ViewENotice = () => {
   const classes = useStyles();
@@ -25,31 +25,31 @@ const ViewENotice = () => {
   // TODO: Style this Notice Component
   const RenderENotices = () => (
     <Box
-      style={{ display: "flex", flexWrap: "wrap", justifyContent: "center" }}
+      style={{ display: 'flex', flexWrap: 'wrap', justifyContent: 'center' }}
     >
       {ENotices &&
-        ENotices.map(data => (
+        ENotices.map((data) => (
           <Box component={Paper} key={data._id} className={classes.notices}>
-            <Box variant="div" className={classes.notice}>
+            <Box variant='div' className={classes.notice}>
               <Box
-                variant="div"
+                variant='div'
                 style={{
-                  display: "flex",
-                  justifyContent: "space-between"
+                  display: 'flex',
+                  justifyContent: 'space-between',
                 }}
               >
-                <Box variant="div" className={classes.noticeIcon}>
+                <Box variant='div' className={classes.noticeIcon}>
                   <EventNote className={classes.icon} />
                 </Box>
-                <Box variant="div" className={classes.mobileInfo}>
+                <Box variant='div' className={classes.mobileInfo}>
                   <Info />
                 </Box>
               </Box>
-              <Box varint="div">
+              <Box varint='div'>
                 <Box
-                  style={{ display: "flex", justifyContent: "space-between" }}
+                  style={{ display: 'flex', justifyContent: 'space-between' }}
                 >
-                  <Typography className={classes.noticeTitle} color="inherit">
+                  <Typography className={classes.noticeTitle} color='inherit'>
                     {getFormattedString(data.title)}
                   </Typography>
                   <Info className={classes.desktopInfo} />
@@ -61,12 +61,12 @@ const ViewENotice = () => {
               </Box>
             </Box>
             <Divider />
-            <Box variant="div" className={classes.noticeOtherDetails}>
+            <Box variant='div' className={classes.noticeOtherDetails}>
               <Typography className={classes.detail}>
                 {getFormattedString(data.faculty.name)}
               </Typography>
               <Typography className={classes.detail}>
-                <Moment format="DD/MM/YYYY">
+                <Moment format='DD/MM/YYYY'>
                   {getFormattedString(data.createdAt)}
                 </Moment>
               </Typography>
@@ -80,7 +80,7 @@ const ViewENotice = () => {
     <div>
       <h1>View E Notice</h1>
       {!ENotices ? (
-        <Skeleton variant="rect" height={400} animation="wave" />
+        <Skeleton variant='rect' height={400} animation='wave' />
       ) : (
         RenderENotices()
       )}

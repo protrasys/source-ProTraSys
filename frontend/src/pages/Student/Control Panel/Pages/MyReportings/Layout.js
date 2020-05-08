@@ -1,7 +1,7 @@
-import React, { useEffect } from "react";
-import { getFormattedString } from "../../../../../Helper";
-import { fetchEReportListing } from "../../../../../store/actions";
-import useStyles from "./Style";
+import React, { useEffect } from 'react';
+import { getFormattedString } from '../../../../../Helper';
+import { fetchEReportListing } from '../../../../../Store/actions';
+import useStyles from './Style';
 import {
   Table,
   TableBody,
@@ -9,14 +9,14 @@ import {
   TableContainer,
   TableHead,
   TableRow,
-  Paper
-} from "@material-ui/core";
-import { Skeleton } from "@material-ui/lab";
-import Moment from "react-moment";
+  Paper,
+} from '@material-ui/core';
+import { Skeleton } from '@material-ui/lab';
+import Moment from 'react-moment';
 
 // Import Redux Dependencies
-import { useSelector } from "react-redux";
-import { selectStudent, selectEReports } from "../../../../../store/selectors";
+import { useSelector } from 'react-redux';
+import { selectStudent, selectEReports } from '../../../../../Store/selectors';
 
 const MyReportings = () => {
   const classes = useStyles();
@@ -33,10 +33,10 @@ const MyReportings = () => {
   // TODO: Style this Report Component
   const RenderEReports = () =>
     EReports &&
-    EReports.map(data => (
+    EReports.map((data) => (
       <TableContainer key={data._id} component={Paper}>
         <Table className={classes.table}>
-          <TableHead style={{ backgroundColor: "#eee" }}>
+          <TableHead style={{ backgroundColor: '#eee' }}>
             <TableRow>
               <TableCell>Discussion </TableCell>
               <TableCell>Feedback </TableCell>
@@ -49,12 +49,12 @@ const MyReportings = () => {
               <TableCell> {getFormattedString(data.discussion)} </TableCell>
               <TableCell> {getFormattedString(data.feedback)} </TableCell>
               <TableCell>
-                <Moment format="DD/MM/YYYY">
+                <Moment format='DD/MM/YYYY'>
                   {getFormattedString(data.createdAt)}
                 </Moment>
               </TableCell>
               <TableCell>
-                <Moment format="DD/MM/YYYY">
+                <Moment format='DD/MM/YYYY'>
                   {getFormattedString(data.updatedAt)}
                 </Moment>
               </TableCell>
@@ -68,7 +68,7 @@ const MyReportings = () => {
     <div>
       <h1>My All Reportings</h1>
       {!EReports ? (
-        <Skeleton variant="rect" height={400} animation="wave" />
+        <Skeleton variant='rect' height={400} animation='wave' />
       ) : (
         RenderEReports()
       )}

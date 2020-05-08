@@ -1,6 +1,6 @@
 import React from 'react';
 import { BrowserRouter, Route } from 'react-router-dom';
-import CustomRoutes from './routes';
+import CustomRoutes from './Routes';
 
 const App = () => {
   return (

@@ -11,7 +11,7 @@ module.exports.adminAuth = (req, res, next) => {
   // Check if token is not valid or not available
   if (!token) {
     return res.status(401).json({
-      msg: 'Authorization Failed'
+      msg: 'Authorization Failed',
     });
   }
 
@@ -23,7 +23,7 @@ module.exports.adminAuth = (req, res, next) => {
   } catch (err) {
     res.status(401).json({
       msg: 'Token is not Valid',
-      fullEerror: err
+      fullEerror: err,
     });
   }
 };
@@ -36,7 +36,7 @@ module.exports.studentAuth = (req, res, next) => {
   // Check if token is not valid or not available
   if (!token) {
     return res.status(401).json({
-      msg: 'Authorization Failed'
+      msg: 'Authorization Failed',
     });
   }
 
@@ -48,7 +48,7 @@ module.exports.studentAuth = (req, res, next) => {
   } catch (err) {
     res.status(401).json({
       msg: 'Token is not Valid',
-      fullEerror: err
+      fullEerror: err,
     });
   }
 };
@@ -61,7 +61,7 @@ module.exports.facultyAuth = (req, res, next) => {
   // Check if token is not valid or not available
   if (!token) {
     return res.status(401).json({
-      msg: 'Authorization Failed'
+      msg: 'Authorization Failed',
     });
   }
 
@@ -73,7 +73,7 @@ module.exports.facultyAuth = (req, res, next) => {
   } catch (err) {
     res.status(401).json({
       msg: 'Token is not Valid',
-      fullEerror: err
+      fullEerror: err,
     });
   }
 };

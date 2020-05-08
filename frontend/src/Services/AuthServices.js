@@ -1,6 +1,6 @@
 import Config from '../Config';
 import { NetworkServices, LogServices } from './index';
-import { store } from '../store';
+import { store } from '../Store';
 import {
   getStudentAction,
   eNoticeListingAction,
@@ -11,8 +11,8 @@ import {
   getAllProjectGroupsAction,
   getAllStudentsAction,
   getMineProjectGroups,
-  setAlert
-} from '../store/reducers';
+  setAlert,
+} from '../Store/reducers';
 
 const logger = LogServices.getInstance('AuthServices');
 const AUTH_LOCALSTORAGEKEY = 'badboysecurities_STUDENT';
@@ -171,7 +171,7 @@ class AuthService {
     if (!this._adminAuth) {
       return null;
     }
-    return this._adminAuth.token;
+    return this._adminAuth;
   }
 
   async adminLogout() {

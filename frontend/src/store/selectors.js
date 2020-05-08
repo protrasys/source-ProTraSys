@@ -45,3 +45,15 @@ export const selectMineProjectGroups = (state) => {
 export const selectCountedAllDocuments = (state) => {
   return selectState(state).AllDocuments;
 };
+
+export const selectAdmin = (state) => {
+  return selectState(state).admin;
+};
+
+export const selectAllAdmins = (state) => {
+  return selectState(state).allAdmins;
+};
+
+export const selectAllData = (state) => {
+  return selectState(state).AllData;
+};

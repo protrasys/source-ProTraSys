@@ -10,12 +10,12 @@ import IsFacultyLoggedOut from './PrivateRouters/Faculty/isLoggedOut';
 import IsAdminLoggedIn from './PrivateRouters/Admin/isLoggedIn';
 import IsAdminLoggedOut from './PrivateRouters/Admin/isLoggedOut';
 
-import { FacultyLogin, FacultyControlPanel } from '../components/Faculty';
-import { StudentLogin, StudentControlPanel } from '../components/Student';
-import { AdminLogin, AdminControlPanel } from '../components/Admin';
+import { FacultyLogin, FacultyControlPanel } from '../Pages/Faculty';
+import { StudentLogin, StudentControlPanel } from '../Pages/Student';
+import { AdminLogin, AdminControlPanel } from '../Pages/Admin';
 
-import LandingPage from '../components/Layouts/Landing Page';
-import ForOForPage from '../components/Layouts/Landing Page/PageNotFound';
+import LandingPage from '../Pages/Layouts/Landing Page';
+import ForOForPage from '../Pages/Layouts/Landing Page/PageNotFound';
 
 const Routes = () => {
   return (

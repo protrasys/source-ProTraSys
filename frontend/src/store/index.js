@@ -4,7 +4,7 @@ import rootReducers from './reducers';
 import { loggerMiddleware } from './logger';
 
 const appReducers = combineReducers({
-  root: rootReducers
+  root: rootReducers,
 });
 
 const middleware = composeWithDevTools(applyMiddleware(...loggerMiddleware));

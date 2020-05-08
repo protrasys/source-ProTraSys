@@ -10,7 +10,7 @@ const getDataAction = (name) => {
     reset: createAction(getActionName(`${name}_RESET`)),
     init: createAction(getActionName(`${name}_INIT`)),
     failed: createAction(getActionName(`${name}_FAILED`)),
-    success: createAction(getActionName(`${name}_SUCCESS`))
+    success: createAction(getActionName(`${name}_SUCCESS`)),
   };
 };
 
@@ -30,6 +30,9 @@ export const getMineProjectGroups = getDataAction('GET_MINE_PROJECTGROUPS');
 // Actions for Administrator
 export const setAlert = getDataAction('SET_ALERT');
 export const countAllDocuments = getDataAction('COUNT_ALL_DOCUMENTS');
+export const getAdminAction = getDataAction('GET_ADMIN');
+export const getAllAdminAction = getDataAction('GET_ALL_ADMINS');
+export const getAllData = getDataAction('GET_ALL_DATA');
 
 const addDataAction = (action, key) => {
   return (reducerFactory) => {
@@ -40,8 +43,8 @@ const addDataAction = (action, key) => {
           initialized: false,
           loading: true,
           error: null,
-          data: null
-        }
+          data: null,
+        },
       };
     });
     reducerFactory.add(action.init, (state) => {
@@ -51,8 +54,8 @@ const addDataAction = (action, key) => {
           initialized: true,
           loading: true,
           error: null,
-          data: null
-        }
+          data: null,
+        },
       };
     });
     reducerFactory.add(action.failed, (state, action) => {
@@ -62,8 +65,8 @@ const addDataAction = (action, key) => {
           initialized: true,
           loading: false,
           error: action.payload,
-          data: null
-        }
+          data: null,
+        },
       };
     });
     reducerFactory.add(action.success, (state, action) => {
@@ -73,8 +76,8 @@ const addDataAction = (action, key) => {
           initialized: true,
           loading: false,
           error: null,
-          data: action.payload
-        }
+          data: action.payload,
+        },
       };
     });
   };
@@ -85,74 +88,86 @@ const initialState = {
     initialized: false,
     loading: false,
     error: null,
-    data: null
+    data: null,
   },
   eReporting: {
     initialized: false,
     loading: false,
     error: null,
-    data: null
+    data: null,
   },
   projectFiles: {
     initialized: false,
     loading: false,
     error: null,
-    data: null
+    data: null,
   },
   student: {
     initialized: false,
     loading: false,
     error: null,
-    data: null
+    data: null,
   },
   faculty: {
     initialized: false,
     loading: false,
     error: null,
-    data: null
+    data: null,
   },
   allFaculties: {
     initialized: false,
     loading: false,
     error: null,
-    data: null
+    data: null,
   },
   allStudents: {
     initialized: false,
     loading: false,
     error: null,
-    data: null
+    data: null,
   },
   allProjectGroups: {
     initialized: false,
     loading: false,
     error: null,
-    data: null
+    data: null,
+  },
+  allAdmins: {
+    initialized: false,
+    loading: false,
+    error: null,
+    data: null,
   },
   admin: {
     initialized: false,
     loading: false,
     error: null,
-    data: null
+    data: null,
   },
   alerts: {
     initialized: false,
     loading: false,
     error: null,
-    data: null
+    data: null,
   },
   mineGroups: {
     initialized: false,
     loading: false,
     error: null,
-    data: null
+    data: null,
   },
   AllDocuments: {
     initialized: false,
     loading: false,
     error: null,
-    data: null
-  }
+    data: null,
+  },
+  AllData: {
+    initialized: false,
+    loading: false,
+    error: null,
+    data: null,
+  },
 };
 
 const reducer = new ReducerFactory(initialState)
@@ -167,6 +182,9 @@ const reducer = new ReducerFactory(initialState)
   .addCustom(addDataAction(setAlert, 'alerts'))
   .addCustom(addDataAction(getMineProjectGroups, 'mineGroups'))
   .addCustom(addDataAction(countAllDocuments, 'AllDocuments'))
+  .addCustom(addDataAction(getAdminAction, 'admin'))
+  .addCustom(addDataAction(getAllAdminAction, 'allAdmins'))
+  .addCustom(addDataAction(getAllData, 'AllData'))
   .toReducer();
 
 export default reducer;

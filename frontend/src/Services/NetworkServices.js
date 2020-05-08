@@ -7,7 +7,8 @@ const MESSAGES = {
   OFFLINE: 'You are offline, Kindly turn on Internet',
   NOT_REACHABLE:
     'Sorry, We are not able to connect to the server at the moment',
-  UNKNOWN: 'Something went wrong, please contact to the ProTraSys Administrator'
+  UNKNOWN:
+    'Something went wrong, please contact to the ProTraSys Administrator',
 };
 
 class NetworkService {
@@ -69,7 +70,7 @@ class NetworkService {
     logger.debug('get', url);
     try {
       const response = await axios.get(url, {
-        headers: this.getHeader(options)
+        headers: this.getHeader(options),
       });
       logger.debug('get response', response);
 
@@ -89,7 +90,7 @@ class NetworkService {
     logger.debug('post', url, data);
     try {
       const response = await axios.post(url, data, {
-        headers: this.getHeader(options)
+        headers: this.getHeader(options),
       });
       logger.debug('post response', response);
 
@@ -108,7 +109,7 @@ class NetworkService {
     logger.debug('patch', url, data);
     try {
       const response = await axios.patch(url, data, {
-        headers: this.getHeader(options)
+        headers: this.getHeader(options),
       });
       logger.debug('patch response', response);
       this.handleResponse(response);
@@ -125,7 +126,7 @@ class NetworkService {
     logger.debug('delete', url);
     try {
       const response = await axios.delete(url, {
-        headers: this.getHeader(options)
+        headers: this.getHeader(options),
       });
       logger.debug('delete response', response);
       return this.handleResponse(response);
@@ -164,7 +165,7 @@ class NetworkService {
     logger.debug('get', url);
     try {
       const response = await axios.get(url, {
-        headers: this.getFacultyHeader(options)
+        headers: this.getFacultyHeader(options),
       });
 
       logger.debug('get response', response);
@@ -189,7 +190,7 @@ class NetworkService {
     logger.debug('post', url, data);
     try {
       const response = await axios.post(url, data, {
-        headers: this.getFacultyHeader(options)
+        headers: this.getFacultyHeader(options),
       });
       logger.debug('post response', response);
 
@@ -208,7 +209,7 @@ class NetworkService {
     logger.debug('patch', url, data);
     try {
       const response = await axios.patch(url, data, {
-        headers: this.getFacultyHeader(options)
+        headers: this.getFacultyHeader(options),
       });
       logger.debug('patch response', response);
       this.handleResponse(response);
@@ -227,7 +228,7 @@ class NetworkService {
     logger.debug('delete', url);
     try {
       const response = await axios.delete(url, {
-        headers: this.getFacultyHeader(options)
+        headers: this.getFacultyHeader(options),
       });
       logger.debug('delete response', response);
       return this.handleResponse(response);
@@ -250,8 +251,6 @@ class NetworkService {
 
     const token = AuthServices.getAdminToken();
 
-    console.log('NETWORK SERVICE TEMP LOG', token);
-
     if (token) {
       header.authorization = `Bearer ${token}`;
     }
@@ -268,7 +267,7 @@ class NetworkService {
     logger.debug('get', url);
     try {
       const response = await axios.get(url, {
-        headers: this.getAdminHeader(options)
+        headers: this.getAdminHeader(options),
       });
 
       logger.debug('get response', response);
@@ -293,7 +292,7 @@ class NetworkService {
     logger.debug('post', url, data);
     try {
       const response = await axios.post(url, data, {
-        headers: this.getAdminHeader(options)
+        headers: this.getAdminHeader(options),
       });
       logger.debug('post response', response);
 
@@ -312,7 +311,7 @@ class NetworkService {
     logger.debug('patch', url, data);
     try {
       const response = await axios.patch(url, data, {
-        headers: this.getAdminHeader(options)
+        headers: this.getAdminHeader(options),
       });
       logger.debug('patch response', response);
       this.handleResponse(response);
@@ -331,7 +330,7 @@ class NetworkService {
     logger.debug('delete', url);
     try {
       const response = await axios.delete(url, {
-        headers: this.getAdminHeader(options)
+        headers: this.getAdminHeader(options),
       });
       logger.debug('delete response', response);
       return this.handleResponse(response);

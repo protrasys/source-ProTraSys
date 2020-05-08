@@ -23,7 +23,7 @@ module.exports.PostAddNewFaculty = async (req, res) => {
     phone,
     designation,
     skills,
-    password
+    password,
   } = req.body;
 
   try {
@@ -32,7 +32,7 @@ module.exports.PostAddNewFaculty = async (req, res) => {
 
     if (faculty) {
       return res.status(400).json({
-        msg: 'Faculty already exists with same enrollment ID'
+        msg: 'Faculty already exists with same enrollment ID',
       });
     }
 
@@ -43,7 +43,7 @@ module.exports.PostAddNewFaculty = async (req, res) => {
     faculty = new Faculty({
       name,
       date: {
-        from
+        from,
       },
       profile,
       enrollmentId,
@@ -51,27 +51,27 @@ module.exports.PostAddNewFaculty = async (req, res) => {
       phone,
       designation,
       skills: skills.split(',').map((skill) => skill.trim()),
-      password: encryptedPassword
+      password: encryptedPassword,
     });
     await faculty.save();
 
     const payload = {
       faculty: {
-        id: faculty.id
-      }
+        id: faculty.id,
+      },
     };
 
     jwt.sign(payload, jwtSecret, { expiresIn: '24h' }, (err, token) => {
       if (err) throw err;
       res.status(200).json({
         msg: `${faculty.name}, You are welcome to the ProTraSys Family !🙏`,
-        token
+        token,
       });
     });
   } catch (err) {
     console.log(err);
     return res.status(500).json({
-      Error: err.errmsg || err.message
+      Error: err.errmsg || err.message,
     });
   }
 };
@@ -87,7 +87,7 @@ module.exports.PostAddNewAdmin = async (req, res) => {
 
     if (admin) {
       return res.status(400).json({
-        msg: `Admin already exists with same ${AID}`
+        msg: `Admin already exists with same ${AID}`,
       });
     }
 
@@ -99,14 +99,14 @@ module.exports.PostAddNewAdmin = async (req, res) => {
     admin = new Admin({
       _id: AID,
       name,
-      password: encryptedPassword
+      password: encryptedPassword,
     });
 
     // Creating Payload for frontend
     const payload = {
       admin: {
-        id: admin.id
-      }
+        id: admin.id,
+      },
     };
 
     admin
@@ -119,20 +119,20 @@ module.exports.PostAddNewAdmin = async (req, res) => {
           } else {
             return res.status(200).json({
               msg: `${admin.name}, You are welcome to the ProTraSys Family !🙏`,
-              token
+              token,
             });
           }
         });
       })
       .catch((mongoErr) => {
         return res.status(500).json({
-          err: mongoErr.message
+          err: mongoErr.message,
         });
       });
   } catch (err) {
     console.log(err);
     return res.status(500).json({
-      Error: err.errmsg || err.message
+      Error: err.errmsg || err.message,
     });
   }
 };
@@ -149,7 +149,7 @@ module.exports.PostAdminLogin = async (req, res) => {
     // If Admin does not found
     if (!admin) {
       return res.status(400).json({
-        error: 'Invalid Credentials'
+        error: 'Invalid Credentials',
       });
     }
 
@@ -158,22 +158,22 @@ module.exports.PostAdminLogin = async (req, res) => {
 
     if (!isCorrect) {
       return res.status(400).json({
-        error: 'Invalid Credentials'
+        error: 'Invalid Credentials',
       });
     }
 
     // Sending Admin id in Payload
     const payload = {
       admin: {
-        id: admin.id
-      }
+        id: admin.id,
+      },
     };
     // return json web token to frontend
     jwt.sign(payload, jwtSecret, { expiresIn: '24h' }, (err, token) => {
       if (!err) {
         return res.json({
           msg: `${admin.name}, Welcome Back 😉`,
-          token
+          token,
         });
       }
       throw err;
@@ -181,7 +181,7 @@ module.exports.PostAdminLogin = async (req, res) => {
   } catch (err) {
     console.log(err);
     return res.status(500).json({
-      error: err.errmsg || err.message
+      error: err.errmsg || err.message,
     });
   }
 };
@@ -196,7 +196,7 @@ module.exports.GetIndividualAdmin = async (req, res) => {
   } catch (err) {
     console.log(err);
     res.status(500).json({
-      error: err.message
+      error: err.message,
     });
   }
 };
@@ -211,14 +211,14 @@ module.exports.GetAllAdmins = async (req, res) => {
     // Check is no admin found
     if (admins.length === 0) {
       return res.status(400).json({
-        msg: 'No More Admins Found'
+        msg: 'No More Admins Found',
       });
     }
 
     res.status(200).json(admins);
   } catch (err) {
     res.status(500).json({
-      error: err
+      error: err,
     });
   }
 };
@@ -234,17 +234,17 @@ module.exports.DeleteFaculty = async (req, res) => {
 
     if (!faculty) {
       return res.status(400).json({
-        msg: 'No Faculty Found'
+        msg: 'No Faculty Found',
       });
     }
 
     await Faculty.deleteOne({ _id: id });
     res.status(200).json({
-      msg: 'Faculty Removed'
+      msg: 'Faculty Removed',
     });
   } catch (err) {
     res.status(500).json({
-      err: err
+      err: err,
     });
   }
 };
@@ -260,17 +260,17 @@ module.exports.DeleteStudent = async (req, res) => {
 
     if (!student) {
       return res.status(400).json({
-        msg: 'No Student Found'
+        msg: 'No Student Found',
       });
     }
 
     await Student.deleteOne({ _id: id });
     res.status(200).json({
-      msg: 'Student Removed'
+      msg: 'Student Removed',
     });
   } catch (err) {
     res.status(500).json({
-      err: err
+      err: err,
     });
   }
 };
@@ -286,24 +286,24 @@ module.exports.DeleteProjectGroup = async (req, res) => {
       .then((result) => {
         if (result.deletedCount > 0) {
           return res.status(200).json({
-            msg: 'Deleted Successfully'
+            msg: 'Deleted Successfully',
           });
         } else {
           return res.status(400).json({
-            msg: 'No Project Group Found to Delete'
+            msg: 'No Project Group Found to Delete',
           });
         }
       })
       .catch((err) => {
         console.log(err);
         return res.status(400).json({
-          err: err
+          err: err,
         });
       });
   } catch (err) {
     console.log(err);
     res.status(500).json({
-      err: err
+      err: err,
     });
   }
 };
@@ -320,25 +320,25 @@ module.exports.DeleteENotice = async (req, res) => {
       .then((result) => {
         if (result.deletedCount > 0) {
           return res.status(200).json({
-            msg: 'Deleted Successfully'
+            msg: 'Deleted Successfully',
           });
         } else {
           return res.status(400).json({
-            msg: 'No eNotice Found to Delete'
+            msg: 'No eNotice Found to Delete',
           });
         }
       })
       .catch((err) => {
         console.log(err);
         return res.status(400).json({
-          err: err
+          err: err,
         });
       });
   } catch (err) {
     console.log('DELETE ADMIN E-NOTICE ROUTE ERROR', err);
     res.status(500).json({
       error: 'Internal Server Error',
-      desc: err
+      desc: err,
     });
   }
 };
@@ -363,13 +363,42 @@ module.exports.countAllDocuments = async (req, res) => {
       allFac,
       allStu,
       allProjectGroups,
-      allProjectFiles
+      allProjectFiles,
     });
   } catch (err) {
     console.log('GET ADMIN COUNTALLDOCUMENTS ROUTE ERROR', err);
     res.status(500).json({
       error: 'Internal Server Error',
-      desc: err
+      desc: err,
+    });
+  }
+};
+
+// @route     Get   /admin/data
+// @desc      get All Data
+// @access    private
+module.exports.getAllData = async (req, res) => {
+  try {
+    const Students = await Student.find();
+    const Faculties = await Faculty.find();
+    const ENotices = await eNotice.find();
+    const EReports = await eReports.find();
+    const ProjectFiles = await ProjectFIles.find();
+    const ProjectGroups = await ProjectGroup.find();
+
+    res.json({
+      ENotices,
+      EReports,
+      Faculties,
+      Students,
+      ProjectGroups,
+      ProjectFiles,
+    });
+  } catch (err) {
+    console.log('GET ALL ADMIN DATA BACKEND ERROR', err);
+    res.status(500).json({
+      error: 'Internal Server Error',
+      desc: err,
     });
   }
 };

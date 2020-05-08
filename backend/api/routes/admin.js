@@ -11,7 +11,8 @@ const {
   DeleteProjectGroup,
   DeleteENotice,
   DeleteFaculty,
-  countAllDocuments
+  countAllDocuments,
+  getAllData,
 } = require('../controllers/admin');
 
 // @route     Post   /admin/addNewFaculty
@@ -63,5 +64,10 @@ router.delete('/deleteENotice/:noticeId', adminAuth, DeleteENotice);
 // @desc      This Request will count all documents from the database and send it to frontend
 // @access    private
 router.get('/countAllDocuments', countAllDocuments);
+
+// @route     Get   /admin/data
+// @desc      get All data
+// @access    private
+router.get('/data', adminAuth, getAllData);
 
 module.exports = router;

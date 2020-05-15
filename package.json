@@ -4,7 +4,7 @@
   "description": "Project Tracking and Monitoring System",
   "scripts": {
     "frontend": "npm start --prefix frontend",
-    "install": "cd frontend && npm install && cd .. && cd backend && npm install && cd ..",
+    "install": "cd frontend && yarn install && cd .. && cd backend && yarn install && cd ..",
     "dev": "npm run dev --prefix backend",
     "start": "npm start --prefix backend",
     "build": "npm run build --prefix frontend",

@@ -1,6 +1,6 @@
 {
   "short_name": "ProTraSys",
-  "name": "Project Tracking System",
+  "name": "Track and Monitor the project in modern way",
   "icons": [
     {
       "src": "favicon.ico",
@@ -20,6 +20,6 @@
   ],
   "start_url": ".",
   "display": "standalone",
-  "theme_color": "#fff",
-  "background_color": "#800080"
+  "theme_color": "#000000",
+  "background_color": "#ffffff"
 }

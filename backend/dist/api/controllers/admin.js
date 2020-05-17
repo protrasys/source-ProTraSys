@@ -1,29 +1,18 @@
 "use strict";
-var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, generator) {
-    function adopt(value) { return value instanceof P ? value : new P(function (resolve) { resolve(value); }); }
-    return new (P || (P = Promise))(function (resolve, reject) {
-        function fulfilled(value) { try { step(generator.next(value)); } catch (e) { reject(e); } }
-        function rejected(value) { try { step(generator["throw"](value)); } catch (e) { reject(e); } }
-        function step(result) { result.done ? resolve(result.value) : adopt(result.value).then(fulfilled, rejected); }
-        step((generator = generator.apply(thisArg, _arguments || [])).next());
-    });
-};
-var __importDefault = (this && this.__importDefault) || function (mod) {
-    return (mod && mod.__esModule) ? mod : { "default": mod };
-};
 Object.defineProperty(exports, "__esModule", { value: true });
+const tslib_1 = require("tslib");
 // Importing Dependencies
-const Admin_1 = __importDefault(require("../models/Admin"));
-const eNotice_1 = __importDefault(require("../models/eNotice"));
-const eReports_1 = __importDefault(require("../models/eReports"));
-const Faculty_1 = __importDefault(require("../models/Faculty"));
-const Student_1 = __importDefault(require("../models/Student"));
-const ProjectGroup_1 = __importDefault(require("../models/ProjectGroup"));
-const ProjectFIles_1 = __importDefault(require("../models/ProjectFIles"));
-const bcryptjs_1 = __importDefault(require("bcryptjs"));
+const Admin_1 = tslib_1.__importDefault(require("../models/Admin"));
+const eNotice_1 = tslib_1.__importDefault(require("../models/eNotice"));
+const eReports_1 = tslib_1.__importDefault(require("../models/eReports"));
+const Faculty_1 = tslib_1.__importDefault(require("../models/Faculty"));
+const Student_1 = tslib_1.__importDefault(require("../models/Student"));
+const ProjectGroup_1 = tslib_1.__importDefault(require("../models/ProjectGroup"));
+const ProjectFIles_1 = tslib_1.__importDefault(require("../models/ProjectFIles"));
+const bcryptjs_1 = tslib_1.__importDefault(require("bcryptjs"));
 const config_1 = require("../../config");
-const jsonwebtoken_1 = __importDefault(require("jsonwebtoken"));
-exports.PostAddNewFaculty = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+const jsonwebtoken_1 = tslib_1.__importDefault(require("jsonwebtoken"));
+exports.PostAddNewFaculty = (req, res) => tslib_1.__awaiter(void 0, void 0, void 0, function* () {
     const { name, from, profile, enrollmentId, email, phone, designation, skills, password, } = req.body;
     try {
         // See if Faculty already exists with same enrollment ID
@@ -71,7 +60,7 @@ exports.PostAddNewFaculty = (req, res) => __awaiter(void 0, void 0, void 0, func
         });
     }
 });
-exports.PostAddNewAdmin = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+exports.PostAddNewAdmin = (req, res) => tslib_1.__awaiter(void 0, void 0, void 0, function* () {
     const { AID, name, password } = req.body;
     try {
         // check if an admin already exists
@@ -125,7 +114,7 @@ exports.PostAddNewAdmin = (req, res) => __awaiter(void 0, void 0, void 0, functi
         });
     }
 });
-exports.PostAdminLogin = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+exports.PostAdminLogin = (req, res) => tslib_1.__awaiter(void 0, void 0, void 0, function* () {
     const { AID, password } = req.body;
     try {
         // Lets FInd the Admin first
@@ -167,7 +156,7 @@ exports.PostAdminLogin = (req, res) => __awaiter(void 0, void 0, void 0, functio
         });
     }
 });
-exports.GetIndividualAdmin = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+exports.GetIndividualAdmin = (req, res) => tslib_1.__awaiter(void 0, void 0, void 0, function* () {
     try {
         const admin = yield Admin_1.default.findById(req.admin.id).select('-password');
         res.status(200).json(admin);
@@ -179,7 +168,7 @@ exports.GetIndividualAdmin = (req, res) => __awaiter(void 0, void 0, void 0, fun
         });
     }
 });
-exports.GetAllAdmins = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+exports.GetAllAdmins = (req, res) => tslib_1.__awaiter(void 0, void 0, void 0, function* () {
     try {
         const admins = yield Admin_1.default.find().select('-password');
         // Check is no admin found
@@ -196,7 +185,7 @@ exports.GetAllAdmins = (req, res) => __awaiter(void 0, void 0, void 0, function*
         });
     }
 });
-exports.DeleteFaculty = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+exports.DeleteFaculty = (req, res) => tslib_1.__awaiter(void 0, void 0, void 0, function* () {
     const id = req.params.id;
     try {
         // Check if Faculty exists with same id
@@ -217,7 +206,7 @@ exports.DeleteFaculty = (req, res) => __awaiter(void 0, void 0, void 0, function
         });
     }
 });
-exports.DeleteStudent = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+exports.DeleteStudent = (req, res) => tslib_1.__awaiter(void 0, void 0, void 0, function* () {
     const id = req.params.id;
     try {
         // Check if Student exists with same id
@@ -238,7 +227,7 @@ exports.DeleteStudent = (req, res) => __awaiter(void 0, void 0, void 0, function
         });
     }
 });
-exports.DeleteProjectGroup = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+exports.DeleteProjectGroup = (req, res) => tslib_1.__awaiter(void 0, void 0, void 0, function* () {
     const id = req.params.id;
     try {
         yield ProjectGroup_1.default.deleteOne({ _id: id })
@@ -269,7 +258,7 @@ exports.DeleteProjectGroup = (req, res) => __awaiter(void 0, void 0, void 0, fun
         });
     }
 });
-exports.DeleteENotice = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+exports.DeleteENotice = (req, res) => tslib_1.__awaiter(void 0, void 0, void 0, function* () {
     const noticeId = req.params.noticeId;
     try {
         yield eNotice_1.default
@@ -302,7 +291,7 @@ exports.DeleteENotice = (req, res) => __awaiter(void 0, void 0, void 0, function
         });
     }
 });
-exports.countAllDocuments = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+exports.countAllDocuments = (req, res) => tslib_1.__awaiter(void 0, void 0, void 0, function* () {
     try {
         const allStu = yield Student_1.default.countDocuments();
         const allFac = yield Faculty_1.default.countDocuments();
@@ -329,7 +318,7 @@ exports.countAllDocuments = (req, res) => __awaiter(void 0, void 0, void 0, func
         });
     }
 });
-exports.getAllData = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+exports.getAllData = (req, res) => tslib_1.__awaiter(void 0, void 0, void 0, function* () {
     try {
         const Students = yield Student_1.default.find();
         const Faculties = yield Faculty_1.default.find();

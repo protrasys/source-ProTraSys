@@ -16,7 +16,7 @@ import {
 import Cards from './Cards';
 import About from './About';
 import { Link } from 'react-router-dom';
-const Responsiveness = require('../../.././assets/hold-idea@2x.png');
+const Responsiveness = require('../../.././assets/Demo.jpg');
 
 const LandingPage = () => {
   const classes = useStyles();
@@ -30,8 +30,8 @@ const LandingPage = () => {
       <Container maxWidth='xl'>
         <Appbar />
         <Box component='div' className={classes.center}>
-          <Typography variant='h5' className={classes.tagline}>
-            Launching Soon
+          <Typography variant='h6' className={classes.tagline}>
+            Yes, we are here to help you during this pandemic
           </Typography>
           <Typography variant='h2' className={classes.heading}>
             тracĸ yoυr projecт onlιne
@@ -77,42 +77,40 @@ const LandingPage = () => {
           <Grid item xs={12} md={3} xl={3}>
             <Cards
               icon={<EmojiObjectsOutlined />}
-              heading='IDEA PLAN'
-              subHeading='Create a one-page business plan'
-              text='Structure your idea and cover all the major points on a business canvas, which lets you brainstorm easily with friends and partners.'
+              heading='Project Initialization'
+              subHeading='Define Title, Description and Technology used.'
+              text='Here group of students will find best and suitable concept or idea for thier Grand Project'
             />
           </Grid>
           <Grid item xs={12} md={3} xl={3}>
             <Cards
               icon={<MenuBookOutlined />}
-              heading='STORY MODE'
-              subHeading='Develop the idea through Story Mode'
-              text='Structure your idea and cover all the major points on a business canvas, which lets you brainstorm easily with friends and partners.'
+              heading='Faculty Guidance'
+              subHeading='Project mentor guide students about thier project'
+              text='In this process, Project incharge generally understands the project importants and either they accept project or may ask for some changes.'
             />
           </Grid>
           <Grid item xs={12} md={3} xl={3}>
             <Cards
               icon={<ExploreOutlined />}
-              heading='VALIDATION'
-              subHeading='Test-run and get a validation score'
-              text='Structure your idea and cover all the major points on a business canvas, which lets you brainstorm easily with friends and partners.'
+              heading='Group Reporting'
+              subHeading='Group of students reports thier work to mentor'
+              text='After understanding the requirements and feedbacks of faculty, Students complete thier task and upload thier work'
             />
           </Grid>
           <Grid item xs={12} md={3} xl={3}>
             <Cards
               icon={<PollOutlined />}
-              heading='JOURNAL'
-              subHeading='Get an internal business plan'
-              text='Structure your idea and cover all the major points on a business canvas, which lets you brainstorm easily with friends and partners.'
+              heading='Report Generation'
+              subHeading='Faculty will evaluate students uploaded work and report that work'
+              text='Here, Faculty will give thier feedback and our system will send emails to both student and faculty for confirmation of reporting'
             />
           </Grid>
         </Grid>
 
-        <About />
-
         <Box component='div' className={classes.center}>
           <Typography variant='h3' style={{ marginBottom: '1rem' }}>
-            Hold on to your idea, no <br />
+            You can report your work everyday, no <br />
             matter where you are
           </Typography>
           <Typography paragraph style={{ color: '#666666' }}>

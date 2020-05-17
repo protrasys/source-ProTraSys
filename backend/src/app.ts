@@ -3,6 +3,7 @@ import express, { Request, Response, Application } from 'express';
 import cors from 'cors';
 import databaseConnectionHandler from './config/database';
 import path from 'path';
+import { port } from './config';
 
 // ======================= Importing Routes  ==================
 import StudentRoutes from './api/routes/student';
@@ -32,11 +33,9 @@ app.get('*', (req: Request, res: Response) => {
   res.sendFile(path.join(__dirname, '../frontend/build/index.html'));
 });
 
-app.listen(5000, (err) => {
-  if (!err) {
-    console.log(`▀▄▀▄▀▄ ωєℓ¢σмє тσ ρяσтяαѕуѕ ▄▀▄▀▄`);
-    console.log(` Backend is Listening on: [${5000}]`);
-  }
+app.listen(port, () => {
+  console.log(`▀▄▀▄▀▄ ωєℓ¢σмє тσ ρяσтяαѕуѕ ▄▀▄▀▄`);
+  console.log(` Backend is Listening on: [${port}]`);
 });
 
 // ===================== Exporting app =====================

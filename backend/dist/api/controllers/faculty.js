@@ -1,29 +1,18 @@
 "use strict";
-var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, generator) {
-    function adopt(value) { return value instanceof P ? value : new P(function (resolve) { resolve(value); }); }
-    return new (P || (P = Promise))(function (resolve, reject) {
-        function fulfilled(value) { try { step(generator.next(value)); } catch (e) { reject(e); } }
-        function rejected(value) { try { step(generator["throw"](value)); } catch (e) { reject(e); } }
-        function step(result) { result.done ? resolve(result.value) : adopt(result.value).then(fulfilled, rejected); }
-        step((generator = generator.apply(thisArg, _arguments || [])).next());
-    });
-};
-var __importDefault = (this && this.__importDefault) || function (mod) {
-    return (mod && mod.__esModule) ? mod : { "default": mod };
-};
 Object.defineProperty(exports, "__esModule", { value: true });
+const tslib_1 = require("tslib");
 // Importing Dependencies
-const Faculty_1 = __importDefault(require("../models/Faculty"));
-const Student_1 = __importDefault(require("../models/Student"));
-const eNotice_1 = __importDefault(require("../models/eNotice"));
-const eReports_1 = __importDefault(require("../models/eReports"));
-const ProjectGroup_1 = __importDefault(require("../models/ProjectGroup"));
-const ProjectFiles_1 = __importDefault(require("../models/ProjectFiles"));
-const bcryptjs_1 = __importDefault(require("bcryptjs"));
+const Faculty_1 = tslib_1.__importDefault(require("../models/Faculty"));
+const Student_1 = tslib_1.__importDefault(require("../models/Student"));
+const eNotice_1 = tslib_1.__importDefault(require("../models/eNotice"));
+const eReports_1 = tslib_1.__importDefault(require("../models/eReports"));
+const ProjectGroup_1 = tslib_1.__importDefault(require("../models/ProjectGroup"));
+const ProjectFIles_1 = tslib_1.__importDefault(require("../models/ProjectFIles"));
+const bcryptjs_1 = tslib_1.__importDefault(require("bcryptjs"));
 const config_1 = require("../../config");
-const jsonwebtoken_1 = __importDefault(require("jsonwebtoken"));
-const nodemailer_1 = __importDefault(require("nodemailer"));
-exports.GetAllFaculty = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+const jsonwebtoken_1 = tslib_1.__importDefault(require("jsonwebtoken"));
+const nodemailer_1 = tslib_1.__importDefault(require("nodemailer"));
+exports.GetAllFaculty = (req, res) => tslib_1.__awaiter(void 0, void 0, void 0, function* () {
     try {
         const faculties = yield Faculty_1.default.find().select('-password');
         if (faculties.length === 0) {
@@ -39,7 +28,7 @@ exports.GetAllFaculty = (req, res) => __awaiter(void 0, void 0, void 0, function
         });
     }
 });
-exports.PostFacultyLogin = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+exports.PostFacultyLogin = (req, res) => tslib_1.__awaiter(void 0, void 0, void 0, function* () {
     const { enrollmentId, password } = req.body;
     try {
         // See if faculty exists or not
@@ -80,7 +69,7 @@ exports.PostFacultyLogin = (req, res) => __awaiter(void 0, void 0, void 0, funct
         });
     }
 });
-exports.GetIndividualFaculty = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+exports.GetIndividualFaculty = (req, res) => tslib_1.__awaiter(void 0, void 0, void 0, function* () {
     try {
         const faculty = yield Faculty_1.default.findById(req.faculty.id).select('-password');
         res.status(200).json(faculty);
@@ -92,7 +81,7 @@ exports.GetIndividualFaculty = (req, res) => __awaiter(void 0, void 0, void 0, f
         });
     }
 });
-exports.PostAddNewProjectGroup = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+exports.PostAddNewProjectGroup = (req, res) => tslib_1.__awaiter(void 0, void 0, void 0, function* () {
     const { projectName, definition, stu01, stu02, stu03, stu04, technology, teamLeader, } = req.body;
     try {
         let faculty = yield Faculty_1.default.findById(req.faculty.id).select('-password');
@@ -139,7 +128,7 @@ exports.PostAddNewProjectGroup = (req, res) => __awaiter(void 0, void 0, void 0,
         });
     }
 });
-exports.GetAllProjectGroups = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+exports.GetAllProjectGroups = (req, res) => tslib_1.__awaiter(void 0, void 0, void 0, function* () {
     try {
         const projectGroups = yield ProjectGroup_1.default.find().populate('stu01 stu02 stu03 stu04 teamLeader faculty', '-password');
         // check if projectGroup available or not
@@ -159,7 +148,7 @@ exports.GetAllProjectGroups = (req, res) => __awaiter(void 0, void 0, void 0, fu
         });
     }
 });
-exports.GetIndiividualFacultyAllProjectGroups = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+exports.GetIndiividualFacultyAllProjectGroups = (req, res) => tslib_1.__awaiter(void 0, void 0, void 0, function* () {
     try {
         const faculty = yield Faculty_1.default.findOne({ _id: req.faculty.id });
         const myProjectGroups = yield ProjectGroup_1.default.find({
@@ -181,7 +170,7 @@ exports.GetIndiividualFacultyAllProjectGroups = (req, res) => __awaiter(void 0, 
         });
     }
 });
-exports.GetIndividualProjectGroup = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+exports.GetIndividualProjectGroup = (req, res) => tslib_1.__awaiter(void 0, void 0, void 0, function* () {
     const id = req.params.id;
     try {
         const faculty = yield Faculty_1.default.findOne({ _id: req.faculty.id });
@@ -200,7 +189,7 @@ exports.GetIndividualProjectGroup = (req, res) => __awaiter(void 0, void 0, void
         });
     }
 });
-exports.DeleteProjectGroup = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+exports.DeleteProjectGroup = (req, res) => tslib_1.__awaiter(void 0, void 0, void 0, function* () {
     const id = req.params.id;
     try {
         yield ProjectGroup_1.default.deleteOne({ _id: id })
@@ -231,10 +220,10 @@ exports.DeleteProjectGroup = (req, res) => __awaiter(void 0, void 0, void 0, fun
         });
     }
 });
-exports.DeleteProjectFile = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+exports.DeleteProjectFile = (req, res) => tslib_1.__awaiter(void 0, void 0, void 0, function* () {
     const fileID = req.params.fileID;
     try {
-        const projectFIle = yield ProjectFiles_1.default.findOne({ _id: fileID });
+        const projectFIle = yield ProjectFIles_1.default.findOne({ _id: fileID });
         const groupId = projectFIle.projectGroup;
         const projectGroup = yield ProjectGroup_1.default.findOne({ _id: groupId });
         // If no such file found to delete
@@ -249,7 +238,7 @@ exports.DeleteProjectFile = (req, res) => __awaiter(void 0, void 0, void 0, func
                 msg: 'Faculty Unauthorized',
             });
         }
-        yield ProjectFiles_1.default.deleteOne({ _id: fileID })
+        yield ProjectFIles_1.default.deleteOne({ _id: fileID })
             .exec()
             .then((result) => {
             if (result.deletedCount > 0) {
@@ -275,10 +264,10 @@ exports.DeleteProjectFile = (req, res) => __awaiter(void 0, void 0, void 0, func
         res.status(500).json(err);
     }
 });
-exports.GetStudentsUploadedFile = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+exports.GetStudentsUploadedFile = (req, res) => tslib_1.__awaiter(void 0, void 0, void 0, function* () {
     const fileID = req.params.fileID;
     try {
-        const projectFile = yield ProjectFiles_1.default.find({ _id: fileID });
+        const projectFile = yield ProjectFIles_1.default.find({ _id: fileID });
         if (!projectFile) {
             return res.status(404).json({
                 msg: 'No Such File Found to View',
@@ -291,7 +280,7 @@ exports.GetStudentsUploadedFile = (req, res) => __awaiter(void 0, void 0, void 0
         res.status(500).json(err);
     }
 });
-exports.PostUploadENotice = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+exports.PostUploadENotice = (req, res) => tslib_1.__awaiter(void 0, void 0, void 0, function* () {
     const { title, description } = req.body;
     try {
         yield new eNotice_1.default({
@@ -318,11 +307,11 @@ exports.PostUploadENotice = (req, res) => __awaiter(void 0, void 0, void 0, func
         });
     }
 });
-exports.PostGenerateEReport = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+exports.PostGenerateEReport = (req, res) => tslib_1.__awaiter(void 0, void 0, void 0, function* () {
     const { feedback, status } = req.body;
     const { filesId } = req.params;
     try {
-        const projectFIle = yield ProjectFiles_1.default.findOne({ _id: filesId });
+        const projectFIle = yield ProjectFIles_1.default.findOne({ _id: filesId });
         const projectGroup = yield ProjectGroup_1.default.findOne({
             _id: projectFIle.projectGroup,
         });
@@ -332,7 +321,7 @@ exports.PostGenerateEReport = (req, res) => __awaiter(void 0, void 0, void 0, fu
                 error: 'Faculty Unauthorized',
             });
         }
-        yield ProjectFiles_1.default.findOneAndUpdate({ _id: filesId }, {
+        yield ProjectFIles_1.default.findOneAndUpdate({ _id: filesId }, {
             $set: {
                 status,
             },
@@ -478,7 +467,7 @@ exports.PostGenerateEReport = (req, res) => __awaiter(void 0, void 0, void 0, fu
         });
     }
 });
-exports.PostAddNewStudent = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+exports.PostAddNewStudent = (req, res) => tslib_1.__awaiter(void 0, void 0, void 0, function* () {
     const { name, sem, enrollmentId, email, phone, password } = req.body;
     // Encrypting Password using Bcrypt
     var salt = bcryptjs_1.default.genSaltSync(10);
@@ -524,7 +513,7 @@ exports.PostAddNewStudent = (req, res) => __awaiter(void 0, void 0, void 0, func
         });
     }
 });
-exports.PatchStudentDetails = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+exports.PatchStudentDetails = (req, res) => tslib_1.__awaiter(void 0, void 0, void 0, function* () {
     const { stuId } = req.params;
     const { name, sem, enrollmentId, email, phone, password, projectGroupId, } = req.body;
     const updatedStudent = {};
@@ -574,7 +563,7 @@ exports.PatchStudentDetails = (req, res) => __awaiter(void 0, void 0, void 0, fu
         });
     }
 });
-exports.GetAllStudents = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+exports.GetAllStudents = (req, res) => tslib_1.__awaiter(void 0, void 0, void 0, function* () {
     try {
         const students = yield Student_1.default.find().populate('projectGroupId');
         if (students.length === 0) {
@@ -590,7 +579,7 @@ exports.GetAllStudents = (req, res) => __awaiter(void 0, void 0, void 0, functio
         });
     }
 });
-exports.GetIndividualFacultyReportings = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+exports.GetIndividualFacultyReportings = (req, res) => tslib_1.__awaiter(void 0, void 0, void 0, function* () {
     try {
         let response = yield eReports_1.default.find({ faculty: req.faculty.id });
         if (response.length <= 0) {
@@ -609,7 +598,7 @@ exports.GetIndividualFacultyReportings = (req, res) => __awaiter(void 0, void 0,
         });
     }
 });
-exports.PatchEReportings = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+exports.PatchEReportings = (req, res) => tslib_1.__awaiter(void 0, void 0, void 0, function* () {
     const { groupId } = req.params;
     const { status, feedback } = req.body;
     const updatedReport = {};
